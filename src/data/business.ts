@@ -6,7 +6,7 @@
 export const BUSINESS = {
   name: 'Ocala Fence Install',
   legalName: 'Crystalline Dynamics',
-  tagline: 'Marion County\'s bilingual fence installation team',
+  tagline: 'Marion County\'s family-owned fence installation team',
   founded: 2021,
   yearsInBusiness: 5,
   teamSize: 6,
@@ -160,15 +160,15 @@ export const BUSINESS = {
   usps: [
     { title: 'Less than 7 days install', body: 'From signed contract to fence in your yard. Urgent? 2-3 days possible.' },
     { title: '$0 down financing', body: 'Pre-qualify in 60 seconds with no credit impact. 6 lending partners.' },
-    { title: 'Hablamos español', body: 'Andri and team are bilingual. Talk in the language you prefer.' },
-    { title: 'Family-owned, local', body: '5 years in Ocala. Marion County\'s bilingual fence team.' },
+    { title: 'Lifetime materials warranty', body: 'Vinyl and DuraFence carry a lifetime materials warranty — transferable to the next homeowner.' },
+    { title: 'Family-owned, local', body: '5 years in Ocala. Same crew start to finish — no call centers, no out-of-state bosses.' },
   ],
 
   // Trust badges (for trust bar)
   trustBadges: [
     { label: 'Licensed & Insured', value: 'FL Contractor' },
     { label: 'Years in Ocala', value: '5+' },
-    { label: 'Hablamos', value: 'Español' },
+    { label: 'Wind-rated', value: '160 MPH' },
     { label: 'Financing', value: '$0 Down' },
   ],
 

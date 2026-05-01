@@ -50,7 +50,7 @@ const localBusinessSchema = {
 const faqs = [
   { q: 'How long does fence installation take in Ocala?', a: 'Most installations are completed in <strong>less than 7 days</strong> from the signed contract. For urgent projects we can install in 2-3 days.' },
   { q: 'Do you offer financing?', a: 'Yes — <strong>$0 down financing</strong> with no credit impact pre-qualification. We partner with Aqua, Synchrony, Affirm, Klarna, Launch, and United Financial. Pre-qualify in 60 seconds.' },
-  { q: 'Do you speak Spanish?', a: 'Sí — Andri and the entire team are bilingual. Hablamos español con gusto.' },
+  { q: 'How long does the materials warranty last?', a: 'Vinyl and DuraFence carry a <strong>lifetime materials warranty</strong> from the manufacturer. Aluminum carries 25+ years. Workmanship is warranted by us for 1 year. Warranty transfers to the next homeowner if you sell.' },
   { q: 'What ZIP codes do you serve?', a: 'We serve all of Marion County (34470-34491), plus The Villages (32162), Lady Lake (32159), and up to 100 miles south of Ocala.' },
   { q: 'Do I need a permit for my fence?', a: 'In unincorporated Marion County, no permit is needed for fences under 6ft. In City of Ocala limits, most fences require a permit. <strong>We handle the permit process for you</strong> either way.' },
   { q: 'What\'s the warranty on materials?', a: 'Lifetime warranty on vinyl and aluminum from the manufacturer. 1-year warranty on workmanship from us. Warranty transfers to the next homeowner if you sell.' },
@@ -58,18 +58,18 @@ const faqs = [
 ---
 
 <PageLayout
-  title="Fence Installation Ocala FL | $0 Down · Same-Day Estimate · Hablamos Español"
-  description="Marion County's bilingual fence installation team. Vinyl, DuraFence, aluminum, and pool fences installed in less than 7 days. $0 down financing. Free same-day estimate. Call (863) 377-0928."
+  title="Fence Installation Ocala FL | $0 Down · Done in Less Than 7 Days"
+  description="Marion County's family-owned fence installation team. Vinyl, DuraFence, aluminum, and pool fences installed in less than 7 days. $0 down financing. Free same-day estimate. Call (863) 377-0928."
   activeNav="Home"
   schemaJsonLd={localBusinessSchema}
 >
   <Hero
-    tag="Marion County · Bilingual · Family-Owned"
+    tag="Marion County · Family-Owned · Licensed & Insured"
     title="Fence Installation in <span class='text-highlight'>Ocala, FL</span> — Done in Less Than 7 Days"
-    subtitle="Premium vinyl, DuraFence, aluminum, and pool fence installation across Ocala and Marion County. $0 down financing, same-day estimates, hablamos español. Most fences installed in less than 7 days."
+    subtitle="Premium vinyl, DuraFence, aluminum, and pool fence installation across Ocala and Marion County. $0 down financing, same-day estimates, lifetime materials warranty. Most fences installed in less than 7 days."
     primaryCta={{ label: 'Get Your Quote', href: '/free-estimate' }}
     secondaryCta={{ label: `Call ${BUSINESS.phone}`, href: `tel:${BUSINESS.phoneE164}` }}
-    trustItems={['Same-day estimates', '$0 down financing', 'Hablamos español', '< 7 days install']}
+    trustItems={['Same-day estimates', '$0 down financing', 'Lifetime warranty', '< 7 days install']}
   />
 
   <TrustBar />
@@ -142,7 +142,7 @@ const faqs = [
             Florida is wild. <strong>Bears, coyotes, gators</strong> — they don't stop at property lines. A real fence does.
           </p>
           <p class="text-gray-600 text-base leading-relaxed mb-8">
-            We install premium <strong>vinyl, DuraFence, aluminum, and pool fences</strong> with our own crew — no subcontractors, no shortcuts. Bilingual, family-owned, and built to outlast Florida's weather and wildlife.
+            We install premium <strong>vinyl, DuraFence, aluminum, and pool fences</strong> with our own crew — no subcontractors, no shortcuts. Family-owned, locally operated, and built to outlast Florida's weather and wildlife.
           </p>
 
           <!-- Bullet trust list -->
@@ -161,7 +161,7 @@ const faqs = [
             </li>
             <li class="flex items-start gap-3">
               <svg class="w-6 h-6 text-primary shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-              <span class="text-gray-700"><strong>Hablamos español</strong> — the whole team is bilingual</span>
+              <span class="text-gray-700"><strong>Same crew start to finish</strong> — no subcontractors, ever</span>
             </li>
           </ul>
 
@@ -190,8 +190,8 @@ const faqs = [
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6">
         <WhyCard icon="speed" title="Less than 7 days install" body="From signed contract to fence in your yard. Need it faster? 2-3 days possible for urgent jobs." />
         <WhyCard icon="money" title="$0 down financing" body="Pre-qualify in 60 seconds with no credit impact. Six lending partners means more approvals." />
-        <WhyCard icon="language" title="Hablamos español" body="The whole team is bilingual. Talk to Andri direct in English or Spanish — your choice." />
-        <WhyCard icon="family" title="Local family team" body="5+ years in Ocala. Marion County's bilingual fence team. No call centers, no out-of-state bosses." />
+        <WhyCard icon="warranty" title="Lifetime warranty" body="Vinyl and DuraFence carry a lifetime materials warranty from the manufacturer. Transferable to the next homeowner." />
+        <WhyCard icon="family" title="Local family team" body="5+ years in Ocala. Same crew start to finish — no call centers, no out-of-state bosses." />
       </div>
     </div>
   </section>
@@ -257,7 +257,7 @@ const faqs = [
           name="Carlos R."
           city="The Villages · 32162"
           rating={5}
-          body="Hablan español y eso me hizo todo más fácil. Andri me explicó cada detalle del financiamiento. Cero down y mi pago mensual quedó bien manejable."
+          body="Andri walked me through every detail of the financing. $0 down and my monthly payment came out very manageable. Honest pricing from the first visit."
           source="google"
         />
       </div>
