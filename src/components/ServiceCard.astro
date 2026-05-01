@@ -11,28 +11,60 @@ interface Props {
 const { slug, name, tagline, image, priceFromMonthly, popular } = Astro.props;
 ---
 
-<a href={`/services/${slug}`} class="group block bg-white rounded-xl border border-gray-200 hover:border-primary hover:shadow-xl transition-all overflow-hidden">
-  <div class="aspect-[4/3] bg-gradient-to-br from-primary-50 to-highlight-100 relative overflow-hidden">
-    {image ? (
-      <img src={image} alt={name} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-    ) : (
-      <div class="w-full h-full flex items-center justify-center text-primary/20 text-6xl font-black">
-        {name.charAt(0)}
-      </div>
-    )}
-    {popular && (
-      <span class="absolute top-3 left-3 badge-primary">Most Popular</span>
-    )}
-  </div>
-  <div class="p-5">
-    <h3 class="text-lg font-bold mb-1 group-hover:text-primary transition-colors">{name}</h3>
-    <p class="text-sm text-gray-600 mb-3">{tagline}</p>
-    {priceFromMonthly && (
-      <p class="text-sm font-semibold text-primary">From ${priceFromMonthly}/mo</p>
-    )}
-    <span class="text-sm font-semibold text-primary group-hover:underline mt-2 inline-flex items-center gap-1">
-      Learn more
-      <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+<a
+  href={`/services/${slug}`}
+  class="group relative block rounded-lg overflow-hidden aspect-[4/5] shadow-lg hover:shadow-2xl transition-all duration-300"
+>
+  {/* Background image */}
+  {image ? (
+    <img
+      src={image}
+      alt={name}
+      class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+      loading="lazy"
+    />
+  ) : (
+    <div class="absolute inset-0 bg-gradient-to-br from-primary-700 to-primary-900 flex items-center justify-center text-white/40 text-9xl font-black">
+      {name.charAt(0)}
+    </div>
+  )}
+
+  {/* Dark overlay (Big Jerry's-style) — bottom-up gradient for text legibility */}
+  <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/20 group-hover:from-black/90 group-hover:via-black/55 transition-all duration-300"></div>
+
+  {/* Most Popular badge — top right */}
+  {popular && (
+    <span class="absolute top-3 right-3 bg-highlight text-primary-900 text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-1 rounded shadow-md">
+      Most Popular
     </span>
+  )}
+
+  {/* Title — centered, big white uppercase */}
+  <div class="absolute inset-x-0 top-1/2 -translate-y-1/2 px-3 text-center">
+    <h3 class="text-white text-xl sm:text-2xl lg:text-3xl font-extrabold uppercase tracking-tight leading-[1.05] drop-shadow-lg">
+      {name}
+    </h3>
+  </div>
+
+  {/* Bottom info: tagline + price + arrow */}
+  <div class="absolute inset-x-0 bottom-0 p-4 lg:p-5">
+    <p class="text-white/90 text-xs lg:text-sm font-medium mb-2 leading-tight drop-shadow">
+      {tagline}
+    </p>
+    <div class="flex items-center justify-between">
+      {priceFromMonthly ? (
+        <span class="text-highlight text-sm lg:text-base font-bold drop-shadow">
+          From ${priceFromMonthly}/mo
+        </span>
+      ) : (
+        <span></span>
+      )}
+      <span class="inline-flex items-center gap-1 text-white text-xs font-bold uppercase tracking-wider opacity-80 group-hover:opacity-100 group-hover:translate-x-1 transition-all">
+        Learn more
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/>
+        </svg>
+      </span>
+    </div>
   </div>
 </a>
