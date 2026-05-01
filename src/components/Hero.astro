@@ -25,19 +25,24 @@ const {
 ---
 
 <section class="relative overflow-hidden min-h-[640px] lg:min-h-[720px] flex items-center">
-  <!-- BG: Ocala horse country photo with subtle overlay -->
+  <!-- BG: Ocala horse country photo with cinematic overlay (Big Jerry's-style) -->
   <div class="absolute inset-0">
-    <!-- Photo layer -->
+    <!-- Photo layer with subtle desaturation for cinematic mood -->
     <div
       class="absolute inset-0 bg-cover bg-center"
-      style={`background-image: url('${image}');`}
+      style={`background-image: url('${image}'); filter: saturate(0.85) contrast(1.05);`}
       role="img"
       aria-label={imageAlt}
     ></div>
-    <!-- Soft left-to-right overlay for text legibility (lighter than before — lets Ocala photo breathe) -->
-    <div class="absolute inset-0 bg-gradient-to-r from-primary-900/80 via-primary-900/50 to-primary-900/10"></div>
-    <!-- Bottom dark fade for the floating badge -->
-    <div class="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-primary-900/60 to-transparent"></div>
+    <!-- Top dark fade — anchors header & gives drama -->
+    <div class="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black/70 to-transparent"></div>
+    <!-- Left-to-right overlay for text legibility -->
+    <div class="absolute inset-0 bg-gradient-to-r from-black/75 via-black/45 to-black/10"></div>
+    <!-- Bottom vignette — cinematic fade -->
+    <div class="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-black/80 via-black/25 to-transparent"></div>
+    <!-- Side vignettes for cinematic frame -->
+    <div class="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-black/40 to-transparent"></div>
+    <div class="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-black/40 to-transparent"></div>
   </div>
 
   <!-- Content -->

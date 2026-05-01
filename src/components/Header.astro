@@ -47,18 +47,18 @@ const { activeNav } = Astro.props;
           </a>
 
           <!-- ZIP search (desktop only) -->
-          <form action="/free-estimate" method="get" class="hidden xl:flex items-stretch ml-2">
+          <form action="/free-estimate" method="get" class="hidden xl:flex items-center gap-2 ml-3">
             <input
               type="text"
               name="zip"
               placeholder="Zip Code"
               maxlength="5"
               pattern="[0-9]{5}"
-              class="w-24 px-3 py-2 text-sm rounded-l-sm bg-white text-gray-900 border-0 focus:ring-2 focus:ring-highlight focus:outline-none"
+              class="w-28 h-12 px-4 text-sm font-medium rounded-md bg-white text-gray-900 border-0 focus:ring-2 focus:ring-highlight focus:outline-none placeholder:text-gray-500"
             />
             <button
               type="submit"
-              class="bg-primary hover:bg-primary-700 text-white font-bold uppercase text-xs px-4 rounded-r-sm transition-colors"
+              class="w-12 h-12 bg-primary hover:bg-primary-700 text-white font-bold uppercase text-sm rounded-full border-2 border-white/30 transition-colors flex items-center justify-center"
               aria-label="Search by ZIP"
             >
               GO
