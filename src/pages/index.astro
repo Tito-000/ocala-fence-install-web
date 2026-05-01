@@ -179,10 +179,12 @@ const faqs = [
     </div>
   </section>
 
-  <!-- Financing Calculator (Big Jerry's-style header) -->
-  <section class="section relative overflow-hidden">
-    <!-- Subtle background pattern -->
-    <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: radial-gradient(circle at 1px 1px, #136229 1px, transparent 0); background-size: 24px 24px;"></div>
+  <!-- Financing Calculator (Big Jerry's-style with gradient bg for section separation) -->
+  <section class="section relative overflow-hidden bg-gradient-to-b from-gray-100 via-gray-50 to-gray-100 border-y border-gray-200">
+    <!-- Subtle blueprint-style pattern -->
+    <div class="absolute inset-0 opacity-[0.04] pointer-events-none" style="background-image: linear-gradient(0deg, transparent 24px, #136229 25px, transparent 26px), linear-gradient(90deg, transparent 24px, #136229 25px, transparent 26px); background-size: 25px 25px;"></div>
+    <!-- Soft radial highlight in center -->
+    <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse at center top, rgba(255,255,255,0.6) 0%, transparent 60%);"></div>
 
     <div class="container-page relative">
       <!-- Header -->
