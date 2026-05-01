@@ -1,0 +1,34 @@
+---
+interface Step {
+  n: number;
+  title: string;
+  body: string;
+}
+
+interface Props {
+  steps?: Step[];
+}
+
+const defaultSteps: Step[] = [
+  { n: 1, title: 'Request a quote', body: 'Submit our 60-second form or call Andri direct. Same-day response Mon-Sun.' },
+  { n: 2, title: 'Free on-site estimate', body: 'We come measure within 24-48 hours. Written quote on the spot — no phone games.' },
+  { n: 3, title: 'Pick design + finance', body: 'Choose colors, height, style. $0 down financing in 60 seconds with no credit impact.' },
+  { n: 4, title: 'We pull permit', body: 'Marion County permit handled by us. You don\'t lift a finger.' },
+  { n: 5, title: 'Install in less than 7 days', body: 'Most jobs finished in under a week. Urgent? 2-3 days possible.' },
+  { n: 6, title: 'Walk-through + warranty', body: 'You sign off when 100% happy. Lifetime materials warranty + 1-year workmanship.' },
+];
+
+const { steps = defaultSteps } = Astro.props;
+---
+
+<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
+  {steps.map((step) => (
+    <div class="relative bg-white rounded-xl border border-gray-200 p-6 hover:border-primary hover:shadow-md transition-all">
+      <div class="absolute -top-3 -left-2 w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center font-extrabold shadow-lg">
+        {step.n}
+      </div>
+      <h3 class="text-lg font-bold mt-3 mb-2">{step.title}</h3>
+      <p class="text-sm text-gray-600">{step.body}</p>
+    </div>
+  ))}
+</div>

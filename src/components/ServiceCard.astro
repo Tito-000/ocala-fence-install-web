@@ -1,0 +1,38 @@
+---
+interface Props {
+  slug: string;
+  name: string;
+  tagline: string;
+  image?: string;
+  priceFromMonthly?: number;
+  popular?: boolean;
+}
+
+const { slug, name, tagline, image, priceFromMonthly, popular } = Astro.props;
+---
+
+<a href={`/services/${slug}`} class="group block bg-white rounded-xl border border-gray-200 hover:border-primary hover:shadow-xl transition-all overflow-hidden">
+  <div class="aspect-[4/3] bg-gradient-to-br from-primary-50 to-highlight-100 relative overflow-hidden">
+    {image ? (
+      <img src={image} alt={name} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+    ) : (
+      <div class="w-full h-full flex items-center justify-center text-primary/20 text-6xl font-black">
+        {name.charAt(0)}
+      </div>
+    )}
+    {popular && (
+      <span class="absolute top-3 left-3 badge-primary">Most Popular</span>
+    )}
+  </div>
+  <div class="p-5">
+    <h3 class="text-lg font-bold mb-1 group-hover:text-primary transition-colors">{name}</h3>
+    <p class="text-sm text-gray-600 mb-3">{tagline}</p>
+    {priceFromMonthly && (
+      <p class="text-sm font-semibold text-primary">From ${priceFromMonthly}/mo</p>
+    )}
+    <span class="text-sm font-semibold text-primary group-hover:underline mt-2 inline-flex items-center gap-1">
+      Learn more
+      <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+    </span>
+  </div>
+</a>

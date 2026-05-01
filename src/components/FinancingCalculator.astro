@@ -1,0 +1,135 @@
+---
+import { BUSINESS } from '@data/business';
+
+interface Props {
+  minAmount?: number;
+  maxAmount?: number;
+  defaultAmount?: number;
+  defaultMonths?: number;
+  defaultApr?: number;
+  compact?: boolean;
+}
+
+const {
+  minAmount = 2000,
+  maxAmount = 20000,
+  defaultAmount = 7500,
+  defaultMonths = BUSINESS.financing.defaultMonths,
+  defaultApr = BUSINESS.financing.typicalApr,
+  compact = false,
+} = Astro.props;
+---
+
+<div class={`bg-gray-900 text-white rounded-2xl p-6 lg:p-8 ${compact ? '' : 'shadow-2xl'}`} data-financing-calc>
+  <div class="grid lg:grid-cols-2 gap-6 lg:gap-8">
+    <!-- Controls -->
+    <div class="bg-gray-800 rounded-xl p-5 lg:p-6 space-y-5">
+      <div>
+        <div class="text-xs uppercase tracking-wider text-gray-400 mb-2">Fence Cost</div>
+        <div class="text-2xl font-bold text-green-400 mb-3" data-fc-amount-display>${defaultAmount.toLocaleString()}</div>
+        <input
+          type="range"
+          min={minAmount}
+          max={maxAmount}
+          step="500"
+          value={defaultAmount}
+          data-fc-amount
+          class="w-full accent-green-400"
+          aria-label="Fence cost"
+        />
+        <div class="text-xs text-gray-500 mt-1">Min: ${minAmount.toLocaleString()} · Max: ${maxAmount.toLocaleString()}</div>
+      </div>
+
+      <div>
+        <div class="text-xs uppercase tracking-wider text-gray-400 mb-2">Term Length</div>
+        <div class="text-2xl font-bold text-green-400 mb-3" data-fc-term-display>{defaultMonths} months</div>
+        <input
+          type="range"
+          min={BUSINESS.financing.minMonths}
+          max={BUSINESS.financing.maxMonths}
+          step="12"
+          value={defaultMonths}
+          data-fc-term
+          class="w-full accent-green-400"
+          aria-label="Loan term"
+        />
+        <div class="text-xs text-gray-500 mt-1">{BUSINESS.financing.minMonths}-{BUSINESS.financing.maxMonths} months</div>
+      </div>
+
+      <div>
+        <div class="text-xs uppercase tracking-wider text-gray-400 mb-2">APR (estimated)</div>
+        <div class="text-2xl font-bold text-green-400 mb-3" data-fc-apr-display>{defaultApr}%</div>
+        <input
+          type="range"
+          min="0"
+          max="15"
+          step="0.5"
+          value={defaultApr}
+          data-fc-apr
+          class="w-full accent-green-400"
+          aria-label="APR"
+        />
+      </div>
+    </div>
+
+    <!-- Summary -->
+    <div class="bg-gray-800 rounded-xl p-5 lg:p-6 flex flex-col">
+      <div class="text-xs uppercase tracking-wider text-gray-400 mb-2">Your Monthly Payment</div>
+      <div class="text-5xl lg:text-6xl font-extrabold text-green-400 my-3" data-fc-payment>$148</div>
+      <div class="text-sm text-gray-300 mb-6">
+        <strong class="block text-white">$0 down · No credit impact · {BUSINESS.financing.preQualifyTime} pre-qualify</strong>
+      </div>
+
+      <a href="/free-estimate" class="btn bg-green-400 hover:bg-green-500 text-gray-900 font-bold py-4 mt-auto" data-track="lead_calculator_used">
+        Pre-Qualify Now →
+      </a>
+
+      <p class="text-xs text-gray-500 mt-4 leading-relaxed">
+        Estimated payment based on the values above. Final terms depend on credit approval and partner financing.
+        Our partners: {BUSINESS.financingPartners.map((p) => p.name).join(', ')}.
+      </p>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  document.querySelectorAll('[data-financing-calc]').forEach((calc) => {
+    const amountSlider = calc.querySelector('[data-fc-amount]');
+    const termSlider = calc.querySelector('[data-fc-term]');
+    const aprSlider = calc.querySelector('[data-fc-apr]');
+    const amountDisplay = calc.querySelector('[data-fc-amount-display]');
+    const termDisplay = calc.querySelector('[data-fc-term-display]');
+    const aprDisplay = calc.querySelector('[data-fc-apr-display]');
+    const paymentDisplay = calc.querySelector('[data-fc-payment]');
+
+    function pmt(p, r, n) {
+      if (r === 0) return p / n;
+      const monthlyRate = r / 100 / 12;
+      return (p * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -n));
+    }
+
+    function update() {
+      const amount = +amountSlider.value;
+      const term = +termSlider.value;
+      const apr = +aprSlider.value;
+      amountDisplay.textContent = '$' + amount.toLocaleString();
+      termDisplay.textContent = term + ' months';
+      aprDisplay.textContent = apr + '%';
+      const monthly = pmt(amount, apr, term);
+      paymentDisplay.textContent = '$' + Math.round(monthly).toLocaleString();
+    }
+
+    [amountSlider, termSlider, aprSlider].forEach((s) => s.addEventListener('input', update));
+    update();
+
+    // Track first interaction (once per session)
+    let tracked = false;
+    [amountSlider, termSlider, aprSlider].forEach((s) => {
+      s.addEventListener('change', () => {
+        if (tracked) return;
+        tracked = true;
+        if (window.gtag) gtag('event', 'lead_calculator_used');
+      });
+    });
+  });
+</script>

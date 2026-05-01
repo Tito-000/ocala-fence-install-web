@@ -1,0 +1,29 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Header from '@components/Header.astro';
+import Footer from '@components/Footer.astro';
+import FloatingButtons from '@components/FloatingButtons.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  image?: string;
+  noindex?: boolean;
+  lang?: 'en' | 'es';
+  alternateLanguages?: { lang: string; href: string }[];
+  schemaJsonLd?: object | object[];
+  activeNav?: string;
+}
+
+const props = Astro.props;
+---
+
+<BaseLayout {...props}>
+  <Header activeNav={props.activeNav} />
+  <main class="flex-1">
+    <slot />
+  </main>
+  <Footer />
+  <FloatingButtons />
+</BaseLayout>

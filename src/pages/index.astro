@@ -1,0 +1,224 @@
+---
+import PageLayout from '@layouts/PageLayout.astro';
+import Hero from '@components/Hero.astro';
+import TrustBar from '@components/TrustBar.astro';
+import ServiceCard from '@components/ServiceCard.astro';
+import CityCard from '@components/CityCard.astro';
+import WhyCard from '@components/WhyCard.astro';
+import ProcessSteps from '@components/ProcessSteps.astro';
+import FinancingCalculator from '@components/FinancingCalculator.astro';
+import ReviewCard from '@components/ReviewCard.astro';
+import FAQ from '@components/FAQ.astro';
+import FinalCTA from '@components/FinalCTA.astro';
+import { BUSINESS } from '@data/business';
+
+const localBusinessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FenceContractor',
+  '@id': 'https://ocalafenceinstall.com#business',
+  name: BUSINESS.name,
+  url: 'https://ocalafenceinstall.com',
+  telephone: BUSINESS.phoneE164,
+  email: BUSINESS.email,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: BUSINESS.address.streetAddress,
+    addressLocality: BUSINESS.address.addressLocality,
+    addressRegion: BUSINESS.address.addressRegion,
+    postalCode: BUSINESS.address.postalCode,
+    addressCountry: BUSINESS.address.addressCountry,
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: BUSINESS.geo.latitude,
+    longitude: BUSINESS.geo.longitude,
+  },
+  openingHoursSpecification: [{
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+    opens: BUSINESS.hours.phone.open,
+    closes: BUSINESS.hours.phone.close,
+  }],
+  priceRange: '$$$',
+  areaServed: BUSINESS.serviceAreas.map((a) => ({
+    '@type': 'City',
+    name: `${a.name}, ${a.state}`,
+  })),
+  image: 'https://ocalafenceinstall.com/images/logo/master.jpeg',
+};
+
+const faqs = [
+  { q: 'How long does fence installation take in Ocala?', a: 'Most installations are completed in <strong>less than 7 days</strong> from the signed contract. For urgent projects we can install in 2-3 days.' },
+  { q: 'Do you offer financing?', a: 'Yes — <strong>$0 down financing</strong> with no credit impact pre-qualification. We partner with Aqua, Synchrony, Affirm, Klarna, Launch, and United Financial. Pre-qualify in 60 seconds.' },
+  { q: 'Do you speak Spanish?', a: 'Sí — Andri and the entire team are bilingual. Hablamos español con gusto.' },
+  { q: 'What ZIP codes do you serve?', a: 'We serve all of Marion County (34470-34491), plus The Villages (32162), Lady Lake (32159), and up to 100 miles south of Ocala.' },
+  { q: 'Do I need a permit for my fence?', a: 'In unincorporated Marion County, no permit is needed for fences under 6ft. In City of Ocala limits, most fences require a permit. <strong>We handle the permit process for you</strong> either way.' },
+  { q: 'What\'s the warranty on materials?', a: 'Lifetime warranty on vinyl and aluminum from the manufacturer. 1-year warranty on workmanship from us. Warranty transfers to the next homeowner if you sell.' },
+];
+---
+
+<PageLayout
+  title="Fence Installation Ocala FL | $0 Down · Same-Day Estimate · Hablamos Español"
+  description="Marion County's bilingual fence installation team. Vinyl, DuraFence, aluminum, and pool fences installed in less than 7 days. $0 down financing. Free same-day estimate. Call (863) 377-0928."
+  activeNav="Home"
+  schemaJsonLd={localBusinessSchema}
+>
+  <Hero
+    tag="Marion County · Bilingual · Family-Owned"
+    title="Fence Installation in <span class='text-highlight'>Ocala, FL</span> — Done in Less Than 7 Days"
+    subtitle="Premium vinyl, DuraFence, aluminum, and pool fence installation across Ocala and Marion County. $0 down financing, same-day estimates, hablamos español. Most fences installed in less than 7 days."
+    primaryCta={{ label: 'Get Your Quote', href: '/free-estimate' }}
+    secondaryCta={{ label: `Call ${BUSINESS.phone}`, href: `tel:${BUSINESS.phoneE164}` }}
+    trustItems={['Same-day estimates', '$0 down financing', 'Hablamos español', '< 7 days install']}
+  />
+
+  <TrustBar />
+
+  <!-- Services -->
+  <section class="section">
+    <div class="container-page">
+      <div class="text-center max-w-2xl mx-auto mb-10 lg:mb-14">
+        <span class="badge-highlight mb-4">Our Services</span>
+        <h2 class="mb-3 text-balance">Fences built for Florida homes</h2>
+        <p class="text-gray-600 text-lg">Five fence types, all installed by our own crew. No subcontractors. Lifetime materials warranty.</p>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-6">
+        {BUSINESS.services.map((s) => (
+          <ServiceCard
+            slug={s.slug}
+            name={s.shortName}
+            tagline={s.tagline}
+            priceFromMonthly={s.priceFromMonthly}
+            popular={s.popular}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Us -->
+  <section class="section bg-gray-50">
+    <div class="container-page">
+      <div class="text-center max-w-2xl mx-auto mb-10 lg:mb-14">
+        <span class="badge-highlight mb-4">Why Us</span>
+        <h2 class="mb-3 text-balance">Why Ocala homeowners choose us</h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6">
+        <WhyCard icon="speed" title="Less than 7 days install" body="From signed contract to fence in your yard. Need it faster? 2-3 days possible for urgent jobs." />
+        <WhyCard icon="money" title="$0 down financing" body="Pre-qualify in 60 seconds with no credit impact. Six lending partners means more approvals." />
+        <WhyCard icon="language" title="Hablamos español" body="The whole team is bilingual. Talk to Andri direct in English or Spanish — your choice." />
+        <WhyCard icon="family" title="Local family team" body="5+ years in Ocala. Marion County's bilingual fence team. No call centers, no out-of-state bosses." />
+      </div>
+    </div>
+  </section>
+
+  <!-- Financing Calculator -->
+  <section class="section">
+    <div class="container-page">
+      <div class="text-center max-w-2xl mx-auto mb-10 lg:mb-14">
+        <span class="badge-highlight mb-4">Financing</span>
+        <h2 class="mb-3 text-balance">See your monthly payment in 5 seconds</h2>
+        <p class="text-gray-600 text-lg">Most fences end up between $80 and $200/month with $0 down. Move the sliders below.</p>
+      </div>
+
+      <FinancingCalculator />
+
+      <div class="mt-8 grid grid-cols-3 md:grid-cols-6 gap-3 max-w-4xl mx-auto">
+        {BUSINESS.financingPartners.map((p) => (
+          <div class="text-center p-3 bg-gray-50 rounded-lg text-xs font-semibold text-gray-600">
+            {p.name}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section class="section bg-highlight-50">
+    <div class="container-page">
+      <div class="text-center max-w-2xl mx-auto mb-10 lg:mb-14">
+        <span class="badge-highlight mb-4">Our Process</span>
+        <h2 class="mb-3 text-balance">From quote to install in 7 days</h2>
+        <p class="text-gray-600 text-lg">No phone games. No surprise charges. Same-day quotes Mon through Sun.</p>
+      </div>
+
+      <ProcessSteps />
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section class="section">
+    <div class="container-page">
+      <div class="text-center max-w-2xl mx-auto mb-10 lg:mb-14">
+        <span class="badge-highlight mb-4">Reviews</span>
+        <h2 class="mb-3 text-balance">What Ocala neighbors are saying</h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-5 lg:gap-6">
+        <ReviewCard
+          name="Maria G."
+          city="Marion Oaks · 34473"
+          rating={5}
+          body="Andri's team finished our vinyl fence in 4 days. Same crew start to finish. We're really happy with the result and the price was honest from the first visit."
+          source="google"
+        />
+        <ReviewCard
+          name="James T."
+          city="Silver Springs · 34472"
+          rating={5}
+          body="We needed a pool fence to meet code before our inspection. Andri came out the same day, quoted, installed in a week, and walked us through the gate self-close test. Could not ask for more."
+          source="google"
+        />
+        <ReviewCard
+          name="Carlos R."
+          city="The Villages · 32162"
+          rating={5}
+          body="Hablan español y eso me hizo todo más fácil. Andri me explicó cada detalle del financiamiento. Cero down y mi pago mensual quedó bien manejable."
+          source="google"
+        />
+      </div>
+
+      <div class="text-center mt-8">
+        <a href="/reviews" class="btn-outline">Read all reviews →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service Areas -->
+  <section class="section bg-gray-50">
+    <div class="container-page">
+      <div class="text-center max-w-2xl mx-auto mb-10 lg:mb-14">
+        <span class="badge-highlight mb-4">Service Areas</span>
+        <h2 class="mb-3 text-balance">Where we work</h2>
+        <p class="text-gray-600 text-lg">Marion County primary · The Villages · 100 miles south of Ocala</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-3">
+        {BUSINESS.serviceAreas.map((a) => (
+          <CityCard
+            slug={a.slug}
+            name={a.name}
+            state={a.state}
+            county={a.county}
+            primaryZip={a.primaryZip}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="container-page max-w-3xl">
+      <div class="text-center mb-10">
+        <span class="badge-highlight mb-4">FAQ</span>
+        <h2 class="mb-3 text-balance">Frequently asked questions</h2>
+      </div>
+      <FAQ items={faqs} />
+    </div>
+  </section>
+
+  <FinalCTA />
+</PageLayout>

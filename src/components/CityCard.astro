@@ -1,0 +1,26 @@
+---
+interface Props {
+  slug: string;
+  name: string;
+  state: string;
+  county?: string;
+  primaryZip?: string;
+}
+
+const { slug, name, state, county, primaryZip } = Astro.props;
+---
+
+<a href={`/areas/${slug}`} class="group block p-5 bg-white border border-gray-200 rounded-lg hover:border-primary hover:shadow-md transition-all">
+  <div class="flex items-center gap-3">
+    <div class="w-10 h-10 bg-primary-50 rounded-lg flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors shrink-0">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+    </div>
+    <div class="min-w-0 flex-1">
+      <div class="font-semibold group-hover:text-primary transition-colors">{name}, {state}</div>
+      {(county || primaryZip) && (
+        <div class="text-xs text-gray-500">{county}{primaryZip && ` · ${primaryZip}`}</div>
+      )}
+    </div>
+    <svg class="w-4 h-4 text-gray-400 group-hover:text-primary group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+  </div>
+</a>

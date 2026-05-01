@@ -1,0 +1,158 @@
+---
+import { PRIMARY_NAV } from '@data/nav';
+import { BUSINESS } from '@data/business';
+
+interface Props {
+  activeNav?: string;
+}
+const { activeNav } = Astro.props;
+---
+
+<header class="sticky top-0 z-40 bg-white shadow-sm">
+  <!-- TOP BAR (dark) -->
+  <div class="bg-gradient-to-r from-gray-900 via-gray-900 to-primary-900 text-white">
+    <div class="container-page">
+      <div class="flex items-center justify-between gap-4 py-3 lg:py-4">
+        <!-- Logo (left) -->
+        <a href="/" class="flex items-center gap-2 shrink-0" aria-label={BUSINESS.name}>
+          <img
+            src="/images/logo/master.jpeg"
+            alt={BUSINESS.name}
+            class="h-12 lg:h-14 w-auto rounded-md"
+            loading="eager"
+            width="180"
+            height="56"
+          />
+        </a>
+
+        <!-- Contact strip (center, desktop only) -->
+        <div class="hidden lg:flex items-center gap-8 flex-1 justify-center">
+          <a href={`tel:${BUSINESS.phoneE164}`} class="flex items-center gap-2 text-sm font-semibold hover:text-highlight transition-colors" data-track="click_phone">
+            <svg class="w-5 h-5 text-highlight" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
+            <span class="text-base">{BUSINESS.phone}</span>
+          </a>
+          <div class="flex items-center gap-2 text-sm">
+            <svg class="w-5 h-5 text-highlight" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/></svg>
+            <div>
+              <div class="text-xs text-white/70 leading-tight">Mon - Sun</div>
+              <div class="font-semibold text-sm leading-tight">9:00 am - 9:00 pm</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTAs (right) -->
+        <div class="flex items-center gap-2 shrink-0">
+          <a href="/free-estimate" class="hidden sm:inline-flex items-center bg-primary hover:bg-primary-700 text-white font-bold uppercase tracking-wider text-xs lg:text-sm px-4 lg:px-6 py-3 lg:py-3.5 rounded-sm shadow transition-colors">
+            Get Your Free Estimate
+          </a>
+
+          <!-- ZIP search (desktop only) -->
+          <form action="/free-estimate" method="get" class="hidden xl:flex items-stretch ml-2">
+            <input
+              type="text"
+              name="zip"
+              placeholder="Zip Code"
+              maxlength="5"
+              pattern="[0-9]{5}"
+              class="w-24 px-3 py-2 text-sm rounded-l-sm bg-white text-gray-900 border-0 focus:ring-2 focus:ring-highlight focus:outline-none"
+            />
+            <button
+              type="submit"
+              class="bg-primary hover:bg-primary-700 text-white font-bold uppercase text-xs px-4 rounded-r-sm transition-colors"
+              aria-label="Search by ZIP"
+            >
+              GO
+            </button>
+          </form>
+
+          <!-- Mobile menu toggle -->
+          <button
+            type="button"
+            class="lg:hidden inline-flex items-center justify-center p-2 rounded-md text-white hover:bg-white/10"
+            aria-controls="mobile-menu"
+            aria-expanded="false"
+            id="mobile-menu-toggle"
+          >
+            <span class="sr-only">Open menu</span>
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAV BAR (white) -->
+  <div class="hidden lg:block border-b border-gray-200 bg-white">
+    <div class="container-page">
+      <nav class="flex items-center justify-center gap-1 py-3" aria-label="Primary">
+        {PRIMARY_NAV.map((item) => (
+          <div class="relative group">
+            <a
+              href={item.href}
+              class={`inline-flex items-center gap-1 px-4 py-2 text-sm font-bold uppercase tracking-wider rounded-sm hover:text-primary transition-colors ${activeNav === item.label ? 'text-primary' : 'text-gray-800'}`}
+            >
+              {item.label}
+              {item.children && <span class="text-xs">▾</span>}
+            </a>
+
+            {item.children && (
+              <div class="absolute top-full left-1/2 -translate-x-1/2 hidden group-hover:block bg-white border border-gray-200 rounded-md shadow-xl py-2 min-w-[240px] z-50">
+                {item.children.map((child) => (
+                  <a
+                    href={child.href}
+                    class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary"
+                  >
+                    {child.label}
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+        ))}
+      </nav>
+    </div>
+  </div>
+
+  <!-- MOBILE MENU -->
+  <div id="mobile-menu" class="lg:hidden hidden border-t border-gray-200 bg-white">
+    <nav class="container-page py-4 space-y-1" aria-label="Mobile primary">
+      {PRIMARY_NAV.map((item) => (
+        <details class="group">
+          <summary class={`flex items-center justify-between px-3 py-2.5 text-base font-medium rounded-md hover:bg-gray-50 cursor-pointer ${item.children ? '' : 'list-none'}`}>
+            <a href={item.href} class="flex-1">{item.label}</a>
+            {item.children && <span class="text-xs group-open:rotate-180 transition-transform">▾</span>}
+          </summary>
+          {item.children && (
+            <div class="ml-4 mt-1 mb-2 space-y-1">
+              {item.children.map((child) => (
+                <a href={child.href} class="block px-3 py-2 text-sm text-gray-600 hover:bg-primary-50 hover:text-primary rounded-md">
+                  {child.label}
+                </a>
+              ))}
+            </div>
+          )}
+        </details>
+      ))}
+      <div class="pt-4 mt-4 border-t border-gray-200 space-y-2">
+        <a href={`tel:${BUSINESS.phoneE164}`} class="btn-outline w-full" data-track="click_phone">
+          Call {BUSINESS.phone}
+        </a>
+        <a href="/free-estimate" class="btn-primary w-full">
+          Free Estimate
+        </a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<script is:inline>
+  document.getElementById('mobile-menu-toggle')?.addEventListener('click', (e) => {
+    const btn = e.currentTarget;
+    const menu = document.getElementById('mobile-menu');
+    const expanded = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!expanded));
+    menu?.classList.toggle('hidden');
+  });
+</script>

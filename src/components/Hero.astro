@@ -1,0 +1,96 @@
+---
+import { BUSINESS } from '@data/business';
+
+interface Props {
+  tag?: string;
+  title: string;
+  subtitle: string;
+  primaryCta?: { label: string; href: string };
+  secondaryCta?: { label: string; href: string };
+  image?: string;
+  imageAlt?: string;
+  trustItems?: string[];
+}
+
+const {
+  tag,
+  title,
+  subtitle,
+  primaryCta = { label: 'Get Your Quote', href: '/free-estimate' },
+  secondaryCta,
+  image = '/images/hero/ocala-horse-country.jpg',
+  imageAlt = 'Ocala Florida horse country — Marion County fence installation service area',
+  trustItems,
+} = Astro.props;
+---
+
+<section class="relative overflow-hidden min-h-[640px] lg:min-h-[720px] flex items-center">
+  <!-- BG: Ocala horse country photo with subtle overlay -->
+  <div class="absolute inset-0">
+    <!-- Photo layer -->
+    <div
+      class="absolute inset-0 bg-cover bg-center"
+      style={`background-image: url('${image}');`}
+      role="img"
+      aria-label={imageAlt}
+    ></div>
+    <!-- Soft left-to-right overlay for text legibility (lighter than before — lets Ocala photo breathe) -->
+    <div class="absolute inset-0 bg-gradient-to-r from-primary-900/80 via-primary-900/50 to-primary-900/10"></div>
+    <!-- Bottom dark fade for the floating badge -->
+    <div class="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-primary-900/60 to-transparent"></div>
+  </div>
+
+  <!-- Content -->
+  <div class="container-page relative py-20 lg:py-28 w-full">
+    <div class="max-w-3xl text-white">
+      {tag && (
+        <span class="inline-block bg-highlight/20 border border-highlight/40 text-highlight text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded mb-6 backdrop-blur-sm">
+          {tag}
+        </span>
+      )}
+
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold uppercase leading-[1.05] tracking-tight mb-6 text-balance drop-shadow-lg">
+        <span set:html={title}></span>
+      </h1>
+
+      <p class="text-lg lg:text-xl text-white/95 mb-8 max-w-2xl leading-relaxed drop-shadow">
+        {subtitle}
+      </p>
+
+      <div class="flex flex-wrap gap-3">
+        <a href={primaryCta.href} class="inline-flex items-center gap-2 bg-primary hover:bg-primary-700 text-white font-bold uppercase tracking-wider text-sm px-8 py-4 rounded-sm shadow-lg transition-colors">
+          {primaryCta.label}
+        </a>
+        {secondaryCta && (
+          <a href={secondaryCta.href} class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white border-2 border-white/40 font-bold uppercase tracking-wider text-sm px-8 py-4 rounded-sm transition-colors" data-track="click_phone">
+            {secondaryCta.label}
+          </a>
+        )}
+      </div>
+
+      {trustItems && trustItems.length > 0 && (
+        <div class="mt-10 flex flex-wrap gap-x-6 gap-y-3">
+          {trustItems.map((item) => (
+            <div class="flex items-center gap-2 text-sm text-white/95">
+              <svg class="w-5 h-5 text-highlight shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+              <span class="font-semibold drop-shadow">{item}</span>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+
+    <!-- Floating $0 down badge — bottom right, doesn't block the image -->
+    <div class="hidden md:block absolute bottom-8 right-6 lg:right-12 bg-white rounded-xl shadow-2xl p-4 border-2 border-highlight max-w-[260px]">
+      <div class="flex items-center gap-3">
+        <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center shrink-0">
+          <span class="text-white font-extrabold text-xl">$0</span>
+        </div>
+        <div>
+          <div class="font-extrabold text-base text-gray-900">Down Financing</div>
+          <div class="text-xs text-gray-600">Pre-qualify in 60 seconds · No credit hit</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
