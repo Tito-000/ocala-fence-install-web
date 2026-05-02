@@ -60,7 +60,7 @@
   }
 
   .btn {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg font-semibold text-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary;
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-none font-bold uppercase tracking-wider text-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary;
   }
 
   .btn-primary {
@@ -80,7 +80,7 @@
   }
 
   .badge {
-    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold;
+    @apply inline-flex items-center px-3 py-1 rounded-none text-xs font-bold uppercase tracking-wider;
   }
 
   .badge-primary { @apply badge bg-primary text-white; }
@@ -96,11 +96,11 @@
   }
 
   .card {
-    @apply bg-white rounded-xl border border-gray-200 p-6 transition-shadow hover:shadow-lg;
+    @apply bg-white rounded-none border border-gray-200 p-6 transition-shadow hover:shadow-lg;
   }
 
   .input {
-    @apply w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-primary focus:outline-none transition-colors text-base;
+    @apply w-full px-4 py-3 rounded-none border-2 border-gray-200 focus:border-primary focus:outline-none transition-colors text-base;
   }
 
   .label {

@@ -18,7 +18,7 @@ const { activeNav } = Astro.props;
           <img
             src="/images/logo/master.jpeg"
             alt={BUSINESS.name}
-            class="h-12 lg:h-14 w-auto rounded-md"
+            class="h-12 lg:h-14 w-auto rounded-none"
             loading="eager"
             width="180"
             height="56"
@@ -42,7 +42,7 @@ const { activeNav } = Astro.props;
 
         <!-- CTAs (right) -->
         <div class="flex items-center gap-2 shrink-0">
-          <a href="/free-estimate" class="hidden sm:inline-flex items-center bg-primary hover:bg-primary-700 text-white font-bold uppercase tracking-wider text-xs lg:text-sm px-4 lg:px-6 py-3 lg:py-3.5 rounded-sm shadow transition-colors">
+          <a href="/free-estimate" class="hidden sm:inline-flex items-center bg-primary hover:bg-primary-700 text-white font-bold uppercase tracking-wider text-xs lg:text-sm px-4 lg:px-6 py-3 lg:py-3.5 rounded-none shadow transition-colors">
             Get Your Free Estimate
           </a>
 
@@ -54,11 +54,11 @@ const { activeNav } = Astro.props;
               placeholder="Zip Code"
               maxlength="5"
               pattern="[0-9]{5}"
-              class="w-28 h-12 px-4 text-sm font-medium rounded-md bg-white text-gray-900 border-0 focus:ring-2 focus:ring-highlight focus:outline-none placeholder:text-gray-500"
+              class="w-28 h-12 px-4 text-sm font-medium rounded-none bg-white text-gray-900 border-0 focus:ring-2 focus:ring-highlight focus:outline-none placeholder:text-gray-500"
             />
             <button
               type="submit"
-              class="w-12 h-12 bg-primary hover:bg-primary-700 text-white font-bold uppercase text-sm rounded-full border-2 border-white/30 transition-colors flex items-center justify-center"
+              class="w-12 h-12 bg-primary hover:bg-primary-700 text-white font-bold uppercase text-sm rounded-none border-2 border-white/30 transition-colors flex items-center justify-center"
               aria-label="Search by ZIP"
             >
               GO
@@ -68,7 +68,7 @@ const { activeNav } = Astro.props;
           <!-- Mobile menu toggle -->
           <button
             type="button"
-            class="lg:hidden inline-flex items-center justify-center p-2 rounded-md text-white hover:bg-white/10"
+            class="lg:hidden inline-flex items-center justify-center p-2 rounded-none text-white hover:bg-white/10"
             aria-controls="mobile-menu"
             aria-expanded="false"
             id="mobile-menu-toggle"
@@ -91,14 +91,14 @@ const { activeNav } = Astro.props;
           <div class="relative group">
             <a
               href={item.href}
-              class={`inline-flex items-center gap-1 px-4 py-2 text-sm font-bold uppercase tracking-wider rounded-sm hover:text-primary transition-colors ${activeNav === item.label ? 'text-primary' : 'text-gray-800'}`}
+              class={`inline-flex items-center gap-1 px-4 py-2 text-sm font-bold uppercase tracking-wider rounded-none hover:text-primary transition-colors ${activeNav === item.label ? 'text-primary' : 'text-gray-800'}`}
             >
               {item.label}
               {item.children && <span class="text-xs">▾</span>}
             </a>
 
             {item.children && (
-              <div class="absolute top-full left-1/2 -translate-x-1/2 hidden group-hover:block bg-white border border-gray-200 rounded-md shadow-xl py-2 min-w-[240px] z-50">
+              <div class="absolute top-full left-1/2 -translate-x-1/2 hidden group-hover:block bg-white border border-gray-200 rounded-none shadow-xl py-2 min-w-[240px] z-50">
                 {item.children.map((child) => (
                   <a
                     href={child.href}
@@ -120,14 +120,14 @@ const { activeNav } = Astro.props;
     <nav class="container-page py-4 space-y-1" aria-label="Mobile primary">
       {PRIMARY_NAV.map((item) => (
         <details class="group">
-          <summary class={`flex items-center justify-between px-3 py-2.5 text-base font-medium rounded-md hover:bg-gray-50 cursor-pointer ${item.children ? '' : 'list-none'}`}>
+          <summary class={`flex items-center justify-between px-3 py-2.5 text-base font-medium rounded-none hover:bg-gray-50 cursor-pointer ${item.children ? '' : 'list-none'}`}>
             <a href={item.href} class="flex-1">{item.label}</a>
             {item.children && <span class="text-xs group-open:rotate-180 transition-transform">▾</span>}
           </summary>
           {item.children && (
             <div class="ml-4 mt-1 mb-2 space-y-1">
               {item.children.map((child) => (
-                <a href={child.href} class="block px-3 py-2 text-sm text-gray-600 hover:bg-primary-50 hover:text-primary rounded-md">
+                <a href={child.href} class="block px-3 py-2 text-sm text-gray-600 hover:bg-primary-50 hover:text-primary rounded-none">
                   {child.label}
                 </a>
               ))}

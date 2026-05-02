@@ -17,7 +17,7 @@ const aspectClasses = {
 };
 ---
 
-<div class={`relative overflow-hidden bg-gradient-to-br from-primary-50 via-highlight-50 to-primary-100 ${rounded ? 'rounded-2xl' : ''} ${aspectClasses[aspect]} ${className}`}>
+<div class={`relative overflow-hidden bg-gradient-to-br from-primary-50 via-highlight-50 to-primary-100 ${rounded ? 'rounded-none' : ''} ${aspectClasses[aspect]} ${className}`}>
   <!-- Diagonal stripe pattern -->
   <div class="absolute inset-0 opacity-30" style="background-image: repeating-linear-gradient(45deg, transparent, transparent 14px, rgba(19, 98, 41, 0.08) 14px, rgba(19, 98, 41, 0.08) 28px);"></div>
 

@@ -63,11 +63,11 @@ const {
       </p>
 
       <div class="flex flex-wrap gap-3">
-        <a href={primaryCta.href} class="inline-flex items-center gap-2 bg-primary hover:bg-primary-700 text-white font-bold uppercase tracking-wider text-sm px-8 py-4 rounded-sm shadow-lg transition-colors">
+        <a href={primaryCta.href} class="inline-flex items-center gap-2 bg-primary hover:bg-primary-700 text-white font-bold uppercase tracking-wider text-sm px-8 py-4 rounded-none shadow-lg transition-colors">
           {primaryCta.label}
         </a>
         {secondaryCta && (
-          <a href={secondaryCta.href} class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white border-2 border-white/40 font-bold uppercase tracking-wider text-sm px-8 py-4 rounded-sm transition-colors" data-track="click_phone">
+          <a href={secondaryCta.href} class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white border-2 border-white/40 font-bold uppercase tracking-wider text-sm px-8 py-4 rounded-none transition-colors" data-track="click_phone">
             {secondaryCta.label}
           </a>
         )}
@@ -86,7 +86,7 @@ const {
     </div>
 
     <!-- Floating $0 down badge — bottom right, doesn't block the image -->
-    <div class="hidden md:block absolute bottom-8 right-6 lg:right-12 bg-white rounded-xl shadow-2xl p-4 border-2 border-highlight max-w-[260px]">
+    <div class="hidden md:block absolute bottom-8 right-6 lg:right-12 bg-white rounded-none shadow-2xl p-4 border-2 border-highlight max-w-[260px]">
       <div class="flex items-center gap-3">
         <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center shrink-0">
           <span class="text-white font-extrabold text-xl">$0</span>

@@ -49,7 +49,7 @@ const { steps = defaultSteps } = Astro.props;
   {steps.map((step) => (
     <div class="group">
       {/* Image with number badge */}
-      <div class="relative aspect-square rounded-xl overflow-hidden shadow-lg group-hover:shadow-2xl transition-all">
+      <div class="relative aspect-square rounded-none overflow-hidden shadow-lg group-hover:shadow-2xl transition-all">
         <img
           src={step.image}
           alt={step.imageAlt}
