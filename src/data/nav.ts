@@ -23,6 +23,7 @@ export const PRIMARY_NAV = [
   { label: 'Reviews', href: '/reviews' },
   { label: 'Blog', href: '/blog' },
   { label: 'About', href: '/about' },
+  { label: 'Contact', href: '/contact' },
 ];
 
 export const FOOTER_NAV = {
