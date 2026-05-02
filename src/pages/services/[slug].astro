@@ -18,6 +18,41 @@ const { service } = Astro.props;
 const content = SERVICES_CONTENT[service.slug];
 const otherServices = BUSINESS.services.filter((s) => s.slug !== service.slug);
 
+// Styles per service
+const stylesBySlug: Record<string, { name: string; desc: string }[]> = {
+  'vinyl-privacy-fence': [
+    { name: 'Flat Top', desc: 'Classic clean horizontal top — most popular' },
+    { name: 'Scalloped', desc: 'Curved decorative top edge for elegance' },
+    { name: 'Lattice Top', desc: 'Privacy bottom + decorative lattice top' },
+    { name: 'Shadowbox', desc: 'Alternating boards — privacy from both sides' },
+  ],
+  'vinyl-picket-fence': [
+    { name: 'Pointed Top', desc: 'Traditional pointed pickets — timeless' },
+    { name: 'Dog-Ear', desc: 'Rounded corners — softer look' },
+    { name: 'Gothic Cap', desc: 'Decorative cap on each picket' },
+    { name: 'Flat Top', desc: 'Modern flat-top pickets' },
+  ],
+  'durafence': [
+    { name: 'Stone Texture', desc: 'Realistic stacked stone look' },
+    { name: 'Smooth Finish', desc: 'Clean modern smooth surface' },
+    { name: 'Combination', desc: 'Stone bottom + smooth top accent' },
+    { name: 'Custom Heights', desc: '5ft, 6ft, custom on request' },
+  ],
+  'aluminum-fence': [
+    { name: '3-Rail Standard', desc: 'Most common — pool & residential' },
+    { name: '4-Rail Premium', desc: 'Extra rail for security & strength' },
+    { name: 'Spear Top', desc: 'Decorative pointed picket tops' },
+    { name: 'Flat Top', desc: 'Clean modern look — pool perimeter' },
+  ],
+  'pool-fence': [
+    { name: 'Black Aluminum', desc: 'Most popular — disappears visually' },
+    { name: 'White Vinyl Picket', desc: 'Classic white look pool perimeter' },
+    { name: 'Self-Closing Gate', desc: 'Magnetic latch · §515 compliant' },
+    { name: 'Double Gate', desc: 'Wide access for equipment' },
+  ],
+};
+const styles = stylesBySlug[service.slug] || [];
+
 // Schema.org Product
 const productSchema = {
   '@context': 'https://schema.org',
@@ -261,46 +296,12 @@ const breadcrumbSchema = {
       </div>
 
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-5">
-        {(() => {
-          const stylesBySlug: Record<string, { name: string; desc: string }[]> = {
-            'vinyl-privacy-fence': [
-              { name: 'Flat Top', desc: 'Classic clean horizontal top — most popular' },
-              { name: 'Scalloped', desc: 'Curved decorative top edge for elegance' },
-              { name: 'Lattice Top', desc: 'Privacy bottom + decorative lattice top' },
-              { name: 'Shadowbox', desc: 'Alternating boards — privacy from both sides' },
-            ],
-            'vinyl-picket-fence': [
-              { name: 'Pointed Top', desc: 'Traditional pointed pickets — timeless' },
-              { name: 'Dog-Ear', desc: 'Rounded corners — softer look' },
-              { name: 'Gothic Cap', desc: 'Decorative cap on each picket' },
-              { name: 'Flat Top', desc: 'Modern flat-top pickets' },
-            ],
-            'durafence': [
-              { name: 'Stone Texture', desc: 'Realistic stacked stone look' },
-              { name: 'Smooth Finish', desc: 'Clean modern smooth surface' },
-              { name: 'Combination', desc: 'Stone bottom + smooth top accent' },
-              { name: 'Custom Heights', desc: '5ft, 6ft, custom on request' },
-            ],
-            'aluminum-fence': [
-              { name: '3-Rail Standard', desc: 'Most common — pool & residential' },
-              { name: '4-Rail Premium', desc: 'Extra rail for security & strength' },
-              { name: 'Spear Top', desc: 'Decorative pointed picket tops' },
-              { name: 'Flat Top', desc: 'Clean modern look — pool perimeter' },
-            ],
-            'pool-fence': [
-              { name: 'Black Aluminum', desc: 'Most popular — disappears visually' },
-              { name: 'White Vinyl Picket', desc: 'Classic white look pool perimeter' },
-              { name: 'Self-Closing Gate', desc: 'Magnetic latch · §515 compliant' },
-              { name: 'Double Gate', desc: 'Wide access for equipment' },
-            ],
-          };
-          return (stylesBySlug[service.slug] || []).map((style) => (
-            <div class="bg-white border border-gray-200 p-5 hover:border-primary hover:shadow-md transition-all">
-              <h3 class="text-base lg:text-lg font-extrabold text-gray-900 mb-2 leading-tight">{style.name}</h3>
-              <p class="text-sm text-gray-600 leading-relaxed">{style.desc}</p>
-            </div>
-          ));
-        })()}
+        {styles.map((style) => (
+          <div class="bg-white border border-gray-200 p-5 hover:border-primary hover:shadow-md transition-all">
+            <h3 class="text-base lg:text-lg font-extrabold text-gray-900 mb-2 leading-tight">{style.name}</h3>
+            <p class="text-sm text-gray-600 leading-relaxed">{style.desc}</p>
+          </div>
+        ))}
       </div>
     </div>
   </section>
