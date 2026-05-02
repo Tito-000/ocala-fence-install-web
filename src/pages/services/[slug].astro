@@ -1,0 +1,290 @@
+---
+import PageLayout from '@layouts/PageLayout.astro';
+import FAQ from '@components/FAQ.astro';
+import ServiceCard from '@components/ServiceCard.astro';
+import FinalCTA from '@components/FinalCTA.astro';
+import { BUSINESS } from '@data/business';
+import { SERVICES_CONTENT } from '@data/services-content';
+
+export function getStaticPaths() {
+  return BUSINESS.services.map((service) => ({
+    params: { slug: service.slug },
+    props: { service },
+  }));
+}
+
+const { service } = Astro.props;
+const content = SERVICES_CONTENT[service.slug];
+const otherServices = BUSINESS.services.filter((s) => s.slug !== service.slug);
+
+// Schema.org Product
+const productSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  serviceType: service.name,
+  provider: {
+    '@type': 'LocalBusiness',
+    name: BUSINESS.name,
+    telephone: BUSINESS.phoneE164,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: BUSINESS.address.streetAddress,
+      addressLocality: BUSINESS.address.addressLocality,
+      addressRegion: BUSINESS.address.addressRegion,
+      postalCode: BUSINESS.address.postalCode,
+    },
+  },
+  areaServed: 'Marion County, FL',
+  description: content.metaDescription,
+  offers: {
+    '@type': 'Offer',
+    priceCurrency: 'USD',
+    priceSpecification: {
+      '@type': 'PriceSpecification',
+      minPrice: service.priceRange.min,
+      maxPrice: service.priceRange.max,
+      priceCurrency: 'USD',
+    },
+  },
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://ocalafenceinstall.com' },
+    { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://ocalafenceinstall.com/services' },
+    { '@type': 'ListItem', position: 3, name: service.name, item: `https://ocalafenceinstall.com/services/${service.slug}` },
+  ],
+};
+---
+
+<PageLayout
+  title={content.metaTitle}
+  description={content.metaDescription}
+  activeNav="Services"
+  schemaJsonLd={[productSchema, breadcrumbSchema]}
+>
+  {/* Breadcrumb */}
+  <div class="bg-highlight-50 border-b border-highlight-200 py-3">
+    <div class="container-page">
+      <nav class="text-sm text-accent" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-primary">Home</a>
+        <span class="mx-2 text-accent/50">›</span>
+        <a href="/services" class="hover:text-primary">Services</a>
+        <span class="mx-2 text-accent/50">›</span>
+        <span class="font-semibold text-primary">{service.name}</span>
+      </nav>
+    </div>
+  </div>
+
+  {/* Product Hero */}
+  <section class="relative overflow-hidden bg-primary-900 text-white">
+    <div class="absolute inset-0">
+      <img
+        src={service.image}
+        alt={service.name}
+        class="absolute inset-0 w-full h-full object-cover opacity-50"
+        style="filter: saturate(0.8) contrast(1.05);"
+      />
+      <div class="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-black/30"></div>
+      <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black/80 to-transparent"></div>
+    </div>
+
+    <div class="container-page relative py-16 lg:py-24">
+      <div class="max-w-3xl">
+        <div class="flex flex-wrap gap-2 mb-5">
+          {service.popular && (
+            <span class="inline-block bg-highlight text-primary-900 text-xs font-extrabold uppercase tracking-wider px-3 py-1.5">
+              Most Popular
+            </span>
+          )}
+          {service.windRated && (
+            <span class="inline-block bg-accent text-white text-xs font-extrabold uppercase tracking-wider px-3 py-1.5">
+              {service.windRated} Wind-Rated
+            </span>
+          )}
+        </div>
+
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold uppercase leading-[1.05] tracking-tight mb-6 text-balance drop-shadow-lg">
+          <span set:html={content.heroTitle}></span>
+        </h1>
+
+        <p class="text-lg lg:text-xl text-white/95 mb-8 max-w-2xl leading-relaxed drop-shadow">
+          {content.heroSubtitle}
+        </p>
+
+        {service.priceFromMonthly && (
+          <div class="inline-block bg-highlight/20 border border-highlight/40 text-white px-5 py-3 mb-6 backdrop-blur-sm">
+            <span class="text-sm">From </span>
+            <strong class="text-lg lg:text-xl text-highlight">${service.priceFromMonthly}/month</strong>
+            <span class="text-sm"> with $0 down financing</span>
+          </div>
+        )}
+
+        <div class="flex flex-wrap gap-3">
+          <a href="/free-estimate" class="inline-flex items-center gap-2 bg-primary hover:bg-primary-700 text-white font-bold uppercase tracking-wider text-sm px-8 py-4 rounded-none shadow-lg transition-colors">
+            Get Free Estimate
+          </a>
+          <a href={`tel:${BUSINESS.phoneE164}`} class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white border-2 border-white/40 font-bold uppercase tracking-wider text-sm px-8 py-4 rounded-none transition-colors" data-track="click_phone">
+            Call {BUSINESS.phone}
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* Quick Specs Bar */}
+  <section class="bg-highlight-100 border-y border-highlight-200">
+    <div class="container-page py-6 lg:py-8">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-5 lg:gap-8">
+        <div class="text-center">
+          <div class="text-xs uppercase tracking-wider text-accent-700 font-bold mb-1">Heights</div>
+          <div class="text-base lg:text-lg font-extrabold text-accent">{service.heights.join(' · ')}</div>
+        </div>
+        <div class="text-center">
+          <div class="text-xs uppercase tracking-wider text-accent-700 font-bold mb-1">Wind Rated</div>
+          <div class="text-base lg:text-lg font-extrabold text-accent">{service.windRated || 'N/A'}</div>
+        </div>
+        <div class="text-center">
+          <div class="text-xs uppercase tracking-wider text-accent-700 font-bold mb-1">Lifespan</div>
+          <div class="text-base lg:text-lg font-extrabold text-accent">{service.lifespan}</div>
+        </div>
+        <div class="text-center">
+          <div class="text-xs uppercase tracking-wider text-accent-700 font-bold mb-1">Install Time</div>
+          <div class="text-base lg:text-lg font-extrabold text-accent">&lt; 7 days</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* Intro + Image */}
+  <section class="section bg-white">
+    <div class="container-page">
+      <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+        <div>
+          <h2 class="mb-5 text-balance">{content.intro.heading}</h2>
+          {content.intro.paragraphs.map((p) => (
+            <p class="text-gray-700 text-lg leading-relaxed mb-4">{p}</p>
+          ))}
+        </div>
+        <div class="relative">
+          <div class="aspect-[4/5] overflow-hidden shadow-2xl">
+            <img
+              src={service.image}
+              alt={`${service.name} installed in Ocala FL`}
+              class="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* Why this product */}
+  <section class="section bg-gray-50">
+    <div class="container-page">
+      <div class="text-center max-w-2xl mx-auto mb-10 lg:mb-14">
+        <span class="badge-highlight mb-4">Why {service.shortName}</span>
+        <h2 class="mb-3 text-balance">Why {service.shortName} is right for Florida</h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6">
+        {content.whyCards.map((card) => (
+          <div class="bg-white border border-gray-200 p-6 lg:p-7">
+            <div class="w-12 h-12 bg-primary mb-4 flex items-center justify-center">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+              </svg>
+            </div>
+            <h3 class="text-lg font-extrabold mb-3 leading-tight">{card.title}</h3>
+            <p class="text-sm text-gray-600 leading-relaxed">{card.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* Colors & Heights */}
+  <section class="section bg-white">
+    <div class="container-page">
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <span class="badge-highlight mb-4">Options</span>
+        <h2 class="mb-3 text-balance">Available colors &amp; heights</h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8 lg:gap-12 max-w-4xl mx-auto">
+        {/* Colors */}
+        <div class="bg-gray-50 p-6 lg:p-8">
+          <h3 class="text-xs uppercase tracking-[0.2em] text-gray-500 font-bold mb-4">Colors</h3>
+          <ul class="space-y-3">
+            {service.colors.map((color) => (
+              <li class="flex items-center gap-3">
+                <span class={`w-6 h-6 border-2 border-gray-300 shrink-0 ${
+                  color.toLowerCase().includes('black') ? 'bg-gray-900' :
+                  color.toLowerCase().includes('bronze') ? 'bg-amber-800' :
+                  color.toLowerCase().includes('gray') ? 'bg-gray-300' :
+                  color.toLowerCase().includes('cream') ? 'bg-amber-50' :
+                  'bg-white'
+                }`}></span>
+                <span class="text-base font-semibold text-gray-800">{color}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Heights */}
+        <div class="bg-gray-50 p-6 lg:p-8">
+          <h3 class="text-xs uppercase tracking-[0.2em] text-gray-500 font-bold mb-4">Heights Available</h3>
+          <ul class="space-y-3">
+            {service.heights.map((h) => (
+              <li class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-primary shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                <span class="text-base font-semibold text-gray-800">{h}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* FAQ */}
+  <section class="section bg-gray-50">
+    <div class="container-page max-w-3xl">
+      <div class="text-center mb-10">
+        <span class="badge-highlight mb-4">FAQ</span>
+        <h2 class="mb-3 text-balance">{service.shortName} questions, answered</h2>
+      </div>
+      <FAQ items={content.faqs} />
+    </div>
+  </section>
+
+  {/* Other services */}
+  <section class="section bg-white">
+    <div class="container-page">
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <span class="badge-highlight mb-4">Other Services</span>
+        <h2 class="mb-3 text-balance">Other fence types we install</h2>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-5">
+        {otherServices.map((s) => (
+          <ServiceCard
+            slug={s.slug}
+            name={s.shortName}
+            tagline={s.tagline}
+            image={s.image}
+            priceFromMonthly={s.priceFromMonthly}
+            popular={s.popular}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <FinalCTA
+    title={`Ready for your ${service.shortName.toLowerCase()} estimate?`}
+    subtitle="Same-day quote · $0 down financing · Less than 7 days install"
+  />
+</PageLayout>
