@@ -85,7 +85,12 @@
 
   .badge-primary { @apply badge bg-primary text-white; }
   .badge-accent { @apply badge bg-accent text-white; }
-  .badge-highlight { @apply badge bg-highlight-100 text-accent; }
+
+  /* Section eyebrow — unified style across all pages (replaces old pill-style badge) */
+  .badge-highlight {
+    @apply inline-block text-primary text-xs lg:text-sm font-extrabold uppercase bg-transparent px-0 py-0;
+    letter-spacing: 0.2em;
+  }
 
   .section {
     @apply py-12 sm:py-16 lg:py-20;
