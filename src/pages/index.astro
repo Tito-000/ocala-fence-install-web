@@ -318,9 +318,9 @@ const faqs = [
         <p class="text-gray-600 text-lg">Six reasons Marion County homeowners pick us — and stick with us.</p>
       </div>
 
-      <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+      <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-stretch">
         {/* Bullets left */}
-        <div>
+        <div class="flex flex-col">
           <ul class="space-y-5">
             <li class="flex items-start gap-4">
               <div class="shrink-0 w-8 h-8 rounded-full bg-primary flex items-center justify-center mt-0.5">
@@ -391,9 +391,9 @@ const faqs = [
           </div>
         </div>
 
-        {/* Video placeholder right */}
-        <div class="relative">
-          <div class="relative aspect-video rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-primary-900 via-primary-700 to-primary-900 group cursor-pointer">
+        {/* Video placeholder right — stretches to match left column height */}
+        <div class="relative flex flex-col">
+          <div class="relative flex-1 min-h-[400px] rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-primary-900 via-primary-700 to-primary-900 group cursor-pointer">
             {/* Subtle pattern */}
             <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 1px 1px, white 1px, transparent 0); background-size: 24px 24px;"></div>
 
