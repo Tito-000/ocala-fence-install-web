@@ -147,7 +147,7 @@ const { activeNav } = Astro.props;
               href={`/services/${s.slug}`}
               class="group/card flex flex-col items-center text-center gap-3 hover:opacity-95 transition-opacity"
             >
-              <div class="relative w-24 h-24 lg:w-28 lg:h-28 overflow-hidden border-2 border-highlight/40 shadow-lg group-hover/card:border-highlight group-hover/card:scale-105 transition-all duration-300">
+              <div class="relative w-24 h-24 lg:w-28 lg:h-28 rounded-full overflow-hidden border-2 border-highlight/40 shadow-lg group-hover/card:border-highlight group-hover/card:scale-105 transition-all duration-300">
                 {s.image ? (
                   <img src={s.image} alt={s.shortName} class="w-full h-full object-cover" loading="lazy" />
                 ) : (
@@ -155,7 +155,7 @@ const { activeNav } = Astro.props;
                     {s.shortName.charAt(0)}
                   </div>
                 )}
-                <div class="absolute inset-0 ring-1 ring-inset ring-black/20"></div>
+                <div class="absolute inset-0 rounded-full ring-1 ring-inset ring-black/20"></div>
               </div>
               <span class="text-white text-xs lg:text-sm font-bold leading-tight">{s.shortName}</span>
             </a>
@@ -176,7 +176,7 @@ const { activeNav } = Astro.props;
               href={`/areas/${c.slug}`}
               class="group/card flex flex-col items-center text-center gap-3 hover:opacity-95 transition-opacity"
             >
-              <div class="relative w-20 h-20 lg:w-24 lg:h-24 overflow-hidden border-2 border-highlight/40 shadow-lg group-hover/card:border-highlight group-hover/card:scale-105 transition-all duration-300">
+              <div class="relative w-20 h-20 lg:w-24 lg:h-24 rounded-full overflow-hidden border-2 border-highlight/40 shadow-lg group-hover/card:border-highlight group-hover/card:scale-105 transition-all duration-300">
                 {c.image ? (
                   <img src={c.image} alt={c.name} class="w-full h-full object-cover" loading="lazy" />
                 ) : (
@@ -184,7 +184,7 @@ const { activeNav } = Astro.props;
                     {c.name.charAt(0)}
                   </div>
                 )}
-                <div class="absolute inset-0 ring-1 ring-inset ring-black/20"></div>
+                <div class="absolute inset-0 rounded-full ring-1 ring-inset ring-black/20"></div>
               </div>
               <span class="text-white text-xs lg:text-sm font-bold leading-tight">{c.name}</span>
             </a>
