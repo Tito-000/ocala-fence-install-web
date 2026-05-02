@@ -751,8 +751,92 @@ const faqs = [
     </div>
   </section>
 
+  <!-- Still on the Fence? — 8 closing reasons (Big Jerry's-style) -->
+  <section class="section bg-white">
+    <div class="container-page">
+      <div class="text-center max-w-3xl mx-auto mb-12 lg:mb-16">
+        <h2 class="mb-4 text-balance">Still on the fence?</h2>
+        <p class="text-gray-600 text-lg italic">
+          Eight more reasons to let Ocala Fence Install build your perfect fence.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12 lg:gap-x-10 lg:gap-y-16">
+        {[
+          {
+            n: 1,
+            title: 'Personalized Service',
+            body: 'Every project starts with Andri visiting your property in person — measuring, listening, and tailoring the solution to your needs.',
+          },
+          {
+            n: 2,
+            title: '5+ Years in Marion County',
+            body: 'Locally owned and operated since 2021. We know Florida soil, the permits, the HOAs, and the wildlife.',
+          },
+          {
+            n: 3,
+            title: 'All Florida Fence Types',
+            body: 'Vinyl, DuraFence composite, hurricane-rated aluminum, and pool-code fences — one team, all materials.',
+          },
+          {
+            n: 4,
+            title: 'Free On-Site Estimates',
+            body: 'No phone games, no surprise charges. We come measure within 24-48 hours and give you a written quote on the spot.',
+          },
+          {
+            n: 5,
+            title: 'Premium Materials Only',
+            body: 'DuraFence composite, premium vinyl, hurricane-rated aluminum. Lifetime materials warranty — no bargain shortcuts.',
+          },
+          {
+            n: 6,
+            title: 'Real People, Real Quotes',
+            body: 'No automated online pricing. Every quote is personalized by Andri, who has taken the time to understand your project.',
+          },
+          {
+            n: 7,
+            title: '$0 Down Financing',
+            body: 'Six lender partners. Pre-qualify in 60 seconds with no credit impact. Most fences end up between $80-$200/month.',
+          },
+          {
+            n: 8,
+            title: 'Satisfaction Guaranteed',
+            body: 'Walk-through when 100% happy. Lifetime materials warranty + 1-year workmanship. Transferable to the next homeowner.',
+          },
+        ].map((item) => (
+          <div class="flex gap-4 lg:gap-5">
+            <div class="shrink-0 text-7xl lg:text-8xl font-extrabold text-gray-200 leading-none -mt-2">
+              {item.n}
+            </div>
+            <div class="flex-1 pt-1">
+              <h3 class="text-lg lg:text-xl font-extrabold text-gray-900 mb-3 leading-tight">
+                {item.title}
+              </h3>
+              <p class="text-sm lg:text-base text-gray-600 leading-relaxed">
+                {item.body}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* CTA */}
+      <div class="text-center mt-16 lg:mt-20">
+        <a
+          href="/free-estimate"
+          class="inline-flex items-center gap-2 bg-primary hover:bg-primary-700 text-white font-extrabold uppercase tracking-wider text-base lg:text-lg px-12 py-5 rounded-none shadow-lg hover:shadow-xl transition-all"
+        >
+          Get Your Quote
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- FAQ -->
-  <section class="section">
+  <section class="section bg-gray-50">
     <div class="container-page max-w-3xl">
       <div class="text-center mb-10">
         <span class="badge-highlight mb-4">FAQ</span>
