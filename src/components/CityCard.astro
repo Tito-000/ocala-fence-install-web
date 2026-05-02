@@ -6,9 +6,11 @@ interface Props {
   county?: string;
   primaryZip?: string;
   image?: string;
+  imageAlt?: string;
 }
 
-const { slug, name, state, county, primaryZip, image } = Astro.props;
+const { slug, name, state, county, primaryZip, image, imageAlt } = Astro.props;
+const altText = imageAlt || `${name}, ${state} — fence installation service area`;
 ---
 
 <a
@@ -19,9 +21,12 @@ const { slug, name, state, county, primaryZip, image } = Astro.props;
   {image ? (
     <img
       src={image}
-      alt={`${name}, ${state} — fence installation service area`}
+      alt={altText}
+      width="1200"
+      height="900"
       class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
       loading="lazy"
+      decoding="async"
     />
   ) : (
     <div class="absolute inset-0 bg-gradient-to-br from-primary-700 to-primary-900"></div>
