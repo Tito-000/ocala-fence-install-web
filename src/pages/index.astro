@@ -289,6 +289,140 @@ const faqs = [
     </div>
   </section>
 
+  <!-- Trust Strip — placeholder for certifications/brand logos (Andri to provide real ones) -->
+  <section class="py-12 lg:py-16 bg-white border-y border-gray-200">
+    <div class="container-page">
+      <p class="text-center text-xs uppercase tracking-[0.25em] text-gray-500 font-bold mb-8">Trusted &amp; Certified</p>
+
+      {/* Placeholder logos — to be replaced with real certifications when Andri provides them */}
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 lg:gap-10 items-center max-w-5xl mx-auto">
+        {[1, 2, 3, 4, 5].map(() => (
+          <div class="flex items-center justify-center h-20 px-4 border-2 border-dashed border-gray-200 rounded-lg bg-gray-50/50">
+            <span class="text-xs uppercase tracking-wider text-gray-400 text-center">Logo<br/>placeholder</span>
+          </div>
+        ))}
+      </div>
+
+      <p class="text-center text-xs text-gray-400 mt-6 italic">
+        Logos to be added: FL Contractor License · Insurance Provider · DuraFence Certified · BBB · Marion County Chamber
+      </p>
+    </div>
+  </section>
+
+  <!-- Choosing the Right Fence Company (Big Jerry's-style — bullets + video placeholder) -->
+  <section class="section bg-gray-50">
+    <div class="container-page">
+      <div class="text-center max-w-3xl mx-auto mb-12 lg:mb-16">
+        <span class="badge-highlight mb-4">Why Choose Us</span>
+        <h2 class="mb-3 text-balance">Choosing the right fence company</h2>
+        <p class="text-gray-600 text-lg">Six reasons Marion County homeowners pick us — and stick with us.</p>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+        {/* Bullets left */}
+        <div>
+          <ul class="space-y-5">
+            <li class="flex items-start gap-4">
+              <div class="shrink-0 w-8 h-8 rounded-full bg-primary flex items-center justify-center mt-0.5">
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <div>
+                <h3 class="text-lg lg:text-xl font-extrabold text-gray-900 mb-1">5+ Years in Marion County</h3>
+                <p class="text-gray-600 text-sm lg:text-base">Locally owned and operated since 2021. We know the soil, the permits, the HOAs.</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-4">
+              <div class="shrink-0 w-8 h-8 rounded-full bg-primary flex items-center justify-center mt-0.5">
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <div>
+                <h3 class="text-lg lg:text-xl font-extrabold text-gray-900 mb-1">Licensed &amp; Insured</h3>
+                <p class="text-gray-600 text-sm lg:text-base">Florida-licensed contractor with full liability insurance. Permits handled by us.</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-4">
+              <div class="shrink-0 w-8 h-8 rounded-full bg-primary flex items-center justify-center mt-0.5">
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <div>
+                <h3 class="text-lg lg:text-xl font-extrabold text-gray-900 mb-1">Lifetime Materials Warranty</h3>
+                <p class="text-gray-600 text-sm lg:text-base">Vinyl and DuraFence backed by the manufacturer. Transferable to the next homeowner.</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-4">
+              <div class="shrink-0 w-8 h-8 rounded-full bg-primary flex items-center justify-center mt-0.5">
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <div>
+                <h3 class="text-lg lg:text-xl font-extrabold text-gray-900 mb-1">Premium Brands We Install</h3>
+                <p class="text-gray-600 text-sm lg:text-base">DuraFence composite, premium vinyl, hurricane-rated aluminum. No bargain materials.</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-4">
+              <div class="shrink-0 w-8 h-8 rounded-full bg-primary flex items-center justify-center mt-0.5">
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <div>
+                <h3 class="text-lg lg:text-xl font-extrabold text-gray-900 mb-1">$0 Down Financing</h3>
+                <p class="text-gray-600 text-sm lg:text-base">Six lender partners. Pre-qualify in 60 seconds with no credit impact.</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-4">
+              <div class="shrink-0 w-8 h-8 rounded-full bg-primary flex items-center justify-center mt-0.5">
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <div>
+                <h3 class="text-lg lg:text-xl font-extrabold text-gray-900 mb-1">Done in Less Than 7 Days</h3>
+                <p class="text-gray-600 text-sm lg:text-base">From signed contract to fence in your yard. Urgent? 2-3 days possible.</p>
+              </div>
+            </li>
+          </ul>
+
+          <div class="mt-10">
+            <a
+              href="/free-estimate"
+              class="inline-flex items-center gap-2 bg-primary hover:bg-primary-700 text-white font-extrabold uppercase tracking-wider text-base lg:text-lg px-12 py-5 rounded-sm shadow-lg hover:shadow-xl transition-all"
+            >
+              Get Your Quote
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        {/* Video placeholder right */}
+        <div class="relative">
+          <div class="relative aspect-video rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-primary-900 via-primary-700 to-primary-900 group cursor-pointer">
+            {/* Subtle pattern */}
+            <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 1px 1px, white 1px, transparent 0); background-size: 24px 24px;"></div>
+
+            {/* Play button */}
+            <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6">
+              <div class="w-20 h-20 lg:w-24 lg:h-24 rounded-full bg-white/95 flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform mb-5">
+                <svg class="w-10 h-10 lg:w-12 lg:h-12 text-primary ml-2" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </div>
+              <p class="text-white text-sm lg:text-base font-bold uppercase tracking-wider drop-shadow">
+                Watch how we work
+              </p>
+              <p class="text-white/70 text-xs lg:text-sm mt-2 italic">
+                (Video coming soon)
+              </p>
+            </div>
+          </div>
+
+          {/* Floating accent badge */}
+          <div class="hidden md:block absolute -bottom-4 -right-4 bg-white rounded-xl shadow-2xl px-5 py-3 border-l-4 border-highlight">
+            <div class="text-2xl font-extrabold text-primary leading-none">5+ years</div>
+            <div class="text-xs text-gray-600 mt-1 font-semibold uppercase tracking-wider">in Marion County</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Reviews -->
   <section class="section">
     <div class="container-page">
