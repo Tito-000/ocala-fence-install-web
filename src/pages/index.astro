@@ -569,21 +569,19 @@ const faqs = [
           { value: 0, suffix: '', prefix: '$', label: 'Down Financing', duration: 1000 },
           { value: 0, suffix: '', prefix: '', label: 'Materials Warranty', isText: true, displayText: '∞' },
         ].map((stat) => (
-          <div class="text-center">
-            <div
-              class={`font-extrabold leading-none mb-3 lg:mb-4 text-white drop-shadow-lg ${
-                stat.isText
-                  ? 'text-7xl sm:text-8xl lg:text-9xl xl:text-[10rem]'
-                  : 'text-5xl sm:text-6xl lg:text-7xl xl:text-8xl'
-              }`}
-              data-stat-value={stat.isText ? stat.displayText : stat.value}
-              data-stat-prefix={stat.prefix}
-              data-stat-suffix={stat.suffix}
-              data-stat-duration={stat.duration || 1500}
-              data-stat-text={stat.isText ? 'true' : 'false'}
-              style={stat.isText ? 'line-height: 0.85;' : ''}
-            >
-              {stat.isText ? stat.displayText : `${stat.prefix}0${stat.suffix}`}
+          <div class="text-center flex flex-col items-center">
+            {/* Fixed-height number area so all stats align */}
+            <div class="h-24 sm:h-28 lg:h-32 xl:h-36 flex items-center justify-center mb-3 lg:mb-4">
+              <div
+                class="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-extrabold leading-none text-white drop-shadow-lg"
+                data-stat-value={stat.isText ? stat.displayText : stat.value}
+                data-stat-prefix={stat.prefix}
+                data-stat-suffix={stat.suffix}
+                data-stat-duration={stat.duration || 1500}
+                data-stat-text={stat.isText ? 'true' : 'false'}
+              >
+                {stat.isText ? stat.displayText : `${stat.prefix}0${stat.suffix}`}
+              </div>
             </div>
             <div class="text-xs sm:text-sm lg:text-base font-bold uppercase tracking-[0.15em] text-white/85">
               {stat.label}
