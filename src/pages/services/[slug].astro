@@ -4,6 +4,7 @@ import FAQ from '@components/FAQ.astro';
 import ServiceCard from '@components/ServiceCard.astro';
 import FinancingCalculator from '@components/FinancingCalculator.astro';
 import ProcessSteps from '@components/ProcessSteps.astro';
+import TrustBar from '@components/TrustBar.astro';
 import FinalCTA from '@components/FinalCTA.astro';
 import { BUSINESS } from '@data/business';
 import { SERVICES_CONTENT } from '@data/services-content';
@@ -193,29 +194,8 @@ const breadcrumbSchema = {
     </div>
   </section>
 
-  {/* Quick Specs Bar */}
-  <section class="bg-highlight-100 border-y border-highlight-200">
-    <div class="container-page py-6 lg:py-8">
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-5 lg:gap-8">
-        <div class="text-center">
-          <div class="text-xs uppercase tracking-wider text-accent-700 font-bold mb-1">Heights</div>
-          <div class="text-base lg:text-lg font-extrabold text-accent">{service.heights.join(' · ')}</div>
-        </div>
-        <div class="text-center">
-          <div class="text-xs uppercase tracking-wider text-accent-700 font-bold mb-1">Wind Rated</div>
-          <div class="text-base lg:text-lg font-extrabold text-accent">{service.windRated || 'N/A'}</div>
-        </div>
-        <div class="text-center">
-          <div class="text-xs uppercase tracking-wider text-accent-700 font-bold mb-1">Lifespan</div>
-          <div class="text-base lg:text-lg font-extrabold text-accent">{service.lifespan}</div>
-        </div>
-        <div class="text-center">
-          <div class="text-xs uppercase tracking-wider text-accent-700 font-bold mb-1">Install Time</div>
-          <div class="text-base lg:text-lg font-extrabold text-accent">&lt; 7 days</div>
-        </div>
-      </div>
-    </div>
-  </section>
+  {/* Trust Bar — same as home */}
+  <TrustBar />
 
   {/* Intro + Image */}
   <section class="section bg-white">
