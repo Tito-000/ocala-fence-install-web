@@ -105,7 +105,7 @@ const { activeNav } = Astro.props;
     <div class="container-page">
       <nav class="flex items-center justify-center gap-1 py-3" aria-label="Primary">
         {PRIMARY_NAV.map((item) => {
-          const isMega = item.label === 'Services' || item.label === 'Areas';
+          const isMega = item.label === 'Fence Types' || item.label === 'Areas';
           return (
             <div class={`relative ${!isMega ? 'group' : ''}`} data-mega-trigger={isMega ? item.label : undefined}>
               <a
@@ -135,10 +135,10 @@ const { activeNav } = Astro.props;
       </nav>
     </div>
 
-    {/* MEGA-MENU — Services (square image cards, brand-coherent) */}
+    {/* MEGA-MENU — Fence Types (square image cards, brand-coherent) */}
     <div
       class="mega-menu-panel absolute left-0 right-0 top-full z-50 bg-gradient-to-b from-primary-900 via-primary to-primary-700 text-white shadow-2xl border-t-2 border-highlight"
-      data-mega-panel="Services"
+      data-mega-panel="Fence Types"
     >
       <div class="container-page py-8 lg:py-10">
         <div class="grid grid-cols-5 gap-6 lg:gap-8">

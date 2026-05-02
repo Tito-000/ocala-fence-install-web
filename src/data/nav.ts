@@ -3,7 +3,7 @@ import { BUSINESS } from './business';
 export const PRIMARY_NAV = [
   { label: 'Home', href: '/' },
   {
-    label: 'Services',
+    label: 'Fence Types',
     href: '/services',
     children: BUSINESS.services.map((s) => ({
       label: s.shortName,
