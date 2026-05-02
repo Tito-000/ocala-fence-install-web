@@ -8,6 +8,24 @@ interface Props {
 const { activeNav } = Astro.props;
 ---
 
+<style>
+  /* Mega-menu hover behavior + slide animation */
+  .has-mega:hover .mega-menu,
+  .has-mega:focus-within .mega-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  .mega-menu {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    pointer-events: none;
+    transition: opacity 200ms ease-out, transform 200ms ease-out, visibility 200ms;
+  }
+</style>
+
 <header class="sticky top-0 z-40 bg-white shadow-sm">
   <!-- TOP BAR (dark) -->
   <div class="bg-gradient-to-r from-gray-900 via-gray-900 to-primary-900 text-white">
@@ -84,33 +102,86 @@ const { activeNav } = Astro.props;
   </div>
 
   <!-- NAV BAR (white) -->
-  <div class="hidden lg:block border-b border-gray-200 bg-white">
+  <div class="hidden lg:block border-b border-gray-200 bg-white relative">
     <div class="container-page">
       <nav class="flex items-center justify-center gap-1 py-3" aria-label="Primary">
-        {PRIMARY_NAV.map((item) => (
-          <div class="relative group">
-            <a
-              href={item.href}
-              class={`inline-flex items-center gap-1 px-4 py-2 text-sm font-bold uppercase tracking-wider rounded-none hover:text-primary transition-colors ${activeNav === item.label ? 'text-primary' : 'text-gray-800'}`}
-            >
-              {item.label}
-              {item.children && <span class="text-xs">▾</span>}
-            </a>
+        {PRIMARY_NAV.map((item) => {
+          const isMega = item.label === 'Services' || item.label === 'Areas';
+          return (
+            <div class={`relative ${isMega ? 'has-mega' : 'group'}`}>
+              <a
+                href={item.href}
+                class={`inline-flex items-center gap-1 px-4 py-2 text-sm font-bold uppercase tracking-wider rounded-none hover:text-primary transition-colors ${activeNav === item.label ? 'text-primary' : 'text-gray-800'}`}
+              >
+                {item.label}
+                {item.children && <span class="text-xs">▾</span>}
+              </a>
 
-            {item.children && (
-              <div class="absolute top-full left-1/2 -translate-x-1/2 hidden group-hover:block bg-white border border-gray-200 rounded-none shadow-xl py-2 min-w-[240px] z-50">
-                {item.children.map((child) => (
-                  <a
-                    href={child.href}
-                    class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary"
-                  >
-                    {child.label}
-                  </a>
-                ))}
-              </div>
-            )}
-          </div>
-        ))}
+              {/* MEGA-MENU for Services / Areas (Big Jerry's-style — full width green bar with circular image cards) */}
+              {isMega && item.children && (
+                <div class="mega-menu absolute top-full left-1/2 -translate-x-1/2 z-50 w-screen max-w-[100vw]">
+                  <div class="bg-gradient-to-b from-primary-900 via-primary to-primary-700 text-white shadow-2xl border-t-2 border-highlight">
+                    <div class="container-page py-8 lg:py-10">
+                      <div class={`grid gap-6 lg:gap-8 ${item.label === 'Services' ? 'grid-cols-5' : 'grid-cols-4 lg:grid-cols-8'}`}>
+                        {(item.label === 'Services'
+                          ? BUSINESS.services.map((s) => ({
+                              label: s.shortName,
+                              href: `/services/${s.slug}`,
+                              image: s.image,
+                            }))
+                          : BUSINESS.serviceAreas.map((c) => ({
+                              label: c.name,
+                              href: `/areas/${c.slug}`,
+                              image: c.image,
+                            }))
+                        ).map((card) => (
+                          <a
+                            href={card.href}
+                            class="group/card flex flex-col items-center text-center gap-3 hover:opacity-90 transition-opacity"
+                          >
+                            <div class="relative w-24 h-24 lg:w-28 lg:h-28 rounded-full overflow-hidden border-2 border-highlight/40 shadow-lg group-hover/card:border-highlight group-hover/card:scale-105 transition-all duration-300">
+                              {card.image ? (
+                                <img
+                                  src={card.image}
+                                  alt={card.label}
+                                  class="w-full h-full object-cover"
+                                  loading="lazy"
+                                />
+                              ) : (
+                                <div class="w-full h-full bg-primary-700 flex items-center justify-center text-white/40 text-3xl font-extrabold">
+                                  {card.label.charAt(0)}
+                                </div>
+                              )}
+                              {/* Subtle dark inner ring */}
+                              <div class="absolute inset-0 rounded-full ring-1 ring-inset ring-black/20"></div>
+                            </div>
+                            <span class="text-white text-xs lg:text-sm font-bold leading-tight max-w-[7rem]">
+                              {card.label}
+                            </span>
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* SIMPLE DROPDOWN for non-mega items */}
+              {!isMega && item.children && (
+                <div class="absolute top-full left-1/2 -translate-x-1/2 hidden group-hover:block bg-white border border-gray-200 rounded-none shadow-xl py-2 min-w-[240px] z-50">
+                  {item.children.map((child) => (
+                    <a
+                      href={child.href}
+                      class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary"
+                    >
+                      {child.label}
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
+          );
+        })}
       </nav>
     </div>
   </div>
