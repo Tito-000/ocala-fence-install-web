@@ -269,36 +269,71 @@ const LATEST_NEWS = [
     </div>
   </section>
 
-  {/* NEIGHBORHOODS & ZIPS — pills */}
-  <section class="bg-gray-50 py-16 lg:py-20">
+  {/* NEIGHBORHOODS & ZIPS — visual map-style with neighborhood cards + ZIP grid */}
+  <section class="bg-gray-50 py-16 lg:py-24">
     <div class="container-page">
-      <h2 class="text-center text-4xl lg:text-5xl font-extrabold text-primary-900 mb-10 text-balance">
-        Neighborhoods &amp; ZIPs we cover in {city.name}
-      </h2>
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <h2 class="text-4xl lg:text-5xl font-extrabold text-primary-900 mb-4 text-balance">
+          We cover all of {city.name}
+        </h2>
+        <p class="text-lg text-gray-600">
+          Every neighborhood. Every ZIP code. Same crew, same 7-day install promise.
+        </p>
+      </div>
 
-      <div class="max-w-4xl mx-auto space-y-8">
-        {content.neighborhoods.length > 0 && (
-          <div>
-            <h3 class="text-xs uppercase tracking-[0.2em] text-gray-500 font-bold mb-4 text-center">Neighborhoods</h3>
-            <div class="flex flex-wrap justify-center gap-2 lg:gap-3">
-              {content.neighborhoods.map((n) => (
-                <span class="inline-flex items-center px-4 py-2 bg-white border border-gray-200 text-gray-800 text-sm font-semibold">
-                  {n}
-                </span>
-              ))}
+      <div class="grid lg:grid-cols-12 gap-6 lg:gap-8 max-w-6xl mx-auto">
+        {/* LEFT — coverage stat card (dark) */}
+        <div class="lg:col-span-4 bg-primary-900 text-white p-8 lg:p-10 relative overflow-hidden">
+          <div class="absolute inset-0 opacity-10">
+            <img src={city.image} alt="" class="w-full h-full object-cover" />
+          </div>
+          <div class="relative">
+            <div class="flex items-center gap-3 mb-6">
+              <svg class="w-8 h-8 text-highlight" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/></svg>
+              <span class="text-xs uppercase tracking-[0.2em] font-bold text-highlight">Coverage Area</span>
+            </div>
+
+            <div class="space-y-6 mb-8">
+              <div>
+                <div class="text-5xl lg:text-6xl font-extrabold text-highlight leading-none">{content.zips.length}</div>
+                <div class="text-sm uppercase tracking-wider mt-2 text-white/90 font-bold">ZIP Codes Covered</div>
+              </div>
+              <div>
+                <div class="text-5xl lg:text-6xl font-extrabold text-highlight leading-none">{content.neighborhoods.length}+</div>
+                <div class="text-sm uppercase tracking-wider mt-2 text-white/90 font-bold">Neighborhoods Served</div>
+              </div>
+            </div>
+
+            <div class="border-t border-white/20 pt-6">
+              <div class="text-xs uppercase tracking-[0.2em] text-highlight font-bold mb-3">All ZIPs</div>
+              <div class="flex flex-wrap gap-1.5">
+                {content.zips.map((zip) => (
+                  <span class="inline-flex items-center px-2.5 py-1 bg-white/10 border border-white/20 text-white text-xs font-mono font-semibold">
+                    {zip}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
-        )}
+        </div>
 
-        <div>
-          <h3 class="text-xs uppercase tracking-[0.2em] text-gray-500 font-bold mb-4 text-center">ZIP Codes</h3>
-          <div class="flex flex-wrap justify-center gap-2">
-            {content.zips.map((zip) => (
-              <span class="inline-flex items-center px-3 py-1.5 bg-white border border-gray-200 text-gray-700 text-sm font-mono font-semibold">
-                {zip}
-              </span>
+        {/* RIGHT — neighborhoods as map-pin cards */}
+        <div class="lg:col-span-8">
+          <h3 class="text-xs uppercase tracking-[0.2em] text-gray-500 font-bold mb-5">Neighborhoods we serve in {city.name}</h3>
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-3 lg:gap-4">
+            {content.neighborhoods.map((n) => (
+              <div class="group bg-white border border-gray-200 hover:border-primary hover:shadow-md transition-all px-4 py-4 flex items-center gap-3">
+                <div class="w-9 h-9 rounded-full bg-primary-50 group-hover:bg-primary flex items-center justify-center shrink-0 transition-colors">
+                  <svg class="w-4 h-4 text-primary group-hover:text-white transition-colors" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/></svg>
+                </div>
+                <div class="text-sm lg:text-base font-bold text-gray-900 leading-tight">{n}</div>
+              </div>
             ))}
           </div>
+
+          <p class="text-sm text-gray-500 mt-5 italic">
+            Don't see your neighborhood? <a href={`tel:${BUSINESS.phoneE164}`} class="text-primary font-semibold hover:underline">Call us</a> — chances are we still cover you.
+          </p>
         </div>
       </div>
     </div>
