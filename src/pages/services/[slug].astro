@@ -318,109 +318,6 @@ const faqSchema = {
     </div>
   </section>
 
-  {/* Cost Calculator — Linear feet × Height */}
-  <section class="section bg-gray-50">
-    <div class="container-page">
-      <div class="text-center max-w-2xl mx-auto mb-10">
-        <span class="badge-highlight mb-4">Estimate Your Cost</span>
-        <h2 class="mb-3 text-balance">{service.shortName} cost estimator</h2>
-        <p class="text-gray-600 text-lg">Drag the sliders to see a ballpark for your project.</p>
-      </div>
-
-      <div class="bg-white border border-gray-200 shadow-md p-6 lg:p-10 max-w-3xl mx-auto" data-cost-calc>
-        <div class="grid md:grid-cols-2 gap-6 lg:gap-10">
-          <div>
-            <div class="flex items-baseline justify-between mb-3">
-              <label class="text-sm font-bold uppercase tracking-wider text-gray-700">Linear Feet</label>
-              <span class="text-2xl font-extrabold text-primary" data-cost-feet>150</span>
-            </div>
-            <input type="range" min="50" max="600" step="10" value="150" data-cost-feet-slider class="w-full accent-primary"/>
-            <div class="text-xs text-gray-500 mt-1 flex justify-between"><span>50 ft</span><span>600 ft</span></div>
-          </div>
-          <div>
-            <div class="flex items-baseline justify-between mb-3">
-              <label class="text-sm font-bold uppercase tracking-wider text-gray-700">Height</label>
-              <span class="text-2xl font-extrabold text-primary" data-cost-height>{service.heights[0] || '4ft'}</span>
-            </div>
-            <div class="grid grid-cols-{service.heights.length} gap-2" style={`grid-template-columns: repeat(${service.heights.length}, 1fr);`}>
-              {service.heights.map((h, idx) => (
-                <button type="button" data-cost-height-btn={h} class={`py-3 border-2 font-bold uppercase tracking-wider text-sm transition-colors ${idx === 0 ? 'border-primary bg-primary text-white' : 'border-gray-300 text-gray-700 hover:border-primary'}`}>
-                  {h}
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <div class="mt-8 pt-8 border-t border-gray-200 text-center">
-          <div class="text-xs uppercase tracking-[0.2em] text-gray-500 font-bold mb-3">Estimated Range</div>
-          <div class="text-4xl lg:text-5xl font-extrabold text-primary mb-2">
-            <span data-cost-low>$5,250</span>
-            <span class="text-gray-400">–</span>
-            <span data-cost-high>$9,000</span>
-          </div>
-          <p class="text-sm text-gray-600 mb-6">Final price depends on terrain, gates, and access. <strong>Free on-site quote</strong> confirms the exact number.</p>
-
-          <a href="/free-estimate" class="inline-flex items-center gap-2 bg-primary hover:bg-primary-700 text-white font-extrabold uppercase tracking-wider text-base px-10 py-4 rounded-none shadow-md transition-colors">
-            Get Exact Quote
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <script is:inline define:vars={{ minPrice: service.priceRange.min, maxPrice: service.priceRange.max, heights: service.heights }}>
-      (() => {
-        const calc = document.querySelector('[data-cost-calc]');
-        if (!calc) return;
-        const feetSlider = calc.querySelector('[data-cost-feet-slider]');
-        const feetDisplay = calc.querySelector('[data-cost-feet]');
-        const heightDisplay = calc.querySelector('[data-cost-height]');
-        const heightBtns = calc.querySelectorAll('[data-cost-height-btn]');
-        const lowDisplay = calc.querySelector('[data-cost-low]');
-        const highDisplay = calc.querySelector('[data-cost-high]');
-
-        // Heights mapped to multipliers (taller = pricier)
-        const heightMultipliers = {};
-        heights.forEach((h, idx) => {
-          heightMultipliers[h] = 1 + (idx * 0.15); // 4ft = 1.0, 5ft = 1.15, 6ft = 1.30
-        });
-
-        let currentHeight = heights[0];
-
-        function update() {
-          const feet = +feetSlider.value;
-          const mult = heightMultipliers[currentHeight] || 1;
-          // Approximate: minPrice for 100ft baseline, scaled
-          const lowPerFt = (minPrice / 150) * mult;
-          const highPerFt = (maxPrice / 300) * mult;
-          const low = Math.round(feet * lowPerFt / 100) * 100;
-          const high = Math.round(feet * highPerFt / 100) * 100;
-          feetDisplay.textContent = feet;
-          heightDisplay.textContent = currentHeight;
-          lowDisplay.textContent = '$' + low.toLocaleString();
-          highDisplay.textContent = '$' + high.toLocaleString();
-        }
-
-        feetSlider.addEventListener('input', update);
-        heightBtns.forEach((btn) => {
-          btn.addEventListener('click', () => {
-            currentHeight = btn.getAttribute('data-cost-height-btn');
-            heightBtns.forEach((b) => {
-              b.classList.remove('border-primary', 'bg-primary', 'text-white');
-              b.classList.add('border-gray-300', 'text-gray-700');
-            });
-            btn.classList.remove('border-gray-300', 'text-gray-700');
-            btn.classList.add('border-primary', 'bg-primary', 'text-white');
-            update();
-          });
-        });
-
-        update();
-      })();
-    </script>
-  </section>
-
   {/* Comparison Table — Which fence is right for you? */}
   <section class="section bg-white">
     <div class="container-page">
@@ -576,23 +473,38 @@ const faqSchema = {
     </div>
   </section>
 
-  {/* Service Areas — Internal linking for SEO */}
+  {/* Service Areas — Internal linking for SEO with city images */}
   <section class="section bg-white">
     <div class="container-page">
-      <div class="text-center max-w-2xl mx-auto mb-10">
+      <div class="text-center max-w-2xl mx-auto mb-10 lg:mb-14">
         <span class="badge-highlight mb-4">Service Areas</span>
         <h2 class="mb-3 text-balance">{service.shortName} installation across Marion County</h2>
         <p class="text-gray-600 text-lg">We install {service.shortName.toLowerCase()} fences throughout Ocala and surrounding cities.</p>
       </div>
 
-      {/* Cities pills (long-tail SEO) */}
-      <div class="flex flex-wrap justify-center gap-2 lg:gap-3 max-w-4xl mx-auto">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-5">
         {BUSINESS.serviceAreas.map((c) => (
           <a
             href={`/areas/${c.slug}`}
-            class="inline-flex items-center px-4 lg:px-5 py-2 lg:py-2.5 bg-gray-50 border border-gray-200 text-gray-800 text-sm font-semibold hover:border-primary hover:text-primary hover:bg-primary-50 transition-colors"
+            class="group relative block aspect-[4/3] overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
           >
-            {service.shortName} in {c.name}, {c.state}
+            <img
+              src={c.image}
+              alt={`${service.shortName} fence installation in ${c.name}, ${c.state} — ${c.county}`}
+              class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              loading="lazy"
+              width="800"
+              height="600"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-black/10 group-hover:from-black/90 group-hover:via-black/45 transition-all"></div>
+            <div class="absolute inset-x-0 bottom-0 p-4">
+              <p class="text-white/80 text-[10px] font-bold uppercase tracking-wider mb-1 drop-shadow">
+                {service.shortName} in
+              </p>
+              <h3 class="text-white text-base lg:text-lg font-extrabold uppercase leading-tight drop-shadow-lg">
+                {c.name}, {c.state}
+              </h3>
+            </div>
           </a>
         ))}
       </div>
