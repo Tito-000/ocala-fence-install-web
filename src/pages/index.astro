@@ -321,61 +321,22 @@ const faqs = [
       <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-stretch">
         {/* Bullets left */}
         <div class="flex flex-col">
-          <ul class="space-y-5">
-            <li class="flex items-start gap-4">
-              <div class="shrink-0 w-8 h-8 rounded-full bg-primary flex items-center justify-center mt-0.5">
-                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
-              </div>
-              <div>
-                <h3 class="text-lg lg:text-xl font-extrabold text-gray-900 mb-1">5+ Years in Marion County</h3>
-                <p class="text-gray-600 text-sm lg:text-base">Locally owned and operated since 2021. We know the soil, the permits, the HOAs.</p>
-              </div>
-            </li>
-            <li class="flex items-start gap-4">
-              <div class="shrink-0 w-8 h-8 rounded-full bg-primary flex items-center justify-center mt-0.5">
-                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
-              </div>
-              <div>
-                <h3 class="text-lg lg:text-xl font-extrabold text-gray-900 mb-1">Licensed &amp; Insured</h3>
-                <p class="text-gray-600 text-sm lg:text-base">Florida-licensed contractor with full liability insurance. Permits handled by us.</p>
-              </div>
-            </li>
-            <li class="flex items-start gap-4">
-              <div class="shrink-0 w-8 h-8 rounded-full bg-primary flex items-center justify-center mt-0.5">
-                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
-              </div>
-              <div>
-                <h3 class="text-lg lg:text-xl font-extrabold text-gray-900 mb-1">Lifetime Materials Warranty</h3>
-                <p class="text-gray-600 text-sm lg:text-base">Vinyl and DuraFence backed by the manufacturer. Transferable to the next homeowner.</p>
-              </div>
-            </li>
-            <li class="flex items-start gap-4">
-              <div class="shrink-0 w-8 h-8 rounded-full bg-primary flex items-center justify-center mt-0.5">
-                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
-              </div>
-              <div>
-                <h3 class="text-lg lg:text-xl font-extrabold text-gray-900 mb-1">Premium Brands We Install</h3>
-                <p class="text-gray-600 text-sm lg:text-base">DuraFence composite, premium vinyl, hurricane-rated aluminum. No bargain materials.</p>
-              </div>
-            </li>
-            <li class="flex items-start gap-4">
-              <div class="shrink-0 w-8 h-8 rounded-full bg-primary flex items-center justify-center mt-0.5">
-                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
-              </div>
-              <div>
-                <h3 class="text-lg lg:text-xl font-extrabold text-gray-900 mb-1">$0 Down Financing</h3>
-                <p class="text-gray-600 text-sm lg:text-base">Six lender partners. Pre-qualify in 60 seconds with no credit impact.</p>
-              </div>
-            </li>
-            <li class="flex items-start gap-4">
-              <div class="shrink-0 w-8 h-8 rounded-full bg-primary flex items-center justify-center mt-0.5">
-                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
-              </div>
-              <div>
-                <h3 class="text-lg lg:text-xl font-extrabold text-gray-900 mb-1">Done in Less Than 7 Days</h3>
-                <p class="text-gray-600 text-sm lg:text-base">From signed contract to fence in your yard. Urgent? 2-3 days possible.</p>
-              </div>
-            </li>
+          <ul class="space-y-5 lg:space-y-6">
+            {[
+              '5+ Years in Marion County',
+              'Licensed & Insured',
+              'Lifetime Materials Warranty',
+              'Premium Brands We Install',
+              '$0 Down Financing',
+              'Done in Less Than 7 Days',
+            ].map((title) => (
+              <li class="flex items-center gap-4">
+                <div class="shrink-0 w-9 h-9 lg:w-10 lg:h-10 rounded-full bg-primary flex items-center justify-center">
+                  <svg class="w-5 h-5 lg:w-6 lg:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+                </div>
+                <h3 class="text-lg lg:text-2xl font-extrabold text-gray-900">{title}</h3>
+              </li>
+            ))}
           </ul>
 
           <div class="mt-10">
