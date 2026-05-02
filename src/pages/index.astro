@@ -531,6 +531,69 @@ const faqs = [
     </script>
   </section>
 
+  <!-- Gallery — Recent Projects (placeholders, awaiting Andri's real project photos) -->
+  <section class="section bg-white border-t border-gray-100">
+    <div class="container-page">
+      <div class="text-center max-w-2xl mx-auto mb-10 lg:mb-14">
+        <span class="badge-highlight mb-4">Gallery</span>
+        <h2 class="mb-3 text-balance">Recent fence projects in Marion County</h2>
+        <p class="text-gray-600 text-lg">A look at our most recent installations across Ocala and surrounding areas.</p>
+      </div>
+
+      {/* Gallery grid — 8 placeholder thumbnails */}
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 lg:gap-4">
+        {[
+          { type: 'Vinyl Privacy', city: 'Ocala' },
+          { type: 'DuraFence', city: 'Belleview' },
+          { type: 'Pool Fence', city: 'Summerfield' },
+          { type: 'Aluminum', city: 'The Villages' },
+          { type: 'Vinyl Picket', city: 'Silver Springs' },
+          { type: 'Vinyl Privacy', city: 'Dunnellon' },
+          { type: 'DuraFence', city: 'Lady Lake' },
+          { type: 'Aluminum', city: 'Marion County' },
+        ].map((p) => (
+          <div class="group relative aspect-square overflow-hidden bg-gray-100 border border-gray-200">
+            {/* Placeholder pattern */}
+            <div class="absolute inset-0 bg-gradient-to-br from-primary-50 via-gray-100 to-highlight-50"></div>
+            <div class="absolute inset-0 opacity-30" style="background-image: linear-gradient(45deg, transparent 49%, #136229 49%, #136229 51%, transparent 51%); background-size: 16px 16px;"></div>
+
+            {/* Centered icon */}
+            <div class="absolute inset-0 flex items-center justify-center">
+              <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+              </svg>
+            </div>
+
+            {/* Bottom info on hover */}
+            <div class="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+              <p class="text-white text-xs font-bold uppercase tracking-wider">{p.type}</p>
+              <p class="text-white/85 text-xs">{p.city}, FL</p>
+            </div>
+
+            {/* Persistent type tag */}
+            <div class="absolute top-2 left-2 bg-primary text-white text-[9px] font-extrabold uppercase tracking-wider px-2 py-1 shadow-md">
+              {p.type}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* CTA */}
+      <div class="text-center mt-12 lg:mt-14">
+        <a
+          href="/gallery"
+          class="inline-flex items-center gap-2 border-2 border-primary text-primary hover:bg-primary hover:text-white font-extrabold uppercase tracking-wider text-base px-10 py-4 rounded-none transition-colors"
+        >
+          View Full Gallery
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/>
+          </svg>
+        </a>
+        <p class="text-xs text-gray-400 italic mt-4">More project photos coming soon</p>
+      </div>
+    </div>
+  </section>
+
   <!-- Stats Section (Big Jerry's-style with photo bg + animated counter) -->
   <section class="relative overflow-hidden py-20 lg:py-28 bg-primary-900 text-white" data-stats-section>
     {/* Photo bg with overlay */}
