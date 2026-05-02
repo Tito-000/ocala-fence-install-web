@@ -56,14 +56,14 @@ export const BUSINESS = {
 
   // Service areas (8 cities)
   serviceAreas: [
-    { slug: 'ocala-fl', name: 'Ocala', state: 'FL', county: 'Marion County', primaryZip: '34471', allZips: ['34471', '34472', '34473', '34474', '34476', '34480'] },
-    { slug: 'belleview-fl', name: 'Belleview', state: 'FL', county: 'Marion County', primaryZip: '34420' },
-    { slug: 'summerfield-fl', name: 'Summerfield', state: 'FL', county: 'Marion County', primaryZip: '34491' },
-    { slug: 'silver-springs-fl', name: 'Silver Springs', state: 'FL', county: 'Marion County', primaryZip: '34488' },
-    { slug: 'dunnellon-fl', name: 'Dunnellon', state: 'FL', county: 'Marion County', primaryZip: '34431' },
-    { slug: 'the-villages-fl', name: 'The Villages', state: 'FL', county: 'Sumter County', primaryZip: '32162' },
-    { slug: 'lady-lake-fl', name: 'Lady Lake', state: 'FL', county: 'Lake County', primaryZip: '32159' },
-    { slug: 'marion-county-fl', name: 'Marion County', state: 'FL', county: 'Marion County', primaryZip: '34470' },
+    { slug: 'ocala-fl', name: 'Ocala', state: 'FL', county: 'Marion County', primaryZip: '34471', image: '/images/cities/ocala.jpg', allZips: ['34471', '34472', '34473', '34474', '34476', '34480'] },
+    { slug: 'belleview-fl', name: 'Belleview', state: 'FL', county: 'Marion County', primaryZip: '34420', image: '/images/cities/belleview.jpg' },
+    { slug: 'summerfield-fl', name: 'Summerfield', state: 'FL', county: 'Marion County', primaryZip: '34491', image: '/images/cities/summerfield.jpg' },
+    { slug: 'silver-springs-fl', name: 'Silver Springs', state: 'FL', county: 'Marion County', primaryZip: '34488', image: '/images/cities/silver-springs.jpg' },
+    { slug: 'dunnellon-fl', name: 'Dunnellon', state: 'FL', county: 'Marion County', primaryZip: '34431', image: '/images/cities/dunnellon.jpg' },
+    { slug: 'the-villages-fl', name: 'The Villages', state: 'FL', county: 'Sumter County', primaryZip: '32162', image: '/images/cities/the-villages.jpg' },
+    { slug: 'lady-lake-fl', name: 'Lady Lake', state: 'FL', county: 'Lake County', primaryZip: '32159', image: '/images/cities/lady-lake.jpg' },
+    { slug: 'marion-county-fl', name: 'Marion County', state: 'FL', county: 'Marion County', primaryZip: '34470', image: '/images/cities/marion-county.jpg' },
   ],
 
   // Services (5 fence types)

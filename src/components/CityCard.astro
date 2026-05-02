@@ -5,22 +5,47 @@ interface Props {
   state: string;
   county?: string;
   primaryZip?: string;
+  image?: string;
 }
 
-const { slug, name, state, county, primaryZip } = Astro.props;
+const { slug, name, state, county, primaryZip, image } = Astro.props;
 ---
 
-<a href={`/areas/${slug}`} class="group block p-5 bg-white border border-gray-200 rounded-none hover:border-primary hover:shadow-md transition-all">
-  <div class="flex items-center gap-3">
-    <div class="w-10 h-10 bg-primary-50 rounded-none flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors shrink-0">
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+<a
+  href={`/areas/${slug}`}
+  class="group relative block aspect-[4/3] overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
+>
+  {/* Background image */}
+  {image ? (
+    <img
+      src={image}
+      alt={`${name}, ${state} — fence installation service area`}
+      class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+      loading="lazy"
+    />
+  ) : (
+    <div class="absolute inset-0 bg-gradient-to-br from-primary-700 to-primary-900"></div>
+  )}
+
+  {/* Dark overlay — bottom-up for text legibility */}
+  <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/15 group-hover:from-black/90 group-hover:via-black/50 transition-all"></div>
+
+  {/* Content — bottom */}
+  <div class="absolute inset-x-0 bottom-0 p-5 lg:p-6">
+    <div class="flex items-end justify-between gap-3">
+      <div class="min-w-0">
+        <h3 class="text-white text-xl lg:text-2xl font-extrabold uppercase leading-tight drop-shadow-lg">
+          {name}, {state}
+        </h3>
+        {(county || primaryZip) && (
+          <p class="text-white/85 text-xs lg:text-sm font-semibold mt-1 drop-shadow">
+            {county}{primaryZip && ` · ${primaryZip}`}
+          </p>
+        )}
+      </div>
+      <svg class="shrink-0 w-6 h-6 text-white opacity-80 group-hover:opacity-100 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/>
+      </svg>
     </div>
-    <div class="min-w-0 flex-1">
-      <div class="font-semibold group-hover:text-primary transition-colors">{name}, {state}</div>
-      {(county || primaryZip) && (
-        <div class="text-xs text-gray-500">{county}{primaryZip && ` · ${primaryZip}`}</div>
-      )}
-    </div>
-    <svg class="w-4 h-4 text-gray-400 group-hover:text-primary group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
   </div>
 </a>
