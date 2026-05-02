@@ -549,6 +549,102 @@ const faqs = [
     </script>
   </section>
 
+  <!-- Stats Section (Big Jerry's-style with photo bg + animated counter) -->
+  <section class="relative overflow-hidden py-20 lg:py-28 bg-primary-900 text-white" data-stats-section>
+    {/* Photo bg with overlay */}
+    <div class="absolute inset-0">
+      <div
+        class="absolute inset-0 bg-cover bg-center"
+        style="background-image: url('/images/services/vinyl-privacy.jpg'); filter: saturate(0.6) contrast(1.1);"
+      ></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-primary-900/95 via-primary-900/85 to-primary-900/90"></div>
+      <div class="absolute inset-0 bg-black/30"></div>
+    </div>
+
+    <div class="container-page relative">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
+        {[
+          { value: 5, suffix: '+', prefix: '', label: 'Years in Marion County', duration: 1500 },
+          { value: 7, suffix: '', prefix: '< ', label: 'Days to Install', duration: 1500 },
+          { value: 0, suffix: '', prefix: '$', label: 'Down Financing', duration: 1000 },
+          { value: 0, suffix: '', prefix: '', label: 'Lifetime Warranty', isText: true, displayText: 'Lifetime' },
+        ].map((stat) => (
+          <div class="text-center">
+            <div
+              class="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-extrabold leading-none mb-3 lg:mb-4 text-white drop-shadow-lg"
+              data-stat-value={stat.isText ? stat.displayText : stat.value}
+              data-stat-prefix={stat.prefix}
+              data-stat-suffix={stat.suffix}
+              data-stat-duration={stat.duration || 1500}
+              data-stat-text={stat.isText ? 'true' : 'false'}
+            >
+              {stat.isText ? stat.displayText : `${stat.prefix}0${stat.suffix}`}
+            </div>
+            <div class="text-xs sm:text-sm lg:text-base font-bold uppercase tracking-[0.15em] text-white/85">
+              {stat.label}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <script is:inline>
+      (() => {
+        const section = document.querySelector('[data-stats-section]');
+        if (!section) return;
+        const stats = section.querySelectorAll('[data-stat-value]');
+        let triggered = false;
+
+        function easeOutQuart(t) {
+          return 1 - Math.pow(1 - t, 4);
+        }
+
+        function animate(el) {
+          const isText = el.getAttribute('data-stat-text') === 'true';
+          const target = el.getAttribute('data-stat-value');
+          const prefix = el.getAttribute('data-stat-prefix') || '';
+          const suffix = el.getAttribute('data-stat-suffix') || '';
+          const duration = parseInt(el.getAttribute('data-stat-duration')) || 1500;
+
+          if (isText) {
+            // Text fade in
+            el.style.opacity = '0';
+            el.textContent = target;
+            requestAnimationFrame(() => {
+              el.style.transition = `opacity ${duration}ms ease-out`;
+              el.style.opacity = '1';
+            });
+            return;
+          }
+
+          const targetNum = parseFloat(target);
+          const start = performance.now();
+          function frame(now) {
+            const elapsed = now - start;
+            const progress = Math.min(elapsed / duration, 1);
+            const eased = easeOutQuart(progress);
+            const current = Math.round(targetNum * eased);
+            el.textContent = `${prefix}${current}${suffix}`;
+            if (progress < 1) requestAnimationFrame(frame);
+            else el.textContent = `${prefix}${targetNum}${suffix}`;
+          }
+          requestAnimationFrame(frame);
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting && !triggered) {
+              triggered = true;
+              stats.forEach((s) => animate(s));
+            }
+          });
+        }, { threshold: 0.3 });
+
+        observer.observe(section);
+      })();
+    </script>
+  </section>
+
   <!-- Recent News (Blog placeholders) -->
   <section class="section bg-white border-t border-gray-100">
     <div class="container-page">
