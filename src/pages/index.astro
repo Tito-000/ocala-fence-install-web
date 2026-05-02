@@ -571,12 +571,17 @@ const faqs = [
         ].map((stat) => (
           <div class="text-center">
             <div
-              class="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-extrabold leading-none mb-3 lg:mb-4 text-white drop-shadow-lg"
+              class={`font-extrabold leading-none mb-3 lg:mb-4 text-white drop-shadow-lg ${
+                stat.isText
+                  ? 'text-7xl sm:text-8xl lg:text-9xl xl:text-[10rem]'
+                  : 'text-5xl sm:text-6xl lg:text-7xl xl:text-8xl'
+              }`}
               data-stat-value={stat.isText ? stat.displayText : stat.value}
               data-stat-prefix={stat.prefix}
               data-stat-suffix={stat.suffix}
               data-stat-duration={stat.duration || 1500}
               data-stat-text={stat.isText ? 'true' : 'false'}
+              style={stat.isText ? 'line-height: 0.85;' : ''}
             >
               {stat.isText ? stat.displayText : `${stat.prefix}0${stat.suffix}`}
             </div>
