@@ -2,6 +2,7 @@
 import PageLayout from '@layouts/PageLayout.astro';
 import FAQ from '@components/FAQ.astro';
 import ServiceCard from '@components/ServiceCard.astro';
+import FinancingCalculator from '@components/FinancingCalculator.astro';
 import FinalCTA from '@components/FinalCTA.astro';
 import { BUSINESS } from '@data/business';
 import { SERVICES_CONTENT } from '@data/services-content';
@@ -250,8 +251,233 @@ const breadcrumbSchema = {
     </div>
   </section>
 
-  {/* FAQ */}
+  {/* Styles / Variants */}
   <section class="section bg-gray-50">
+    <div class="container-page">
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <span class="badge-highlight mb-4">Styles</span>
+        <h2 class="mb-3 text-balance">{service.shortName} styles &amp; variants</h2>
+        <p class="text-gray-600 text-lg">Common configurations we install across Marion County.</p>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-5">
+        {(() => {
+          const stylesBySlug: Record<string, { name: string; desc: string }[]> = {
+            'vinyl-privacy-fence': [
+              { name: 'Flat Top', desc: 'Classic clean horizontal top — most popular' },
+              { name: 'Scalloped', desc: 'Curved decorative top edge for elegance' },
+              { name: 'Lattice Top', desc: 'Privacy bottom + decorative lattice top' },
+              { name: 'Shadowbox', desc: 'Alternating boards — privacy from both sides' },
+            ],
+            'vinyl-picket-fence': [
+              { name: 'Pointed Top', desc: 'Traditional pointed pickets — timeless' },
+              { name: 'Dog-Ear', desc: 'Rounded corners — softer look' },
+              { name: 'Gothic Cap', desc: 'Decorative cap on each picket' },
+              { name: 'Flat Top', desc: 'Modern flat-top pickets' },
+            ],
+            'durafence': [
+              { name: 'Stone Texture', desc: 'Realistic stacked stone look' },
+              { name: 'Smooth Finish', desc: 'Clean modern smooth surface' },
+              { name: 'Combination', desc: 'Stone bottom + smooth top accent' },
+              { name: 'Custom Heights', desc: '5ft, 6ft, custom on request' },
+            ],
+            'aluminum-fence': [
+              { name: '3-Rail Standard', desc: 'Most common — pool & residential' },
+              { name: '4-Rail Premium', desc: 'Extra rail for security & strength' },
+              { name: 'Spear Top', desc: 'Decorative pointed picket tops' },
+              { name: 'Flat Top', desc: 'Clean modern look — pool perimeter' },
+            ],
+            'pool-fence': [
+              { name: 'Black Aluminum', desc: 'Most popular — disappears visually' },
+              { name: 'White Vinyl Picket', desc: 'Classic white look pool perimeter' },
+              { name: 'Self-Closing Gate', desc: 'Magnetic latch · §515 compliant' },
+              { name: 'Double Gate', desc: 'Wide access for equipment' },
+            ],
+          };
+          return (stylesBySlug[service.slug] || []).map((style) => (
+            <div class="bg-white border border-gray-200 p-5 hover:border-primary hover:shadow-md transition-all">
+              <h3 class="text-base lg:text-lg font-extrabold text-gray-900 mb-2 leading-tight">{style.name}</h3>
+              <p class="text-sm text-gray-600 leading-relaxed">{style.desc}</p>
+            </div>
+          ));
+        })()}
+      </div>
+    </div>
+  </section>
+
+  {/* Comparison Table — Which fence is right for you? */}
+  <section class="section bg-white">
+    <div class="container-page">
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <span class="badge-highlight mb-4">Compare</span>
+        <h2 class="mb-3 text-balance">Which fence is right for you?</h2>
+        <p class="text-gray-600 text-lg">A side-by-side comparison of all 5 fence types we install.</p>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full bg-white border border-gray-200 text-sm lg:text-base">
+          <thead>
+            <tr class="bg-gray-50 border-b-2 border-gray-200">
+              <th class="text-left p-4 font-extrabold text-gray-700 uppercase tracking-wider text-xs">Feature</th>
+              {BUSINESS.services.map((s) => (
+                <th class={`text-center p-4 font-extrabold uppercase tracking-wider text-xs ${s.slug === service.slug ? 'bg-primary text-white' : 'text-gray-700'}`}>
+                  {s.shortName}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b border-gray-100">
+              <td class="p-4 font-semibold text-gray-700">Price (avg.)</td>
+              {BUSINESS.services.map((s) => (
+                <td class={`p-4 text-center ${s.slug === service.slug ? 'bg-primary-50 font-extrabold text-primary' : 'text-gray-700'}`}>
+                  ${(s.priceRange.min / 1000).toFixed(1)}k–${(s.priceRange.max / 1000).toFixed(0)}k
+                </td>
+              ))}
+            </tr>
+            <tr class="border-b border-gray-100">
+              <td class="p-4 font-semibold text-gray-700">Wind Rating</td>
+              {BUSINESS.services.map((s) => (
+                <td class={`p-4 text-center ${s.slug === service.slug ? 'bg-primary-50 font-extrabold text-primary' : 'text-gray-700'}`}>
+                  {s.windRated || '—'}
+                </td>
+              ))}
+            </tr>
+            <tr class="border-b border-gray-100">
+              <td class="p-4 font-semibold text-gray-700">Lifespan</td>
+              {BUSINESS.services.map((s) => (
+                <td class={`p-4 text-center ${s.slug === service.slug ? 'bg-primary-50 font-extrabold text-primary' : 'text-gray-700'}`}>
+                  {s.lifespan}
+                </td>
+              ))}
+            </tr>
+            <tr class="border-b border-gray-100">
+              <td class="p-4 font-semibold text-gray-700">Maintenance</td>
+              {BUSINESS.services.map((s) => (
+                <td class={`p-4 text-center ${s.slug === service.slug ? 'bg-primary-50 font-extrabold text-primary' : 'text-gray-700'}`}>
+                  {s.slug.includes('aluminum') || s.slug.includes('pool') ? 'None' : 'Hose only'}
+                </td>
+              ))}
+            </tr>
+            <tr class="border-b border-gray-100">
+              <td class="p-4 font-semibold text-gray-700">Privacy</td>
+              {BUSINESS.services.map((s) => {
+                const privacy = s.slug === 'vinyl-privacy-fence' ? 'Full' :
+                                s.slug === 'durafence' ? 'Full' :
+                                s.slug === 'vinyl-picket-fence' ? 'Decorative' :
+                                'See-through';
+                return (
+                  <td class={`p-4 text-center ${s.slug === service.slug ? 'bg-primary-50 font-extrabold text-primary' : 'text-gray-700'}`}>
+                    {privacy}
+                  </td>
+                );
+              })}
+            </tr>
+            <tr>
+              <td class="p-4 font-semibold text-gray-700">Pool Code</td>
+              {BUSINESS.services.map((s) => {
+                const compliant = s.slug === 'pool-fence' || s.slug === 'aluminum-fence';
+                return (
+                  <td class={`p-4 text-center ${s.slug === service.slug ? 'bg-primary-50' : ''}`}>
+                    {compliant ? (
+                      <svg class="w-6 h-6 text-primary mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                    ) : (
+                      <span class="text-gray-300 text-xl">—</span>
+                    )}
+                  </td>
+                );
+              })}
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  {/* Financing Calculator */}
+  <section class="section relative overflow-hidden bg-gradient-to-b from-gray-100 via-gray-50 to-gray-100 border-y border-gray-200">
+    <div class="absolute inset-0 opacity-[0.04] pointer-events-none" style="background-image: linear-gradient(0deg, transparent 24px, #136229 25px, transparent 26px), linear-gradient(90deg, transparent 24px, #136229 25px, transparent 26px); background-size: 25px 25px;"></div>
+
+    <div class="container-page relative">
+      <div class="text-center max-w-3xl mx-auto mb-10 lg:mb-14">
+        <span class="inline-block text-primary text-xs lg:text-sm font-extrabold uppercase tracking-[0.2em] mb-4">
+          Financing Available
+        </span>
+        <h2 class="mb-5 text-balance">Calculate your monthly payment</h2>
+        <p class="text-gray-600 text-lg lg:text-xl leading-relaxed">
+          Most {service.shortName.toLowerCase()} projects fit between <strong>$80 and $200/month</strong> with $0 down. Move the sliders.
+        </p>
+      </div>
+
+      <FinancingCalculator
+        defaultAmount={Math.round((service.priceRange.min + service.priceRange.max) / 2)}
+        minAmount={service.priceRange.min}
+        maxAmount={service.priceRange.max}
+      />
+    </div>
+  </section>
+
+  {/* Mini Process Recap */}
+  <section class="section bg-white">
+    <div class="container-page">
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <span class="badge-highlight mb-4">Our Process</span>
+        <h2 class="mb-3 text-balance">From quote to fence in 4 steps</h2>
+      </div>
+
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6 max-w-5xl mx-auto">
+        {[
+          { n: 1, title: 'Get a Quote', body: 'Submit our 60-sec form or call Andri direct.' },
+          { n: 2, title: 'On-Site Estimate', body: 'We come measure within 24-48h. Written quote on the spot.' },
+          { n: 3, title: 'We Install', body: 'Our own crew. Most fences finished in less than 7 days.' },
+          { n: 4, title: 'Enjoy', body: 'Walk-through when 100% happy. Lifetime materials warranty.' },
+        ].map((step) => (
+          <div class="text-center">
+            <div class="w-14 h-14 lg:w-16 lg:h-16 bg-primary text-white rounded-full flex items-center justify-center text-xl lg:text-2xl font-extrabold mx-auto mb-4 shadow-lg">
+              {step.n}
+            </div>
+            <h3 class="text-base lg:text-lg font-extrabold mb-2">{step.title}</h3>
+            <p class="text-sm text-gray-600 leading-relaxed">{step.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* Gallery filtered (placeholders) */}
+  <section class="section bg-gray-50">
+    <div class="container-page">
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <span class="badge-highlight mb-4">Gallery</span>
+        <h2 class="mb-3 text-balance">Recent {service.shortName.toLowerCase()} projects</h2>
+        <p class="text-gray-600 text-lg">A look at our recent {service.shortName.toLowerCase()} installations across Marion County.</p>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 lg:gap-4">
+        {[1, 2, 3, 4, 5, 6, 7, 8].map((n) => (
+          <div class="relative aspect-square overflow-hidden bg-gray-100 border border-gray-200">
+            <div class="absolute inset-0 bg-gradient-to-br from-primary-50 via-gray-100 to-highlight-50"></div>
+            <div class="absolute inset-0 opacity-30" style="background-image: linear-gradient(45deg, transparent 49%, #136229 49%, #136229 51%, transparent 51%); background-size: 16px 16px;"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+              </svg>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="text-center mt-10">
+        <a href="/gallery" class="inline-flex items-center gap-2 border-2 border-primary text-primary hover:bg-primary hover:text-white font-extrabold uppercase tracking-wider text-base px-10 py-4 rounded-none transition-colors">
+          View Full Gallery
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {/* FAQ */}
+  <section class="section bg-white">
     <div class="container-page max-w-3xl">
       <div class="text-center mb-10">
         <span class="badge-highlight mb-4">FAQ</span>
