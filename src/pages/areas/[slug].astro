@@ -1,10 +1,6 @@
 ---
 import PageLayout from '@layouts/PageLayout.astro';
 import FAQ from '@components/FAQ.astro';
-import ServiceCard from '@components/ServiceCard.astro';
-import CityCard from '@components/CityCard.astro';
-import TrustBar from '@components/TrustBar.astro';
-import ProcessSteps from '@components/ProcessSteps.astro';
 import FinalCTA from '@components/FinalCTA.astro';
 import { BUSINESS } from '@data/business';
 import { CITIES_CONTENT } from '@data/cities-content';
@@ -20,7 +16,16 @@ const { city } = Astro.props;
 const content = CITIES_CONTENT[city.slug];
 const otherCities = BUSINESS.serviceAreas.filter((c) => c.slug !== city.slug);
 
-// Schema.org LocalBusiness with areaServed
+// Per-service bullets for the "Select The Perfect Fence" section (BJF style)
+const SERVICE_BULLETS: Record<string, string[]> = {
+  'vinyl-privacy-fence': ['Total privacy & 6ft height', 'Hurricane-rated 130 MPH', 'Lifetime materials warranty'],
+  'vinyl-picket-fence': ['Decorative front-yard look', 'Maintenance-free vinyl', '25+ year lifespan'],
+  'durafence': ['160 MPH wind-rated', 'Looks like real stone', 'Lifetime warranty'],
+  'aluminum-fence': ['Florida §515 pool-code ready', 'Maintenance-free metal', 'Modern, sleek look'],
+  'pool-fence': ['Florida §515 compliant', 'Self-closing magnetic gates', 'Pass inspection on first try'],
+};
+
+// Schemas
 const localSchema = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
@@ -38,10 +43,7 @@ const localSchema = {
   areaServed: {
     '@type': 'City',
     name: `${city.name}, ${city.state}`,
-    containedInPlace: {
-      '@type': 'AdministrativeArea',
-      name: city.county,
-    },
+    containedInPlace: { '@type': 'AdministrativeArea', name: city.county },
   },
   priceRange: '$$$',
   description: content.metaDescription,
@@ -57,19 +59,42 @@ const breadcrumbSchema = {
   ],
 };
 
-// FAQ Schema
 const faqSchema = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
   mainEntity: content.faqs.map((faq) => ({
     '@type': 'Question',
     name: faq.q,
-    acceptedAnswer: {
-      '@type': 'Answer',
-      text: faq.a.replace(/<[^>]*>/g, ''),
-    },
+    acceptedAnswer: { '@type': 'Answer', text: faq.a.replace(/<[^>]*>/g, '') },
   })),
 };
+
+// Stats bar (BJF style)
+const STATS = [
+  { number: '500+', label: 'Fences Installed' },
+  { number: '5+', label: 'Years in Marion' },
+  { number: '< 7', label: 'Days to Install' },
+  { number: '$0', label: 'Down Financing' },
+];
+
+// Latest news posts (BJF "Latest News" style — 3 blog cards)
+const LATEST_NEWS = [
+  {
+    slug: 'fence-installation-timeline-ocala',
+    title: 'How Long Does Fence Installation Take in Ocala, FL?',
+    image: '/images/services/vinyl-privacy.jpg',
+  },
+  {
+    slug: 'pool-fence-code-marion-county-florida',
+    title: 'Florida §515 Pool Fence Code: What Marion County Homeowners Need to Know',
+    image: '/images/services/pool-fence.jpg',
+  },
+  {
+    slug: 'vinyl-vs-durafence-florida-heat',
+    title: 'Vinyl vs DuraFence: Which Holds Up Best in Florida Heat?',
+    image: '/images/services/durafence.jpg',
+  },
+];
 ---
 
 <PageLayout
@@ -91,142 +116,167 @@ const faqSchema = {
     </div>
   </div>
 
-  {/* City Hero — split screen with city image */}
-  <section class="relative bg-gray-50 border-b border-gray-200">
-    <div class="absolute inset-0 opacity-[0.04] pointer-events-none" style="background-image: repeating-linear-gradient(135deg, transparent 0, transparent 18px, #136229 18px, #136229 19px, transparent 19px, transparent 38px);"></div>
+  {/* HERO — BJF style: aerial bg + big white title + 4 bullets */}
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0">
+      <img
+        src={city.image}
+        alt={city.imageAlt || `${city.name}, ${city.state} aerial view`}
+        class="w-full h-full object-cover"
+        loading="eager"
+        width="1920"
+        height="900"
+      />
+      <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/55 to-black/30"></div>
+    </div>
 
-    <div class="container-page relative py-12 lg:py-20">
-      <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-        {/* LEFT — content card */}
-        <div class="bg-white border border-gray-200 shadow-md p-8 lg:p-12">
-          <div class="flex flex-wrap gap-2 mb-5">
-            <span class="inline-block bg-primary text-white text-xs font-extrabold uppercase tracking-wider px-3 py-1.5">
-              {city.county}
-            </span>
-            <span class="inline-block bg-accent text-white text-xs font-extrabold uppercase tracking-wider px-3 py-1.5">
-              ZIPs {content.zips.slice(0, 3).join(', ')}{content.zips.length > 3 ? '+' : ''}
-            </span>
-          </div>
+    <div class="container-page relative py-20 lg:py-32">
+      <div class="max-w-3xl text-white">
+        <h1 class="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-extrabold leading-[0.95] tracking-tight mb-8 text-balance drop-shadow-2xl">
+          Fence Installation in <span class="text-highlight">{city.name}</span>
+        </h1>
 
-          <h1 class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold uppercase leading-[1.05] tracking-tight mb-5 text-balance text-gray-900">
-            <span set:html={content.heroTitle}></span>
-          </h1>
+        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3 mb-10 max-w-2xl">
+          <li class="flex items-center gap-3 text-lg lg:text-xl font-semibold">
+            <svg class="w-6 h-6 text-highlight shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+            Fast & Accurate Quotes
+          </li>
+          <li class="flex items-center gap-3 text-lg lg:text-xl font-semibold">
+            <svg class="w-6 h-6 text-highlight shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+            Efficient Fence Installation
+          </li>
+          <li class="flex items-center gap-3 text-lg lg:text-xl font-semibold">
+            <svg class="w-6 h-6 text-highlight shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+            Hassle-Free Experience
+          </li>
+          <li class="flex items-center gap-3 text-lg lg:text-xl font-semibold">
+            <svg class="w-6 h-6 text-highlight shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+            Residential & Commercial
+          </li>
+        </ul>
 
-          <p class="text-base lg:text-lg text-gray-700 mb-6 leading-relaxed">
-            {content.heroSubtitle}
-          </p>
-
-          <div class="bg-highlight-50 border-l-4 border-highlight px-4 py-3 mb-7">
-            <p class="text-sm lg:text-base text-gray-800">
-              <strong>Same-day estimates</strong> · Mon–Sun, 9am to 9pm
-            </p>
-          </div>
-
-          <div class="flex flex-wrap gap-3">
-            <a href="/free-estimate" class="inline-flex items-center gap-2 bg-primary hover:bg-primary-700 text-white font-extrabold uppercase tracking-wider text-sm px-8 py-4 rounded-none shadow-md transition-colors">
-              Free Estimate in {city.name}
-            </a>
-            <a href={`tel:${BUSINESS.phoneE164}`} class="inline-flex items-center gap-2 bg-white hover:bg-gray-50 text-primary border-2 border-primary font-extrabold uppercase tracking-wider text-sm px-8 py-4 rounded-none transition-colors" data-track="click_phone">
-              Call Now
-            </a>
-          </div>
-        </div>
-
-        {/* RIGHT — city image */}
-        <div class="relative">
-          <div class="relative aspect-[4/5] lg:aspect-square overflow-hidden border border-gray-200 shadow-xl bg-white">
-            <img
-              src={city.image}
-              alt={city.imageAlt || `${city.name}, ${city.state} — fence installation service area`}
-              class="w-full h-full object-cover"
-              loading="eager"
-              width="1200"
-              height="1200"
-            />
-          </div>
-
-          <div class="hidden md:block absolute -bottom-4 -left-4 bg-white shadow-2xl border-l-4 border-primary px-5 py-4">
-            <div class="text-xs uppercase tracking-wider text-gray-500 font-bold mb-1">Serving</div>
-            <div class="text-base lg:text-lg font-extrabold text-primary">{city.name} since 2021</div>
-          </div>
+        <div class="flex flex-wrap gap-3">
+          <a href="/free-estimate" class="inline-flex items-center gap-2 bg-primary hover:bg-primary-700 text-white font-extrabold uppercase tracking-wider text-sm px-10 py-5 shadow-lg transition-colors">
+            Get Your Free Estimate
+          </a>
+          <a href={`tel:${BUSINESS.phoneE164}`} class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white border-2 border-white/60 font-extrabold uppercase tracking-wider text-sm px-10 py-5 transition-colors" data-track="click_phone">
+            Call {BUSINESS.phone}
+          </a>
         </div>
       </div>
     </div>
   </section>
 
-  <TrustBar />
-
-  {/* Intro */}
-  <section class="section bg-white">
-    <div class="container-page max-w-4xl">
-      <div class="text-center max-w-2xl mx-auto mb-8">
-        <span class="badge-highlight mb-4">About {city.name}</span>
-        <h2 class="mb-3 text-balance">{content.intro.heading}</h2>
+  {/* STATS BAR — BJF dark green with cream big numbers */}
+  <section class="relative bg-primary-900 overflow-hidden">
+    <div class="absolute inset-0 opacity-10">
+      <img src={city.image} alt="" class="w-full h-full object-cover" />
+    </div>
+    <div class="container-page relative py-14 lg:py-20">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+        {STATS.map((s) => (
+          <div>
+            <div class="text-5xl lg:text-7xl font-extrabold text-highlight leading-none mb-3">{s.number}</div>
+            <div class="text-xs lg:text-sm uppercase tracking-[0.2em] text-white font-bold">{s.label}</div>
+          </div>
+        ))}
       </div>
+    </div>
+  </section>
+
+  {/* SELECT THE PERFECT FENCE — BJF style: image with LEARN MORE bar + title + bullets below */}
+  <section class="bg-white py-16 lg:py-24">
+    <div class="container-page">
+      <h2 class="text-center text-4xl lg:text-5xl font-extrabold text-primary-900 mb-12 lg:mb-16 text-balance">
+        Select The Perfect Fence For Your Property
+      </h2>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+        {BUSINESS.services.map((s) => (
+          <div>
+            <a href={`/services/${s.slug}`} class="group block">
+              <div class="relative aspect-[4/3] overflow-hidden">
+                <img
+                  src={s.image}
+                  alt={s.name}
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
+                <div class="absolute bottom-0 left-0 right-0 bg-primary group-hover:bg-primary-700 text-white text-center py-4 font-extrabold uppercase tracking-[0.2em] text-sm transition-colors">
+                  Learn More
+                </div>
+              </div>
+            </a>
+
+            <h3 class="text-2xl lg:text-3xl font-extrabold mt-7 mb-4 text-primary-900">{s.name}</h3>
+
+            <ul class="space-y-3">
+              {(SERVICE_BULLETS[s.slug] || []).map((bullet) => (
+                <li class="flex items-start gap-3 text-base text-gray-700">
+                  <span class="w-3 h-3 bg-primary rounded-full shrink-0 mt-1.5"></span>
+                  <span>{bullet}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* WHY CHOOSE US — BJF style: left CTA card + right vertical icon list */}
+  <section class="bg-gray-50 py-16 lg:py-24">
+    <div class="container-page">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+        {/* LEFT — title + CTA */}
+        <div>
+          <h2 class="text-5xl lg:text-6xl font-extrabold text-primary-900 mb-8 leading-[0.95]">
+            Why Choose Us?
+          </h2>
+          <p class="text-lg text-gray-700 mb-8 leading-relaxed">
+            {city.name} homeowners trust us because we treat every fence install like it's at our own home. Local crew, local permits, local accountability.
+          </p>
+          <a href="/free-estimate" class="inline-flex items-center gap-2 bg-primary hover:bg-primary-700 text-white font-extrabold uppercase tracking-wider text-sm px-10 py-5 shadow-md transition-colors">
+            Get Your Free Estimate
+          </a>
+        </div>
+
+        {/* RIGHT — Why local cards (vertical) */}
+        <div class="bg-highlight-50 p-8 lg:p-10 space-y-8">
+          {content.whyLocal.map((card) => (
+            <div class="flex gap-5">
+              <div class="w-14 h-14 rounded-full border-2 border-primary flex items-center justify-center text-primary shrink-0">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+              </div>
+              <div>
+                <h3 class="text-2xl font-extrabold mb-2 text-primary-900">{card.title}</h3>
+                <p class="text-gray-700 leading-relaxed">{card.body}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* INTRO — kept as a content section */}
+  <section class="py-16 lg:py-20 bg-white">
+    <div class="container-page max-w-4xl">
+      <h2 class="text-4xl lg:text-5xl font-extrabold text-primary-900 mb-8 text-balance">{content.intro.heading}</h2>
       {content.intro.paragraphs.map((p) => (
         <p class="text-gray-700 text-lg leading-relaxed mb-5">{p}</p>
       ))}
     </div>
   </section>
 
-  {/* Why Local */}
-  <section class="section bg-gray-50">
+  {/* NEIGHBORHOODS & ZIPS — pills */}
+  <section class="bg-gray-50 py-16 lg:py-20">
     <div class="container-page">
-      <div class="text-center max-w-2xl mx-auto mb-10">
-        <span class="badge-highlight mb-4">Why Us</span>
-        <h2 class="mb-3 text-balance">Why {city.name} homeowners choose us</h2>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-5 lg:gap-6 max-w-5xl mx-auto">
-        {content.whyLocal.map((card) => (
-          <div class="bg-white border border-gray-200 p-6 lg:p-7">
-            <div class="w-12 h-12 bg-primary mb-4 flex items-center justify-center">
-              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
-              </svg>
-            </div>
-            <h3 class="text-lg font-extrabold mb-3 leading-tight">{card.title}</h3>
-            <p class="text-sm text-gray-600 leading-relaxed">{card.body}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  {/* Fence Types in [City] — links to service pages */}
-  <section class="section bg-white">
-    <div class="container-page">
-      <div class="text-center max-w-2xl mx-auto mb-10 lg:mb-14">
-        <span class="badge-highlight mb-4">Fence Types</span>
-        <h2 class="mb-3 text-balance">Fence types we install in {city.name}</h2>
-        <p class="text-gray-600 text-lg">All five fence types available across {city.county}.</p>
-      </div>
-
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-6">
-        {BUSINESS.services.map((s) => (
-          <ServiceCard
-            slug={s.slug}
-            name={s.shortName}
-            tagline={s.tagline}
-            image={s.image}
-            priceFromMonthly={s.priceFromMonthly}
-            popular={s.popular}
-          />
-        ))}
-      </div>
-    </div>
-  </section>
-
-  {/* Neighborhoods / ZIPs (long-tail SEO) */}
-  <section class="section bg-gray-50">
-    <div class="container-page">
-      <div class="text-center max-w-2xl mx-auto mb-10">
-        <span class="badge-highlight mb-4">Neighborhoods</span>
-        <h2 class="mb-3 text-balance">Neighborhoods &amp; ZIPs we cover in {city.name}</h2>
-      </div>
+      <h2 class="text-center text-4xl lg:text-5xl font-extrabold text-primary-900 mb-10 text-balance">
+        Neighborhoods &amp; ZIPs we cover in {city.name}
+      </h2>
 
       <div class="max-w-4xl mx-auto space-y-8">
-        {/* Neighborhoods pills */}
         {content.neighborhoods.length > 0 && (
           <div>
             <h3 class="text-xs uppercase tracking-[0.2em] text-gray-500 font-bold mb-4 text-center">Neighborhoods</h3>
@@ -240,7 +290,6 @@ const faqSchema = {
           </div>
         )}
 
-        {/* ZIPs pills */}
         <div>
           <h3 class="text-xs uppercase tracking-[0.2em] text-gray-500 font-bold mb-4 text-center">ZIP Codes</h3>
           <div class="flex flex-wrap justify-center gap-2">
@@ -255,73 +304,106 @@ const faqSchema = {
     </div>
   </section>
 
-  {/* Recent Projects (placeholder) */}
-  <section class="section bg-white">
+  {/* LATEST NEWS — BJF style: 3 blog cards with photo + title + Read More */}
+  <section class="bg-white py-16 lg:py-24">
     <div class="container-page">
-      <div class="text-center max-w-2xl mx-auto mb-10">
-        <span class="badge-highlight mb-4">Recent Projects</span>
-        <h2 class="mb-3 text-balance">Recent fence projects in {city.name}</h2>
-      </div>
+      <h2 class="text-4xl lg:text-5xl font-extrabold text-primary-900 mb-10 lg:mb-14">Latest News</h2>
 
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 lg:gap-4">
-        {[1, 2, 3, 4, 5, 6, 7, 8].map(() => (
-          <div class="relative aspect-square overflow-hidden bg-gray-100 border border-gray-200">
-            <div class="absolute inset-0 bg-gradient-to-br from-primary-50 via-gray-100 to-highlight-50"></div>
-            <div class="absolute inset-0 opacity-30" style="background-image: linear-gradient(45deg, transparent 49%, #136229 49%, #136229 51%, transparent 51%); background-size: 16px 16px;"></div>
-            <div class="absolute inset-0 flex items-center justify-center">
-              <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-              </svg>
-            </div>
-          </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+        {LATEST_NEWS.map((post) => (
+          <article>
+            <a href={`/blog/${post.slug}`} class="block group">
+              <div class="aspect-[4/3] overflow-hidden mb-6">
+                <img
+                  src={post.image}
+                  alt={post.title}
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
+              </div>
+              <h3 class="text-2xl font-extrabold text-primary-900 leading-tight mb-5 group-hover:text-primary transition-colors">
+                {post.title}
+              </h3>
+            </a>
+            <a href={`/blog/${post.slug}`} class="inline-flex items-center bg-primary hover:bg-primary-700 text-white font-extrabold uppercase tracking-wider text-sm px-6 py-3 transition-colors">
+              Read More
+            </a>
+          </article>
         ))}
       </div>
-
-      <p class="text-xs text-center text-gray-400 italic mt-6">{city.name} project photos coming soon</p>
     </div>
   </section>
 
-  {/* Process */}
-  <section class="section bg-highlight-50">
+  {/* NEWSLETTER STRIP — BJF green bar with name + email + signup */}
+  <section class="bg-primary py-12 lg:py-14">
     <div class="container-page">
-      <div class="text-center max-w-3xl mx-auto mb-10 lg:mb-14">
-        <span class="badge-highlight mb-4">Our Process</span>
-        <h2 class="mb-3 text-balance">Four easy steps to your perfect fence</h2>
+      <div class="text-center mb-7">
+        <h2 class="text-2xl lg:text-3xl font-extrabold text-white">
+          Monthly Tips, News &amp; Florida Fence Insider Info
+        </h2>
       </div>
-      <ProcessSteps />
+
+      <form
+        class="grid md:grid-cols-[1fr_2fr_auto] gap-3 max-w-4xl mx-auto"
+        action={BUSINESS.ghlWebhookUrl || '#'}
+        method="POST"
+      >
+        <input
+          type="text"
+          name="name"
+          placeholder="Name"
+          required
+          class="px-5 py-4 bg-white text-gray-900 placeholder-gray-500 font-medium border-0 focus:outline-none focus:ring-2 focus:ring-highlight"
+        />
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          required
+          class="px-5 py-4 bg-white text-gray-900 placeholder-gray-500 font-medium border-0 focus:outline-none focus:ring-2 focus:ring-highlight"
+        />
+        <button
+          type="submit"
+          class="px-10 py-4 bg-white hover:bg-gray-50 text-primary font-extrabold uppercase tracking-wider text-sm transition-colors border-2 border-white"
+        >
+          Sign Up
+        </button>
+      </form>
     </div>
   </section>
 
   {/* FAQ */}
-  <section class="section bg-white">
+  <section class="bg-gray-50 py-16 lg:py-20">
     <div class="container-page max-w-3xl">
-      <div class="text-center mb-10">
-        <span class="badge-highlight mb-4">FAQ</span>
-        <h2 class="mb-3 text-balance">{city.name} fence questions</h2>
-      </div>
+      <h2 class="text-center text-4xl lg:text-5xl font-extrabold text-primary-900 mb-10 text-balance">
+        {city.name} fence questions
+      </h2>
       <FAQ items={content.faqs} />
     </div>
   </section>
 
-  {/* Nearby Cities */}
-  <section class="section bg-gray-50">
+  {/* OTHER LOCATIONS — BJF "Franchises" style: image cards with city name overlay */}
+  <section class="bg-highlight-50 py-16 lg:py-24">
     <div class="container-page">
-      <div class="text-center max-w-2xl mx-auto mb-10 lg:mb-14">
-        <span class="badge-highlight mb-4">Nearby Cities</span>
-        <h2 class="mb-3 text-balance">We also serve nearby cities</h2>
-      </div>
+      <h2 class="text-center text-4xl lg:text-5xl font-extrabold text-primary-900 mb-12 text-balance">
+        We also serve nearby cities
+      </h2>
 
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5">
-        {otherCities.slice(0, 4).map((c) => (
-          <CityCard
-            slug={c.slug}
-            name={c.name}
-            state={c.state}
-            county={c.county}
-            primaryZip={c.primaryZip}
-            image={c.image}
-            imageAlt={c.imageAlt}
-          />
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6 max-w-6xl mx-auto">
+        {otherCities.map((c) => (
+          <a href={`/areas/${c.slug}`} class="group block relative overflow-hidden shadow-md hover:shadow-xl transition-shadow">
+            <div class="aspect-[4/3] overflow-hidden">
+              <img
+                src={c.image}
+                alt={c.imageAlt || `${c.name}, ${c.state}`}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+              />
+            </div>
+            <div class="bg-primary group-hover:bg-primary-700 text-white text-center py-4 font-extrabold uppercase tracking-wider text-sm transition-colors">
+              {c.name}
+            </div>
+          </a>
         ))}
       </div>
     </div>
