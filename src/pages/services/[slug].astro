@@ -3,6 +3,7 @@ import PageLayout from '@layouts/PageLayout.astro';
 import FAQ from '@components/FAQ.astro';
 import ServiceCard from '@components/ServiceCard.astro';
 import FinancingCalculator from '@components/FinancingCalculator.astro';
+import ProcessSteps from '@components/ProcessSteps.astro';
 import FinalCTA from '@components/FinalCTA.astro';
 import { BUSINESS } from '@data/business';
 import { SERVICES_CONTENT } from '@data/services-content';
@@ -440,30 +441,16 @@ const breadcrumbSchema = {
     </div>
   </section>
 
-  {/* Mini Process Recap */}
-  <section class="section bg-white">
+  {/* Process — same visual style as home page (photo + numbered badge) */}
+  <section class="section bg-highlight-50">
     <div class="container-page">
-      <div class="text-center max-w-2xl mx-auto mb-10">
+      <div class="text-center max-w-3xl mx-auto mb-10 lg:mb-14">
         <span class="badge-highlight mb-4">Our Process</span>
-        <h2 class="mb-3 text-balance">From quote to fence in 4 steps</h2>
+        <h2 class="mb-3 text-balance">Four easy steps to your perfect fence</h2>
+        <p class="text-gray-600 text-lg">No phone games. No surprise charges. Same-day quotes Mon through Sun.</p>
       </div>
 
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6 max-w-5xl mx-auto">
-        {[
-          { n: 1, title: 'Get a Quote', body: 'Submit our 60-sec form or call Andri direct.' },
-          { n: 2, title: 'On-Site Estimate', body: 'We come measure within 24-48h. Written quote on the spot.' },
-          { n: 3, title: 'We Install', body: 'Our own crew. Most fences finished in less than 7 days.' },
-          { n: 4, title: 'Enjoy', body: 'Walk-through when 100% happy. Lifetime materials warranty.' },
-        ].map((step) => (
-          <div class="text-center">
-            <div class="w-14 h-14 lg:w-16 lg:h-16 bg-primary text-white rounded-full flex items-center justify-center text-xl lg:text-2xl font-extrabold mx-auto mb-4 shadow-lg">
-              {step.n}
-            </div>
-            <h3 class="text-base lg:text-lg font-extrabold mb-2">{step.title}</h3>
-            <p class="text-sm text-gray-600 leading-relaxed">{step.body}</p>
-          </div>
-        ))}
-      </div>
+      <ProcessSteps />
     </div>
   </section>
 
