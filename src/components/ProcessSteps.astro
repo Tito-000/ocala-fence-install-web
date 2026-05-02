@@ -3,6 +3,8 @@ interface Step {
   n: number;
   title: string;
   body: string;
+  image: string;
+  imageAlt: string;
 }
 
 interface Props {
@@ -10,25 +12,69 @@ interface Props {
 }
 
 const defaultSteps: Step[] = [
-  { n: 1, title: 'Request a quote', body: 'Submit our 60-second form or call Andri direct. Same-day response Mon-Sun.' },
-  { n: 2, title: 'Free on-site estimate', body: 'We come measure within 24-48 hours. Written quote on the spot — no phone games.' },
-  { n: 3, title: 'Pick design + finance', body: 'Choose colors, height, style. $0 down financing in 60 seconds with no credit impact.' },
-  { n: 4, title: 'We pull permit', body: 'Marion County permit handled by us. You don\'t lift a finger.' },
-  { n: 5, title: 'Install in less than 7 days', body: 'Most jobs finished in under a week. Urgent? 2-3 days possible.' },
-  { n: 6, title: 'Walk-through + warranty', body: 'You sign off when 100% happy. Lifetime materials warranty + 1-year workmanship.' },
+  {
+    n: 1,
+    title: 'Get a Quick Quote',
+    body: 'Submit our 60-second form or call Andri direct. Same-day phone response — we give you a ballpark range so you know what to expect.',
+    image: '/images/process/01-quote.jpg',
+    imageAlt: 'Ocala homeowner filling out a fence quote request form on their phone',
+  },
+  {
+    n: 2,
+    title: 'Free On-Site Estimate',
+    body: 'We come measure within 24-48 hours. Written quote on the spot — no phone games, no surprise charges.',
+    image: '/images/process/02-estimate.jpg',
+    imageAlt: 'Ocala Fence Install contractor measuring a Florida residential backyard with a tape measure',
+  },
+  {
+    n: 3,
+    title: 'We Install',
+    body: 'Our own crew, no subcontractors. Most fences finished in less than 7 days from signed contract. Urgent? 2-3 days possible.',
+    image: '/images/process/03-install.jpg',
+    imageAlt: 'Ocala Fence Install crew installing a white vinyl privacy fence in a Florida backyard',
+  },
+  {
+    n: 4,
+    title: 'Enjoy & Relax',
+    body: 'Walk-through when 100% happy. Lifetime materials warranty + 1-year workmanship. Transferable to next homeowner.',
+    image: '/images/process/04-enjoy.jpg',
+    imageAlt: 'Happy Florida homeowner couple enjoying their newly installed fence in their backyard',
+  },
 ];
 
 const { steps = defaultSteps } = Astro.props;
 ---
 
-<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6">
   {steps.map((step) => (
-    <div class="relative bg-white rounded-xl border border-gray-200 p-6 hover:border-primary hover:shadow-md transition-all">
-      <div class="absolute -top-3 -left-2 w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center font-extrabold shadow-lg">
-        {step.n}
+    <div class="group">
+      {/* Image with big number overlay */}
+      <div class="relative aspect-square rounded-xl overflow-hidden shadow-lg group-hover:shadow-2xl transition-all">
+        <img
+          src={step.image}
+          alt={step.imageAlt}
+          class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          loading="lazy"
+        />
+        {/* Dark overlay so number stands out */}
+        <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-black/40 to-black/55 group-hover:from-black/20 group-hover:via-black/30 group-hover:to-black/45 transition-all"></div>
+        {/* Big centered number */}
+        <div class="absolute inset-0 flex items-center justify-center">
+          <span class="text-white text-7xl sm:text-8xl lg:text-9xl font-extrabold drop-shadow-2xl leading-none" style="text-shadow: 0 4px 24px rgba(0,0,0,0.6);">
+            {step.n}
+          </span>
+        </div>
       </div>
-      <h3 class="text-lg font-bold mt-3 mb-2">{step.title}</h3>
-      <p class="text-sm text-gray-600">{step.body}</p>
+
+      {/* Title + body below image */}
+      <div class="text-center mt-5 lg:mt-6">
+        <h3 class="text-lg lg:text-xl font-extrabold mb-2 text-gray-900">
+          {step.title}
+        </h3>
+        <p class="text-sm lg:text-base text-gray-600 leading-relaxed max-w-xs mx-auto">
+          {step.body}
+        </p>
+      </div>
     </div>
   ))}
 </div>
