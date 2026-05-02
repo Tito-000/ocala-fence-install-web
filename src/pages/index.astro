@@ -81,18 +81,16 @@ const faqs = [
         <p class="text-gray-600 text-lg">Five fence types, all installed by our own crew. No subcontractors. Lifetime materials warranty.</p>
       </div>
 
-      <div class="flex flex-wrap justify-center gap-4 lg:gap-6">
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-6">
         {BUSINESS.services.map((s) => (
-          <div class="w-[calc(50%-0.5rem)] md:w-[calc(33.333%-0.667rem)] lg:w-[calc(33.333%-1rem)] xl:w-[calc(25%-1.125rem)]">
-            <ServiceCard
-              slug={s.slug}
-              name={s.shortName}
-              tagline={s.tagline}
-              image={s.image}
-              priceFromMonthly={s.priceFromMonthly}
-              popular={s.popular}
-            />
-          </div>
+          <ServiceCard
+            slug={s.slug}
+            name={s.shortName}
+            tagline={s.tagline}
+            image={s.image}
+            priceFromMonthly={s.priceFromMonthly}
+            popular={s.popular}
+          />
         ))}
       </div>
 
@@ -270,8 +268,25 @@ const faqs = [
     </div>
   </section>
 
-  {/* Trust Strip — hidden until Andri provides real certification logos
-       (FL Contractor License · Insurance Provider · DuraFence Certified · BBB · Marion County Chamber) */}
+  <!-- Trust Strip — placeholder for certifications/brand logos (Andri to provide real ones) -->
+  <section class="py-12 lg:py-16 bg-white border-y border-gray-200">
+    <div class="container-page">
+      <p class="text-center text-xs uppercase tracking-[0.25em] text-gray-500 font-bold mb-8">Trusted &amp; Certified</p>
+
+      {/* Placeholder logos — to be replaced with real certifications when Andri provides them */}
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 lg:gap-10 items-center max-w-5xl mx-auto">
+        {[1, 2, 3, 4, 5].map(() => (
+          <div class="flex items-center justify-center h-20 px-4 border-2 border-dashed border-gray-200 rounded-none bg-gray-50/50">
+            <span class="text-xs uppercase tracking-wider text-gray-400 text-center">Logo<br/>placeholder</span>
+          </div>
+        ))}
+      </div>
+
+      <p class="text-center text-xs text-gray-400 mt-6 italic">
+        Logos to be added: FL Contractor License · Insurance Provider · DuraFence Certified · BBB · Marion County Chamber
+      </p>
+    </div>
+  </section>
 
   <!-- Choosing the Right Fence Company (Big Jerry's-style — bullets + video placeholder) -->
   <section class="section bg-gray-50">
@@ -304,17 +319,26 @@ const faqs = [
           </ul>
         </div>
 
-        {/* Image right — premium fence install (replaces video placeholder until Andri sends real video) */}
+        {/* Video placeholder right — stretches to match left column height */}
         <div class="relative flex flex-col">
-          <div class="relative flex-1 min-h-[400px] rounded-none overflow-hidden shadow-2xl">
-            <img
-              src="/images/services/durafence.jpg"
-              alt="Premium DuraFence composite fence installed in an Ocala backyard — Marion County fence installation"
-              class="w-full h-full object-cover"
-              loading="lazy"
-            />
-            {/* Subtle dark gradient bottom for visual depth */}
-            <div class="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/40 to-transparent pointer-events-none"></div>
+          <div class="relative flex-1 min-h-[400px] rounded-none overflow-hidden shadow-2xl bg-gradient-to-br from-primary-900 via-primary-700 to-primary-900 group cursor-pointer">
+            {/* Subtle pattern */}
+            <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 1px 1px, white 1px, transparent 0); background-size: 24px 24px;"></div>
+
+            {/* Play button */}
+            <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6">
+              <div class="w-20 h-20 lg:w-24 lg:h-24 rounded-full bg-white/95 flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform mb-5">
+                <svg class="w-10 h-10 lg:w-12 lg:h-12 text-primary ml-2" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </div>
+              <p class="text-white text-sm lg:text-base font-bold uppercase tracking-wider drop-shadow">
+                Watch how we work
+              </p>
+              <p class="text-white/70 text-xs lg:text-sm mt-2 italic">
+                (Video coming soon)
+              </p>
+            </div>
           </div>
 
           {/* Floating accent badge */}
@@ -504,7 +528,68 @@ const faqs = [
     </script>
   </section>
 
-  {/* Gallery — hidden until Andri provides real project photos */}
+  <!-- Gallery — Recent Projects (placeholders, awaiting Andri's real project photos) -->
+  <section class="section bg-gray-50 border-t border-gray-200">
+    <div class="container-page">
+      <div class="text-center max-w-2xl mx-auto mb-10 lg:mb-14">
+        <span class="badge-highlight mb-4">Gallery</span>
+        <h2 class="mb-3 text-balance">Recent fence projects in Marion County</h2>
+        <p class="text-gray-600 text-lg">A look at our most recent installations across Ocala and surrounding areas.</p>
+      </div>
+
+      {/* Gallery grid — 8 placeholder thumbnails */}
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 lg:gap-4">
+        {[
+          { type: 'Vinyl Privacy', city: 'Ocala' },
+          { type: 'DuraFence', city: 'Belleview' },
+          { type: 'Pool Fence', city: 'Summerfield' },
+          { type: 'Aluminum', city: 'The Villages' },
+          { type: 'Vinyl Picket', city: 'Silver Springs' },
+          { type: 'Vinyl Privacy', city: 'Dunnellon' },
+          { type: 'DuraFence', city: 'Lady Lake' },
+          { type: 'Aluminum', city: 'Marion County' },
+        ].map((p) => (
+          <div class="group relative aspect-square overflow-hidden bg-gray-100 border border-gray-200">
+            {/* Placeholder pattern */}
+            <div class="absolute inset-0 bg-gradient-to-br from-primary-50 via-gray-100 to-highlight-50"></div>
+            <div class="absolute inset-0 opacity-30" style="background-image: linear-gradient(45deg, transparent 49%, #136229 49%, #136229 51%, transparent 51%); background-size: 16px 16px;"></div>
+
+            {/* Centered icon */}
+            <div class="absolute inset-0 flex items-center justify-center">
+              <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+              </svg>
+            </div>
+
+            {/* Bottom info on hover */}
+            <div class="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+              <p class="text-white text-xs font-bold uppercase tracking-wider">{p.type}</p>
+              <p class="text-white/85 text-xs">{p.city}, FL</p>
+            </div>
+
+            {/* Persistent type tag */}
+            <div class="absolute top-2 left-2 bg-primary text-white text-[9px] font-extrabold uppercase tracking-wider px-2 py-1 shadow-md">
+              {p.type}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* CTA */}
+      <div class="text-center mt-12 lg:mt-14">
+        <a
+          href="/gallery"
+          class="inline-flex items-center gap-2 border-2 border-primary text-primary hover:bg-primary hover:text-white font-extrabold uppercase tracking-wider text-base px-10 py-4 rounded-none transition-colors"
+        >
+          View Full Gallery
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/>
+          </svg>
+        </a>
+        <p class="text-xs text-gray-400 italic mt-4">More project photos coming soon</p>
+      </div>
+    </div>
+  </section>
 
   <!-- Stats Section (Big Jerry's-style with photo bg + animated counter) -->
   <section class="relative overflow-hidden py-20 lg:py-28 bg-primary-900 text-white" data-stats-section>
