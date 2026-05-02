@@ -773,7 +773,7 @@ const faqs = [
     </div>
   </section>
 
-  <!-- Service Areas (with Map + ZIP search) -->
+  <!-- Service Areas -->
   <section class="section bg-gray-50">
     <div class="container-page">
       <div class="text-center max-w-2xl mx-auto mb-10 lg:mb-14">
@@ -782,8 +782,7 @@ const faqs = [
         <p class="text-gray-600 text-lg">Marion County primary · The Villages · 100 miles south of Ocala</p>
       </div>
 
-      {/* Cities grid */}
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5 mb-10 lg:mb-12">
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5">
         {BUSINESS.serviceAreas.map((a) => (
           <CityCard
             slug={a.slug}
@@ -795,65 +794,6 @@ const faqs = [
             imageAlt={a.imageAlt}
           />
         ))}
-      </div>
-
-      {/* Map + ZIP check (Big Jerry's-style) */}
-      <div class="grid lg:grid-cols-3 gap-6 lg:gap-8 items-stretch">
-        {/* Google Maps embed */}
-        <div class="lg:col-span-2 relative overflow-hidden border border-gray-300 shadow-md min-h-[400px] lg:min-h-[420px]">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d437654.5!2d-82.45!3d29.05!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1714670000000!5m2!1sen!2sus"
-            width="100%"
-            height="100%"
-            style="border:0; position: absolute; inset: 0;"
-            allowfullscreen
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            title="Ocala Fence Install — service area map covering Marion County, The Villages, Lady Lake, and 100 miles south of Ocala"
-          ></iframe>
-        </div>
-
-        {/* ZIP check box */}
-        <div class="bg-white border border-gray-300 shadow-md p-6 lg:p-8 flex flex-col">
-          <h3 class="text-xl lg:text-2xl font-extrabold text-gray-900 mb-3 leading-tight">
-            Check if we serve your area
-          </h3>
-          <p class="text-sm text-gray-600 mb-6 leading-relaxed">
-            Enter your ZIP code and we'll confirm if you're inside our service radius. Same-day estimates Mon-Sun.
-          </p>
-
-          <form action="/free-estimate" method="get" class="space-y-3 mb-6">
-            <div>
-              <label for="zip-check" class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-2">
-                Your ZIP Code
-              </label>
-              <input
-                type="text"
-                id="zip-check"
-                name="zip"
-                placeholder="34471"
-                maxlength="5"
-                pattern="[0-9]{5}"
-                inputmode="numeric"
-                required
-                class="w-full h-12 px-4 text-base font-medium rounded-none bg-gray-50 text-gray-900 border-2 border-gray-300 focus:border-primary focus:bg-white focus:outline-none transition-colors"
-              />
-            </div>
-            <button
-              type="submit"
-              class="w-full bg-primary hover:bg-primary-700 text-white font-extrabold uppercase tracking-wider text-sm h-12 rounded-none transition-colors"
-            >
-              Check Coverage
-            </button>
-          </form>
-
-          {/* Coverage note */}
-          <div class="mt-auto pt-5 border-t border-gray-200">
-            <p class="text-xs text-gray-500 leading-relaxed">
-              <strong class="text-gray-700">Service radius:</strong> All Marion County, plus The Villages, Lady Lake, and up to 100 miles south of Ocala.
-            </p>
-          </div>
-        </div>
       </div>
     </div>
   </section>
