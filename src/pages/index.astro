@@ -570,10 +570,14 @@ const faqs = [
           { value: 0, suffix: '', prefix: '', label: 'Materials Warranty', isText: true, displayText: '∞' },
         ].map((stat) => (
           <div class="text-center flex flex-col items-center">
-            {/* Fixed-height number area so all stats align */}
-            <div class="h-24 sm:h-28 lg:h-32 xl:h-36 flex items-center justify-center mb-3 lg:mb-4">
+            {/* Fixed-height number area — all stats baseline aligned */}
+            <div class="h-24 sm:h-28 lg:h-32 xl:h-36 flex items-end justify-center mb-3 lg:mb-4 w-full">
               <div
-                class="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-extrabold leading-none text-white drop-shadow-lg"
+                class={`font-extrabold leading-none text-white drop-shadow-lg ${
+                  stat.isText
+                    ? 'text-7xl sm:text-8xl lg:text-9xl xl:text-[9rem] -mb-2 sm:-mb-3 lg:-mb-4'
+                    : 'text-5xl sm:text-6xl lg:text-7xl xl:text-8xl'
+                }`}
                 data-stat-value={stat.isText ? stat.displayText : stat.value}
                 data-stat-prefix={stat.prefix}
                 data-stat-suffix={stat.suffix}
