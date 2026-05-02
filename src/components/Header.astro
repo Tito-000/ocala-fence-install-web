@@ -9,20 +9,19 @@ const { activeNav } = Astro.props;
 ---
 
 <style>
-  /* Mega-menu hover behavior + slide animation */
-  .has-mega:hover .mega-menu,
-  .has-mega:focus-within .mega-menu {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-    pointer-events: auto;
-  }
-  .mega-menu {
+  /* Mega-menu panels — hidden by default, shown when triggered */
+  .mega-menu-panel {
     opacity: 0;
     visibility: hidden;
     transform: translateY(-8px);
     pointer-events: none;
     transition: opacity 200ms ease-out, transform 200ms ease-out, visibility 200ms;
+  }
+  .mega-menu-panel.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
   }
 </style>
 
@@ -101,14 +100,14 @@ const { activeNav } = Astro.props;
     </div>
   </div>
 
-  <!-- NAV BAR (white) -->
-  <div class="hidden lg:block border-b border-gray-200 bg-white relative">
+  <!-- NAV BAR (white) — wrapper hosts mega-menu full-width -->
+  <div class="hidden lg:block border-b border-gray-200 bg-white relative" data-nav-wrapper>
     <div class="container-page">
       <nav class="flex items-center justify-center gap-1 py-3" aria-label="Primary">
         {PRIMARY_NAV.map((item) => {
           const isMega = item.label === 'Services' || item.label === 'Areas';
           return (
-            <div class={`relative ${isMega ? 'has-mega' : 'group'}`}>
+            <div class={`relative ${!isMega ? 'group' : ''}`} data-mega-trigger={isMega ? item.label : undefined}>
               <a
                 href={item.href}
                 class={`inline-flex items-center gap-1 px-4 py-2 text-sm font-bold uppercase tracking-wider rounded-none hover:text-primary transition-colors ${activeNav === item.label ? 'text-primary' : 'text-gray-800'}`}
@@ -116,55 +115,6 @@ const { activeNav } = Astro.props;
                 {item.label}
                 {item.children && <span class="text-xs">▾</span>}
               </a>
-
-              {/* MEGA-MENU for Services / Areas (Big Jerry's-style — full width green bar with circular image cards) */}
-              {isMega && item.children && (
-                <div class="mega-menu absolute top-full left-1/2 -translate-x-1/2 z-50 w-screen max-w-[100vw]">
-                  <div class="bg-gradient-to-b from-primary-900 via-primary to-primary-700 text-white shadow-2xl border-t-2 border-highlight">
-                    <div class="container-page py-8 lg:py-10">
-                      <div class={`grid gap-6 lg:gap-8 ${item.label === 'Services' ? 'grid-cols-5' : 'grid-cols-4 lg:grid-cols-8'}`}>
-                        {(item.label === 'Services'
-                          ? BUSINESS.services.map((s) => ({
-                              label: s.shortName,
-                              href: `/services/${s.slug}`,
-                              image: s.image,
-                            }))
-                          : BUSINESS.serviceAreas.map((c) => ({
-                              label: c.name,
-                              href: `/areas/${c.slug}`,
-                              image: c.image,
-                            }))
-                        ).map((card) => (
-                          <a
-                            href={card.href}
-                            class="group/card flex flex-col items-center text-center gap-3 hover:opacity-90 transition-opacity"
-                          >
-                            <div class="relative w-24 h-24 lg:w-28 lg:h-28 rounded-full overflow-hidden border-2 border-highlight/40 shadow-lg group-hover/card:border-highlight group-hover/card:scale-105 transition-all duration-300">
-                              {card.image ? (
-                                <img
-                                  src={card.image}
-                                  alt={card.label}
-                                  class="w-full h-full object-cover"
-                                  loading="lazy"
-                                />
-                              ) : (
-                                <div class="w-full h-full bg-primary-700 flex items-center justify-center text-white/40 text-3xl font-extrabold">
-                                  {card.label.charAt(0)}
-                                </div>
-                              )}
-                              {/* Subtle dark inner ring */}
-                              <div class="absolute inset-0 rounded-full ring-1 ring-inset ring-black/20"></div>
-                            </div>
-                            <span class="text-white text-xs lg:text-sm font-bold leading-tight max-w-[7rem]">
-                              {card.label}
-                            </span>
-                          </a>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
 
               {/* SIMPLE DROPDOWN for non-mega items */}
               {!isMega && item.children && (
@@ -183,6 +133,64 @@ const { activeNav } = Astro.props;
           );
         })}
       </nav>
+    </div>
+
+    {/* MEGA-MENU — Services (full-width, anchored to nav-wrapper) */}
+    <div
+      class="mega-menu-panel absolute left-0 right-0 top-full z-50 bg-gradient-to-b from-primary-900 via-primary to-primary-700 text-white shadow-2xl border-t-2 border-highlight"
+      data-mega-panel="Services"
+    >
+      <div class="container-page py-8 lg:py-10">
+        <div class="grid grid-cols-5 gap-6 lg:gap-8">
+          {BUSINESS.services.map((s) => (
+            <a
+              href={`/services/${s.slug}`}
+              class="group/card flex flex-col items-center text-center gap-3 hover:opacity-95 transition-opacity"
+            >
+              <div class="relative w-24 h-24 lg:w-28 lg:h-28 rounded-full overflow-hidden border-2 border-highlight/40 shadow-lg group-hover/card:border-highlight group-hover/card:scale-105 transition-all duration-300">
+                {s.image ? (
+                  <img src={s.image} alt={s.shortName} class="w-full h-full object-cover" loading="lazy" />
+                ) : (
+                  <div class="w-full h-full bg-primary-700 flex items-center justify-center text-white/40 text-3xl font-extrabold">
+                    {s.shortName.charAt(0)}
+                  </div>
+                )}
+                <div class="absolute inset-0 rounded-full ring-1 ring-inset ring-black/20"></div>
+              </div>
+              <span class="text-white text-xs lg:text-sm font-bold leading-tight">{s.shortName}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    {/* MEGA-MENU — Areas (full-width, anchored to nav-wrapper) */}
+    <div
+      class="mega-menu-panel absolute left-0 right-0 top-full z-50 bg-gradient-to-b from-primary-900 via-primary to-primary-700 text-white shadow-2xl border-t-2 border-highlight"
+      data-mega-panel="Areas"
+    >
+      <div class="container-page py-8 lg:py-10">
+        <div class="grid grid-cols-4 lg:grid-cols-8 gap-5 lg:gap-6">
+          {BUSINESS.serviceAreas.map((c) => (
+            <a
+              href={`/areas/${c.slug}`}
+              class="group/card flex flex-col items-center text-center gap-3 hover:opacity-95 transition-opacity"
+            >
+              <div class="relative w-20 h-20 lg:w-24 lg:h-24 rounded-full overflow-hidden border-2 border-highlight/40 shadow-lg group-hover/card:border-highlight group-hover/card:scale-105 transition-all duration-300">
+                {c.image ? (
+                  <img src={c.image} alt={c.name} class="w-full h-full object-cover" loading="lazy" />
+                ) : (
+                  <div class="w-full h-full bg-primary-700 flex items-center justify-center text-white/40 text-2xl font-extrabold">
+                    {c.name.charAt(0)}
+                  </div>
+                )}
+                <div class="absolute inset-0 rounded-full ring-1 ring-inset ring-black/20"></div>
+              </div>
+              <span class="text-white text-xs lg:text-sm font-bold leading-tight">{c.name}</span>
+            </a>
+          ))}
+        </div>
+      </div>
     </div>
   </div>
 
@@ -226,4 +234,35 @@ const { activeNav } = Astro.props;
     btn.setAttribute('aria-expanded', String(!expanded));
     menu?.classList.toggle('hidden');
   });
+
+  // Mega-menu hover handling — show panel matching trigger, hide others
+  (() => {
+    const wrapper = document.querySelector('[data-nav-wrapper]');
+    if (!wrapper) return;
+    const triggers = wrapper.querySelectorAll('[data-mega-trigger]');
+    const panels = wrapper.querySelectorAll('[data-mega-panel]');
+    let hideTimer;
+
+    function showPanel(name) {
+      clearTimeout(hideTimer);
+      panels.forEach((p) => {
+        p.classList.toggle('is-open', p.getAttribute('data-mega-panel') === name);
+      });
+    }
+    function scheduleHide() {
+      hideTimer = setTimeout(() => {
+        panels.forEach((p) => p.classList.remove('is-open'));
+      }, 150);
+    }
+
+    triggers.forEach((t) => {
+      const name = t.getAttribute('data-mega-trigger');
+      t.addEventListener('mouseenter', () => showPanel(name));
+      t.addEventListener('mouseleave', scheduleHide);
+    });
+    panels.forEach((p) => {
+      p.addEventListener('mouseenter', () => clearTimeout(hideTimer));
+      p.addEventListener('mouseleave', scheduleHide);
+    });
+  })();
 </script>
