@@ -1,0 +1,334 @@
+---
+import PageLayout from '@layouts/PageLayout.astro';
+import FAQ from '@components/FAQ.astro';
+import ServiceCard from '@components/ServiceCard.astro';
+import CityCard from '@components/CityCard.astro';
+import TrustBar from '@components/TrustBar.astro';
+import ProcessSteps from '@components/ProcessSteps.astro';
+import FinalCTA from '@components/FinalCTA.astro';
+import { BUSINESS } from '@data/business';
+import { CITIES_CONTENT } from '@data/cities-content';
+
+export function getStaticPaths() {
+  return BUSINESS.serviceAreas.map((city) => ({
+    params: { slug: city.slug },
+    props: { city },
+  }));
+}
+
+const { city } = Astro.props;
+const content = CITIES_CONTENT[city.slug];
+const otherCities = BUSINESS.serviceAreas.filter((c) => c.slug !== city.slug);
+
+// Schema.org LocalBusiness with areaServed
+const localSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: `${BUSINESS.name} — ${city.name}`,
+  url: `https://ocalafenceinstall.com/areas/${city.slug}`,
+  telephone: BUSINESS.phoneE164,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: BUSINESS.address.streetAddress,
+    addressLocality: BUSINESS.address.addressLocality,
+    addressRegion: BUSINESS.address.addressRegion,
+    postalCode: BUSINESS.address.postalCode,
+    addressCountry: BUSINESS.address.addressCountry,
+  },
+  areaServed: {
+    '@type': 'City',
+    name: `${city.name}, ${city.state}`,
+    containedInPlace: {
+      '@type': 'AdministrativeArea',
+      name: city.county,
+    },
+  },
+  priceRange: '$$$',
+  description: content.metaDescription,
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://ocalafenceinstall.com' },
+    { '@type': 'ListItem', position: 2, name: 'Service Areas', item: 'https://ocalafenceinstall.com/areas' },
+    { '@type': 'ListItem', position: 3, name: `${city.name}, ${city.state}`, item: `https://ocalafenceinstall.com/areas/${city.slug}` },
+  ],
+};
+
+// FAQ Schema
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: content.faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.q,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: faq.a.replace(/<[^>]*>/g, ''),
+    },
+  })),
+};
+---
+
+<PageLayout
+  title={content.metaTitle}
+  description={content.metaDescription}
+  activeNav="Areas"
+  schemaJsonLd={[localSchema, breadcrumbSchema, faqSchema]}
+>
+  {/* Breadcrumb */}
+  <div class="bg-highlight-50 border-b border-highlight-200 py-3">
+    <div class="container-page">
+      <nav class="text-sm text-accent" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-primary">Home</a>
+        <span class="mx-2 text-accent/50">›</span>
+        <a href="/areas" class="hover:text-primary">Service Areas</a>
+        <span class="mx-2 text-accent/50">›</span>
+        <span class="font-semibold text-primary">{city.name}, {city.state}</span>
+      </nav>
+    </div>
+  </div>
+
+  {/* City Hero — split screen with city image */}
+  <section class="relative bg-gray-50 border-b border-gray-200">
+    <div class="absolute inset-0 opacity-[0.04] pointer-events-none" style="background-image: repeating-linear-gradient(135deg, transparent 0, transparent 18px, #136229 18px, #136229 19px, transparent 19px, transparent 38px);"></div>
+
+    <div class="container-page relative py-12 lg:py-20">
+      <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+        {/* LEFT — content card */}
+        <div class="bg-white border border-gray-200 shadow-md p-8 lg:p-12">
+          <div class="flex flex-wrap gap-2 mb-5">
+            <span class="inline-block bg-primary text-white text-xs font-extrabold uppercase tracking-wider px-3 py-1.5">
+              {city.county}
+            </span>
+            <span class="inline-block bg-accent text-white text-xs font-extrabold uppercase tracking-wider px-3 py-1.5">
+              ZIPs {content.zips.slice(0, 3).join(', ')}{content.zips.length > 3 ? '+' : ''}
+            </span>
+          </div>
+
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold uppercase leading-[1.05] tracking-tight mb-5 text-balance text-gray-900">
+            <span set:html={content.heroTitle}></span>
+          </h1>
+
+          <p class="text-base lg:text-lg text-gray-700 mb-6 leading-relaxed">
+            {content.heroSubtitle}
+          </p>
+
+          <div class="bg-highlight-50 border-l-4 border-highlight px-4 py-3 mb-7">
+            <p class="text-sm lg:text-base text-gray-800">
+              <strong>Same-day estimates</strong> · Mon–Sun, 9am to 9pm
+            </p>
+          </div>
+
+          <div class="flex flex-wrap gap-3">
+            <a href="/free-estimate" class="inline-flex items-center gap-2 bg-primary hover:bg-primary-700 text-white font-extrabold uppercase tracking-wider text-sm px-8 py-4 rounded-none shadow-md transition-colors">
+              Free Estimate in {city.name}
+            </a>
+            <a href={`tel:${BUSINESS.phoneE164}`} class="inline-flex items-center gap-2 bg-white hover:bg-gray-50 text-primary border-2 border-primary font-extrabold uppercase tracking-wider text-sm px-8 py-4 rounded-none transition-colors" data-track="click_phone">
+              Call Now
+            </a>
+          </div>
+        </div>
+
+        {/* RIGHT — city image */}
+        <div class="relative">
+          <div class="relative aspect-[4/5] lg:aspect-square overflow-hidden border border-gray-200 shadow-xl bg-white">
+            <img
+              src={city.image}
+              alt={city.imageAlt || `${city.name}, ${city.state} — fence installation service area`}
+              class="w-full h-full object-cover"
+              loading="eager"
+              width="1200"
+              height="1200"
+            />
+          </div>
+
+          <div class="hidden md:block absolute -bottom-4 -left-4 bg-white shadow-2xl border-l-4 border-primary px-5 py-4">
+            <div class="text-xs uppercase tracking-wider text-gray-500 font-bold mb-1">Serving</div>
+            <div class="text-base lg:text-lg font-extrabold text-primary">{city.name} since 2021</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <TrustBar />
+
+  {/* Intro */}
+  <section class="section bg-white">
+    <div class="container-page max-w-4xl">
+      <div class="text-center max-w-2xl mx-auto mb-8">
+        <span class="badge-highlight mb-4">About {city.name}</span>
+        <h2 class="mb-3 text-balance">{content.intro.heading}</h2>
+      </div>
+      {content.intro.paragraphs.map((p) => (
+        <p class="text-gray-700 text-lg leading-relaxed mb-5">{p}</p>
+      ))}
+    </div>
+  </section>
+
+  {/* Why Local */}
+  <section class="section bg-gray-50">
+    <div class="container-page">
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <span class="badge-highlight mb-4">Why Us</span>
+        <h2 class="mb-3 text-balance">Why {city.name} homeowners choose us</h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-5 lg:gap-6 max-w-5xl mx-auto">
+        {content.whyLocal.map((card) => (
+          <div class="bg-white border border-gray-200 p-6 lg:p-7">
+            <div class="w-12 h-12 bg-primary mb-4 flex items-center justify-center">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+              </svg>
+            </div>
+            <h3 class="text-lg font-extrabold mb-3 leading-tight">{card.title}</h3>
+            <p class="text-sm text-gray-600 leading-relaxed">{card.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* Fence Types in [City] — links to service pages */}
+  <section class="section bg-white">
+    <div class="container-page">
+      <div class="text-center max-w-2xl mx-auto mb-10 lg:mb-14">
+        <span class="badge-highlight mb-4">Fence Types</span>
+        <h2 class="mb-3 text-balance">Fence types we install in {city.name}</h2>
+        <p class="text-gray-600 text-lg">All five fence types available across {city.county}.</p>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-6">
+        {BUSINESS.services.map((s) => (
+          <ServiceCard
+            slug={s.slug}
+            name={s.shortName}
+            tagline={s.tagline}
+            image={s.image}
+            priceFromMonthly={s.priceFromMonthly}
+            popular={s.popular}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* Neighborhoods / ZIPs (long-tail SEO) */}
+  <section class="section bg-gray-50">
+    <div class="container-page">
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <span class="badge-highlight mb-4">Neighborhoods</span>
+        <h2 class="mb-3 text-balance">Neighborhoods &amp; ZIPs we cover in {city.name}</h2>
+      </div>
+
+      <div class="max-w-4xl mx-auto space-y-8">
+        {/* Neighborhoods pills */}
+        {content.neighborhoods.length > 0 && (
+          <div>
+            <h3 class="text-xs uppercase tracking-[0.2em] text-gray-500 font-bold mb-4 text-center">Neighborhoods</h3>
+            <div class="flex flex-wrap justify-center gap-2 lg:gap-3">
+              {content.neighborhoods.map((n) => (
+                <span class="inline-flex items-center px-4 py-2 bg-white border border-gray-200 text-gray-800 text-sm font-semibold">
+                  {n}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* ZIPs pills */}
+        <div>
+          <h3 class="text-xs uppercase tracking-[0.2em] text-gray-500 font-bold mb-4 text-center">ZIP Codes</h3>
+          <div class="flex flex-wrap justify-center gap-2">
+            {content.zips.map((zip) => (
+              <span class="inline-flex items-center px-3 py-1.5 bg-white border border-gray-200 text-gray-700 text-sm font-mono font-semibold">
+                {zip}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* Recent Projects (placeholder) */}
+  <section class="section bg-white">
+    <div class="container-page">
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <span class="badge-highlight mb-4">Recent Projects</span>
+        <h2 class="mb-3 text-balance">Recent fence projects in {city.name}</h2>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 lg:gap-4">
+        {[1, 2, 3, 4, 5, 6, 7, 8].map(() => (
+          <div class="relative aspect-square overflow-hidden bg-gray-100 border border-gray-200">
+            <div class="absolute inset-0 bg-gradient-to-br from-primary-50 via-gray-100 to-highlight-50"></div>
+            <div class="absolute inset-0 opacity-30" style="background-image: linear-gradient(45deg, transparent 49%, #136229 49%, #136229 51%, transparent 51%); background-size: 16px 16px;"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+              </svg>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <p class="text-xs text-center text-gray-400 italic mt-6">{city.name} project photos coming soon</p>
+    </div>
+  </section>
+
+  {/* Process */}
+  <section class="section bg-highlight-50">
+    <div class="container-page">
+      <div class="text-center max-w-3xl mx-auto mb-10 lg:mb-14">
+        <span class="badge-highlight mb-4">Our Process</span>
+        <h2 class="mb-3 text-balance">Four easy steps to your perfect fence</h2>
+      </div>
+      <ProcessSteps />
+    </div>
+  </section>
+
+  {/* FAQ */}
+  <section class="section bg-white">
+    <div class="container-page max-w-3xl">
+      <div class="text-center mb-10">
+        <span class="badge-highlight mb-4">FAQ</span>
+        <h2 class="mb-3 text-balance">{city.name} fence questions</h2>
+      </div>
+      <FAQ items={content.faqs} />
+    </div>
+  </section>
+
+  {/* Nearby Cities */}
+  <section class="section bg-gray-50">
+    <div class="container-page">
+      <div class="text-center max-w-2xl mx-auto mb-10 lg:mb-14">
+        <span class="badge-highlight mb-4">Nearby Cities</span>
+        <h2 class="mb-3 text-balance">We also serve nearby cities</h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5">
+        {otherCities.slice(0, 4).map((c) => (
+          <CityCard
+            slug={c.slug}
+            name={c.name}
+            state={c.state}
+            county={c.county}
+            primaryZip={c.primaryZip}
+            image={c.image}
+            imageAlt={c.imageAlt}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <FinalCTA
+    title={`Ready for your ${city.name} fence estimate?`}
+    subtitle="Same-day quote · $0 down financing · Less than 7 days install"
+  />
+</PageLayout>
