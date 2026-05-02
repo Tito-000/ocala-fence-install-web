@@ -112,4 +112,24 @@
   .text-balance {
     text-wrap: balance;
   }
+
+  /* Infinite horizontal scroll for logo marquee */
+  @keyframes scroll-x {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-scroll-x {
+    animation: scroll-x 30s linear infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-scroll-x {
+      animation: none;
+    }
+  }
 }
