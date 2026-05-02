@@ -48,7 +48,7 @@ const { steps = defaultSteps } = Astro.props;
 <div class="grid grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6">
   {steps.map((step) => (
     <div class="group">
-      {/* Image with big number overlay */}
+      {/* Image with number badge */}
       <div class="relative aspect-square rounded-xl overflow-hidden shadow-lg group-hover:shadow-2xl transition-all">
         <img
           src={step.image}
@@ -56,11 +56,11 @@ const { steps = defaultSteps } = Astro.props;
           class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           loading="lazy"
         />
-        {/* Dark overlay so number stands out */}
-        <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-black/40 to-black/55 group-hover:from-black/20 group-hover:via-black/30 group-hover:to-black/45 transition-all"></div>
-        {/* Big centered number */}
-        <div class="absolute inset-0 flex items-center justify-center">
-          <span class="text-white text-7xl sm:text-8xl lg:text-9xl font-extrabold drop-shadow-2xl leading-none" style="text-shadow: 0 4px 24px rgba(0,0,0,0.6);">
+        {/* Subtle gradient on top edge so the badge reads cleanly */}
+        <div class="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/40 to-transparent pointer-events-none"></div>
+        {/* Number badge — top left circle */}
+        <div class="absolute top-4 left-4 w-12 h-12 lg:w-14 lg:h-14 rounded-full bg-primary border-2 border-white shadow-xl flex items-center justify-center">
+          <span class="text-white text-xl lg:text-2xl font-extrabold leading-none">
             {step.n}
           </span>
         </div>
