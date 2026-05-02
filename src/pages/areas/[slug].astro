@@ -191,9 +191,9 @@ const LATEST_NEWS = [
         Select The Perfect Fence For Your Property
       </h2>
 
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+      <div class="flex flex-wrap justify-center gap-x-8 gap-y-12">
         {BUSINESS.services.map((s) => (
-          <div>
+          <div class="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)]">
             <a href={`/services/${s.slug}`} class="group block">
               <div class="relative aspect-[4/3] overflow-hidden">
                 <img
@@ -389,9 +389,9 @@ const LATEST_NEWS = [
         We also serve nearby cities
       </h2>
 
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6 max-w-6xl mx-auto">
+      <div class="flex flex-wrap justify-center gap-4 lg:gap-6 max-w-6xl mx-auto">
         {otherCities.map((c) => (
-          <a href={`/areas/${c.slug}`} class="group block relative overflow-hidden shadow-md hover:shadow-xl transition-shadow">
+          <a href={`/areas/${c.slug}`} class="group block relative overflow-hidden shadow-md hover:shadow-xl transition-shadow w-[calc(50%-0.5rem)] md:w-[calc(33.333%-0.667rem)] lg:w-[calc(25%-1.125rem)]">
             <div class="aspect-[4/3] overflow-hidden">
               <img
                 src={c.image}
