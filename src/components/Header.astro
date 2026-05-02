@@ -164,31 +164,97 @@ const { activeNav } = Astro.props;
       </div>
     </div>
 
-    {/* MEGA-MENU — Areas (full-width, anchored to nav-wrapper) */}
+    {/* MEGA-MENU — Areas (Big Jerry's-style: state header + counties columns) */}
     <div
-      class="mega-menu-panel absolute left-0 right-0 top-full z-50 bg-gradient-to-b from-primary-900 via-primary to-primary-700 text-white shadow-2xl border-t-2 border-highlight"
+      class="mega-menu-panel absolute left-0 right-0 top-full z-50 bg-white text-gray-900 shadow-2xl border-t-2 border-highlight"
       data-mega-panel="Areas"
     >
-      <div class="container-page py-8 lg:py-10">
-        <div class="grid grid-cols-4 lg:grid-cols-8 gap-5 lg:gap-6">
-          {BUSINESS.serviceAreas.map((c) => (
-            <a
-              href={`/areas/${c.slug}`}
-              class="group/card flex flex-col items-center text-center gap-3 hover:opacity-95 transition-opacity"
-            >
-              <div class="relative w-20 h-20 lg:w-24 lg:h-24 rounded-full overflow-hidden border-2 border-highlight/40 shadow-lg group-hover/card:border-highlight group-hover/card:scale-105 transition-all duration-300">
-                {c.image ? (
-                  <img src={c.image} alt={c.name} class="w-full h-full object-cover" loading="lazy" />
-                ) : (
-                  <div class="w-full h-full bg-primary-700 flex items-center justify-center text-white/40 text-2xl font-extrabold">
-                    {c.name.charAt(0)}
-                  </div>
-                )}
-                <div class="absolute inset-0 rounded-full ring-1 ring-inset ring-black/20"></div>
-              </div>
-              <span class="text-white text-xs lg:text-sm font-bold leading-tight">{c.name}</span>
-            </a>
-          ))}
+      <div class="container-page py-10 lg:py-12">
+        {/* State header — Florida */}
+        <div class="flex items-center justify-center gap-3 mb-8 pb-5 border-b border-gray-200">
+          {/* Florida shape icon (simplified) */}
+          <svg class="w-8 h-8 text-primary" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M2 4h13v3l-1 1v3l1 1v2l1 1h2l1 1 1 2 2 1v3l-1 1-1-1-1 1-2-1v-1l-1 1-1-1-1 1-1-1-1 1-2-1v-2l-1-1v-2l-1-1V8L2 7V4z"/>
+          </svg>
+          <h3 class="text-2xl lg:text-3xl font-extrabold uppercase tracking-tight text-primary">
+            Florida
+          </h3>
+        </div>
+
+        {/* Counties grid */}
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 max-w-5xl mx-auto">
+          {/* Marion County */}
+          <div>
+            <h4 class="text-sm font-extrabold uppercase tracking-[0.15em] text-gray-700 pb-2 mb-3 border-b-2 border-primary">
+              Marion County
+            </h4>
+            <ul class="space-y-2.5">
+              {BUSINESS.serviceAreas
+                .filter((c) => c.county === 'Marion County')
+                .map((c) => (
+                  <li>
+                    <a
+                      href={`/areas/${c.slug}`}
+                      class="block text-base font-semibold text-gray-800 hover:text-primary transition-colors"
+                    >
+                      • {c.name}
+                    </a>
+                  </li>
+                ))}
+            </ul>
+          </div>
+
+          {/* Sumter County */}
+          <div>
+            <h4 class="text-sm font-extrabold uppercase tracking-[0.15em] text-gray-700 pb-2 mb-3 border-b-2 border-primary">
+              Sumter County
+            </h4>
+            <ul class="space-y-2.5">
+              {BUSINESS.serviceAreas
+                .filter((c) => c.county === 'Sumter County')
+                .map((c) => (
+                  <li>
+                    <a
+                      href={`/areas/${c.slug}`}
+                      class="block text-base font-semibold text-gray-800 hover:text-primary transition-colors"
+                    >
+                      • {c.name}
+                    </a>
+                  </li>
+                ))}
+            </ul>
+          </div>
+
+          {/* Lake County */}
+          <div>
+            <h4 class="text-sm font-extrabold uppercase tracking-[0.15em] text-gray-700 pb-2 mb-3 border-b-2 border-primary">
+              Lake County
+            </h4>
+            <ul class="space-y-2.5">
+              {BUSINESS.serviceAreas
+                .filter((c) => c.county === 'Lake County')
+                .map((c) => (
+                  <li>
+                    <a
+                      href={`/areas/${c.slug}`}
+                      class="block text-base font-semibold text-gray-800 hover:text-primary transition-colors"
+                    >
+                      • {c.name}
+                    </a>
+                  </li>
+                ))}
+            </ul>
+          </div>
+        </div>
+
+        {/* Footer link */}
+        <div class="text-center mt-8 pt-6 border-t border-gray-200">
+          <a href="/areas" class="inline-flex items-center gap-1 text-sm font-bold uppercase tracking-wider text-primary hover:text-primary-700 transition-colors">
+            View all service areas
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/>
+            </svg>
+          </a>
         </div>
       </div>
     </div>
