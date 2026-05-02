@@ -138,12 +138,12 @@ export const BUSINESS = {
 
   // Financing partners (6)
   financingPartners: [
-    { name: 'Aqua Finance', type: 'Home improvement loans' },
-    { name: 'Synchrony', type: 'Home design credit' },
-    { name: 'Affirm', type: 'Buy now, pay later' },
-    { name: 'Klarna', type: 'Buy now, pay later' },
-    { name: 'Launch', type: 'Contractor financing' },
-    { name: 'United Financial', type: 'Traditional loan' },
+    { name: 'Aqua Finance', type: 'Home improvement loans', logo: '/images/lenders/aqua-finance.svg' },
+    { name: 'Synchrony', type: 'Home design credit', logo: '/images/lenders/synchrony.svg' },
+    { name: 'Affirm', type: 'Buy now, pay later', logo: '/images/lenders/affirm.svg' },
+    { name: 'Klarna', type: 'Buy now, pay later', logo: '/images/lenders/klarna.svg' },
+    { name: 'Launch', type: 'Contractor financing', logo: '/images/lenders/launch.svg' },
+    { name: 'United Financial', type: 'Traditional loan', logo: '/images/lenders/united-financial.svg' },
   ],
 
   financing: {
