@@ -22,7 +22,17 @@ export const PRIMARY_NAV = [
   { label: 'Financing', href: '/financing' },
   { label: 'Reviews', href: '/reviews' },
   { label: 'Blog', href: '/blog' },
-  { label: 'About', href: '/about' },
+  {
+    label: 'About',
+    href: '/about',
+    children: [
+      { label: 'About Us', href: '/about' },
+      { label: 'Customer Reviews', href: '/about/reviews' },
+      { label: 'Our Process', href: '/about/our-process' },
+      { label: 'FAQs', href: '/about/faqs' },
+      { label: 'Preparing for Your Fence', href: '/about/preparing' },
+    ],
+  },
   { label: 'Contact', href: '/contact' },
 ];
 
