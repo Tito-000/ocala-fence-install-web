@@ -20,7 +20,6 @@ export const PRIMARY_NAV = [
   },
   { label: 'Gallery', href: '/gallery' },
   { label: 'Financing', href: '/financing' },
-  { label: 'Reviews', href: '/reviews' },
   { label: 'Blog', href: '/blog' },
   {
     label: 'About',
