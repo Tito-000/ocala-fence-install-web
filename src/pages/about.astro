@@ -58,7 +58,7 @@ const breadcrumbSchema = {
       <div class="absolute inset-0 bg-gradient-to-r from-primary-900/85 via-primary-900/70 to-primary-900/55"></div>
     </div>
 
-    <div class="container-page relative py-20 lg:py-28 text-center text-white">
+    <div class="container-page relative pt-20 pb-32 lg:pt-28 lg:pb-40 text-center text-white">
       <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-[0.95] tracking-tight mb-4 text-balance drop-shadow-2xl">
         About Ocala Fence Install
       </h1>
@@ -67,27 +67,29 @@ const breadcrumbSchema = {
       </p>
     </div>
 
-    {/* SUB-NAV — 4 buttons floating over hero bottom (BJF style) */}
-    <div class="container-page relative -mb-10 -mt-2 lg:-mb-12 lg:-mt-4 z-10">
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-5 max-w-5xl mx-auto">
-        <a href="/about/reviews" class="bg-primary hover:bg-primary-700 text-white text-center font-extrabold uppercase tracking-[0.15em] text-xs lg:text-sm py-5 lg:py-6 transition-colors shadow-xl">
-          Customer Reviews
-        </a>
-        <a href="/about/our-process" class="bg-primary hover:bg-primary-700 text-white text-center font-extrabold uppercase tracking-[0.15em] text-xs lg:text-sm py-5 lg:py-6 transition-colors shadow-xl">
-          Our Process
-        </a>
-        <a href="/about/faqs" class="bg-primary hover:bg-primary-700 text-white text-center font-extrabold uppercase tracking-[0.15em] text-xs lg:text-sm py-5 lg:py-6 transition-colors shadow-xl">
-          FAQs
-        </a>
-        <a href="/about/preparing" class="bg-primary hover:bg-primary-700 text-white text-center font-extrabold uppercase tracking-[0.15em] text-xs lg:text-sm py-5 lg:py-6 transition-colors shadow-xl">
-          Preparing for Your Fence
-        </a>
+    {/* SUB-NAV — 4 buttons absolutely positioned at hero bottom edge (BJF style) */}
+    <div class="absolute bottom-0 left-0 right-0 translate-y-1/2 z-10">
+      <div class="container-page">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-5 max-w-5xl mx-auto">
+          <a href="/about/reviews" class="bg-primary hover:bg-primary-700 text-white text-center font-extrabold uppercase tracking-[0.15em] text-xs lg:text-sm py-5 lg:py-6 transition-colors shadow-xl flex items-center justify-center min-h-[72px] lg:min-h-[80px]">
+            Customer Reviews
+          </a>
+          <a href="/about/our-process" class="bg-primary hover:bg-primary-700 text-white text-center font-extrabold uppercase tracking-[0.15em] text-xs lg:text-sm py-5 lg:py-6 transition-colors shadow-xl flex items-center justify-center min-h-[72px] lg:min-h-[80px]">
+            Our Process
+          </a>
+          <a href="/about/faqs" class="bg-primary hover:bg-primary-700 text-white text-center font-extrabold uppercase tracking-[0.15em] text-xs lg:text-sm py-5 lg:py-6 transition-colors shadow-xl flex items-center justify-center min-h-[72px] lg:min-h-[80px]">
+            FAQs
+          </a>
+          <a href="/about/preparing" class="bg-primary hover:bg-primary-700 text-white text-center font-extrabold uppercase tracking-[0.15em] text-xs lg:text-sm py-5 lg:py-6 transition-colors shadow-xl flex items-center justify-center min-h-[72px] lg:min-h-[80px]">
+            Preparing for Your Fence
+          </a>
+        </div>
       </div>
     </div>
   </section>
 
   {/* BODY INTRO — text + video placeholder (Andri founder portrait) */}
-  <section class="bg-white pt-28 lg:pt-36 pb-16 lg:pb-24">
+  <section class="bg-white pt-32 lg:pt-40 pb-16 lg:pb-24">
     <div class="container-page">
       <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center max-w-6xl mx-auto">
         <div>
