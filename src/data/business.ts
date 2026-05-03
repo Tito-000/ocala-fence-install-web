@@ -98,11 +98,11 @@ export const BUSINESS = {
       lifespan: '25+ years',
     },
     {
-      slug: 'durafence',
-      name: 'DuraFence',
-      shortName: 'DuraFence',
-      tagline: 'Premium composite, hurricane-rated',
-      image: '/images/services/durafence.jpg',
+      slug: 'composite-fence',
+      name: 'Composite Fence',
+      shortName: 'Composite',
+      tagline: 'Premium wood-look, hurricane-rated, zero rot',
+      image: '/images/services/composite-fence.jpg',
       priceRange: { min: 4000, max: 12000 },
       pricePerFoot: { min: 28, max: 50 },
       priceFromMonthly: 79,
@@ -165,7 +165,7 @@ export const BUSINESS = {
   usps: [
     { title: 'Less than 7 days install', body: 'From signed contract to fence in your yard. Urgent? 2-3 days possible.' },
     { title: '$0 down financing', body: 'Pre-qualify in 60 seconds with no credit impact. 6 lending partners.' },
-    { title: 'Lifetime materials warranty', body: 'Vinyl and DuraFence carry a lifetime materials warranty — transferable to the next homeowner.' },
+    { title: 'Lifetime materials warranty', body: 'Vinyl and composite fences carry a lifetime materials warranty — transferable to the next homeowner.' },
     { title: 'Family-owned, local', body: '5 years in Ocala. Same crew start to finish — no call centers, no out-of-state bosses.' },
   ],
 

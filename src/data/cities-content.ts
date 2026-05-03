@@ -13,27 +13,27 @@ export const CITIES_CONTENT: Record<string, {
 }> = {
   'ocala-fl': {
     metaTitle: 'Fence Installation Ocala FL | $0 Down · Done in Less Than 7 Days',
-    metaDescription: 'Premium fence installation in Ocala, FL. Vinyl, DuraFence, aluminum, pool fences. Marion County permits handled. $0 down financing. Same-day estimates. Call (863) 377-0928.',
+    metaDescription: 'Premium fence installation in Ocala, FL. Vinyl, composite, aluminum, pool fences. Marion County permits handled. $0 down financing. Same-day estimates. Call (863) 377-0928.',
     heroTitle: 'Fence Installation in <span class="text-primary">Ocala, FL</span>',
-    heroSubtitle: 'Marion County\'s family-owned fence team. Vinyl, DuraFence, aluminum, and pool fences installed in less than 7 days. $0 down financing.',
+    heroSubtitle: 'Marion County\'s family-owned fence team. Vinyl, composite, aluminum, and pool fences installed in less than 7 days. $0 down financing.',
     zips: ['34470', '34471', '34472', '34473', '34474', '34475', '34476', '34479', '34480', '34481', '34482'],
     neighborhoods: ['Marion Oaks', 'Silver Springs Shores', 'On Top of the World', 'Stone Creek', 'Calesa Township', 'JB Ranch', 'Oak Run', 'Spruce Creek', 'Pine Run', 'Heath Brook', 'Magnolia'],
     intro: {
       heading: 'Ocala homeowners trust us with their fence installation',
       paragraphs: [
-        'Ocala backs up to wild Florida. Bears, coyotes, gators — they don\'t stop at property lines. We build fences that do. Whether you\'re in Marion Oaks, Heath Brook, On Top of the World, or any other Ocala neighborhood, we install premium vinyl, DuraFence, aluminum, and pool fences that pass inspection and outlast Florida weather.',
+        'Ocala backs up to wild Florida. Bears, coyotes, gators — they don\'t stop at property lines. We build fences that do. Whether you\'re in Marion Oaks, Heath Brook, On Top of the World, or any other Ocala neighborhood, we install premium vinyl, composite, aluminum, and pool fences that pass inspection and outlast Florida weather.',
         'We\'re locally based in Ocala, we know Marion County permits inside and out, and we\'ve installed fences across every ZIP from 34470 to 34482. Same-day estimates Mon-Sun, $0 down financing, and most jobs finished in less than 7 days.',
       ],
     },
     whyLocal: [
-      { title: 'Bear & Wildlife Protection', body: 'Ocala is in black bear territory. Our 6ft vinyl privacy and DuraFence panels keep bears, coyotes, and gators out of your yard.' },
+      { title: 'Bear & Wildlife Protection', body: 'Ocala is in black bear territory. Our 6ft vinyl privacy and composite fence panels keep bears, coyotes, and gators out of your yard.' },
       { title: '130 MPH Hurricane-Rated', body: 'Florida storms are no joke. Our concrete-set posts and reinforced panels meet or exceed Florida building code for wind resistance.' },
       { title: 'Marion County Permits Handled', body: 'We pull every permit, schedule the inspection, and walk you through the final sign-off. You don\'t lift a finger.' },
     ],
     faqs: [
       { q: 'Do I need a fence permit in Marion County?', a: 'In <strong>unincorporated Marion County</strong>, no permit is needed for residential fences under 6 feet. In the <strong>City of Ocala limits</strong>, most fences require a permit. We handle the permit process either way — pull, schedule, and pass the inspection.' },
       { q: 'How much does a fence cost in Ocala?', a: 'Most projects run between <strong>$4,000 and $13,000</strong> depending on length, height, material, and gates. Average Ocala backyard runs $7,000-$8,500. With $0 down financing, monthly payments typically fall between $79 and $200.' },
-      { q: 'What about black bears? Will a fence keep them out?', a: 'Yes. Our 6ft <strong>vinyl privacy</strong> and <strong>DuraFence composite</strong> panels are solid and tall enough to keep bears out. We\'ve installed dozens of bear-proof fences in Ocala neighborhoods near wooded areas.' },
+      { q: 'What about black bears? Will a fence keep them out?', a: 'Yes. Our 6ft <strong>vinyl privacy</strong> and <strong>composite fence</strong> panels are solid and tall enough to keep bears out. We\'ve installed dozens of bear-proof fences in Ocala neighborhoods near wooded areas.' },
       { q: 'Do you serve all Ocala ZIP codes?', a: 'Yes. We cover every Ocala ZIP from <strong>34470 to 34482</strong>, including Marion Oaks, Silver Springs Shores, On Top of the World, Stone Creek, Calesa Township, Heath Brook, and all surrounding subdivisions.' },
       { q: 'How fast can you install a fence in Ocala?', a: 'Most installations finish in <strong>less than 7 days</strong> from signed contract. Urgent timelines (2-3 days) are possible for smaller projects.' },
       { q: 'Can you install a fence with HOA approval in Ocala?', a: 'Yes — we have experience with HOAs across <strong>On Top of the World, Stone Creek, Spruce Creek, Oak Run</strong>, and most Ocala master-planned communities. We help with HOA submission paperwork.' },
@@ -41,7 +41,7 @@ export const CITIES_CONTENT: Record<string, {
   },
   'belleview-fl': {
     metaTitle: 'Fence Installation Belleview FL | $0 Down · Marion County',
-    metaDescription: 'Fence installation in Belleview, FL (34420). Vinyl, DuraFence, aluminum, pool fences. $0 down financing. Less than 7 days install. Call (863) 377-0928.',
+    metaDescription: 'Fence installation in Belleview, FL (34420). Vinyl, composite, aluminum, pool fences. $0 down financing. Less than 7 days install. Call (863) 377-0928.',
     heroTitle: 'Fence Installation in <span class="text-primary">Belleview, FL</span>',
     heroSubtitle: 'Premium fence installation in Belleview and South Marion County. Family-owned, $0 down financing, less than 7 days install.',
     zips: ['34420', '34421'],
@@ -62,7 +62,7 @@ export const CITIES_CONTENT: Record<string, {
       { q: 'Do you serve all Belleview ZIP codes?', a: 'Yes — Belleview ZIPs <strong>34420 and 34421</strong>, plus all surrounding South Marion County areas like Sun Country and Lake Lillian.' },
       { q: 'How long does fence installation take in Belleview?', a: 'Most Belleview projects finish in <strong>less than 7 days</strong> from signed contract. Smaller backyards can be done in 3-5 days.' },
       { q: 'Do I need a permit for a fence in Belleview?', a: 'Belleview is in <strong>unincorporated Marion County</strong>, so most residential fences under 6ft don\'t require a permit. Inside city limits, permits may apply — we handle either way.' },
-      { q: 'What\'s the cheapest fence option in Belleview?', a: '<strong>Vinyl picket fence</strong> typically starts around $4,000 for a small front yard. Vinyl privacy and DuraFence start higher but include lifetime warranty.' },
+      { q: 'What\'s the cheapest fence option in Belleview?', a: '<strong>Vinyl picket fence</strong> typically starts around $4,000 for a small front yard. Vinyl privacy and composite fence start higher but include lifetime warranty.' },
     ],
   },
   'summerfield-fl': {
@@ -93,7 +93,7 @@ export const CITIES_CONTENT: Record<string, {
   },
   'silver-springs-fl': {
     metaTitle: 'Fence Installation Silver Springs FL | Marion County · 34488',
-    metaDescription: 'Fence installation in Silver Springs, FL (34488). East Marion County. Vinyl, DuraFence, aluminum, pool fences. $0 down financing. Call (863) 377-0928.',
+    metaDescription: 'Fence installation in Silver Springs, FL (34488). East Marion County. Vinyl, composite, aluminum, pool fences. $0 down financing. Call (863) 377-0928.',
     heroTitle: 'Fence Installation in <span class="text-primary">Silver Springs, FL</span>',
     heroSubtitle: 'Premium fence installation in Silver Springs and East Marion County. Family-owned, $0 down financing, less than 7 days install.',
     zips: ['34488', '34489'],
@@ -111,7 +111,7 @@ export const CITIES_CONTENT: Record<string, {
       { title: 'Marion County Permits', body: 'We pull every permit through Marion County and handle the inspection.' },
     ],
     faqs: [
-      { q: 'Will a fence keep bears out of my Silver Springs yard?', a: 'Yes — our 6ft <strong>vinyl privacy</strong> and <strong>DuraFence</strong> panels are solid and tall enough to deter bears. We install with concrete-set posts so they can\'t be pushed through.' },
+      { q: 'Will a fence keep bears out of my Silver Springs yard?', a: 'Yes — our 6ft <strong>vinyl privacy</strong> and <strong>Composite Fence</strong> panels are solid and tall enough to deter bears. We install with concrete-set posts so they can\'t be pushed through.' },
       { q: 'Do you install fences on lots near Silver River?', a: 'Yes. We use marine-grade hardware (stainless steel) for any install within 100ft of waterfront to handle Florida humidity.' },
       { q: 'How fast can you install in Silver Springs?', a: 'Most Silver Springs projects finish in <strong>less than 7 days</strong>. Urgent timelines available for smaller jobs.' },
     ],
@@ -126,7 +126,7 @@ export const CITIES_CONTENT: Record<string, {
     intro: {
       heading: 'Dunnellon homeowners get premium fences without the city prices',
       paragraphs: [
-        'Dunnellon is one of Florida\'s most beautiful corners — Rainbow River, crystal springs, mature oaks. We install fences that match the natural beauty: clean vinyl, hurricane-rated DuraFence, sleek black aluminum.',
+        'Dunnellon is one of Florida\'s most beautiful corners — Rainbow River, crystal springs, mature oaks. We install fences that match the natural beauty: clean vinyl, hurricane-rated composite fence, sleek black aluminum.',
         'Same Marion County permits, same lifetime warranty, same $0 down financing as everywhere else we work. We cover all Dunnellon ZIPs from 34431 to 34434.',
       ],
     },
@@ -199,7 +199,7 @@ export const CITIES_CONTENT: Record<string, {
     metaTitle: 'Fence Installation Marion County FL | All Cities · $0 Down',
     metaDescription: 'Fence installation across all Marion County, FL. Ocala, Belleview, Summerfield, Silver Springs, Dunnellon. $0 down financing. Call (863) 377-0928.',
     heroTitle: 'Fence Installation Across <span class="text-primary">Marion County, FL</span>',
-    heroSubtitle: 'Family-owned fence installation across every city in Marion County. Vinyl, DuraFence, aluminum, pool fences. $0 down financing.',
+    heroSubtitle: 'Family-owned fence installation across every city in Marion County. Vinyl, composite, aluminum, pool fences. $0 down financing.',
     zips: ['34470', '34471', '34472', '34473', '34474', '34475', '34476', '34479', '34480', '34481', '34482', '34420', '34421', '34488', '34489', '34491', '34492', '34431', '34432', '34433', '34434', '34470'],
     neighborhoods: ['Ocala', 'Belleview', 'Summerfield', 'Silver Springs', 'Dunnellon', 'Anthony', 'Citra', 'Reddick', 'McIntosh', 'Fellowship'],
     intro: {
@@ -218,7 +218,7 @@ export const CITIES_CONTENT: Record<string, {
       { q: 'Which Marion County cities do you serve?', a: 'All of them — <strong>Ocala, Belleview, Summerfield, Silver Springs, Dunnellon</strong>, plus rural areas like Anthony, Citra, Reddick, McIntosh, and Fellowship.' },
       { q: 'Do I need a permit for a fence in Marion County?', a: 'In <strong>unincorporated Marion County</strong>, residential fences under 6ft don\'t require a permit. Inside city limits (Ocala, Belleview), permits may apply. We handle either way.' },
       { q: 'How much does fence installation cost in Marion County?', a: 'Most Marion County projects run <strong>$4,000-$13,000</strong> depending on length, height, material. With $0 down financing, monthly payments typically $79-$200.' },
-      { q: 'Do you install bear-proof fences in Marion County?', a: 'Yes. Our 6ft <strong>vinyl privacy</strong> and <strong>DuraFence composite</strong> panels are solid enough to keep bears out. Especially recommended near the Ocala National Forest border.' },
+      { q: 'Do you install bear-proof fences in Marion County?', a: 'Yes. Our 6ft <strong>vinyl privacy</strong> and <strong>composite fence</strong> panels are solid enough to keep bears out. Especially recommended near the Ocala National Forest border.' },
     ],
   },
 };
