@@ -29,7 +29,6 @@ export const PRIMARY_NAV = [
       { label: 'Our Process', href: '/about/our-process' },
       { label: 'Our Mission', href: '/about/our-mission' },
       { label: 'FAQs', href: '/about/faqs' },
-      { label: 'Preparing for Your Fence', href: '/about/preparing', icon: 'play' },
     ],
   },
   { label: 'Contact', href: '/contact' },
