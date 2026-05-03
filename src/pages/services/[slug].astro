@@ -2,7 +2,6 @@
 import PageLayout from '@layouts/PageLayout.astro';
 import FAQ from '@components/FAQ.astro';
 import ServiceCard from '@components/ServiceCard.astro';
-import FinancingCalculator from '@components/FinancingCalculator.astro';
 import ProcessSteps from '@components/ProcessSteps.astro';
 import TrustBar from '@components/TrustBar.astro';
 import FinalCTA from '@components/FinalCTA.astro';
@@ -318,42 +317,6 @@ const faqSchema = {
     </div>
   </section>
 
-  {/* Style Showcase — visual cards for each style option */}
-  {styles.length > 0 && (
-    <section class="section bg-white">
-      <div class="container-page">
-        <div class="text-center max-w-2xl mx-auto mb-10 lg:mb-12">
-          <span class="badge-highlight mb-4">Style Options</span>
-          <h2 class="mb-3 text-balance">Pick the {service.shortName.toLowerCase()} style that fits your home</h2>
-          <p class="text-gray-600 text-lg">{styles.length} configurations available — all priced the same.</p>
-        </div>
-
-        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6 max-w-6xl mx-auto">
-          {styles.map((style, idx) => (
-            <div class="group relative bg-white border-2 border-gray-200 hover:border-primary shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden">
-              <div class="aspect-square bg-gradient-to-br from-gray-100 to-gray-200 relative overflow-hidden">
-                {/* Visual representation per style — uses gallery images when available */}
-                <img
-                  src={galleryImages[idx % Math.max(1, galleryImages.length)]?.src || service.image}
-                  alt={`${style.name} ${service.shortName.toLowerCase()} style`}
-                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  loading="lazy"
-                />
-                <div class="absolute top-3 left-3 w-9 h-9 rounded-full bg-primary text-white text-sm font-extrabold flex items-center justify-center shadow-lg border-2 border-white">
-                  {idx + 1}
-                </div>
-              </div>
-              <div class="p-5 lg:p-6">
-                <h3 class="text-lg font-extrabold text-primary-900 mb-2 leading-tight">{style.name}</h3>
-                <p class="text-sm text-gray-700 leading-relaxed">{style.desc}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )}
-
   {/* Comparison Table — Which fence is right for you? */}
   <section class="section bg-white">
     <div class="container-page">
@@ -527,27 +490,6 @@ const faqSchema = {
           </p>
         </div>
       </div>
-    </div>
-  </section>
-
-  {/* Financing Calculator */}
-  <section class="section relative overflow-hidden bg-gradient-to-b from-gray-100 via-gray-50 to-gray-100 border-y border-gray-200">
-    <div class="absolute inset-0 opacity-[0.04] pointer-events-none" style="background-image: linear-gradient(0deg, transparent 24px, #136229 25px, transparent 26px), linear-gradient(90deg, transparent 24px, #136229 25px, transparent 26px); background-size: 25px 25px;"></div>
-
-    <div class="container-page relative">
-      <div class="text-center max-w-3xl mx-auto mb-10 lg:mb-14">
-        <span class="badge-highlight mb-4">Financing Available</span>
-        <h2 class="mb-5 text-balance">Calculate your monthly payment</h2>
-        <p class="text-gray-600 text-lg lg:text-xl leading-relaxed">
-          Most {service.shortName.toLowerCase()} projects fit between <strong>$80 and $200/month</strong> with $0 down. Move the sliders.
-        </p>
-      </div>
-
-      <FinancingCalculator
-        defaultAmount={Math.round((service.priceRange.min + service.priceRange.max) / 2)}
-        minAmount={service.priceRange.min}
-        maxAmount={service.priceRange.max}
-      />
     </div>
   </section>
 
