@@ -12,73 +12,55 @@ const breadcrumbSchema = {
     { '@type': 'ListItem', position: 3, name: 'Our Mission', item: 'https://ocalafenceinstall.com/about/our-mission' },
   ],
 };
-
-const values = [
-  {
-    title: 'Hire the Right People',
-    body: 'Every member of our crew is local, vetted, bilingual, and trained on our installation standards. We hire for character first — skill is teachable.',
-    icon: 'users',
-  },
-  {
-    title: 'Use Modern Technology',
-    body: 'From draw-your-fence aerial tools to digital quotes signed online in minutes — we use technology to make the process fast, accurate, and transparent.',
-    icon: 'tech',
-  },
-  {
-    title: 'Provide Fair, Transparent Estimates',
-    body: 'Every quote includes a sketch, dimensions, warranty info, and product details. No hidden fees. No "internet pricing." A real person walks you through it.',
-    icon: 'estimate',
-  },
-  {
-    title: 'Deliver a Hassle-Free Experience',
-    body: 'We listen first, install fast, clean up thoroughly, and stand behind our work. You don\'t pay the final invoice until you are satisfied — that\'s our guarantee.',
-    icon: 'check',
-  },
-];
 ---
 
 <PageLayout
   title={`Our Mission | ${BUSINESS.name} | Marion County FL`}
-  description={`Our mission at Ocala Fence Install — to be Marion County's most trusted family-owned fence team by hiring the right people, using modern technology, and delivering a hassle-free fence experience.`}
+  description={`Our mission at Ocala Fence Install — to be Marion County's leading fence company by upholding the highest standard of customer service and offering quality products at a competitive price. Family-owned since 2021.`}
   activeNav="About"
   schemaJsonLd={[breadcrumbSchema]}
 >
-  {/* HERO */}
-  <section class="relative bg-gradient-to-r from-primary-900 via-primary to-primary-700 py-16 lg:py-24">
-    <div class="container-page text-center text-white">
-      <p class="text-xs lg:text-sm uppercase tracking-[0.3em] font-bold text-highlight mb-4">
-        About Ocala Fence Install
-      </p>
-      <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-[0.95] tracking-tight mb-5 text-balance drop-shadow-2xl">
-        Our Mission
+  {/* HERO — solid black, BJF replica */}
+  <section class="bg-black py-20 lg:py-28">
+    <div class="container-page text-center">
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white leading-[0.95] tracking-tight mb-6 text-balance drop-shadow-2xl">
+        The Ocala Fence Install Mission
       </h1>
-      <p class="text-base lg:text-xl text-white/95 max-w-3xl mx-auto leading-relaxed font-semibold">
-        To be Marion County's leading fence company by upholding the highest standard of customer service and always offering quality products at a competitive price.
+      <p class="text-base lg:text-xl text-white/75 max-w-3xl mx-auto leading-relaxed font-medium">
+        At Ocala Fence Install: We make buying fences fast and easy so Marion County families can protect their loved ones and their investments.
       </p>
     </div>
   </section>
 
-  {/* MISSION STATEMENT — long form */}
+  {/* MISSION STATEMENT — text left + founder portrait right (BJF replica) */}
   <section class="bg-white py-16 lg:py-24">
     <div class="container-page">
-      <div class="max-w-4xl mx-auto">
-        <h2 class="text-3xl lg:text-4xl font-extrabold text-primary-900 mb-7 leading-[1.05]">
-          Why we built Ocala Fence Install
-        </h2>
-        <p class="text-base lg:text-lg text-gray-700 mb-5 leading-relaxed">
-          Ocala Fence Install is committed to being Marion County's <strong>leading fence company</strong> by upholding the highest standard of customer service and always offering quality products at a competitive price.
-        </p>
-        <p class="text-base lg:text-lg text-gray-700 mb-5 leading-relaxed">
-          We're improving the fencing experience in Florida by hiring great local people and using modern techniques to maximize efficiency — all while providing a fair estimate and a hassle-free experience to every customer.
-        </p>
-        <p class="text-base lg:text-lg text-gray-700 leading-relaxed">
-          By valuing customers and truly listening to their needs, we are motivated to keep innovating to improve the overall experience of buying a fence in Ocala, Belleview, Summerfield, The Villages, and across Marion County.
-        </p>
+      <div class="grid lg:grid-cols-[1.6fr_1fr] gap-10 lg:gap-16 items-center max-w-6xl mx-auto">
+        <div>
+          <p class="text-base lg:text-lg text-gray-700 leading-relaxed">
+            Ocala Fence Install is committed to being Marion County's leading fence company by upholding the highest standard of customer service and always offering quality products at a competitive price. The company is improving the fencing industry in Florida by hiring great local people and utilizing modern techniques to increase its efficiency, all while providing a fair estimate and a hassle-free experience to each and every customer. By valuing customers and truly listening to their needs, Ocala Fence Install is motivated to continue innovating to improve the overall experience of purchasing a fence.
+          </p>
+        </div>
+
+        <div class="text-center lg:text-left">
+          <div class="aspect-square overflow-hidden shadow-2xl mb-4 max-w-sm mx-auto lg:mx-0">
+            <img
+              src="/images/about/founder-portrait.jpg"
+              alt="Andri Ramírez, founder of Ocala Fence Install"
+              class="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
+          <p class="text-lg lg:text-xl font-semibold text-gray-700 italic">
+            Andri Ramírez
+          </p>
+          <p class="text-sm text-gray-500 mt-1">Founder · Since 2021</p>
+        </div>
       </div>
     </div>
   </section>
 
-  {/* VALUES — 4 cards */}
+  {/* HOW WE'RE IMPROVING — 4 commitments */}
   <section class="bg-gray-100 py-16 lg:py-24">
     <div class="container-page">
       <div class="text-center mb-12 lg:mb-14">
@@ -86,31 +68,42 @@ const values = [
           How We're Improving the Fencing Industry
         </h2>
         <p class="text-base lg:text-lg text-gray-700 max-w-2xl mx-auto">
-          The four commitments that guide every decision we make.
+          Four commitments that guide every install in Marion County.
         </p>
       </div>
 
-      <div class="grid sm:grid-cols-2 gap-5 lg:gap-6 max-w-5xl mx-auto">
-        {values.map((v) => (
-          <div class="bg-white border-l-4 border-primary p-7 lg:p-8 shadow-md hover:shadow-lg transition-shadow">
-            <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center mb-5 shadow-md">
-              {v.icon === 'users' && (
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m6-3.13a4 4 0 11-8 0 4 4 0 018 0zm6 0a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
-              )}
-              {v.icon === 'tech' && (
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17 9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-              )}
-              {v.icon === 'estimate' && (
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-              )}
-              {v.icon === 'check' && (
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-              )}
-            </div>
-            <h3 class="text-xl lg:text-2xl font-extrabold text-primary-900 mb-3 leading-tight">{v.title}</h3>
-            <p class="text-base text-gray-700 leading-relaxed">{v.body}</p>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6 max-w-6xl mx-auto">
+        <div class="bg-white border-t-4 border-primary p-7 lg:p-8 shadow-md hover:shadow-xl transition-shadow text-center">
+          <div class="w-14 h-14 mx-auto rounded-full bg-primary text-white flex items-center justify-center mb-5 shadow-md">
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m6-3.13a4 4 0 11-8 0 4 4 0 018 0zm6 0a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
           </div>
-        ))}
+          <h3 class="text-lg lg:text-xl font-extrabold text-primary-900 mb-3 leading-tight">Hire the Right People</h3>
+          <p class="text-sm lg:text-base text-gray-700 leading-relaxed">Local crew, vetted, bilingual, trained on our standards. Hire for character first.</p>
+        </div>
+
+        <div class="bg-white border-t-4 border-primary p-7 lg:p-8 shadow-md hover:shadow-xl transition-shadow text-center">
+          <div class="w-14 h-14 mx-auto rounded-full bg-primary text-white flex items-center justify-center mb-5 shadow-md">
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17 9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          </div>
+          <h3 class="text-lg lg:text-xl font-extrabold text-primary-900 mb-3 leading-tight">Modern Technology</h3>
+          <p class="text-sm lg:text-base text-gray-700 leading-relaxed">Digital quotes signed online in minutes. Fast, accurate, transparent.</p>
+        </div>
+
+        <div class="bg-white border-t-4 border-primary p-7 lg:p-8 shadow-md hover:shadow-xl transition-shadow text-center">
+          <div class="w-14 h-14 mx-auto rounded-full bg-primary text-white flex items-center justify-center mb-5 shadow-md">
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          </div>
+          <h3 class="text-lg lg:text-xl font-extrabold text-primary-900 mb-3 leading-tight">Fair, Transparent Estimates</h3>
+          <p class="text-sm lg:text-base text-gray-700 leading-relaxed">Sketch, dimensions, warranty, products. No hidden fees, ever.</p>
+        </div>
+
+        <div class="bg-white border-t-4 border-primary p-7 lg:p-8 shadow-md hover:shadow-xl transition-shadow text-center">
+          <div class="w-14 h-14 mx-auto rounded-full bg-primary text-white flex items-center justify-center mb-5 shadow-md">
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+          </div>
+          <h3 class="text-lg lg:text-xl font-extrabold text-primary-900 mb-3 leading-tight">Hassle-Free Experience</h3>
+          <p class="text-sm lg:text-base text-gray-700 leading-relaxed">Listen first, install fast, clean up. You don't pay until you're satisfied.</p>
+        </div>
       </div>
     </div>
   </section>
