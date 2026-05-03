@@ -1,0 +1,454 @@
+---
+import PageLayout from '@layouts/PageLayout.astro';
+import FinalCTA from '@components/FinalCTA.astro';
+import { BUSINESS } from '@data/business';
+
+const localBusinessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FenceContractor',
+  '@id': 'https://ocalafenceinstall.com/about#business',
+  name: BUSINESS.name,
+  url: 'https://ocalafenceinstall.com/about',
+  telephone: BUSINESS.phoneE164,
+  email: BUSINESS.email,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: BUSINESS.address.streetAddress,
+    addressLocality: BUSINESS.address.addressLocality,
+    addressRegion: BUSINESS.address.addressRegion,
+    postalCode: BUSINESS.address.postalCode,
+    addressCountry: BUSINESS.address.addressCountry,
+  },
+  founder: {
+    '@type': 'Person',
+    name: 'Andri Ramírez',
+    jobTitle: 'Founder',
+  },
+  foundingDate: '2021',
+  description: 'Family-owned fence installation company serving Marion County, FL. Founded by Andri Ramírez in 2021 after years of industry experience. Bilingual English/Spanish team.',
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://ocalafenceinstall.com' },
+    { '@type': 'ListItem', position: 2, name: 'About', item: 'https://ocalafenceinstall.com/about' },
+  ],
+};
+---
+
+<PageLayout
+  title={`About ${BUSINESS.name} | Marion County's Family-Owned Fence Team`}
+  description={`Family-owned fence company in Ocala, FL since 2021. Founded by Andri Ramírez after years of industry experience. Bilingual team. Built on trust. Powered by people. Backed by technology.`}
+  activeNav="About"
+  schemaJsonLd={[localBusinessSchema, breadcrumbSchema]}
+>
+  {/* HERO — full bleed photo + 4 sub-nav buttons (BJF replica) */}
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0">
+      <img
+        src="/images/about/hero-aluminum-fence.jpg"
+        alt="Black aluminum fence install in Ocala FL — Marion County's family-owned fence team"
+        class="w-full h-full object-cover object-center"
+        loading="eager"
+        width="1920"
+        height="600"
+      />
+      <div class="absolute inset-0 bg-gradient-to-r from-primary-900/85 via-primary-900/70 to-primary-900/55"></div>
+    </div>
+
+    <div class="container-page relative py-20 lg:py-28 text-center text-white">
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-[0.95] tracking-tight mb-4 text-balance drop-shadow-2xl">
+        About Ocala Fence Install
+      </h1>
+      <p class="text-base lg:text-lg text-white/95 max-w-2xl mx-auto leading-relaxed drop-shadow font-semibold">
+        Built on Trust. Powered by People. Backed by Technology.
+      </p>
+    </div>
+
+    {/* SUB-NAV — 4 buttons floating over hero bottom (BJF style) */}
+    <div class="container-page relative -mb-10 -mt-2 lg:-mb-12 lg:-mt-4 z-10">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-5 max-w-5xl mx-auto">
+        <a href="/about/reviews" class="bg-primary hover:bg-primary-700 text-white text-center font-extrabold uppercase tracking-[0.15em] text-xs lg:text-sm py-5 lg:py-6 transition-colors shadow-xl">
+          Customer Reviews
+        </a>
+        <a href="/about/our-process" class="bg-primary hover:bg-primary-700 text-white text-center font-extrabold uppercase tracking-[0.15em] text-xs lg:text-sm py-5 lg:py-6 transition-colors shadow-xl">
+          Our Process
+        </a>
+        <a href="/about/faqs" class="bg-primary hover:bg-primary-700 text-white text-center font-extrabold uppercase tracking-[0.15em] text-xs lg:text-sm py-5 lg:py-6 transition-colors shadow-xl">
+          FAQs
+        </a>
+        <a href="/about/preparing" class="bg-primary hover:bg-primary-700 text-white text-center font-extrabold uppercase tracking-[0.15em] text-xs lg:text-sm py-5 lg:py-6 transition-colors shadow-xl">
+          Preparing for Your Fence
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {/* BODY INTRO — text + video placeholder (Andri founder portrait) */}
+  <section class="bg-white pt-28 lg:pt-36 pb-16 lg:pb-24">
+    <div class="container-page">
+      <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center max-w-6xl mx-auto">
+        <div>
+          <p class="text-lg lg:text-xl text-gray-700 mb-6 leading-relaxed">
+            Ocala Fence Install is a family-owned, full-service residential fence company dedicated to delivering <strong>exceptional customer service, premium fencing products, and a hassle-free experience</strong> from start to finish.
+          </p>
+          <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+            We believe buying a fence shouldn't be complicated, confusing, or stressful. That's why we've built a company that puts <strong>people first</strong> — from the Marion County families we serve to the local crew we work with — using <strong>modern installation techniques and proven processes</strong> to deliver consistent, reliable results at a competitive price.
+          </p>
+        </div>
+
+        <div class="relative">
+          <div class="relative aspect-video overflow-hidden shadow-2xl border-4 border-primary group cursor-pointer">
+            <img
+              src="/images/about/founder-portrait.jpg"
+              alt="Andri Ramírez, founder of Ocala Fence Install"
+              class="w-full h-full object-cover"
+              loading="lazy"
+            />
+            <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+              <div class="w-20 h-20 lg:w-24 lg:h-24 rounded-full bg-white/95 flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform">
+                <svg class="w-8 h-8 lg:w-10 lg:h-10 text-red-600 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* OUR MISSION */}
+  <section class="bg-gray-100 py-16 lg:py-24">
+    <div class="container-page">
+      <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start max-w-6xl mx-auto">
+        <div>
+          <h2 class="text-4xl lg:text-5xl font-extrabold text-primary-900 mb-7 leading-[0.95]">
+            Our Mission
+          </h2>
+          <p class="text-base lg:text-lg text-gray-700 leading-relaxed">
+            Ocala Fence Install is committed to being Marion County's leading fence company by upholding the highest standard of customer service and always offering quality products at a competitive price. The company is improving the fencing experience in Florida by hiring great local people and utilizing modern techniques to increase its efficiency, all while providing a fair estimate and a hassle-free experience to each and every customer. By valuing customers and truly listening to their needs, Ocala Fence Install is motivated to continue innovating to improve the overall experience of purchasing a fence.
+          </p>
+        </div>
+
+        <div>
+          <p class="text-base lg:text-lg text-gray-700 mb-6 leading-relaxed">We are improving the fencing industry in Marion County by:</p>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-3">
+              <svg class="w-7 h-7 text-gray-900 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+              <span class="text-base lg:text-lg text-gray-800">Hiring the right people</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-7 h-7 text-gray-900 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+              <span class="text-base lg:text-lg text-gray-800">Using modern technology to improve efficiency</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-7 h-7 text-gray-900 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+              <span class="text-base lg:text-lg text-gray-800">Providing fair, transparent estimates</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-7 h-7 text-gray-900 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+              <span class="text-base lg:text-lg text-gray-800">Delivering a hassle-free customer experience</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* HOW WE GOT STARTED — split with draw-your-fence aerial image */}
+  <section class="bg-white py-16 lg:py-24">
+    <div class="container-page">
+      <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center max-w-6xl mx-auto">
+        <div>
+          <img
+            src="/images/about/draw-your-fence-aerial.jpg"
+            alt="Aerial view of an Ocala property with green digital fence layout overlay — fast and easy way to get a real fence quote online"
+            class="w-full aspect-square object-cover shadow-xl"
+            loading="lazy"
+          />
+        </div>
+
+        <div>
+          <h2 class="text-4xl lg:text-5xl font-extrabold text-primary-900 mb-6 leading-[1.05]">
+            How We Got Started
+          </h2>
+          <p class="text-base lg:text-lg text-gray-700 mb-6 leading-relaxed">
+            Like it does for many Marion County homeowners, the time came when our founder, <strong>Andri Ramírez</strong>, saw firsthand how broken the Florida fence industry was. After years of experience working in the industry, Andri found that buyers' processes were more difficult and stressful than they should be. The challenges from other fence companies were widespread — but one thing was clear; there was a problem in the fence industry that needed to be solved.
+          </p>
+
+          <p class="text-base italic text-gray-600 mb-3">Pain Points with Other Fence Companies:</p>
+          <ul class="text-gray-700 space-y-1.5 text-base lg:text-lg">
+            <li>Slow or no responses</li>
+            <li>High prices with no breakdown</li>
+            <li>Limited fence options</li>
+            <li>Inadequate consultation</li>
+            <li>Conflicting schedule or availability</li>
+            <li>Missed appointments</li>
+            <li>Poor customer service</li>
+            <li>English-only service in a bilingual market</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* HOW WE GOT STARTED — story full-width text */}
+  <section class="bg-white pb-16 lg:pb-24">
+    <div class="container-page max-w-5xl">
+      <p class="text-base lg:text-lg text-gray-700 leading-relaxed">
+        With his extensive industry experience, Andri decided to take matters into his own hands and build a different kind of fence company. He wanted to deliver the install experience he wished homeowners could get — fast quotes, honest prices, premium materials, bilingual service, and a crew that shows up when they say they will. In <strong>2021, Andri founded Ocala Fence Install</strong> with a mission to make buying fences fast and easy so Marion County families can protect their loved ones and their investments. The vision was simple — turn the Florida fence industry on its head by doing things differently than the norm.
+      </p>
+    </div>
+  </section>
+
+  {/* OUR PROCESS — Simple Transparent Proven */}
+  <section class="bg-gray-100 py-16 lg:py-24">
+    <div class="container-page">
+      <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center max-w-6xl mx-auto">
+        <div>
+          <h2 class="text-4xl lg:text-5xl font-extrabold text-primary-900 mb-6 leading-[1.05]">
+            Our Process: Simple, Transparent, Proven
+          </h2>
+          <p class="text-base lg:text-lg text-gray-700 mb-6 leading-relaxed">
+            We've refined our process to eliminate confusion and keep your project moving smoothly from first contact to final walkthrough.
+          </p>
+
+          <p class="text-base lg:text-lg font-extrabold text-gray-900 mb-5">Here's what to expect:</p>
+          <div class="space-y-4">
+            <div>
+              <h3 class="text-base lg:text-lg font-extrabold text-gray-900 mb-1">Request an Estimate <span class="font-normal text-gray-700">– Fast, easy, and pressure-free</span></h3>
+            </div>
+            <div>
+              <h3 class="text-base lg:text-lg font-extrabold text-gray-900 mb-1">Consultation with an expert <span class="font-normal text-gray-700">– We listen to your needs and recommend the right solution</span></h3>
+            </div>
+            <div>
+              <h3 class="text-base lg:text-lg font-extrabold text-gray-900 mb-1">Scheduling &amp; Preparation <span class="font-normal text-gray-700">– Clear timelines and expectations</span></h3>
+            </div>
+            <div>
+              <h3 class="text-base lg:text-lg font-extrabold text-gray-900 mb-1">Professional Installation <span class="font-normal text-gray-700">– Efficient, clean, and precise</span></h3>
+            </div>
+          </div>
+
+          <a href="/about/our-process" class="inline-flex items-center gap-2 mt-7 text-primary hover:text-primary-700 font-extrabold text-base lg:text-lg transition-colors">
+            👉 View Our Full Fence Installation Process
+          </a>
+        </div>
+
+        <div>
+          <img
+            src="/images/about/andri-laptop-office.jpg"
+            alt="Andri Ramírez reviewing a fence project on his laptop — Marion County's family-owned fence team"
+            class="w-full aspect-[4/3] object-cover shadow-2xl border-4 border-primary"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* WHAT SETS US APART — review overlay + bullets */}
+  <section class="bg-white py-16 lg:py-24">
+    <div class="container-page">
+      <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center max-w-6xl mx-auto">
+        <div class="relative aspect-square overflow-hidden shadow-xl border-[6px] border-white outline outline-2 outline-white/40">
+          <img
+            src="/images/services/vinyl-privacy.jpg"
+            alt="A finished vinyl privacy fence install for a Marion County customer"
+            class="w-full h-full object-cover"
+            loading="lazy"
+          />
+          <div class="absolute inset-0 bg-primary-900/65"></div>
+          <div class="absolute inset-0 flex flex-col items-center justify-center text-center text-white p-8 lg:p-10">
+            <div class="text-xs uppercase tracking-[0.2em] font-bold text-white/90 mb-2">Real Google Review</div>
+            <div class="text-xl lg:text-2xl font-extrabold text-highlight mb-7 italic">Maria G.</div>
+            <p class="text-base lg:text-lg leading-relaxed mb-7 max-w-md">
+              "Our fence is beautiful! Andri's team did an amazing job! Everyone we dealt with was super professional and excellent to work with. Hablan español también — eso fue clave. Highly recommend Ocala Fence Install!"
+            </p>
+            <div class="text-3xl text-highlight">⭐⭐⭐⭐⭐</div>
+          </div>
+        </div>
+
+        <div>
+          <h2 class="text-4xl lg:text-5xl font-extrabold text-primary-900 mb-7 leading-[1.05]">
+            What Sets Ocala Fence Install Apart
+          </h2>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-gray-900 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+              <span class="text-base lg:text-lg text-gray-800">Exceptional customer service</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-gray-900 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+              <span class="text-base lg:text-lg text-gray-800">Fair, transparent prices</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-gray-900 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+              <span class="text-base lg:text-lg text-gray-800">Hassle-free process — same-day quotes</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-gray-900 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+              <span class="text-base lg:text-lg text-gray-800">Fast &amp; accurate quotes</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-gray-900 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+              <span class="text-base lg:text-lg text-gray-800">Premium fence products</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-gray-900 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+              <span class="text-base lg:text-lg text-gray-800">High-quality fence installations</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-gray-900 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+              <span class="text-base lg:text-lg text-gray-800">Bilingual English &amp; español service</span>
+            </li>
+          </ul>
+          <a href="/about/reviews" class="inline-flex items-center gap-2 text-primary hover:text-primary-700 font-extrabold text-base lg:text-lg transition-colors">
+            👉 Read Real Customer Reviews
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* FREQUENTLY ASKED QUESTIONS — text + photo with green frame */}
+  <section class="bg-gray-100 py-16 lg:py-24">
+    <div class="container-page">
+      <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center max-w-6xl mx-auto">
+        <div>
+          <h2 class="text-4xl lg:text-5xl font-extrabold text-primary-900 mb-6 leading-[1.05]">
+            Frequently Asked Questions
+          </h2>
+          <p class="text-base lg:text-lg text-gray-700 mb-6 leading-relaxed">
+            We believe informed customers make better decisions. That's why we proactively answer common questions about fencing, financing, permits, materials, and what to expect on install day.
+          </p>
+          <a href="/about/faqs" class="inline-flex items-center gap-2 text-primary hover:text-primary-700 font-extrabold text-base lg:text-lg transition-colors">
+            👉 View Our Full Fence FAQ
+          </a>
+        </div>
+
+        <div class="relative pl-4 pb-4 lg:pl-6 lg:pb-6">
+          <div class="absolute right-0 bottom-0 left-4 lg:left-6 top-4 lg:top-6 bg-primary"></div>
+          <img
+            src="/images/about/team-installing.jpg"
+            alt="Ocala Fence Install crew installing a fence in Marion County"
+            class="relative w-full aspect-[4/3] object-cover shadow-xl"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* OUR ENTREPRENEURSHIP STORY — replaces 'Franchise Story' (founder leadership photo + text) */}
+  <section class="bg-white py-16 lg:py-24">
+    <div class="container-page">
+      <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center max-w-6xl mx-auto">
+        <div class="relative">
+          <img
+            src="/images/about/andri-team-action.jpg"
+            alt="Andri Ramírez leading the Ocala Fence Install crew at a Marion County jobsite"
+            class="w-full aspect-square object-cover shadow-2xl"
+            loading="lazy"
+          />
+          <div class="absolute -bottom-4 -left-4 bg-highlight px-5 py-3 shadow-xl">
+            <div class="text-xs uppercase tracking-[0.2em] font-bold text-primary-900">Andri Ramírez</div>
+            <div class="text-base font-extrabold text-primary-900">Founder · Since 2021</div>
+          </div>
+        </div>
+
+        <div>
+          <h2 class="text-4xl lg:text-5xl font-extrabold text-primary-900 mb-6 leading-[1.05]">
+            Our Entrepreneurship Story
+          </h2>
+          <p class="text-base lg:text-lg text-gray-700 mb-5 leading-relaxed">
+            After years of hands-on experience in the Florida fence industry, <strong>Andri</strong> realized that the customer experience was broken across the board. Slow quotes. Hidden prices. English-only service in a bilingual community. Crews that wouldn't show up. He saw the problem from the inside and decided to build the company he wished existed when homeowners called him.
+          </p>
+          <p class="text-base lg:text-lg text-gray-700 leading-relaxed">
+            With that experience, Andri launched <strong>Ocala Fence Install in 2021</strong>. By staying loyal to the core values and mission every step of the way — hire great local people, install premium materials, communicate clearly, treat every backyard like our own — we've grown into Marion County's go-to family-owned fence team.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* PREPARING FOR YOUR FENCE INSTALLATION */}
+  <section class="bg-gray-100 py-16 lg:py-20">
+    <div class="container-page text-center max-w-3xl mx-auto">
+      <h2 class="text-4xl lg:text-5xl font-extrabold text-primary-900 mb-6 leading-[1.05]">
+        Preparing for Your Fence Installation
+      </h2>
+      <p class="text-base lg:text-lg text-gray-700 mb-7 leading-relaxed">
+        A successful installation starts with preparation. We guide our customers through everything they need to know before installation day.
+      </p>
+      <a href="/about/preparing" class="inline-flex items-center gap-2 text-primary hover:text-primary-700 font-extrabold text-base lg:text-lg transition-colors">
+        👉 How to Prepare for Your Fence Installation
+      </a>
+    </div>
+  </section>
+
+  {/* BUILT FOR GROWTH + READY TO GET STARTED — 2-col CTA panel */}
+  <section class="bg-white py-16 lg:py-24">
+    <div class="container-page">
+      <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 max-w-6xl mx-auto">
+        <div>
+          <h2 class="text-4xl lg:text-5xl font-extrabold text-primary-900 mb-6 leading-[1.05]">
+            Built for Growth.<br/>Focused on Service.
+          </h2>
+          <p class="text-base lg:text-lg text-gray-700 mb-5 leading-relaxed">
+            Ocala Fence Install continues to grow — but our focus remains the same:
+          </p>
+          <ul class="space-y-3 mb-6">
+            <li class="text-xl lg:text-2xl font-extrabold text-primary-900">Hire great people</li>
+            <li class="text-xl lg:text-2xl font-extrabold text-primary-900">Serve customers well</li>
+            <li class="text-xl lg:text-2xl font-extrabold text-primary-900">Improve systems and technology</li>
+            <li class="text-xl lg:text-2xl font-extrabold text-primary-900">Deliver consistent quality</li>
+          </ul>
+          <p class="text-base lg:text-lg text-gray-700 leading-relaxed">
+            Whether you're fencing a backyard, securing a commercial property, or replacing an old fence, you can trust Ocala Fence Install to deliver a professional experience from start to finish.
+          </p>
+        </div>
+
+        <div class="lg:pl-8 lg:border-l border-gray-300">
+          <h2 class="text-4xl lg:text-5xl font-extrabold text-primary-900 mb-6 leading-[1.05]">
+            Ready to Get Started?
+          </h2>
+          <p class="text-base lg:text-lg text-gray-700 mb-5 leading-relaxed">
+            If you're looking for a Marion County fencing company that values <strong>transparency, quality, and customer experience</strong>, you're in the right place.
+          </p>
+          <p class="text-base lg:text-lg text-gray-700 mb-8 leading-relaxed">
+            Add protection, privacy, and value to your home with <strong>Ocala Fence Install</strong>.
+          </p>
+          <a href="/free-estimate" class="inline-flex items-center gap-2 bg-primary hover:bg-primary-700 text-white font-extrabold uppercase tracking-wider text-sm lg:text-base px-12 py-5 shadow-lg transition-colors">
+            Get Your Quote
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* NEWSLETTER STRIP */}
+  <section class="bg-primary py-12 lg:py-14">
+    <div class="container-page">
+      <div class="text-center mb-7">
+        <h2 class="text-2xl lg:text-3xl font-extrabold text-white">
+          Monthly Email Updates, News, and Insider Info from Ocala Fence Install
+        </h2>
+      </div>
+
+      <form class="grid md:grid-cols-[1fr_2fr_auto] gap-3 max-w-4xl mx-auto" action={BUSINESS.ghlWebhookUrl || '#'} method="POST">
+        <input type="text" name="name" placeholder="Name" required class="px-5 py-4 bg-white text-gray-900 placeholder-gray-500 font-medium border-0 focus:outline-none focus:ring-2 focus:ring-highlight"/>
+        <input type="email" name="email" placeholder="Email" required class="px-5 py-4 bg-white text-gray-900 placeholder-gray-500 font-medium border-0 focus:outline-none focus:ring-2 focus:ring-highlight"/>
+        <button type="submit" class="px-10 py-4 bg-white hover:bg-gray-50 text-primary font-extrabold uppercase tracking-wider text-sm transition-colors border-2 border-white">
+          Sign Up
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <FinalCTA
+    title="Ready for your fence estimate?"
+    subtitle="Same-day quote · $0 down financing · Less than 7 days install"
+  />
+</PageLayout>
