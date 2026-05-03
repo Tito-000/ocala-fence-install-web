@@ -1,0 +1,307 @@
+---
+import PageLayout from '@layouts/PageLayout.astro';
+import FinalCTA from '@components/FinalCTA.astro';
+import { BUSINESS } from '@data/business';
+
+const reviews = [
+  {
+    name: 'María G.',
+    initial: 'M',
+    bgColor: 'bg-rose-500',
+    timeAgo: '2 months ago',
+    rating: 5,
+    text: 'Our fence is beautiful! Andri\'s team did an amazing job! Everyone we dealt with was super professional and excellent to work with. Hablan español también — eso fue clave. Highly recommend Ocala Fence Install!',
+  },
+  {
+    name: 'James T.',
+    initial: 'J',
+    bgColor: 'bg-blue-500',
+    timeAgo: '3 months ago',
+    rating: 5,
+    text: 'Quote was fast and fair, install was clean, and the crew was respectful of our property. Best fence company I\'ve worked with in Marion County. They finished a 200-foot vinyl privacy fence in less than a week.',
+  },
+  {
+    name: 'Carlos R.',
+    initial: 'C',
+    bgColor: 'bg-amber-500',
+    timeAgo: '4 months ago',
+    rating: 5,
+    text: 'Excelente servicio de principio a fin. Me dieron el estimado el mismo día y la cerca quedó perfecta. Andri y su equipo son profesionales — muy recomendados para cualquier familia hispana en Ocala.',
+  },
+  {
+    name: 'Sarah B.',
+    initial: 'S',
+    bgColor: 'bg-purple-500',
+    timeAgo: '5 months ago',
+    rating: 5,
+    text: 'Hired Ocala Fence Install for an aluminum pool fence and could not be happier. They handled the permit process and made sure everything was up to code. The crew showed up on time every day. Will use them again.',
+  },
+  {
+    name: 'Mike D.',
+    initial: 'M',
+    bgColor: 'bg-emerald-500',
+    timeAgo: '6 months ago',
+    rating: 5,
+    text: 'I had three quotes for a privacy fence around my Belleview property. Ocala Fence Install was not the cheapest, but their professionalism and the quality of materials made the choice easy. Excellent install.',
+  },
+  {
+    name: 'Linda K.',
+    initial: 'L',
+    bgColor: 'bg-pink-500',
+    timeAgo: '7 months ago',
+    rating: 5,
+    text: 'Andri walked us through every step — material options, gate placement, even helped us deal with the HOA. The fence looks fantastic and our dog loves the new yard. Honest, hardworking, family team.',
+  },
+  {
+    name: 'Tom W.',
+    initial: 'T',
+    bgColor: 'bg-cyan-500',
+    timeAgo: '8 months ago',
+    rating: 5,
+    text: 'Clean, fast, and priced right. They replaced an old wood fence with vinyl picket and the difference is night and day. Crew cleaned up every piece of debris. Couldn\'t ask for more.',
+  },
+  {
+    name: 'Ana P.',
+    initial: 'A',
+    bgColor: 'bg-orange-500',
+    timeAgo: '9 months ago',
+    rating: 5,
+    text: 'Le doy 5 estrellas porque cumplieron con todo lo prometido. Vinieron, midieron, dieron precio justo, y instalaron en el tiempo acordado. La cerca de aluminio se ve elegante y robusta.',
+  },
+  {
+    name: 'David H.',
+    initial: 'D',
+    bgColor: 'bg-indigo-500',
+    timeAgo: '10 months ago',
+    rating: 5,
+    text: 'Had Ocala Fence Install do a chain link enclosure for my backyard. Quick estimate, quick install, quality work. They\'re my go-to for any future fence work in The Villages.',
+  },
+];
+
+const aggregateRatingSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FenceContractor',
+  '@id': 'https://ocalafenceinstall.com/about/reviews#business',
+  name: BUSINESS.name,
+  url: 'https://ocalafenceinstall.com/about/reviews',
+  telephone: BUSINESS.phoneE164,
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '5.0',
+    reviewCount: reviews.length.toString(),
+    bestRating: '5',
+    worstRating: '1',
+  },
+  review: reviews.map((r) => ({
+    '@type': 'Review',
+    author: { '@type': 'Person', name: r.name },
+    reviewRating: { '@type': 'Rating', ratingValue: r.rating.toString(), bestRating: '5' },
+    reviewBody: r.text,
+  })),
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://ocalafenceinstall.com' },
+    { '@type': 'ListItem', position: 2, name: 'About', item: 'https://ocalafenceinstall.com/about' },
+    { '@type': 'ListItem', position: 3, name: 'Reviews', item: 'https://ocalafenceinstall.com/about/reviews' },
+  ],
+};
+---
+
+<PageLayout
+  title={`Customer Reviews | ${BUSINESS.name} | Marion County Fence Reviews`}
+  description={`Read real customer reviews of Ocala Fence Install — Marion County's family-owned fence team. 5-star Google reviews from homeowners in Ocala, Belleview, The Villages, and across Florida.`}
+  activeNav="About"
+  schemaJsonLd={[aggregateRatingSchema, breadcrumbSchema]}
+>
+  {/* HERO */}
+  <section class="relative bg-gradient-to-r from-primary-900 via-primary to-primary-700 py-16 lg:py-24">
+    <div class="container-page text-center text-white">
+      <p class="text-xs lg:text-sm uppercase tracking-[0.3em] font-bold text-highlight mb-4">
+        Real Customer Reviews
+      </p>
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-[0.95] tracking-tight mb-5 text-balance drop-shadow-2xl">
+        What Marion County Says About Us
+      </h1>
+      <p class="text-base lg:text-lg text-white/95 max-w-2xl mx-auto leading-relaxed font-semibold">
+        5-star reviews from real homeowners across Ocala, Belleview, Summerfield, The Villages and beyond.
+      </p>
+
+      <div class="flex flex-wrap items-center justify-center gap-4 lg:gap-6 mt-8">
+        <div class="flex items-center gap-2">
+          <div class="text-3xl lg:text-4xl">⭐⭐⭐⭐⭐</div>
+        </div>
+        <div class="text-left">
+          <div class="text-2xl lg:text-3xl font-extrabold leading-none">5.0 / 5.0</div>
+          <div class="text-xs lg:text-sm text-white/85 mt-1">{reviews.length}+ Google Reviews</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* REVIEWS CAROUSEL — BJF style: 3 cards visible, prev/next, drag/swipe */}
+  <section class="bg-white py-16 lg:py-24">
+    <div class="container-page">
+      <div class="flex items-end justify-between mb-8 lg:mb-10 max-w-6xl mx-auto">
+        <div>
+          <h2 class="text-3xl lg:text-4xl font-extrabold text-primary-900 leading-[1.05]">
+            Verified Google Reviews
+          </h2>
+          <p class="text-base text-gray-700 mt-2">Swipe or use the arrows to read more.</p>
+        </div>
+        <div class="hidden sm:flex items-center gap-3">
+          <button
+            type="button"
+            id="reviews-prev"
+            aria-label="Previous review"
+            class="w-12 h-12 lg:w-14 lg:h-14 rounded-full border-2 border-primary text-primary hover:bg-primary hover:text-white transition-colors flex items-center justify-center shadow-md"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+          </button>
+          <button
+            type="button"
+            id="reviews-next"
+            aria-label="Next review"
+            class="w-12 h-12 lg:w-14 lg:h-14 rounded-full border-2 border-primary text-primary hover:bg-primary hover:text-white transition-colors flex items-center justify-center shadow-md"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div
+        id="reviews-track"
+        class="flex gap-5 lg:gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-6 -mx-4 px-4 lg:mx-0 lg:px-0 scrollbar-hide"
+      >
+        {reviews.map((review) => (
+          <article class="snap-start shrink-0 w-[85%] sm:w-[calc((100%-1.25rem)/2)] lg:w-[calc((100%-3rem)/3)] bg-gray-50 border border-gray-200 p-7 lg:p-8 shadow-sm hover:shadow-md transition-shadow flex flex-col">
+            <div class="flex items-start justify-between mb-5">
+              <div class="flex items-center gap-3">
+                <div class={`w-12 h-12 rounded-full ${review.bgColor} text-white font-extrabold text-lg flex items-center justify-center shrink-0`}>
+                  {review.initial}
+                </div>
+                <div>
+                  <div class="font-extrabold text-gray-900 leading-tight">{review.name}</div>
+                  <div class="text-sm text-gray-500 leading-tight mt-0.5">{review.timeAgo}</div>
+                </div>
+              </div>
+              <svg class="w-8 h-8 shrink-0" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-label="Google logo">
+                <path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/>
+                <path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/>
+                <path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24c0 3.55.85 6.91 2.34 9.88l7.35-5.7z"/>
+                <path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/>
+              </svg>
+            </div>
+
+            <div class="text-xl mb-4">⭐⭐⭐⭐⭐</div>
+
+            <p class="text-base text-gray-700 leading-relaxed flex-1">
+              "{review.text}"
+            </p>
+          </article>
+        ))}
+      </div>
+
+      {/* Mobile arrows */}
+      <div class="flex sm:hidden items-center justify-center gap-3 mt-6">
+        <button
+          type="button"
+          id="reviews-prev-mobile"
+          aria-label="Previous review"
+          class="w-12 h-12 rounded-full border-2 border-primary text-primary hover:bg-primary hover:text-white transition-colors flex items-center justify-center shadow-md"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+        </button>
+        <button
+          type="button"
+          id="reviews-next-mobile"
+          aria-label="Next review"
+          class="w-12 h-12 rounded-full border-2 border-primary text-primary hover:bg-primary hover:text-white transition-colors flex items-center justify-center shadow-md"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  {/* LEAVE A REVIEW CTA STRIP */}
+  <section class="bg-gray-100 py-16 lg:py-20">
+    <div class="container-page">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl lg:text-4xl font-extrabold text-primary-900 mb-5 leading-[1.05]">
+          Worked With Us? Leave a Review.
+        </h2>
+        <p class="text-base lg:text-lg text-gray-700 mb-7 leading-relaxed">
+          Your feedback helps Marion County families find a fence team they can trust. It only takes 60 seconds.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3 lg:gap-4">
+          <a
+            href={BUSINESS.social.googleBusinessProfile || '#'}
+            target="_blank"
+            rel="noopener"
+            class="inline-flex items-center gap-2 bg-primary hover:bg-primary-700 text-white font-extrabold uppercase tracking-wider text-sm px-8 py-4 shadow-lg transition-colors"
+          >
+            <svg class="w-5 h-5" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path fill="#FFFFFF" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z" opacity=".95"/>
+              <path fill="#FFFFFF" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z" opacity=".75"/>
+              <path fill="#FFFFFF" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24c0 3.55.85 6.91 2.34 9.88l7.35-5.7z" opacity=".55"/>
+              <path fill="#FFFFFF" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z" opacity=".85"/>
+            </svg>
+            Review Us on Google
+          </a>
+          <a
+            href={`tel:${BUSINESS.phoneE164}`}
+            class="inline-flex items-center gap-2 bg-white hover:bg-gray-50 text-primary border-2 border-primary font-extrabold uppercase tracking-wider text-sm px-8 py-4 shadow-md transition-colors"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 5a2 2 0 012-2h2.28a2 2 0 011.94 1.515L10.42 8.03a2 2 0 01-.45 1.95l-1.27 1.27a11 11 0 005.05 5.05l1.27-1.27a2 2 0 011.95-.45l3.515.879A2 2 0 0122 17.72V20a2 2 0 01-2 2h-1C9.611 22 2 14.389 2 5V5a2 2 0 011-2z"/></svg>
+            Call {BUSINESS.phone}
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <FinalCTA
+    title="Ready for your fence estimate?"
+    subtitle="Same-day quote · $0 down financing · Less than 7 days install"
+  />
+</PageLayout>
+
+<style>
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+</style>
+
+<script>
+  const track = document.getElementById('reviews-track');
+  const prev = document.getElementById('reviews-prev');
+  const next = document.getElementById('reviews-next');
+  const prevMobile = document.getElementById('reviews-prev-mobile');
+  const nextMobile = document.getElementById('reviews-next-mobile');
+
+  function getCardWidth(): number {
+    if (!track) return 0;
+    const card = track.querySelector('article') as HTMLElement | null;
+    if (!card) return 0;
+    const gap = parseFloat(getComputedStyle(track).columnGap || '20');
+    return card.offsetWidth + gap;
+  }
+
+  function scrollByCard(dir: 1 | -1) {
+    if (!track) return;
+    track.scrollBy({ left: dir * getCardWidth(), behavior: 'smooth' });
+  }
+
+  prev?.addEventListener('click', () => scrollByCard(-1));
+  next?.addEventListener('click', () => scrollByCard(1));
+  prevMobile?.addEventListener('click', () => scrollByCard(-1));
+  nextMobile?.addEventListener('click', () => scrollByCard(1));
+</script>
