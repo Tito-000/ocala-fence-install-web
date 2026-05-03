@@ -4,21 +4,32 @@ import FinalCTA from '@components/FinalCTA.astro';
 import { BUSINESS } from '@data/business';
 
 const projects = [
+  // Vinyl
   { id: '01', src: '/images/gallery/vinyl-privacy-tan.jpg', alt: 'Tan vinyl privacy fence install in Ocala FL backyard', cat: 'Vinyl', city: 'Ocala' },
   { id: '02', src: '/images/gallery/vinyl-privacy-white.jpg', alt: 'White vinyl privacy fence with lattice top in Marion County', cat: 'Vinyl', city: 'Belleview' },
-  { id: '03', src: '/images/gallery/vinyl-picket-white.jpg', alt: 'Classic white vinyl picket fence front yard in Ocala', cat: 'Vinyl', city: 'Ocala' },
-  { id: '04', src: '/images/gallery/aluminum-black-yard.jpg', alt: 'Black aluminum ornamental fence backyard in Ocala FL', cat: 'Aluminum', city: 'Ocala' },
-  { id: '05', src: '/images/gallery/aluminum-driveway-gate.jpg', alt: 'Black aluminum double driveway gate Marion County', cat: 'Aluminum', city: 'The Villages' },
-  { id: '06', src: '/images/gallery/pool-fence-aluminum.jpg', alt: 'Pool-code-compliant black aluminum fence around backyard pool', cat: 'Pool', city: 'Summerfield' },
-  { id: '07', src: '/images/gallery/wood-privacy-natural.jpg', alt: 'Natural cedar wood privacy fence side yard in Ocala', cat: 'Wood', city: 'Ocala' },
-  { id: '08', src: '/images/gallery/wood-shadowbox.jpg', alt: 'Shadow-box wood privacy fence in residential Marion County', cat: 'Wood', city: 'Belleview' },
-  { id: '09', src: '/images/gallery/chain-link-residential.jpg', alt: 'Galvanized chain link fence residential backyard Ocala FL', cat: 'Chain Link', city: 'Ocala' },
-  { id: '10', src: '/images/gallery/aluminum-3-rail.jpg', alt: 'Black aluminum 3-rail estate fence Ocala horse country', cat: 'Aluminum', city: 'Ocala' },
-  { id: '11', src: '/images/gallery/vinyl-privacy-corner.jpg', alt: 'White vinyl privacy fence wrapping corner backyard Marion County', cat: 'Vinyl', city: 'Lady Lake' },
-  { id: '12', src: '/images/gallery/wood-pergola-gate.jpg', alt: 'Custom wood privacy fence with arched pergola gate Ocala FL', cat: 'Wood', city: 'Ocala' },
+  { id: '03', src: '/images/gallery/vinyl-privacy-driveway-gate.jpg', alt: 'White vinyl privacy fence with double driveway gate in Ocala', cat: 'Vinyl', city: 'Ocala' },
+  { id: '04', src: '/images/gallery/vinyl-privacy-shadowbox.jpg', alt: 'Tan vinyl privacy shadowbox-style fence in Ocala FL', cat: 'Vinyl', city: 'Summerfield' },
+  { id: '05', src: '/images/gallery/vinyl-privacy-corner.jpg', alt: 'White vinyl privacy fence wrapping corner backyard Marion County', cat: 'Vinyl', city: 'Lady Lake' },
+  { id: '06', src: '/images/gallery/vinyl-picket-white.jpg', alt: 'Classic white vinyl picket fence front yard in Ocala', cat: 'Vinyl', city: 'Ocala' },
+  { id: '07', src: '/images/gallery/vinyl-picket-cream.jpg', alt: 'Cream vinyl picket fence with gothic top caps in Ocala', cat: 'Vinyl', city: 'Belleview' },
+  { id: '08', src: '/images/gallery/vinyl-picket-garden.jpg', alt: 'White vinyl picket fence around flower garden Marion County', cat: 'Vinyl', city: 'Ocala' },
+  // Aluminum
+  { id: '09', src: '/images/gallery/aluminum-black-yard.jpg', alt: 'Black aluminum ornamental fence backyard in Ocala FL', cat: 'Aluminum', city: 'Ocala' },
+  { id: '10', src: '/images/gallery/aluminum-driveway-gate.jpg', alt: 'Black aluminum double driveway gate Marion County', cat: 'Aluminum', city: 'The Villages' },
+  { id: '11', src: '/images/gallery/aluminum-3-rail.jpg', alt: 'Black aluminum 3-rail estate fence Ocala horse country', cat: 'Aluminum', city: 'Ocala' },
+  // Composite
+  { id: '12', src: '/images/gallery/composite-cedar-tone.jpg', alt: 'Cedar-tone composite privacy fence with realistic wood grain in Ocala', cat: 'Composite', city: 'Ocala' },
+  { id: '13', src: '/images/gallery/composite-modern-gray.jpg', alt: 'Modern charcoal gray horizontal composite fence Marion County', cat: 'Composite', city: 'Belleview' },
+  { id: '14', src: '/images/gallery/composite-stone-look.jpg', alt: 'Stone-look composite fence with stacked-stone texture Ocala', cat: 'Composite', city: 'Ocala' },
+  // Pool
+  { id: '15', src: '/images/gallery/pool-fence-aluminum.jpg', alt: 'Pool-code-compliant black aluminum fence around backyard pool', cat: 'Pool', city: 'Summerfield' },
+  { id: '16', src: '/images/gallery/pool-fence-screen-enclosure.jpg', alt: 'Black aluminum pool fence with screen enclosure in Ocala', cat: 'Pool', city: 'Ocala' },
+  { id: '17', src: '/images/gallery/pool-white-vinyl-picket.jpg', alt: 'White vinyl picket pool-code fence with self-closing gate Ocala', cat: 'Pool', city: 'The Villages' },
+  // Chain Link
+  { id: '18', src: '/images/gallery/chain-link-residential.jpg', alt: 'Galvanized chain link fence residential backyard Ocala FL', cat: 'Chain Link', city: 'Ocala' },
 ];
 
-const categories = ['All', 'Vinyl', 'Aluminum', 'Wood', 'Chain Link', 'Pool'];
+const categories = ['All', 'Vinyl', 'Aluminum', 'Composite', 'Pool', 'Chain Link'];
 
 const breadcrumbSchema = {
   '@context': 'https://schema.org',

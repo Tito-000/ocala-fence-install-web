@@ -54,32 +54,34 @@ const stylesBySlug: Record<string, { name: string; desc: string }[]> = {
 };
 const styles = stylesBySlug[service.slug] || [];
 
-// Gallery images per service slug — uses existing /public/images/gallery/ photos
+// Gallery images per service slug — unique image set per service, no repeats
 const galleryBySlug: Record<string, { src: string; alt: string }[]> = {
   'vinyl-privacy-fence': [
-    { src: '/images/gallery/vinyl-privacy-tan.jpg', alt: 'Tan vinyl privacy fence install in Ocala FL' },
-    { src: '/images/gallery/vinyl-privacy-white.jpg', alt: 'White vinyl privacy fence with lattice top — Marion County' },
+    { src: '/images/gallery/vinyl-privacy-tan.jpg', alt: 'Tan vinyl privacy fence install in Ocala FL backyard' },
+    { src: '/images/gallery/vinyl-privacy-white.jpg', alt: 'White vinyl privacy fence with lattice top — Marion County FL' },
+    { src: '/images/gallery/vinyl-privacy-driveway-gate.jpg', alt: 'White vinyl privacy fence with double driveway gate — Ocala FL' },
+    { src: '/images/gallery/vinyl-privacy-shadowbox.jpg', alt: 'Tan vinyl privacy shadowbox-style fence — Ocala FL' },
     { src: '/images/gallery/vinyl-privacy-corner.jpg', alt: 'White vinyl privacy fence wrapping corner of backyard — Lady Lake FL' },
   ],
   'vinyl-picket-fence': [
     { src: '/images/gallery/vinyl-picket-white.jpg', alt: 'Classic white vinyl picket fence front yard — Ocala FL' },
-    { src: '/images/gallery/vinyl-picket-cream.jpg', alt: 'Cream vinyl picket fence with gothic top caps — Ocala FL' },
+    { src: '/images/gallery/vinyl-picket-cream.jpg', alt: 'Cream vinyl picket fence with gothic top caps — Marion County FL' },
     { src: '/images/gallery/vinyl-picket-garden.jpg', alt: 'White vinyl picket fence around flower garden — Marion County FL' },
   ],
   'aluminum-fence': [
     { src: '/images/gallery/aluminum-black-yard.jpg', alt: 'Black aluminum ornamental fence backyard — Ocala FL' },
-    { src: '/images/gallery/aluminum-driveway-gate.jpg', alt: 'Black aluminum driveway gate — The Villages FL' },
+    { src: '/images/gallery/aluminum-driveway-gate.jpg', alt: 'Black aluminum double driveway gate — The Villages FL' },
     { src: '/images/gallery/aluminum-3-rail.jpg', alt: 'Black aluminum 3-rail estate fence — Ocala horse country' },
   ],
   'pool-fence': [
     { src: '/images/gallery/pool-fence-aluminum.jpg', alt: 'Pool-code-compliant black aluminum fence — Summerfield FL' },
     { src: '/images/gallery/pool-fence-screen-enclosure.jpg', alt: 'Black aluminum pool fence with screen enclosure — Ocala FL' },
-    { src: '/images/gallery/aluminum-black-yard.jpg', alt: 'Pool-code aluminum fence install — Marion County' },
+    { src: '/images/gallery/pool-white-vinyl-picket.jpg', alt: 'White vinyl picket pool-code fence with self-closing gate — Ocala FL' },
   ],
   'composite-fence': [
-    { src: '/images/gallery/wood-pergola-gate.jpg', alt: 'Composite-style install with arched pergola gate — Ocala FL' },
-    { src: '/images/gallery/wood-shadowbox.jpg', alt: 'Composite shadow-box style — Belleview FL' },
-    { src: '/images/gallery/wood-privacy-natural.jpg', alt: 'Composite natural finish — Ocala FL' },
+    { src: '/images/gallery/composite-cedar-tone.jpg', alt: 'Cedar-tone composite privacy fence with realistic wood grain — Ocala FL' },
+    { src: '/images/gallery/composite-modern-gray.jpg', alt: 'Modern charcoal gray horizontal composite fence — Marion County FL' },
+    { src: '/images/gallery/composite-stone-look.jpg', alt: 'Stone-look composite fence with stacked-stone texture — Ocala FL' },
   ],
 };
 const galleryImages = galleryBySlug[service.slug] || [];
