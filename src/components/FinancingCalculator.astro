@@ -20,87 +20,114 @@ const {
 } = Astro.props;
 ---
 
-<div class={`bg-gray-900 text-white rounded-none p-6 lg:p-8 ${compact ? '' : 'shadow-2xl'}`} data-financing-calc>
-  <div class="grid lg:grid-cols-2 gap-6 lg:gap-8">
-    <!-- Controls -->
-    <div class="bg-gray-800 rounded-none p-5 lg:p-6 space-y-5">
-      <div>
-        <div class="text-xs uppercase tracking-wider text-gray-400 mb-2">Fence Cost</div>
-        <div class="text-2xl font-bold text-green-400 mb-3" data-fc-amount-display>${defaultAmount.toLocaleString()}</div>
-        <input
-          type="range"
-          min={minAmount}
-          max={maxAmount}
-          step="500"
-          value={defaultAmount}
-          data-fc-amount
-          class="w-full accent-green-400"
-          aria-label="Fence cost"
-        />
-        <div class="text-xs text-gray-500 mt-1">Min: ${minAmount.toLocaleString()} · Max: ${maxAmount.toLocaleString()}</div>
-      </div>
+<div class={`grid md:grid-cols-[1.4fr_1fr] gap-6 lg:gap-8 ${compact ? '' : 'max-w-5xl mx-auto'}`} data-financing-calc>
+  {/* Inputs panel */}
+  <div class="bg-primary-900 text-white p-7 lg:p-9 shadow-xl">
+    <div class="mb-7">
+      <label class="flex items-center justify-between text-base font-extrabold mb-3">
+        <span>Fence Financing Amount ($) <span class="text-highlight">*</span></span>
+      </label>
+      <input
+        type="number"
+        min={minAmount}
+        max={maxAmount}
+        step="100"
+        value={defaultAmount}
+        data-fc-amount
+        class="w-full bg-white/10 border-2 border-white/20 focus:border-highlight px-4 py-3 text-2xl font-extrabold text-white placeholder-white/40 outline-none transition-colors"
+        aria-label="Fence cost"
+      />
+      <p class="text-xs text-white/60 mt-2">Min: ${minAmount.toLocaleString()} — Max: ${maxAmount.toLocaleString()}</p>
+    </div>
 
-      <div>
-        <div class="text-xs uppercase tracking-wider text-gray-400 mb-2">Term Length</div>
-        <div class="text-2xl font-bold text-green-400 mb-3" data-fc-term-display>{defaultMonths} months</div>
-        <input
-          type="range"
-          min={BUSINESS.financing.minMonths}
-          max={BUSINESS.financing.maxMonths}
-          step="12"
-          value={defaultMonths}
-          data-fc-term
-          class="w-full accent-green-400"
-          aria-label="Loan term"
-        />
-        <div class="text-xs text-gray-500 mt-1">{BUSINESS.financing.minMonths}-{BUSINESS.financing.maxMonths} months</div>
-      </div>
-
-      <div>
-        <div class="text-xs uppercase tracking-wider text-gray-400 mb-2">APR (estimated)</div>
-        <div class="text-2xl font-bold text-green-400 mb-3" data-fc-apr-display>{defaultApr}%</div>
-        <input
-          type="range"
-          min="0"
-          max="15"
-          step="0.5"
-          value={defaultApr}
-          data-fc-apr
-          class="w-full accent-green-400"
-          aria-label="APR"
-        />
+    <div class="mb-7">
+      <label class="flex items-center justify-between text-base font-extrabold mb-3">
+        <span>Interest Rate (APR)</span>
+        <span data-fc-apr-display class="text-highlight text-lg">{defaultApr}%</span>
+      </label>
+      <input
+        type="range"
+        min="0"
+        max="15"
+        step="0.25"
+        value={defaultApr}
+        data-fc-apr
+        class="w-full accent-highlight"
+        aria-label="APR"
+      />
+      <div class="flex justify-between text-xs text-white/60 mt-1">
+        <span>0%</span>
+        <span>15%</span>
       </div>
     </div>
 
-    <!-- Summary -->
-    <div class="bg-gray-800 rounded-none p-5 lg:p-6 flex flex-col">
-      <div class="text-xs uppercase tracking-wider text-gray-400 mb-2">Your Monthly Payment</div>
-      <div class="text-5xl lg:text-6xl font-extrabold text-green-400 my-3" data-fc-payment>$148</div>
-      <div class="text-sm text-gray-300 mb-6">
-        <strong class="block text-white">$0 down · No credit impact · {BUSINESS.financing.preQualifyTime} pre-qualify</strong>
+    <div>
+      <label class="flex items-center justify-between text-base font-extrabold mb-3">
+        <span>Length of Loan</span>
+        <span data-fc-term-display class="text-highlight text-lg">{defaultMonths} months</span>
+      </label>
+      <input
+        type="range"
+        min={BUSINESS.financing.minMonths}
+        max={BUSINESS.financing.maxMonths}
+        step="12"
+        value={defaultMonths}
+        data-fc-term
+        class="w-full accent-highlight"
+        aria-label="Loan term"
+      />
+      <div class="flex justify-between text-xs text-white/60 mt-1">
+        <span>{BUSINESS.financing.minMonths} mo</span>
+        <span>{BUSINESS.financing.maxMonths} mo</span>
       </div>
-
-      <a href="/free-estimate" class="btn bg-green-400 hover:bg-green-500 text-gray-900 font-bold py-4 mt-auto" data-track="lead_calculator_used">
-        Pre-Qualify Now →
-      </a>
-
-      <p class="text-xs text-gray-500 mt-4 leading-relaxed">
-        Estimated payment based on the values above. Final terms depend on credit approval and partner financing.
-        Our partners: {BUSINESS.financingPartners.map((p) => p.name).join(', ')}.
-      </p>
     </div>
+  </div>
+
+  {/* Summary panel */}
+  <div class="bg-primary-900 text-white p-7 lg:p-9 shadow-xl flex flex-col justify-center">
+    <div class="text-xs uppercase tracking-[0.2em] font-bold text-highlight mb-2">Summary</div>
+    <div class="flex items-baseline justify-between border-b border-white/20 pb-5 mb-5">
+      <div class="text-xl lg:text-2xl font-extrabold">Monthly Payment</div>
+      <div class="text-3xl lg:text-4xl font-extrabold text-highlight" data-fc-payment>$148</div>
+    </div>
+    <div class="space-y-3 text-sm lg:text-base">
+      <div class="flex justify-between text-white/85">
+        <span>Total of Payments</span>
+        <span data-fc-total class="font-bold">$8,907</span>
+      </div>
+      <div class="flex justify-between text-white/85">
+        <span>Total Interest</span>
+        <span data-fc-interest class="font-bold">$1,407</span>
+      </div>
+    </div>
+    <a
+      href="/free-estimate"
+      class="mt-7 inline-flex items-center justify-center gap-2 bg-highlight hover:bg-highlight/90 text-primary-900 font-extrabold uppercase tracking-wider text-sm px-6 py-4 shadow-lg transition-colors"
+      data-track="lead_calculator_used"
+    >
+      Pre-Qualify Now
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"/></svg>
+    </a>
+    <p class="text-[11px] text-white/55 mt-3 leading-relaxed">
+      * Estimate only. $0 down · No credit impact · {BUSINESS.financing.preQualifyTime} pre-qualify. Final terms depend on lender, credit, and approval.
+    </p>
   </div>
 </div>
 
 <script is:inline>
   document.querySelectorAll('[data-financing-calc]').forEach((calc) => {
-    const amountSlider = calc.querySelector('[data-fc-amount]');
+    const amountInput = calc.querySelector('[data-fc-amount]');
     const termSlider = calc.querySelector('[data-fc-term]');
     const aprSlider = calc.querySelector('[data-fc-apr]');
-    const amountDisplay = calc.querySelector('[data-fc-amount-display]');
     const termDisplay = calc.querySelector('[data-fc-term-display]');
     const aprDisplay = calc.querySelector('[data-fc-apr-display]');
     const paymentDisplay = calc.querySelector('[data-fc-payment]');
+    const totalDisplay = calc.querySelector('[data-fc-total]');
+    const interestDisplay = calc.querySelector('[data-fc-interest]');
+
+    function fmt(n) {
+      return '$' + Math.round(n).toLocaleString('en-US');
+    }
 
     function pmt(p, r, n) {
       if (r === 0) return p / n;
@@ -109,22 +136,25 @@ const {
     }
 
     function update() {
-      const amount = +amountSlider.value;
-      const term = +termSlider.value;
-      const apr = +aprSlider.value;
-      amountDisplay.textContent = '$' + amount.toLocaleString();
+      const amount = Math.max(0, +amountInput.value || 0);
+      const term = +termSlider.value || 1;
+      const apr = +aprSlider.value || 0;
       termDisplay.textContent = term + ' months';
-      aprDisplay.textContent = apr + '%';
+      aprDisplay.textContent = apr.toFixed(2) + '%';
       const monthly = pmt(amount, apr, term);
-      paymentDisplay.textContent = '$' + Math.round(monthly).toLocaleString();
+      const total = monthly * term;
+      const interest = Math.max(0, total - amount);
+      paymentDisplay.textContent = fmt(monthly);
+      totalDisplay.textContent = fmt(total);
+      interestDisplay.textContent = fmt(interest);
     }
 
-    [amountSlider, termSlider, aprSlider].forEach((s) => s.addEventListener('input', update));
+    [amountInput, termSlider, aprSlider].forEach((s) => s.addEventListener('input', update));
     update();
 
     // Track first interaction (once per session)
     let tracked = false;
-    [amountSlider, termSlider, aprSlider].forEach((s) => {
+    [amountInput, termSlider, aprSlider].forEach((s) => {
       s.addEventListener('change', () => {
         if (tracked) return;
         tracked = true;
