@@ -428,25 +428,6 @@ const breadcrumbSchema = {
     </div>
   </section>
 
-  {/* NEWSLETTER STRIP */}
-  <section class="bg-primary py-12 lg:py-14">
-    <div class="container-page">
-      <div class="text-center mb-7">
-        <h2 class="text-2xl lg:text-3xl font-extrabold text-white">
-          Monthly Email Updates, News, and Insider Info from Ocala Fence Install
-        </h2>
-      </div>
-
-      <form class="grid md:grid-cols-[1fr_2fr_auto] gap-3 max-w-4xl mx-auto" action={BUSINESS.ghlWebhookUrl || '#'} method="POST">
-        <input type="text" name="name" placeholder="Name" required class="px-5 py-4 bg-white text-gray-900 placeholder-gray-500 font-medium border-0 focus:outline-none focus:ring-2 focus:ring-highlight"/>
-        <input type="email" name="email" placeholder="Email" required class="px-5 py-4 bg-white text-gray-900 placeholder-gray-500 font-medium border-0 focus:outline-none focus:ring-2 focus:ring-highlight"/>
-        <button type="submit" class="px-10 py-4 bg-white hover:bg-gray-50 text-primary font-extrabold uppercase tracking-wider text-sm transition-colors border-2 border-white">
-          Sign Up
-        </button>
-      </form>
-    </div>
-  </section>
-
   <FinalCTA
     title="Ready for your fence estimate?"
     subtitle="Same-day quote · $0 down financing · Less than 7 days install"
