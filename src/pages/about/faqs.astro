@@ -5,98 +5,118 @@ import { BUSINESS } from '@data/business';
 
 const faqs = [
   {
-    cat: 'Quotes & Pricing',
-    q: 'How long does it take to get a quote?',
-    a: 'Most homeowners receive a written quote within 24 hours. Quick projects with a clear scope often get a same-day estimate. Every quote includes a sketch, dimensions, warranty info, and product details — no internet-only pricing.',
+    q: 'How long does a wooden fence last?',
+    a: 'Although wood fences require regular care to maximize their longevity, a properly maintained fence can last up to <strong>20 years</strong> in Florida\'s climate. We stick-build our wood fences from scratch onsite using 4×4 posts, 2×4 rails, 1×6 pickets, 6×6 hinge-side gate posts, and galvanized ring shank nails to handle the heat and humidity.',
   },
   {
-    cat: 'Quotes & Pricing',
-    q: 'Are quotes free?',
-    a: 'Yes. Every estimate from Ocala Fence Install is 100% free with no obligation. Whether you call, fill out our online form, or use our Draw Your Fence tool, the quote and consultation cost nothing.',
+    q: 'Can I put a new fence next to my neighbor\'s fence?',
+    a: 'Yes — as long as the new fence sits on your side of the property line, you can install right alongside an existing neighbor\'s fence. We always check property lines before install and recommend leaving a few inches between the two fences for airflow and easier maintenance.',
   },
   {
-    cat: 'Quotes & Pricing',
-    q: 'Do you charge for site visits?',
-    a: 'No charge for the initial site visit. If you have an unusual property, an obstacle, or just want a real person to walk it before quoting, we come out free of charge.',
+    q: 'Do I have to install my fence posts with concrete?',
+    a: 'For long-term stability in Florida soils, yes — we set every post in concrete. This is especially important for wood, vinyl, and ornamental aluminum to handle wind loads and prevent posts from shifting. Chain link installs may use crushed-stone footings in some cases.',
   },
   {
-    cat: 'Materials & Fence Types',
-    q: 'What types of fences do you install?',
-    a: 'Vinyl privacy, vinyl picket, aluminum ornamental, pool-code aluminum, chain link, and DuraFence (steel-core composite). We carry premium-grade products from manufacturers we trust — see our Fence Types page for full options.',
+    q: 'What is the best fence for the least amount of maintenance?',
+    a: '<strong>Vinyl and aluminum.</strong> Both resist rot, insects, rust, and Florida humidity. Vinyl never needs paint or stain — just a hose-down once or twice a year. Aluminum is powder-coated to handle salt air and tropical sun without flaking. Wood is beautiful but needs sealing/staining every 2–3 years.',
   },
   {
-    cat: 'Materials & Fence Types',
-    q: 'Which fence material lasts the longest in Florida?',
-    a: 'Vinyl and aluminum both perform exceptionally well in Florida\'s heat, humidity, and storms. Vinyl resists rot, insects, and fading. Aluminum doesn\'t rust like wrought iron and handles coastal salt air. We help you choose based on your goals, budget, and property.',
+    q: 'Do vinyl fences break easily?',
+    a: 'No. Quality vinyl is engineered to flex under impact and pop back into shape — much more forgiving than wood. We install heavy-gauge vinyl from manufacturers we trust, and most of our vinyl installs come with a 25+ year manufacturer warranty against breakage, fading, and discoloration.',
   },
   {
-    cat: 'Materials & Fence Types',
-    q: 'Do you install pool-code fences?',
-    a: 'Yes. We install pool-code-compliant aluminum fencing that meets Florida and Marion County safety requirements — including self-closing/self-latching gates, picket spacing, and minimum heights. Required for any in-ground pool.',
+    q: 'How do you price my fence job?',
+    a: 'Pricing is based on linear footage, fence type and height, number of gates, terrain difficulty, and any special features (HOA-approved styles, code-compliant pool fencing, etc.). Every quote includes a sketch and itemized breakdown so you see exactly what you\'re paying for — no internet pricing, no surprises.',
   },
   {
-    cat: 'Permits & HOA',
-    q: 'Do I need a permit to install a fence in Marion County?',
-    a: 'It depends on the location, height, and material. Marion County does require permits for many fence installs, and unincorporated areas may have different rules than Ocala city. We handle the permit process for you in most cases.',
+    q: 'Can I finance my fence?',
+    a: 'Yes. We partner with Acorn Finance to offer <strong>$0-down fence financing</strong> across Florida. Apply in minutes with a soft credit check that doesn\'t affect your score. Multiple lenders compete for your loan so you get the best rate. Visit our <a href="/financing" class="text-primary hover:text-primary-700 font-bold underline">financing page</a> to pre-qualify.',
   },
   {
-    cat: 'Permits & HOA',
-    q: 'Will you work with my HOA?',
-    a: 'Absolutely. We help you submit ARC paperwork, provide product specs and renderings your HOA needs to approve the project, and only schedule the install once approval comes back.',
+    q: 'Do wooden fence boards shrink over time?',
+    a: 'A small amount of shrinkage is normal — wood is a natural material that responds to Florida\'s heat and humidity. Properly dried lumber and correct picket spacing minimize visible gaps. We install with this in mind so you\'re not surprised six months later.',
   },
   {
-    cat: 'Permits & HOA',
-    q: 'What about utility marking (Sunshine 811)?',
-    a: 'Florida law requires a utility locate before any digging. We schedule the Sunshine 811 ticket on your behalf so all gas, electric, and water lines are flagged before our team breaks ground.',
+    q: 'Where do I install my fence if I have trees on my property line?',
+    a: 'We try to route the fence around mature trees whenever possible to protect their root systems and your investment. If a tree falls directly on the planned fence line, we discuss options: a small jog around the tree, removal (if you decide to), or a custom panel that integrates with the trunk.',
   },
   {
-    cat: 'Installation',
-    q: 'How long does a typical fence install take?',
-    a: 'Most residential installs in Marion County are completed in 1 to 3 days. Larger lots or complex layouts can take up to a week. From signed contract to install start, the typical lead time is under 7 days.',
+    q: 'What type of fencing lasts the longest?',
+    a: '<strong>Aluminum ornamental fencing</strong> is the longest-lasting option in Florida — typically 50+ years with no rust, no rot, and minimal maintenance. Vinyl is a close second at 25–35 years. Both far outlast wood, which averages 15–20 years even with good care.',
   },
   {
-    cat: 'Installation',
+    q: 'Are fences flammable?',
+    a: 'Wood is flammable. Vinyl will melt at extreme temperatures but is not easily ignited. Aluminum and chain link are non-flammable and a smart choice if you\'re near a wildfire-prone area or want extra peace of mind.',
+  },
+  {
+    q: 'How wide can a gate be?',
+    a: 'Single-swing pedestrian gates max out around <strong>4 feet</strong> for stability. Double-swing driveway gates typically run <strong>10–14 feet wide.</strong> Beyond that we recommend a sliding gate or cantilever to handle the weight without sagging the hinge posts.',
+  },
+  {
+    q: 'Can a fence be used as a retaining wall?',
+    a: 'No — fences and retaining walls are different products. A retaining wall holds back soil and requires engineered footings; a fence marks a boundary. If you have grade changes on your property, we can step the fence with the slope or coordinate with a retaining-wall contractor to install both.',
+  },
+  {
+    q: 'Do you offer composite fencing?',
+    a: 'Yes — we install <strong>DuraFence</strong>, a steel-core composite fence that combines the look of wood with the durability of metal. DuraFence won\'t rot, warp, fade, or burn, and comes with one of the strongest warranties in the industry. Great for HOAs that require a wood-look but want low maintenance.',
+  },
+  {
+    q: 'Does Ocala Fence Install do fence repairs?',
+    a: 'Yes. We repair existing wood, vinyl, aluminum, and chain link fences across Marion County — even fences we didn\'t originally install. Common repairs: storm-damaged sections, leaning posts, broken pickets, sagging gates. Call us for a free repair quote.',
+  },
+  {
+    q: 'What is the best kind of fence for keeping cats from escaping my yard?',
+    a: 'Cats are climbers, so fence height matters less than overhang. We recommend <strong>solid privacy fencing 6 feet tall with a smooth top</strong> (no rails or pickets to grab) plus optional cat-proofing extensions like inward-angled rollers or netting. Wood and vinyl privacy panels work best.',
+  },
+  {
+    q: 'How long does it take to install a fence?',
+    a: 'Most residential installs in Marion County are completed in <strong>1 to 3 days</strong>. Larger lots or complex layouts can take up to a week. From signed contract to install start, our typical lead time is under 7 days — much faster than most Florida fence companies.',
+  },
+  {
+    q: 'What if I have a lot of roots — will that be a problem during install?',
+    a: 'Roots happen — especially in older Marion County yards with mature oaks and palms. Our crew is trained to work around major roots without damaging the trees. In rare cases where a root is directly in a post hole, we shift the post a few inches or use a smaller-diameter footing to preserve the tree.',
+  },
+  {
+    q: 'Do I have to be home during my fence installation?',
+    a: 'Not necessarily. Once the fence layout is confirmed in writing and the property is marked, you don\'t need to be there. We provide daily updates by text or call. That said, we do recommend being home (or available by phone) on day one for the onsite walkthrough.',
+  },
+  {
+    q: 'Will there be a gap between my fence and the ground?',
+    a: 'A small gap (1–2 inches) is normal and intentional — it allows water drainage, prevents wood rot at the base, and lets the fence flex with seasonal ground movement. If you need a no-gap install (small dogs, livestock, privacy concerns), we can add a kickboard or trench the fence in.',
+  },
+  {
+    q: 'How long will my fence last in Florida?',
+    a: 'Depends on the material: <strong>aluminum 50+ years, vinyl 25–35 years, wood 15–20 years, chain link 20–30 years.</strong> Every material we install carries a manufacturer warranty plus our own workmanship warranty. Florida heat, humidity, and storms shorten fence life across the board — material choice matters.',
+  },
+  {
+    q: 'How will you install my fence if I have rocky terrain?',
+    a: 'Marion County has limestone bedrock in spots, which can complicate post-setting. We use rotary hammer drills or rock augers to reach proper depth, and in extreme cases we core-drill into the rock and set posts with epoxy. Rocky soil rarely stops an install — it just adds a little time.',
+  },
+  {
     q: 'Will the crew speak Spanish?',
-    a: 'Yes. Our crew is fully bilingual English &amp; español. From the first call to the final walkthrough, we communicate clearly in either language.',
+    a: 'Yes. <strong>Our crew is fully bilingual English &amp; español.</strong> From the first phone call to the final walkthrough, we communicate clearly in either language. Marion County is a bilingual community and we make sure no homeowner is left out of the conversation.',
   },
   {
-    cat: 'Installation',
-    q: 'What happens on installation day?',
-    a: 'The lead installer walks the project with you on day one to confirm fence lines, gate placement, and any obstacles. We install with premium materials, clean up debris daily, and finish with a final walkthrough so you sign off on the work before paying the final invoice.',
+    q: 'Do I need a permit to install a fence in Marion County?',
+    a: 'It depends on location, height, and material. Marion County requires permits for many fence installs, and unincorporated areas may have different rules than the City of Ocala. <strong>We handle the permit process for you</strong> in most cases — pull permits, submit drawings, and meet with the inspector if needed.',
   },
   {
-    cat: 'Financing & Payment',
-    q: 'Do you offer financing?',
-    a: 'Yes. We partner with Acorn Finance to offer $0-down fence financing across the US — apply in minutes with a soft credit check. Visit our Financing page to see options and pre-qualify.',
+    q: 'Will you work with my HOA?',
+    a: 'Absolutely. We help you submit ARC (Architectural Review Committee) paperwork, provide product specs and renderings your HOA needs to approve the project, and only schedule the install once the approval comes back. We\'ve worked with HOAs across Ocala, Belleview, The Villages, and Stone Creek.',
   },
   {
-    cat: 'Financing & Payment',
-    q: 'How much deposit do you require?',
-    a: 'A standard deposit is required to schedule and order materials. The remaining balance is due after the final walkthrough — we don\'t collect the final invoice until you confirm you\'re satisfied.',
+    q: 'Do you install pool-code fences?',
+    a: 'Yes. We install <strong>pool-code-compliant aluminum fencing</strong> that meets Florida Building Code and Marion County safety requirements — including self-closing/self-latching gates, picket spacing under 4 inches, and minimum 4-foot height. Required for any in-ground pool.',
   },
   {
-    cat: 'Financing & Payment',
     q: 'What payment methods do you accept?',
-    a: 'Credit/debit card, ACH bank transfer, and check. All paperwork — quote, contract, deposit — is handled online in minutes.',
+    a: 'Credit/debit card, ACH bank transfer, check, and Acorn Finance. All paperwork — quote, contract, deposit — is signed and paid online in minutes. Final invoice isn\'t collected until you\'ve done the final walkthrough and confirmed you\'re satisfied with the work.',
   },
   {
-    cat: 'Warranty & Service',
     q: 'Do you offer a warranty?',
-    a: 'Yes. We back every install with a workmanship warranty, plus the manufacturer\'s product warranty on materials (typically 10–25 years for vinyl and aluminum). Warranty details are included in every quote.',
-  },
-  {
-    cat: 'Warranty & Service',
-    q: 'What if a section gets damaged after install?',
-    a: 'Call us. If it\'s a workmanship issue, we fix it under warranty. If it\'s storm or vehicle damage, we offer fast repair quotes — typically same-week turnaround for our previous customers.',
-  },
-  {
-    cat: 'Warranty & Service',
-    q: 'Do you do repairs on fences you didn\'t install?',
-    a: 'Yes. We repair existing wood, vinyl, aluminum, and chain link fences across Marion County. Call us for a free repair quote.',
+    a: 'Yes. We back every install with a <strong>workmanship warranty</strong> on labor plus the <strong>manufacturer\'s product warranty</strong> on materials (typically 10–25 years on vinyl, 20+ years on aluminum, lifetime on DuraFence). All warranty details are spelled out in your written quote.',
   },
 ];
-
-const categories = [...new Set(faqs.map((f) => f.cat))];
 
 const faqSchema = {
   '@context': 'https://schema.org',
@@ -106,7 +126,7 @@ const faqSchema = {
     name: f.q,
     acceptedAnswer: {
       '@type': 'Answer',
-      text: f.a.replace(/&amp;/g, '&'),
+      text: f.a.replace(/<[^>]+>/g, ''),
     },
   })),
 };
@@ -123,69 +143,71 @@ const breadcrumbSchema = {
 ---
 
 <PageLayout
-  title={`Fence Install FAQs | ${BUSINESS.name} | Marion County FL`}
-  description={`Common questions about fence installation, quotes, permits, HOA, financing, warranty, and more — answered by Ocala Fence Install, Marion County's family-owned fence team.`}
+  title={`Fence Install FAQs | ${BUSINESS.name} | Marion County, FL`}
+  description={`28 frequently asked questions about fence installation in Marion County, FL — answered by your local family-owned fence team. Wood, vinyl, aluminum, chain link, financing, permits, HOA, warranty, and more.`}
   activeNav="About"
   schemaJsonLd={[breadcrumbSchema, faqSchema]}
 >
-  {/* HERO */}
-  <section class="relative bg-gradient-to-r from-primary-900 via-primary to-primary-700 py-16 lg:py-24">
-    <div class="container-page text-center text-white">
-      <p class="text-xs lg:text-sm uppercase tracking-[0.3em] font-bold text-highlight mb-4">
-        About Ocala Fence Install
-      </p>
-      <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-[0.95] tracking-tight mb-5 text-balance drop-shadow-2xl">
-        Frequently Asked Questions
-      </h1>
-      <p class="text-base lg:text-xl text-white/95 max-w-3xl mx-auto leading-relaxed font-semibold">
-        Everything Marion County homeowners ask before, during, and after a fence install.
-      </p>
+  {/* HERO — full bleed photo + title left, blurb right (BJF replica) */}
+  <section class="relative">
+    <div class="absolute inset-0 overflow-hidden">
+      <img
+        src="/images/services/aluminum-fence.jpg"
+        alt="Black aluminum fence install in Ocala FL — Marion County's family-owned fence team"
+        class="w-full h-full object-cover object-center"
+        loading="eager"
+        width="1920"
+        height="500"
+      />
+      <div class="absolute inset-0 bg-black/60"></div>
     </div>
-  </section>
 
-  {/* CATEGORY NAV */}
-  <section class="bg-white border-b border-gray-200 sticky top-0 z-30">
-    <div class="container-page">
-      <div class="flex flex-wrap items-center justify-center gap-2 lg:gap-3 py-5">
-        {categories.map((cat) => (
+    <div class="container-page relative py-20 lg:py-28">
+      <div class="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center max-w-6xl mx-auto text-white">
+        <div>
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-[0.95] tracking-tight mb-7 text-balance drop-shadow-2xl">
+            Frequently Asked Questions about fences
+          </h1>
           <a
-            href={`#cat-${cat.toLowerCase().replace(/\s|&/g, '-').replace(/-+/g, '-')}`}
-            class="text-xs lg:text-sm uppercase tracking-wider font-extrabold text-gray-700 hover:text-primary border border-gray-300 hover:border-primary px-4 py-2 transition-colors"
+            href="/free-estimate"
+            class="inline-flex items-center gap-2 bg-primary hover:bg-primary-700 text-white font-extrabold uppercase tracking-wider text-sm lg:text-base px-10 py-4 shadow-xl border-2 border-white transition-colors"
           >
-            {cat}
+            Get Your Quick Quote
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
           </a>
-        ))}
+        </div>
+
+        <div class="lg:pl-4">
+          <p class="text-lg lg:text-xl text-white/95 leading-relaxed font-semibold drop-shadow">
+            From your local fence company at <strong>Ocala Fence Install</strong>. Real answers to the questions Marion County homeowners ask most about fence installation, materials, financing, permits, and warranty.
+          </p>
+        </div>
       </div>
     </div>
   </section>
 
-  {/* FAQ SECTIONS BY CATEGORY */}
-  <section class="bg-white py-12 lg:py-16">
+  {/* FAQ ACCORDION LIST — flat, BJF style */}
+  <section class="bg-white py-14 lg:py-20">
     <div class="container-page">
       <div class="max-w-4xl mx-auto">
-        {categories.map((cat) => (
-          <div id={`cat-${cat.toLowerCase().replace(/\s|&/g, '-').replace(/-+/g, '-')}`} class="mb-12 lg:mb-16 scroll-mt-24">
-            <h2 class="text-2xl lg:text-3xl font-extrabold text-primary-900 mb-6 lg:mb-8 leading-tight border-b-2 border-primary pb-3">
-              {cat}
-            </h2>
-
-            <div class="space-y-3">
-              {faqs.filter((f) => f.cat === cat).map((faq) => (
-                <details class="group bg-gray-50 hover:bg-gray-100 border border-gray-200 transition-colors">
-                  <summary class="flex items-center justify-between cursor-pointer p-5 lg:p-6 list-none">
-                    <h3 class="text-base lg:text-lg font-extrabold text-gray-900 group-hover:text-primary transition-colors pr-4">
-                      {faq.q}
-                    </h3>
-                    <svg class="w-5 h-5 text-primary shrink-0 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
-                  </summary>
-                  <div class="px-5 lg:px-6 pb-6">
-                    <p class="text-base text-gray-700 leading-relaxed" set:html={faq.a}></p>
-                  </div>
-                </details>
-              ))}
-            </div>
-          </div>
-        ))}
+        <div class="space-y-2">
+          {faqs.map((faq, idx) => (
+            <details class="group border-b border-gray-200 transition-colors" open={idx === 0}>
+              <summary class="flex items-start gap-4 cursor-pointer py-5 lg:py-6 list-none hover:text-primary transition-colors">
+                <div class="shrink-0 w-7 h-7 lg:w-8 lg:h-8 mt-0.5 flex items-center justify-center">
+                  <svg class="w-6 h-6 lg:w-7 lg:h-7 text-primary group-open:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+                  <svg class="w-6 h-6 lg:w-7 lg:h-7 text-primary hidden group-open:block" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4"/></svg>
+                </div>
+                <h3 class="text-lg lg:text-xl font-extrabold text-gray-900 group-hover:text-primary group-open:text-primary transition-colors leading-tight">
+                  {faq.q}
+                </h3>
+              </summary>
+              <div class="pl-11 lg:pl-12 pb-6">
+                <p class="text-base lg:text-lg text-gray-700 leading-relaxed" set:html={faq.a}></p>
+              </div>
+            </details>
+          ))}
+        </div>
       </div>
     </div>
   </section>
