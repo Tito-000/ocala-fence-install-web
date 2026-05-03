@@ -1,0 +1,226 @@
+---
+import PageLayout from '@layouts/PageLayout.astro';
+import FinalCTA from '@components/FinalCTA.astro';
+import { BUSINESS } from '@data/business';
+
+const projects = [
+  { id: '01', src: '/images/gallery/vinyl-privacy-tan.jpg', alt: 'Tan vinyl privacy fence install in Ocala FL backyard', cat: 'Vinyl', city: 'Ocala' },
+  { id: '02', src: '/images/gallery/vinyl-privacy-white.jpg', alt: 'White vinyl privacy fence with lattice top in Marion County', cat: 'Vinyl', city: 'Belleview' },
+  { id: '03', src: '/images/gallery/vinyl-picket-white.jpg', alt: 'Classic white vinyl picket fence front yard in Ocala', cat: 'Vinyl', city: 'Ocala' },
+  { id: '04', src: '/images/gallery/aluminum-black-yard.jpg', alt: 'Black aluminum ornamental fence backyard in Ocala FL', cat: 'Aluminum', city: 'Ocala' },
+  { id: '05', src: '/images/gallery/aluminum-driveway-gate.jpg', alt: 'Black aluminum double driveway gate Marion County', cat: 'Aluminum', city: 'The Villages' },
+  { id: '06', src: '/images/gallery/pool-fence-aluminum.jpg', alt: 'Pool-code-compliant black aluminum fence around backyard pool', cat: 'Pool', city: 'Summerfield' },
+  { id: '07', src: '/images/gallery/wood-privacy-natural.jpg', alt: 'Natural cedar wood privacy fence side yard in Ocala', cat: 'Wood', city: 'Ocala' },
+  { id: '08', src: '/images/gallery/wood-shadowbox.jpg', alt: 'Shadow-box wood privacy fence in residential Marion County', cat: 'Wood', city: 'Belleview' },
+  { id: '09', src: '/images/gallery/chain-link-residential.jpg', alt: 'Galvanized chain link fence residential backyard Ocala FL', cat: 'Chain Link', city: 'Ocala' },
+  { id: '10', src: '/images/gallery/aluminum-3-rail.jpg', alt: 'Black aluminum 3-rail estate fence Ocala horse country', cat: 'Aluminum', city: 'Ocala' },
+  { id: '11', src: '/images/gallery/vinyl-privacy-corner.jpg', alt: 'White vinyl privacy fence wrapping corner backyard Marion County', cat: 'Vinyl', city: 'Lady Lake' },
+  { id: '12', src: '/images/gallery/wood-pergola-gate.jpg', alt: 'Custom wood privacy fence with arched pergola gate Ocala FL', cat: 'Wood', city: 'Ocala' },
+];
+
+const categories = ['All', 'Vinyl', 'Aluminum', 'Wood', 'Chain Link', 'Pool'];
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://ocalafenceinstall.com' },
+    { '@type': 'ListItem', position: 2, name: 'Gallery', item: 'https://ocalafenceinstall.com/gallery' },
+  ],
+};
+
+const imageGallerySchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ImageGallery',
+  name: `${BUSINESS.name} — Project Gallery`,
+  description: 'Recent fence installation projects across Marion County, FL — vinyl, aluminum, wood, chain link, and pool-code fences.',
+  image: projects.map((p) => `https://ocalafenceinstall.com${p.src}`),
+};
+---
+
+<PageLayout
+  title={`Project Gallery | ${BUSINESS.name} | Marion County FL Fence Installs`}
+  description={`Browse our recent fence installation projects across Ocala, Belleview, Summerfield, The Villages, and Marion County. Vinyl privacy, aluminum ornamental, wood privacy, chain link, and pool-code fences.`}
+  activeNav="Gallery"
+  schemaJsonLd={[breadcrumbSchema, imageGallerySchema]}
+>
+  {/* HERO */}
+  <section class="relative bg-gradient-to-r from-primary-900 via-primary to-primary-700 py-16 lg:py-24">
+    <div class="container-page text-center text-white">
+      <p class="text-xs lg:text-sm uppercase tracking-[0.3em] font-bold text-highlight mb-4">
+        Recent Projects
+      </p>
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-[0.95] tracking-tight mb-5 text-balance drop-shadow-2xl">
+        Marion County Fence Gallery
+      </h1>
+      <p class="text-base lg:text-xl text-white/95 max-w-3xl mx-auto leading-relaxed font-semibold">
+        A look at recent fence installs across Ocala, Belleview, Summerfield, The Villages, and beyond.
+      </p>
+    </div>
+  </section>
+
+  {/* CATEGORY FILTER + GRID */}
+  <section class="bg-white py-12 lg:py-16">
+    <div class="container-page">
+      <div class="flex flex-wrap items-center justify-center gap-2 lg:gap-3 mb-10 lg:mb-12">
+        {categories.map((cat) => (
+          <button
+            type="button"
+            class="gallery-filter group text-xs lg:text-sm uppercase tracking-wider font-extrabold text-gray-700 hover:text-primary border-2 border-gray-300 hover:border-primary px-5 py-3 transition-colors data-[active=true]:bg-primary data-[active=true]:text-white data-[active=true]:border-primary"
+            data-cat={cat}
+            data-active={cat === 'All'}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+
+      <div id="gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-5 max-w-7xl mx-auto">
+        {projects.map((p) => (
+          <button
+            type="button"
+            class="gallery-item group relative aspect-[4/3] overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 cursor-pointer"
+            data-cat={p.cat}
+            data-src={p.src}
+            data-alt={p.alt}
+            data-city={p.city}
+            aria-label={`Open ${p.alt}`}
+          >
+            <img
+              src={p.src}
+              alt={p.alt}
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              loading="lazy"
+              width="600"
+              height="450"
+            />
+            <div class="absolute inset-0 bg-primary-900/0 group-hover:bg-primary-900/55 transition-colors flex items-end p-5">
+              <div class="opacity-0 group-hover:opacity-100 transition-opacity translate-y-2 group-hover:translate-y-0 duration-300">
+                <div class="text-xs uppercase tracking-[0.2em] font-bold text-highlight mb-1">{p.cat}</div>
+                <div class="text-base lg:text-lg font-extrabold text-white drop-shadow">{p.city}, FL</div>
+              </div>
+            </div>
+          </button>
+        ))}
+      </div>
+
+      <div id="gallery-empty" class="hidden text-center py-16">
+        <p class="text-lg text-gray-600">No projects in this category yet — check back soon.</p>
+      </div>
+    </div>
+  </section>
+
+  {/* LIGHTBOX */}
+  <div id="lightbox" class="fixed inset-0 z-[100] bg-black/95 hidden flex-col items-center justify-center p-4 lg:p-8" role="dialog" aria-modal="true" aria-label="Project image">
+    <button
+      type="button"
+      id="lightbox-close"
+      aria-label="Close"
+      class="absolute top-4 right-4 lg:top-6 lg:right-6 w-12 h-12 lg:w-14 lg:h-14 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors backdrop-blur"
+    >
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+    <button
+      type="button"
+      id="lightbox-prev"
+      aria-label="Previous"
+      class="absolute left-4 lg:left-6 top-1/2 -translate-y-1/2 w-12 h-12 lg:w-14 lg:h-14 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors backdrop-blur"
+    >
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+    </button>
+    <button
+      type="button"
+      id="lightbox-next"
+      aria-label="Next"
+      class="absolute right-4 lg:right-6 top-1/2 -translate-y-1/2 w-12 h-12 lg:w-14 lg:h-14 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors backdrop-blur"
+    >
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+    </button>
+    <img id="lightbox-img" src="" alt="" class="max-h-[80vh] max-w-full object-contain shadow-2xl"/>
+    <div class="text-white text-center mt-5">
+      <div id="lightbox-cat" class="text-xs uppercase tracking-[0.3em] font-bold text-highlight mb-1"></div>
+      <div id="lightbox-city" class="text-base lg:text-lg font-extrabold"></div>
+    </div>
+  </div>
+
+  <FinalCTA
+    title="Want a fence like these on your property?"
+    subtitle="Same-day quote · $0 down financing · Less than 7 days install"
+  />
+</PageLayout>
+
+<script>
+  const filterButtons = document.querySelectorAll<HTMLButtonElement>('.gallery-filter');
+  const items = document.querySelectorAll<HTMLButtonElement>('.gallery-item');
+  const empty = document.getElementById('gallery-empty');
+
+  filterButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const cat = btn.dataset.cat;
+      filterButtons.forEach((b) => (b.dataset.active = String(b === btn)));
+      let visibleCount = 0;
+      items.forEach((item) => {
+        const show = cat === 'All' || item.dataset.cat === cat;
+        item.classList.toggle('hidden', !show);
+        if (show) visibleCount++;
+      });
+      empty?.classList.toggle('hidden', visibleCount > 0);
+    });
+  });
+
+  const lightbox = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lightbox-img') as HTMLImageElement | null;
+  const lbCat = document.getElementById('lightbox-cat');
+  const lbCity = document.getElementById('lightbox-city');
+  const lbClose = document.getElementById('lightbox-close');
+  const lbPrev = document.getElementById('lightbox-prev');
+  const lbNext = document.getElementById('lightbox-next');
+
+  let currentIdx = 0;
+  let visibleItems: HTMLButtonElement[] = [];
+
+  function getVisible(): HTMLButtonElement[] {
+    return Array.from(items).filter((it) => !it.classList.contains('hidden'));
+  }
+
+  function openLightbox(idx: number) {
+    visibleItems = getVisible();
+    currentIdx = Math.max(0, Math.min(idx, visibleItems.length - 1));
+    const item = visibleItems[currentIdx];
+    if (!item || !lbImg || !lightbox) return;
+    lbImg.src = item.dataset.src || '';
+    lbImg.alt = item.dataset.alt || '';
+    if (lbCat) lbCat.textContent = item.dataset.cat || '';
+    if (lbCity) lbCity.textContent = `${item.dataset.city}, FL`;
+    lightbox.classList.remove('hidden');
+    lightbox.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    if (!lightbox) return;
+    lightbox.classList.add('hidden');
+    lightbox.classList.remove('flex');
+    document.body.style.overflow = '';
+  }
+
+  function navigate(dir: 1 | -1) {
+    const next = (currentIdx + dir + visibleItems.length) % visibleItems.length;
+    openLightbox(next);
+  }
+
+  items.forEach((item, idx) => {
+    item.addEventListener('click', () => openLightbox(Array.from(items).indexOf(item)));
+  });
+
+  lbClose?.addEventListener('click', closeLightbox);
+  lbPrev?.addEventListener('click', () => navigate(-1));
+  lbNext?.addEventListener('click', () => navigate(1));
+  lightbox?.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+  document.addEventListener('keydown', (e) => {
+    if (lightbox?.classList.contains('hidden')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') navigate(-1);
+    if (e.key === 'ArrowRight') navigate(1);
+  });
+</script>
