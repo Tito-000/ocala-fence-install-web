@@ -30,7 +30,6 @@ export const PRIMARY_NAV = [
       { label: 'Customer Reviews', href: '/about/reviews' },
       { label: 'Our Process', href: '/about/our-process' },
       { label: 'FAQs', href: '/about/faqs' },
-      { label: 'Preparing for Your Fence', href: '/about/preparing' },
     ],
   },
   { label: 'Contact', href: '/contact' },
