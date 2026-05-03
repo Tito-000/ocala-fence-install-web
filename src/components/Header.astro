@@ -105,7 +105,7 @@ const { activeNav } = Astro.props;
     <div class="container-page">
       <nav class="flex items-center justify-center gap-1 py-3" aria-label="Primary">
         {PRIMARY_NAV.map((item) => {
-          const isMega = item.label === 'Fence Types' || item.label === 'Areas';
+          const isMega = item.label === 'Fence Types' || item.label === 'Areas' || item.label === 'About';
           return (
             <div class={`relative ${!isMega ? 'group' : ''}`} data-mega-trigger={isMega ? item.label : undefined}>
               <a
@@ -165,6 +165,50 @@ const { activeNav } = Astro.props;
               <span class="text-white text-xs lg:text-sm font-bold leading-tight">{s.shortName}</span>
             </a>
           ))}
+        </div>
+      </div>
+    </div>
+
+    {/* MEGA-MENU — About (full-width gray band, BJF replica: title left + 2-col grid right with horizontal items + play icon) */}
+    <div
+      class="mega-menu-panel absolute left-0 right-0 top-full z-50 bg-gray-100 shadow-2xl border-t border-gray-200"
+      data-mega-panel="About"
+    >
+      <div class="container-page py-12 lg:py-16">
+        <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start max-w-6xl mx-auto">
+          {/* LEFT — title + tagline + stars + reviews link */}
+          <div>
+            <h2 class="text-3xl lg:text-4xl xl:text-5xl font-extrabold text-primary-900 mb-3 leading-[1.05]">
+              About Ocala Fence Install
+            </h2>
+            <div class="w-16 h-1 bg-primary mb-6"></div>
+            <p class="text-base lg:text-lg text-gray-700 mb-6 leading-relaxed">
+              We make buying fences fast and easy so you can protect your loved ones and your investments.
+            </p>
+            <div class="text-2xl mb-3">⭐⭐⭐⭐⭐</div>
+            <a href="/about/reviews" class="inline-block text-xs uppercase tracking-[0.2em] font-extrabold text-primary hover:text-primary-700 transition-colors">
+              Read Customer Reviews →
+            </a>
+          </div>
+
+          {/* RIGHT — 4 menu items with separators + play icon on last */}
+          <div>
+            <a href="/about/our-process" class="group/item flex items-center gap-3 py-4 border-b border-gray-300 hover:text-primary transition-colors">
+              <span class="text-xl lg:text-2xl font-extrabold uppercase tracking-wider text-gray-900 group-hover/item:text-primary transition-colors">Our Process</span>
+            </a>
+            <a href="/about/our-mission" class="group/item flex items-center gap-3 py-4 border-b border-gray-300 hover:text-primary transition-colors">
+              <span class="text-xl lg:text-2xl font-extrabold uppercase tracking-wider text-gray-900 group-hover/item:text-primary transition-colors">Our Mission</span>
+            </a>
+            <a href="/about/faqs" class="group/item flex items-center gap-3 py-4 border-b border-gray-300 hover:text-primary transition-colors">
+              <span class="text-xl lg:text-2xl font-extrabold uppercase tracking-wider text-gray-900 group-hover/item:text-primary transition-colors">FAQs</span>
+            </a>
+            <a href="/about/preparing" class="group/item flex items-center gap-3 py-4 hover:text-primary transition-colors">
+              <span class="shrink-0 w-9 h-9 rounded-full border-2 border-primary bg-white flex items-center justify-center group-hover/item:bg-primary transition-colors">
+                <svg class="w-3.5 h-3.5 ml-0.5 text-primary group-hover/item:text-white transition-colors" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              </span>
+              <span class="text-xl lg:text-2xl font-extrabold uppercase tracking-wider text-gray-900 group-hover/item:text-primary transition-colors">Preparing for Your Fence</span>
+            </a>
+          </div>
         </div>
       </div>
     </div>
