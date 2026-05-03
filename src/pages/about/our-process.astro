@@ -1,0 +1,289 @@
+---
+import PageLayout from '@layouts/PageLayout.astro';
+import FinalCTA from '@components/FinalCTA.astro';
+import { BUSINESS } from '@data/business';
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://ocalafenceinstall.com' },
+    { '@type': 'ListItem', position: 2, name: 'About', item: 'https://ocalafenceinstall.com/about' },
+    { '@type': 'ListItem', position: 3, name: 'Our Process', item: 'https://ocalafenceinstall.com/about/our-process' },
+  ],
+};
+
+const howToSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name: `How to Get Your Fence Installed by ${BUSINESS.name}`,
+  description: 'Our 7-step process to get your new fence professionally installed in Marion County, FL.',
+  step: [
+    { '@type': 'HowToStep', position: 1, name: 'Submit Your Quote Request', text: 'Click GET YOUR QUICK QUOTE, enter your zip code, and fill out a quick form with your contact info and project notes.' },
+    { '@type': 'HowToStep', position: 2, name: 'Draw Your Fence', text: 'Use our DRAW YOUR FENCE tool to outline the fence layout right on top of your property\'s satellite imagery.' },
+    { '@type': 'HowToStep', position: 3, name: 'Consult with an Expert', text: 'A real person from our team will connect with you to understand your needs and discuss options before sending an estimate.' },
+    { '@type': 'HowToStep', position: 4, name: 'Receive Your Comprehensive Fence Quote', text: 'Estimates come complete with a sketch, warranty info, and product details — never internet-only pricing.' },
+    { '@type': 'HowToStep', position: 5, name: 'Schedule Your Fence Installation', text: 'Review your quote, sign the contract, and pay the deposit online. Financing available.' },
+    { '@type': 'HowToStep', position: 6, name: 'Onsite Walkthrough & Installation', text: 'Our installers walk through the project with you on day one and then build your fence using premium materials.' },
+    { '@type': 'HowToStep', position: 7, name: 'Enjoy Your New Fence', text: 'Add protection, privacy, and value to your home — guaranteed satisfaction.' },
+  ],
+};
+---
+
+<PageLayout
+  title={`Our Fence Installation Process | ${BUSINESS.name} | Ocala FL`}
+  description={`Our 7-step fence installation process — from quick online quote to onsite walkthrough and final install. Marion County's family-owned fence team.`}
+  activeNav="About"
+  schemaJsonLd={[breadcrumbSchema, howToSchema]}
+>
+  {/* HERO — full bleed aerial photo (BJF replica) */}
+  <section class="relative">
+    <div class="absolute inset-0 overflow-hidden">
+      <img
+        src="/images/about/hero-aerial-fence.jpg"
+        alt="Aerial view of an Ocala neighborhood — Marion County's family-owned fence team"
+        class="w-full h-full object-cover object-center"
+        loading="eager"
+        width="1920"
+        height="600"
+      />
+      <div class="absolute inset-0 bg-primary-900/75"></div>
+    </div>
+
+    <div class="container-page relative py-20 lg:py-28 text-center text-white">
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-[0.95] tracking-tight mb-5 text-balance drop-shadow-2xl">
+        The Ocala Fence Install Process
+      </h1>
+      <p class="text-base lg:text-lg text-white/95 max-w-2xl mx-auto leading-relaxed drop-shadow font-semibold">
+        We make buying fences fast and easy so Marion County families can protect their loved ones and their investments.
+      </p>
+    </div>
+  </section>
+
+  {/* STEP 0 INTRO — Submit Your Quote Request, Easy as 1,2,3 */}
+  <section class="bg-white py-16 lg:py-24">
+    <div class="container-page">
+      <div class="text-center mb-12 lg:mb-14">
+        <h2 class="text-3xl lg:text-4xl xl:text-5xl font-extrabold text-primary-900 mb-3 leading-[1.05]">
+          Submit Your Quote Request
+        </h2>
+        <p class="text-lg lg:text-xl text-gray-600">Easy as 1, 2, 3</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6 max-w-6xl mx-auto">
+        {/* Card 1 */}
+        <div class="relative aspect-square overflow-hidden shadow-xl group">
+          <img
+            src="/images/about/process-step-1.jpg"
+            alt="Happy homeowner about to request a free fence quote in Ocala FL"
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            loading="lazy"
+          />
+          <div class="absolute inset-0 bg-black/45"></div>
+          <div class="absolute inset-0 flex flex-col items-center justify-center text-center text-white p-6 lg:p-8">
+            <div class="text-7xl lg:text-8xl font-extrabold mb-4 drop-shadow-2xl leading-none">1</div>
+            <p class="text-base lg:text-lg font-semibold mb-5 drop-shadow">Click to GET YOUR QUICK QUOTE</p>
+            <a
+              href="/free-estimate"
+              class="inline-flex items-center justify-center bg-primary hover:bg-primary-700 text-white font-extrabold uppercase tracking-wider text-xs lg:text-sm px-6 py-3 border-2 border-white shadow-lg transition-colors"
+            >
+              Get Your Quick Quote
+            </a>
+          </div>
+        </div>
+
+        {/* Card 2 */}
+        <div class="relative aspect-square overflow-hidden shadow-xl bg-primary-900 group">
+          <div class="absolute inset-0 opacity-30">
+            <div class="w-full h-full bg-gradient-to-br from-primary-700 to-primary-900"></div>
+          </div>
+          <div class="absolute inset-0 flex items-start justify-end p-6 lg:p-10">
+            <div class="flex items-center gap-2 -rotate-6 mt-4">
+              <div class="bg-white text-gray-700 font-medium text-sm lg:text-base px-5 py-3 shadow-xl">Zip Code</div>
+              <div class="bg-primary text-white font-extrabold text-sm lg:text-base w-12 h-12 lg:w-14 lg:h-14 rounded-full flex items-center justify-center shadow-xl border-2 border-white">GO</div>
+            </div>
+          </div>
+          <div class="absolute inset-0 flex flex-col items-center justify-center text-center text-white p-6 lg:p-8">
+            <div class="text-7xl lg:text-8xl font-extrabold mb-4 drop-shadow-2xl leading-none">2</div>
+            <p class="text-base lg:text-lg font-semibold max-w-xs drop-shadow">
+              Enter your zip code so we can confirm we serve your area in Marion County.
+            </p>
+          </div>
+        </div>
+
+        {/* Card 3 */}
+        <div class="relative aspect-square overflow-hidden shadow-xl group">
+          <img
+            src="/images/about/andri-laptop-office.jpg"
+            alt="Andri reviewing fence quote requests on his laptop in his Ocala home office"
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            loading="lazy"
+          />
+          <div class="absolute inset-0 bg-black/55"></div>
+          <div class="absolute inset-0 flex flex-col items-center justify-center text-center text-white p-6 lg:p-8">
+            <div class="text-7xl lg:text-8xl font-extrabold mb-4 drop-shadow-2xl leading-none">3</div>
+            <p class="text-base lg:text-lg font-semibold max-w-xs drop-shadow">
+              Fill out a quick form with your name, address, contact info, and notes about the fence project.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* STEP — DRAW YOUR FENCE */}
+  <section class="bg-gray-100 py-16 lg:py-24">
+    <div class="container-page">
+      <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center max-w-6xl mx-auto">
+        <div>
+          <h2 class="text-3xl lg:text-4xl xl:text-5xl font-extrabold text-primary-900 mb-6 leading-[1.05]">
+            Draw Your Fence
+          </h2>
+          <p class="text-base lg:text-lg text-gray-700 mb-5 leading-relaxed">
+            Use our <strong>DRAW YOUR FENCE</strong> tool to give us a general idea of the layout you are looking for. Just type in your address to see satellite imagery of your home and property lines.
+          </p>
+          <p class="text-base lg:text-lg text-gray-700 leading-relaxed">
+            With just a few clicks you can provide us with your desired layout — or even trace the outline of your existing fence. It's the fastest way to get an accurate, transparent quote.
+          </p>
+        </div>
+
+        <div class="relative">
+          <img
+            src="/images/about/draw-your-fence-aerial.jpg"
+            alt="Aerial view of an Ocala property with a green digital fence layout drawn on top — Draw Your Fence tool preview"
+            class="w-full aspect-square object-cover shadow-2xl"
+            loading="lazy"
+          />
+          <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <div class="w-20 h-20 lg:w-24 lg:h-24 rounded-full bg-white/95 flex items-center justify-center shadow-2xl">
+              <svg class="w-8 h-8 lg:w-10 lg:h-10 text-primary ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* STEP — CONSULT WITH AN EXPERT */}
+  <section class="bg-white py-16 lg:py-24">
+    <div class="container-page">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-3xl lg:text-4xl xl:text-5xl font-extrabold text-primary-900 mb-7 leading-[1.05]">
+          Consult with an Expert
+        </h2>
+        <p class="text-base lg:text-lg text-gray-700 mb-5 leading-relaxed">
+          A <strong>LIVE person</strong> will connect with you to consult and collaborate about your project. We take the time to understand your needs and discuss options <em>before</em> sending an estimate.
+        </p>
+        <p class="text-base lg:text-lg text-gray-700 mb-5 leading-relaxed">
+          Ocala Fence Install has been serving Marion County families since 2021. From custom fence designs to oddball requests, we've seen it all and we're standing by to partner with you on your project.
+        </p>
+        <p class="text-base lg:text-lg text-gray-700 leading-relaxed">
+          Let us know what's important to you. New puppy that needs a fenced yard? Pool install that requires a code-compliant fence? Close to neighbors and need privacy for your bedroom windows? HOA stipulating fence type? <strong>We've got you covered.</strong> Whatever your need, we have the experience and products to offer the right solution — and our team is fully bilingual English &amp; español.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  {/* STEP — RECEIVE YOUR COMPREHENSIVE FENCE QUOTE */}
+  <section class="bg-gray-100 py-16 lg:py-24">
+    <div class="container-page">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-3xl lg:text-4xl xl:text-5xl font-extrabold text-primary-900 mb-7 leading-[1.05]">
+          Receive Your Comprehensive Fence Quote
+        </h2>
+        <p class="text-base lg:text-lg text-gray-700 mb-5 leading-relaxed">
+          Estimates from Ocala Fence Install come complete with a <strong>sketch, warranty information, and product details</strong>. The sketch shows you exactly how the fence layout will look in relation to your home and property — including dimensions for each fence line, gate placement, plus a picture and description of the fence type quoted.
+        </p>
+        <p class="text-base lg:text-lg text-gray-700 mb-5 leading-relaxed">
+          If you're "on the fence" about which material is best for your situation, we'll provide multiple quotes and walk you through the benefits of each fence type.
+        </p>
+        <p class="text-base lg:text-lg text-gray-700 leading-relaxed">
+          Remember — <strong>our quotes are NOT internet-based.</strong> Your quote is always provided by a real person who took the time to consult with you and understand your needs. No company in Marion County can match our blend of excellent service and great pricing.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  {/* STEP — SCHEDULE YOUR FENCE INSTALLATION */}
+  <section class="bg-white py-16 lg:py-24">
+    <div class="container-page">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-3xl lg:text-4xl xl:text-5xl font-extrabold text-primary-900 mb-7 leading-[1.05]">
+          Schedule Your Fence Installation
+        </h2>
+        <p class="text-base lg:text-lg text-gray-700 mb-5 leading-relaxed">
+          Once you've reviewed your quote — sketch, warranty, and terms of service — let us know if you have any questions. When you're ready to move forward, just <strong>accept the quote, sign the contract, and pay the deposit to get scheduled</strong>. All conveniently online and done within minutes.
+        </p>
+        <div class="bg-highlight/30 border-l-4 border-primary px-6 py-5 my-7">
+          <p class="text-base lg:text-lg text-gray-800 leading-relaxed">
+            <strong class="text-primary-900 uppercase tracking-wide">Need financing? No worries.</strong> We've got that covered too — visit our <a href="/financing" class="text-primary hover:text-primary-700 font-bold underline">financing page</a> to apply in minutes.
+          </p>
+        </div>
+        <p class="text-base lg:text-lg text-gray-700 leading-relaxed">
+          After scheduling, our team walks you step-by-step through everything you need: working with your HOA, getting a property survey, having your lawn marked for utilities, and any other prep before install day.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  {/* STEP — ONSITE WALKTHROUGH & INSTALLATION */}
+  <section class="bg-gray-100 py-16 lg:py-24">
+    <div class="container-page">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-3xl lg:text-4xl xl:text-5xl font-extrabold text-primary-900 mb-7 leading-[1.05]">
+          Onsite Walkthrough &amp; Installation
+        </h2>
+        <p class="text-base lg:text-lg text-gray-700 mb-5 leading-relaxed">
+          Our installers conduct a full <strong>onsite walkthrough</strong> with you on the day of installation to make sure you get exactly what you're looking for. The installer can physically show you what will be done to overcome any obstacles on your property.
+        </p>
+        <p class="text-base lg:text-lg text-gray-700 mb-5 leading-relaxed">
+          After the walkthrough, our experienced team gets started building your beautiful new fence. We always use <strong>high-quality products that meet or surpass industry standards</strong> — you can rest assured your new investment is built to last.
+        </p>
+        <p class="text-base italic text-gray-600 leading-relaxed">
+          Concerned about a potential obstacle on your property, or want a site visit before installation day? Just let us know and our team will be happy to assist.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  {/* STEP — ENJOY YOUR NEW FENCE */}
+  <section class="bg-white py-16 lg:py-24">
+    <div class="container-page">
+      <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center max-w-6xl mx-auto">
+        <div>
+          <h2 class="text-3xl lg:text-4xl xl:text-5xl font-extrabold text-primary-900 mb-6 leading-[1.05]">
+            Enjoy Your New Fence — Add Protection, Privacy, and Value to Your Home
+          </h2>
+          <p class="text-base lg:text-lg text-gray-700 mb-5 leading-relaxed">
+            At Ocala Fence Install, we never cut corners and always strive for <strong>100% customer satisfaction</strong>. Our installers are highly qualified and we don't consider your project complete until you're happy — therefore you don't pay us for the completion of your fence installation until you are satisfied.
+          </p>
+          <p class="text-base lg:text-lg text-gray-700 mb-5 leading-relaxed">
+            Whether you're protecting your kids, pets, workers, or investments, you'll have peace of mind and a sense of pride in a new fence that makes your property "pop."
+          </p>
+          <p class="text-base lg:text-lg text-gray-700 leading-relaxed">
+            Get the best quality fence at a fair price installed by your local Marion County fence pros. <strong>Don't wait. Start the process to enjoy your yard today.</strong>
+          </p>
+
+          <a href="/free-estimate" class="inline-flex items-center gap-2 mt-8 bg-primary hover:bg-primary-700 text-white font-extrabold uppercase tracking-wider text-sm lg:text-base px-10 py-4 shadow-lg transition-colors">
+            Get Your Free Estimate
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <div>
+          <img
+            src="/images/about/enjoy-new-fence.jpg"
+            alt="Happy Marion County homeowner standing in front of her brand-new fence install by Ocala Fence Install"
+            class="w-full aspect-[4/3] object-cover shadow-2xl border-4 border-primary"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <FinalCTA
+    title="Ready to start your fence install?"
+    subtitle="Same-day quote · $0 down financing · Less than 7 days install"
+  />
+</PageLayout>

@@ -1,0 +1,226 @@
+---
+import PageLayout from '@layouts/PageLayout.astro';
+import FinalCTA from '@components/FinalCTA.astro';
+import { BUSINESS } from '@data/business';
+
+const faqs = [
+  {
+    cat: 'Quotes & Pricing',
+    q: 'How long does it take to get a quote?',
+    a: 'Most homeowners receive a written quote within 24 hours. Quick projects with a clear scope often get a same-day estimate. Every quote includes a sketch, dimensions, warranty info, and product details — no internet-only pricing.',
+  },
+  {
+    cat: 'Quotes & Pricing',
+    q: 'Are quotes free?',
+    a: 'Yes. Every estimate from Ocala Fence Install is 100% free with no obligation. Whether you call, fill out our online form, or use our Draw Your Fence tool, the quote and consultation cost nothing.',
+  },
+  {
+    cat: 'Quotes & Pricing',
+    q: 'Do you charge for site visits?',
+    a: 'No charge for the initial site visit. If you have an unusual property, an obstacle, or just want a real person to walk it before quoting, we come out free of charge.',
+  },
+  {
+    cat: 'Materials & Fence Types',
+    q: 'What types of fences do you install?',
+    a: 'Vinyl privacy, vinyl picket, aluminum ornamental, pool-code aluminum, chain link, and DuraFence (steel-core composite). We carry premium-grade products from manufacturers we trust — see our Fence Types page for full options.',
+  },
+  {
+    cat: 'Materials & Fence Types',
+    q: 'Which fence material lasts the longest in Florida?',
+    a: 'Vinyl and aluminum both perform exceptionally well in Florida\'s heat, humidity, and storms. Vinyl resists rot, insects, and fading. Aluminum doesn\'t rust like wrought iron and handles coastal salt air. We help you choose based on your goals, budget, and property.',
+  },
+  {
+    cat: 'Materials & Fence Types',
+    q: 'Do you install pool-code fences?',
+    a: 'Yes. We install pool-code-compliant aluminum fencing that meets Florida and Marion County safety requirements — including self-closing/self-latching gates, picket spacing, and minimum heights. Required for any in-ground pool.',
+  },
+  {
+    cat: 'Permits & HOA',
+    q: 'Do I need a permit to install a fence in Marion County?',
+    a: 'It depends on the location, height, and material. Marion County does require permits for many fence installs, and unincorporated areas may have different rules than Ocala city. We handle the permit process for you in most cases.',
+  },
+  {
+    cat: 'Permits & HOA',
+    q: 'Will you work with my HOA?',
+    a: 'Absolutely. We help you submit ARC paperwork, provide product specs and renderings your HOA needs to approve the project, and only schedule the install once approval comes back.',
+  },
+  {
+    cat: 'Permits & HOA',
+    q: 'What about utility marking (Sunshine 811)?',
+    a: 'Florida law requires a utility locate before any digging. We schedule the Sunshine 811 ticket on your behalf so all gas, electric, and water lines are flagged before our team breaks ground.',
+  },
+  {
+    cat: 'Installation',
+    q: 'How long does a typical fence install take?',
+    a: 'Most residential installs in Marion County are completed in 1 to 3 days. Larger lots or complex layouts can take up to a week. From signed contract to install start, the typical lead time is under 7 days.',
+  },
+  {
+    cat: 'Installation',
+    q: 'Will the crew speak Spanish?',
+    a: 'Yes. Our crew is fully bilingual English &amp; español. From the first call to the final walkthrough, we communicate clearly in either language.',
+  },
+  {
+    cat: 'Installation',
+    q: 'What happens on installation day?',
+    a: 'The lead installer walks the project with you on day one to confirm fence lines, gate placement, and any obstacles. We install with premium materials, clean up debris daily, and finish with a final walkthrough so you sign off on the work before paying the final invoice.',
+  },
+  {
+    cat: 'Financing & Payment',
+    q: 'Do you offer financing?',
+    a: 'Yes. We partner with Acorn Finance to offer $0-down fence financing across the US — apply in minutes with a soft credit check. Visit our Financing page to see options and pre-qualify.',
+  },
+  {
+    cat: 'Financing & Payment',
+    q: 'How much deposit do you require?',
+    a: 'A standard deposit is required to schedule and order materials. The remaining balance is due after the final walkthrough — we don\'t collect the final invoice until you confirm you\'re satisfied.',
+  },
+  {
+    cat: 'Financing & Payment',
+    q: 'What payment methods do you accept?',
+    a: 'Credit/debit card, ACH bank transfer, and check. All paperwork — quote, contract, deposit — is handled online in minutes.',
+  },
+  {
+    cat: 'Warranty & Service',
+    q: 'Do you offer a warranty?',
+    a: 'Yes. We back every install with a workmanship warranty, plus the manufacturer\'s product warranty on materials (typically 10–25 years for vinyl and aluminum). Warranty details are included in every quote.',
+  },
+  {
+    cat: 'Warranty & Service',
+    q: 'What if a section gets damaged after install?',
+    a: 'Call us. If it\'s a workmanship issue, we fix it under warranty. If it\'s storm or vehicle damage, we offer fast repair quotes — typically same-week turnaround for our previous customers.',
+  },
+  {
+    cat: 'Warranty & Service',
+    q: 'Do you do repairs on fences you didn\'t install?',
+    a: 'Yes. We repair existing wood, vinyl, aluminum, and chain link fences across Marion County. Call us for a free repair quote.',
+  },
+];
+
+const categories = [...new Set(faqs.map((f) => f.cat))];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: f.a.replace(/&amp;/g, '&'),
+    },
+  })),
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://ocalafenceinstall.com' },
+    { '@type': 'ListItem', position: 2, name: 'About', item: 'https://ocalafenceinstall.com/about' },
+    { '@type': 'ListItem', position: 3, name: 'FAQs', item: 'https://ocalafenceinstall.com/about/faqs' },
+  ],
+};
+---
+
+<PageLayout
+  title={`Fence Install FAQs | ${BUSINESS.name} | Marion County FL`}
+  description={`Common questions about fence installation, quotes, permits, HOA, financing, warranty, and more — answered by Ocala Fence Install, Marion County's family-owned fence team.`}
+  activeNav="About"
+  schemaJsonLd={[breadcrumbSchema, faqSchema]}
+>
+  {/* HERO */}
+  <section class="relative bg-gradient-to-r from-primary-900 via-primary to-primary-700 py-16 lg:py-24">
+    <div class="container-page text-center text-white">
+      <p class="text-xs lg:text-sm uppercase tracking-[0.3em] font-bold text-highlight mb-4">
+        About Ocala Fence Install
+      </p>
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-[0.95] tracking-tight mb-5 text-balance drop-shadow-2xl">
+        Frequently Asked Questions
+      </h1>
+      <p class="text-base lg:text-xl text-white/95 max-w-3xl mx-auto leading-relaxed font-semibold">
+        Everything Marion County homeowners ask before, during, and after a fence install.
+      </p>
+    </div>
+  </section>
+
+  {/* CATEGORY NAV */}
+  <section class="bg-white border-b border-gray-200 sticky top-0 z-30">
+    <div class="container-page">
+      <div class="flex flex-wrap items-center justify-center gap-2 lg:gap-3 py-5">
+        {categories.map((cat) => (
+          <a
+            href={`#cat-${cat.toLowerCase().replace(/\s|&/g, '-').replace(/-+/g, '-')}`}
+            class="text-xs lg:text-sm uppercase tracking-wider font-extrabold text-gray-700 hover:text-primary border border-gray-300 hover:border-primary px-4 py-2 transition-colors"
+          >
+            {cat}
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* FAQ SECTIONS BY CATEGORY */}
+  <section class="bg-white py-12 lg:py-16">
+    <div class="container-page">
+      <div class="max-w-4xl mx-auto">
+        {categories.map((cat) => (
+          <div id={`cat-${cat.toLowerCase().replace(/\s|&/g, '-').replace(/-+/g, '-')}`} class="mb-12 lg:mb-16 scroll-mt-24">
+            <h2 class="text-2xl lg:text-3xl font-extrabold text-primary-900 mb-6 lg:mb-8 leading-tight border-b-2 border-primary pb-3">
+              {cat}
+            </h2>
+
+            <div class="space-y-3">
+              {faqs.filter((f) => f.cat === cat).map((faq) => (
+                <details class="group bg-gray-50 hover:bg-gray-100 border border-gray-200 transition-colors">
+                  <summary class="flex items-center justify-between cursor-pointer p-5 lg:p-6 list-none">
+                    <h3 class="text-base lg:text-lg font-extrabold text-gray-900 group-hover:text-primary transition-colors pr-4">
+                      {faq.q}
+                    </h3>
+                    <svg class="w-5 h-5 text-primary shrink-0 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                  </summary>
+                  <div class="px-5 lg:px-6 pb-6">
+                    <p class="text-base text-gray-700 leading-relaxed" set:html={faq.a}></p>
+                  </div>
+                </details>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* STILL HAVE QUESTIONS CTA */}
+  <section class="bg-gray-100 py-16 lg:py-20">
+    <div class="container-page">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl lg:text-4xl font-extrabold text-primary-900 mb-5 leading-[1.05]">
+          Still have a question?
+        </h2>
+        <p class="text-base lg:text-lg text-gray-700 mb-7 leading-relaxed">
+          Call or text us — a real person from our Ocala team answers, hablamos español también.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3 lg:gap-4">
+          <a
+            href={`tel:${BUSINESS.phoneE164}`}
+            class="inline-flex items-center gap-2 bg-primary hover:bg-primary-700 text-white font-extrabold uppercase tracking-wider text-sm px-8 py-4 shadow-lg transition-colors"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 5a2 2 0 012-2h2.28a2 2 0 011.94 1.515L10.42 8.03a2 2 0 01-.45 1.95l-1.27 1.27a11 11 0 005.05 5.05l1.27-1.27a2 2 0 011.95-.45l3.515.879A2 2 0 0122 17.72V20a2 2 0 01-2 2h-1C9.611 22 2 14.389 2 5V5a2 2 0 011-2z"/></svg>
+            Call {BUSINESS.phone}
+          </a>
+          <a
+            href="/contact"
+            class="inline-flex items-center gap-2 bg-white hover:bg-gray-50 text-primary border-2 border-primary font-extrabold uppercase tracking-wider text-sm px-8 py-4 shadow-md transition-colors"
+          >
+            Send a Message
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <FinalCTA
+    title="Ready for your free fence estimate?"
+    subtitle="Same-day quote · $0 down financing · Less than 7 days install"
+  />
+</PageLayout>
