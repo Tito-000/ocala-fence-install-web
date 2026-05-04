@@ -161,6 +161,38 @@ const serviceSchema = {
           </p>
         </div>
       </div>
+
+      {/* Lender partners — infinite carousel marquee (same as Home) */}
+      <div class="mt-12 lg:mt-16 max-w-5xl mx-auto">
+        <p class="text-center text-xs uppercase tracking-[0.2em] text-gray-500 font-bold mb-6">Our Lending Partners</p>
+
+        <div class="relative overflow-hidden" style="mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);">
+          <div class="flex gap-12 lg:gap-20 animate-scroll-x py-4 hover:[animation-play-state:paused]" style="width: max-content;">
+            {/* First set */}
+            {BUSINESS.financingPartners.map((p) => (
+              <div class="flex items-center justify-center shrink-0 w-32 lg:w-40 h-12 lg:h-14">
+                <img
+                  src={p.logo}
+                  alt={`${p.name} financing partner`}
+                  class="max-h-full w-auto grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+                  loading="lazy"
+                />
+              </div>
+            ))}
+            {/* Duplicate set for seamless loop */}
+            {BUSINESS.financingPartners.map((p) => (
+              <div class="flex items-center justify-center shrink-0 w-32 lg:w-40 h-12 lg:h-14" aria-hidden="true">
+                <img
+                  src={p.logo}
+                  alt=""
+                  class="max-h-full w-auto grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+                  loading="lazy"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -367,20 +399,6 @@ const serviceSchema = {
             <strong>Ocala Fence Install</strong> offers a "Buy Now, Pay Later" option, letting you spread the cost of your fence over time. Our flexible installment plans allow you to receive the fence you need <strong>right now</strong> while staying within your budget.
           </p>
         </div>
-      </div>
-    </div>
-  </section>
-
-  {/* TRUST STRIP — partner banks logos placeholder */}
-  <section class="bg-white py-12 lg:py-14 border-t border-gray-200">
-    <div class="container-page">
-      <p class="text-center text-xs lg:text-sm uppercase tracking-[0.3em] font-bold text-gray-500 mb-6">
-        Powered by trusted lending partners
-      </p>
-      <div class="flex flex-wrap items-center justify-center gap-8 lg:gap-12 opacity-70">
-        <div class="text-2xl lg:text-3xl font-extrabold text-gray-700">Acorn Finance</div>
-        <div class="text-2xl lg:text-3xl font-bold text-gray-600 italic">Hearth</div>
-        <div class="text-2xl lg:text-3xl font-bold text-gray-600">Sunbit</div>
       </div>
     </div>
   </section>
