@@ -1,4 +1,9 @@
 User-agent: *
 Allow: /
 
+# Block thank-you and API endpoints from indexing
+Disallow: /thank-you
+Disallow: /api/
+
+# Sitemap location
 Sitemap: https://ocalafenceinstall.com/sitemap-index.xml
