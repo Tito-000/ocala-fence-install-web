@@ -28,7 +28,7 @@ export const BLOG_POSTS: BlogPost[] = [
     dateDisplay: 'May 1, 2026',
     readTime: '7 min read',
     category: 'Material Comparison',
-    image: '/images/blog/vinyl-vs-composite-fence-florida.jpg',
+    image: '/images/blog/vinyl-vs-composite-fence-florida.webp',
     imageAlt: 'White vinyl privacy fence vs cedar-tone composite fence side-by-side comparison in Ocala FL',
     author: ANDRY,
     body: `
@@ -129,7 +129,7 @@ export const BLOG_POSTS: BlogPost[] = [
     dateDisplay: 'April 28, 2026',
     readTime: '8 min read',
     category: 'Pricing',
-    image: '/images/blog/fence-cost-ocala-fl.jpg',
+    image: '/images/blog/fence-cost-ocala-fl.webp',
     imageAlt: 'Tan vinyl privacy fence with calculator and pricing notes — Ocala FL fence cost guide 2026',
     author: ANDRY,
     body: `
@@ -210,7 +210,7 @@ export const BLOG_POSTS: BlogPost[] = [
     dateDisplay: 'April 25, 2026',
     readTime: '6 min read',
     category: 'DIY & Tips',
-    image: '/images/blog/cover-chain-link-fence-privacy.jpg',
+    image: '/images/blog/cover-chain-link-fence-privacy.webp',
     imageAlt: 'Chain link fence covered with green ivy and bamboo screen panels for added privacy in Ocala FL',
     author: ANDRY,
     body: `
@@ -261,7 +261,7 @@ export const BLOG_POSTS: BlogPost[] = [
     dateDisplay: 'April 22, 2026',
     readTime: '5 min read',
     category: 'Code & Permits',
-    image: '/images/blog/pool-fence-code-florida-515.jpg',
+    image: '/images/blog/pool-fence-code-florida-515.webp',
     imageAlt: 'Pool-code-compliant black aluminum fence around residential swimming pool in Ocala FL',
     author: ANDRY,
     body: `
@@ -327,7 +327,7 @@ export const BLOG_POSTS: BlogPost[] = [
     dateDisplay: 'April 19, 2026',
     readTime: '5 min read',
     category: 'Maintenance',
-    image: '/images/blog/wood-fence-lifespan-florida.jpg',
+    image: '/images/blog/wood-fence-lifespan-florida.webp',
     imageAlt: 'Weathered cedar wood privacy fence next to new wood fence section showing aging in Florida',
     author: ANDRY,
     body: `
@@ -408,7 +408,7 @@ export const BLOG_POSTS: BlogPost[] = [
     dateDisplay: 'April 15, 2026',
     readTime: '5 min read',
     category: 'Install Day',
-    image: '/images/blog/prepare-yard-fence-install.jpg',
+    image: '/images/blog/prepare-yard-fence-install.webp',
     imageAlt: 'Backyard with utility flags and stakes marking fence line before installation in Marion County FL',
     author: ANDRY,
     body: `
@@ -472,7 +472,7 @@ export const BLOG_POSTS: BlogPost[] = [
     dateDisplay: 'April 12, 2026',
     readTime: '6 min read',
     category: 'Code & Permits',
-    image: '/images/blog/hoa-fence-approval-guide.jpg',
+    image: '/images/blog/hoa-fence-approval-guide.webp',
     imageAlt: 'HOA-approved white vinyl fence in planned community in Ocala FL',
     author: ANDRY,
     body: `
@@ -557,7 +557,7 @@ export const BLOG_POSTS: BlogPost[] = [
     dateDisplay: 'April 8, 2026',
     readTime: '4 min read',
     category: 'Code & Permits',
-    image: '/images/blog/fence-permits-marion-county.jpg',
+    image: '/images/blog/fence-permits-marion-county.webp',
     imageAlt: 'Marion County FL fence permit document and tablet with fence plans on wood worktable',
     author: ANDRY,
     body: `
