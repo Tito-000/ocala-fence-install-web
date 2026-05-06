@@ -11,6 +11,35 @@ export const CITIES_CONTENT: Record<string, {
   whyLocal: { title: string; body: string }[];
   faqs: { q: string; a: string }[];
 }> = {
+  'marion-oaks-fl': {
+    metaTitle: 'Fence Installation Marion Oaks FL | Local Fence Company · $0 Down',
+    metaDescription: 'Marion Oaks\' #1 fence installation team. Vinyl, composite, aluminum, pool fences. ZIP 34473 & 34476. $0 down financing. Same-day quotes. Call (863) 377-0928.',
+    heroTitle: 'Fence Installation in <span class="text-primary">Marion Oaks, FL</span>',
+    heroSubtitle: 'Your local Marion Oaks fence team. We live and work right here — vinyl, composite, aluminum, and pool fences installed in less than 7 days. $0 down financing.',
+    zips: ['34473', '34476'],
+    neighborhoods: ['Marion Oaks Manor', 'Marion Oaks Trails', 'Marion Oaks Pass', 'Marion Oaks Pines', 'Marion Oaks Course', 'Marion Oaks Hills'],
+    intro: {
+      heading: 'Marion Oaks homeowners — your local fence team',
+      paragraphs: [
+        'Marion Oaks is home base for Ocala Fence Install. We live here, we work here, and we know every street, every HOA rule, and every Marion County permit requirement that affects your fence install. When you call us, you\'re not getting a corporate sales rep — you\'re getting a neighbor.',
+        'We\'ve installed hundreds of fences across Marion Oaks ZIPs <strong>34473</strong> and <strong>34476</strong>, from privacy fences in Marion Oaks Manor to pool-code aluminum in Marion Oaks Trails. Same-day estimates, $0 down financing, and most jobs finished in under 7 days.',
+        'And because we\'re local, we get to your property fast. Most Marion Oaks visits happen within 24 hours of your call.',
+      ],
+    },
+    whyLocal: [
+      { title: 'We\'re Your Neighbors', body: 'Marion Oaks is our home base. Same-day visits, fast response times, and you\'ll see our truck around the neighborhood every week.' },
+      { title: 'Marion Oaks HOA Experience', body: 'We know which fence types are pre-approved in your subdivision and have the paperwork ready for fast HOA submission.' },
+      { title: 'Bilingual English & Español', body: 'Marion Oaks is a bilingual community. Every part of our process — from quote to walkthrough — works in English or Spanish.' },
+    ],
+    faqs: [
+      { q: 'Do you serve all of Marion Oaks?', a: 'Yes. We cover both ZIPs — <strong>34473 and 34476</strong> — and every subdivision including Marion Oaks Manor, Trails, Pass, Pines, Course, and Hills. Most visits happen within 24 hours of your call.' },
+      { q: 'How much does a fence cost in Marion Oaks?', a: 'Most Marion Oaks projects run between <strong>$4,000 and $11,000</strong>. Typical Marion Oaks lot needs 150-200 linear feet. With $0 down financing, monthly payments fall around $79-$160 over 60 months.' },
+      { q: 'Do I need a fence permit in Marion Oaks?', a: 'Marion Oaks is in <strong>unincorporated Marion County</strong>, so most residential fences under 6 feet don\'t require a permit. Pool fences and over-6-foot fences do — we handle those for you.' },
+      { q: 'Will the fence keep my dog in?', a: 'Yes. Our concrete-set posts plus correct picket spacing keeps dogs of any size in the yard. We can also install kickboards or trench the fence if you have a digger.' },
+      { q: 'How fast can you install a fence in Marion Oaks?', a: 'Most Marion Oaks installs finish in <strong>3-5 days</strong>, faster than other cities since we\'re based locally and don\'t need to travel. Urgent jobs can sometimes start within 48 hours of signed contract.' },
+      { q: 'Can you handle Marion Oaks HOA approval?', a: 'Yes. We provide all the paperwork your HOA needs — sketches, product specs, and material samples. Most Marion Oaks HOAs approve our submissions within 2-3 weeks.' },
+    ],
+  },
   'ocala-fl': {
     metaTitle: 'Fence Installation Ocala FL | $0 Down · Done in Less Than 7 Days',
     metaDescription: 'Premium fence installation in Ocala, FL. Vinyl, composite, aluminum, pool fences. Marion County permits handled. $0 down financing. Same-day estimates. Call (863) 377-0928.',

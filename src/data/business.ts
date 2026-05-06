@@ -56,7 +56,8 @@ export const BUSINESS = {
 
   // Service areas (8 cities)
   serviceAreas: [
-    { slug: 'ocala-fl', name: 'Ocala', state: 'FL', county: 'Marion County', primaryZip: '34471', image: '/images/cities/ocala.webp', imageAlt: 'Aerial view of Ocala FL horse country — fence installation service area in Marion County', allZips: ['34471', '34472', '34473', '34474', '34476', '34480'] },
+    { slug: 'marion-oaks-fl', name: 'Marion Oaks', state: 'FL', county: 'Marion County', primaryZip: '34473', image: '/images/cities/marion-oaks.webp', imageAlt: 'Marion Oaks FL residential community with palm trees and family homes — Ocala Fence Install primary service area', allZips: ['34473', '34476'], primary: true },
+    { slug: 'ocala-fl', name: 'Ocala', state: 'FL', county: 'Marion County', primaryZip: '34471', image: '/images/cities/ocala.webp', imageAlt: 'Aerial view of Ocala FL horse country — fence installation service area in Marion County', allZips: ['34471', '34472', '34474', '34480'] },
     { slug: 'belleview-fl', name: 'Belleview', state: 'FL', county: 'Marion County', primaryZip: '34420', image: '/images/cities/belleview.webp', imageAlt: 'Belleview FL small town with church steeple — fence installation in Marion County 34420' },
     { slug: 'summerfield-fl', name: 'Summerfield', state: 'FL', county: 'Marion County', primaryZip: '34491', image: '/images/cities/summerfield.webp', imageAlt: 'Aerial of Summerfield FL residential community with lake — fence installation Marion County 34491' },
     { slug: 'silver-springs-fl', name: 'Silver Springs', state: 'FL', county: 'Marion County', primaryZip: '34488', image: '/images/cities/silver-springs.webp', imageAlt: 'Silver Springs FL turquoise spring water with cypress trees — fence installation Marion County 34488' },
