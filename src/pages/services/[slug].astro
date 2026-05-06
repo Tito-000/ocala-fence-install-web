@@ -51,7 +51,7 @@ const styles = stylesBySlug[service.slug] || [];
 // Gallery images per service slug — unique image set per service, no repeats
 const galleryBySlug: Record<string, { src: string; alt: string }[]> = {
   'vinyl-privacy-fence': [
-    { src: '/images/gallery/vinyl-privacy-white-gate.webp', alt: 'White vinyl privacy fence with double gate by Ocala Fence Install crew — Marion County FL' },
+    // Hero image is vinyl-privacy-white-gate.webp (installer working) — excluded here so gallery shows different photos
     { src: '/images/gallery/vinyl-privacy-white-double-gate.webp', alt: 'White vinyl privacy fence panels with double-swing gate — Ocala FL' },
     { src: '/images/gallery/vinyl-privacy-white-long-run.webp', alt: 'White vinyl privacy fence long run along backyard with American flag — Ocala FL' },
     { src: '/images/gallery/vinyl-privacy-white-backyard.webp', alt: 'White vinyl privacy fence wrapping backyard property line — Marion County FL' },
@@ -67,12 +67,14 @@ const galleryBySlug: Record<string, { src: string; alt: string }[]> = {
     { src: '/images/gallery/aluminum-3-rail.webp', alt: 'Black aluminum 3-rail estate fence — Ocala horse country' },
   ],
   'durafence': [
+    // Hero image is durafence-bronze-long-run.webp — excluded here so gallery shows different photos
     // White
     { src: '/images/gallery/durafence-white-side.webp', alt: 'White Dura Fence install along side of home in Marion Oaks FL' },
     { src: '/images/gallery/durafence-white-gate.webp', alt: 'White Dura Fence with double gate between two homes — Ocala FL' },
     { src: '/images/gallery/durafence-white-driveway.webp', alt: 'White Dura Fence next to driveway and garage — Ocala FL' },
+    { src: '/images/gallery/durafence-white-yard.webp', alt: 'White Dura Fence privacy panel along backyard — Ocala FL' },
     // Bronze
-    { src: '/images/gallery/durafence-bronze-long-run.webp', alt: 'Bronze Dura Fence long run with scalloped top — Ocala FL' },
+    { src: '/images/gallery/durafence-bronze-side-yard.webp', alt: 'Bronze Dura Fence side yard install with AC unit — Marion County FL' },
     { src: '/images/gallery/durafence-bronze-gate.webp', alt: 'Bronze Dura Fence with gate next to garage — Marion County FL' },
     { src: '/images/gallery/durafence-bronze-corner.webp', alt: 'Bronze Dura Fence corner install — Ocala FL' },
     // Black
