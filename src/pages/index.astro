@@ -111,14 +111,48 @@ const faqs = [
         ))}
       </div>
 
-      {/* Open invitation for areas not listed */}
-      <div class="mt-10 lg:mt-12 max-w-3xl mx-auto text-center">
-        <p class="text-base lg:text-lg text-gray-700 leading-relaxed">
-          <strong class="text-primary-900">Don't see your area?</strong> We also serve surrounding cities within 50 miles of Ocala. Call us to confirm coverage:
-          <a href={`tel:${BUSINESS.phoneE164}`} class="ml-1 text-primary hover:text-primary-700 font-extrabold transition-colors">
+      {/* Coverage Area — counties + extended cities list */}
+      <div class="mt-12 lg:mt-16 max-w-5xl mx-auto bg-white border-2 border-primary/20 p-6 lg:p-10 shadow-sm">
+        <div class="text-center mb-6 lg:mb-8">
+          <p class="text-xs lg:text-sm uppercase tracking-[0.3em] font-extrabold text-primary mb-2">Coverage Area</p>
+          <h3 class="text-2xl lg:text-3xl font-extrabold text-primary-900 leading-tight mb-2">
+            We serve {BUSINESS.extendedCoverage.radiusMiles} miles around Marion Oaks
+          </h3>
+          <p class="text-base text-gray-600">Spanning {BUSINESS.extendedCoverage.counties.length} counties across central Florida</p>
+        </div>
+
+        {/* Counties row */}
+        <div class="flex flex-wrap items-center justify-center gap-2 lg:gap-3 mb-6 lg:mb-8 pb-6 lg:pb-8 border-b border-gray-200">
+          {BUSINESS.extendedCoverage.counties.map((c) => (
+            <span class={`inline-block text-xs lg:text-sm font-extrabold uppercase tracking-wider px-4 py-2 ${c.primary ? 'bg-primary text-white' : 'bg-gray-100 text-gray-800'}`}>
+              {c.name}
+            </span>
+          ))}
+        </div>
+
+        {/* Additional cities */}
+        <p class="text-center text-xs uppercase tracking-[0.2em] font-bold text-gray-500 mb-4">Plus all these cities &amp; communities</p>
+        <div class="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-sm lg:text-base text-gray-700 mb-6 lg:mb-8">
+          {BUSINESS.extendedCoverage.additionalCities.map((c, idx) => (
+            <>
+              <span class="font-semibold">{c.name}</span>
+              {idx < BUSINESS.extendedCoverage.additionalCities.length - 1 && (
+                <span class="text-primary/40">·</span>
+              )}
+            </>
+          ))}
+        </div>
+
+        {/* CTA */}
+        <div class="text-center">
+          <p class="text-base lg:text-lg text-gray-700 mb-3">
+            <strong class="text-primary-900">Don't see your area?</strong> Call us — chances are we cover it.
+          </p>
+          <a href={`tel:${BUSINESS.phoneE164}`} class="inline-flex items-center gap-2 text-primary hover:text-primary-700 font-extrabold text-xl lg:text-2xl transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 5a2 2 0 012-2h2.28a2 2 0 011.94 1.515L10.42 8.03a2 2 0 01-.45 1.95l-1.27 1.27a11 11 0 005.05 5.05l1.27-1.27a2 2 0 011.95-.45l3.515.879A2 2 0 0122 17.72V20a2 2 0 01-2 2h-1C9.611 22 2 14.389 2 5V5a2 2 0 011-2z"/></svg>
             {BUSINESS.phone}
           </a>
-        </p>
+        </div>
       </div>
     </div>
   </section>

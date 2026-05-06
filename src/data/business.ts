@@ -67,7 +67,41 @@ export const BUSINESS = {
     { slug: 'marion-county-fl', name: 'Marion County', state: 'FL', county: 'Marion County', primaryZip: '34470', image: '/images/cities/marion-county.webp', imageAlt: 'Marion County FL horse country with white wooden horse fences — Ocala Fence Install service area' },
   ],
 
-  // Services (5 fence types)
+  // Extended coverage — additional cities within 50 miles of Marion Oaks/Ocala
+  // (no dedicated page, but listed for SEO + transparency)
+  extendedCoverage: {
+    radiusMiles: 50,
+    counties: [
+      { name: 'Marion County', primary: true },
+      { name: 'Sumter County' },
+      { name: 'Lake County' },
+      { name: 'Citrus County' },
+      { name: 'Alachua County' },
+      { name: 'Levy County' },
+    ],
+    additionalCities: [
+      { name: 'Crystal River', state: 'FL', county: 'Citrus County', zip: '34428' },
+      { name: 'Inverness', state: 'FL', county: 'Citrus County', zip: '34450' },
+      { name: 'Homosassa', state: 'FL', county: 'Citrus County', zip: '34446' },
+      { name: 'Gainesville', state: 'FL', county: 'Alachua County', zip: '32601' },
+      { name: 'Williston', state: 'FL', county: 'Levy County', zip: '32696' },
+      { name: 'Leesburg', state: 'FL', county: 'Lake County', zip: '34748' },
+      { name: 'Eustis', state: 'FL', county: 'Lake County', zip: '32726' },
+      { name: 'Tavares', state: 'FL', county: 'Lake County', zip: '32778' },
+      { name: 'Mount Dora', state: 'FL', county: 'Lake County', zip: '32757' },
+      { name: 'Wildwood', state: 'FL', county: 'Sumter County', zip: '34785' },
+      { name: 'Bushnell', state: 'FL', county: 'Sumter County', zip: '33513' },
+      { name: 'Anthony', state: 'FL', county: 'Marion County', zip: '32617' },
+      { name: 'Reddick', state: 'FL', county: 'Marion County', zip: '32686' },
+      { name: 'Citra', state: 'FL', county: 'Marion County', zip: '32113' },
+      { name: 'Sparr', state: 'FL', county: 'Marion County', zip: '32192' },
+      { name: 'Fort McCoy', state: 'FL', county: 'Marion County', zip: '32134' },
+      { name: 'Ocklawaha', state: 'FL', county: 'Marion County', zip: '32179' },
+      { name: 'Weirsdale', state: 'FL', county: 'Marion County', zip: '32195' },
+    ],
+  },
+
+  // Services (3 fence types)
   services: [
     {
       slug: 'vinyl-privacy-fence',

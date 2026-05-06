@@ -1,0 +1,139 @@
+---
+import PageLayout from '@layouts/PageLayout.astro';
+import CityCard from '@components/CityCard.astro';
+import FinalCTA from '@components/FinalCTA.astro';
+import { BUSINESS } from '@data/business';
+
+// Group additional cities by county for cleaner display
+const citiesByCounty: Record<string, typeof BUSINESS.extendedCoverage.additionalCities[number][]> = {};
+BUSINESS.extendedCoverage.additionalCities.forEach((c) => {
+  if (!citiesByCounty[c.county]) citiesByCounty[c.county] = [];
+  citiesByCounty[c.county].push(c);
+});
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://ocalafenceinstall.com' },
+    { '@type': 'ListItem', position: 2, name: 'Service Areas', item: 'https://ocalafenceinstall.com/areas' },
+  ],
+};
+
+const totalAreas = BUSINESS.serviceAreas.length + BUSINESS.extendedCoverage.additionalCities.length;
+---
+
+<PageLayout
+  title={`Service Areas | ${BUSINESS.name} | All Cities We Serve in Central Florida`}
+  description={`We install fences across Marion County and within 50 miles of Ocala — Marion Oaks, Ocala, Belleview, Crystal River, Gainesville, Leesburg, The Villages and more. ${totalAreas}+ cities covered.`}
+  activeNav="Areas"
+  schemaJsonLd={[breadcrumbSchema]}
+>
+  {/* HERO */}
+  <section class="relative bg-gradient-to-r from-primary-900 via-primary to-primary-700 py-16 lg:py-24">
+    <div class="container-page text-center text-white">
+      <p class="text-xs lg:text-sm uppercase tracking-[0.3em] font-bold text-highlight mb-4">
+        Service Areas
+      </p>
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-[0.95] tracking-tight mb-5 text-balance drop-shadow-2xl">
+        Where We Install
+      </h1>
+      <p class="text-base lg:text-xl text-white/95 max-w-3xl mx-auto leading-relaxed font-semibold">
+        We serve Marion County and within {BUSINESS.extendedCoverage.radiusMiles} miles of Marion Oaks — across {BUSINESS.extendedCoverage.counties.length} counties and {totalAreas}+ cities in central Florida.
+      </p>
+    </div>
+  </section>
+
+  {/* PRIMARY CITIES — with dedicated pages */}
+  <section class="bg-white py-14 lg:py-20">
+    <div class="container-page">
+      <div class="text-center max-w-2xl mx-auto mb-10 lg:mb-12">
+        <span class="badge-highlight mb-4">Primary Cities</span>
+        <h2 class="mb-3 text-balance">Cities with dedicated install service</h2>
+        <p class="text-gray-600 text-lg">Click your city for local pricing, ZIP codes, and HOA info.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5">
+        {BUSINESS.serviceAreas.map((a) => (
+          <CityCard
+            slug={a.slug}
+            name={a.name}
+            state={a.state}
+            county={a.county}
+            primaryZip={a.primaryZip}
+            image={a.image}
+            imageAlt={a.imageAlt}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* EXTENDED COVERAGE — additional cities by county */}
+  <section class="bg-gray-50 py-14 lg:py-20 border-t border-gray-200">
+    <div class="container-page">
+      <div class="text-center max-w-2xl mx-auto mb-10 lg:mb-12">
+        <span class="badge-highlight mb-4">Extended Coverage</span>
+        <h2 class="mb-3 text-balance">Plus all these cities within {BUSINESS.extendedCoverage.radiusMiles} miles</h2>
+        <p class="text-gray-600 text-lg">Same pricing, same crew, same install times. We just don't have a dedicated page yet.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto">
+        {Object.entries(citiesByCounty).map(([county, cities]) => (
+          <div class="bg-white border-l-4 border-primary p-6 lg:p-7 shadow-sm">
+            <h3 class="text-lg font-extrabold text-primary-900 mb-1 uppercase tracking-wider">
+              {county}
+            </h3>
+            <p class="text-xs uppercase tracking-wider text-gray-500 font-bold mb-4">
+              {cities.length} {cities.length === 1 ? 'city' : 'cities'}
+            </p>
+            <ul class="space-y-2">
+              {cities.map((c) => (
+                <li class="flex items-center justify-between text-sm">
+                  <span class="font-semibold text-gray-800">{c.name}, {c.state}</span>
+                  <span class="font-mono text-xs text-gray-500">{c.zip}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* CTA — Don't see your area */}
+  <section class="bg-primary-900 text-white py-14 lg:py-16 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 1px 1px, white 1px, transparent 0); background-size: 24px 24px;"></div>
+    <div class="container-page relative">
+      <div class="max-w-3xl mx-auto text-center">
+        <p class="text-xs lg:text-sm uppercase tracking-[0.3em] font-bold text-highlight mb-3">Not on the list?</p>
+        <h2 class="text-3xl lg:text-4xl xl:text-5xl font-extrabold mb-5 leading-[1.05]">
+          Just call — we probably cover it.
+        </h2>
+        <p class="text-base lg:text-lg text-white/85 leading-relaxed mb-8 max-w-2xl mx-auto">
+          We expand our service radius based on demand. If you're a Florida homeowner near central Florida and we have install capacity, we'll come measure your yard.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3 lg:gap-4">
+          <a
+            href={`tel:${BUSINESS.phoneE164}`}
+            class="inline-flex items-center gap-2 bg-highlight hover:bg-highlight/90 text-primary-900 font-extrabold uppercase tracking-wider text-sm px-8 py-4 shadow-xl transition-colors"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 5a2 2 0 012-2h2.28a2 2 0 011.94 1.515L10.42 8.03a2 2 0 01-.45 1.95l-1.27 1.27a11 11 0 005.05 5.05l1.27-1.27a2 2 0 011.95-.45l3.515.879A2 2 0 0122 17.72V20a2 2 0 01-2 2h-1C9.611 22 2 14.389 2 5V5a2 2 0 011-2z"/></svg>
+            Call {BUSINESS.phone}
+          </a>
+          <a
+            href="/free-estimate"
+            class="inline-flex items-center gap-2 bg-white hover:bg-gray-50 text-primary-900 font-extrabold uppercase tracking-wider text-sm px-8 py-4 shadow-xl transition-colors"
+          >
+            Request Free Estimate
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <FinalCTA
+    title="Ready for your fence install?"
+    subtitle="Same-day quote · $0 down financing · Less than 7 days install"
+  />
+</PageLayout>

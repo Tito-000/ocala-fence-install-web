@@ -233,6 +233,20 @@ const { activeNav } = Astro.props;
             </a>
           ))}
         </div>
+
+        {/* View All Areas — link to /areas index with extended coverage list */}
+        <div class="mt-6 lg:mt-8 pt-5 lg:pt-6 border-t border-white/15 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
+          <p class="text-xs lg:text-sm text-white/80">
+            <strong class="text-highlight">+ {BUSINESS.extendedCoverage.additionalCities.length} more cities</strong> within {BUSINESS.extendedCoverage.radiusMiles} miles around Marion Oaks
+          </p>
+          <a
+            href="/areas"
+            class="inline-flex items-center gap-2 bg-highlight hover:bg-highlight/90 text-primary-900 text-xs lg:text-sm uppercase tracking-wider font-extrabold px-5 py-2.5 transition-colors"
+          >
+            View All Areas
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"/></svg>
+          </a>
+        </div>
       </div>
     </div>
 
