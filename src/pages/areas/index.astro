@@ -203,23 +203,32 @@ const totalAreas = BUSINESS.serviceAreas.length + BUSINESS.extendedCoverage.addi
             ))}
           </div>
 
-          {/* Cities grouped by county — compact list */}
-          <div class="bg-white border border-gray-200 divide-y divide-gray-100">
+          {/* Cities grouped by county — visual cards */}
+          <div class="space-y-3">
             {Object.entries(citiesByCounty).map(([county, cities]) => (
-              <div class="px-5 py-4">
-                <div class="flex items-baseline justify-between mb-2">
-                  <h3 class="text-sm font-extrabold text-primary uppercase tracking-wider">{county}</h3>
-                  <span class="text-[10px] font-bold text-gray-400 uppercase">{cities.length} {cities.length === 1 ? 'city' : 'cities'}</span>
+              <div class="group/county bg-white border border-gray-200 hover:border-primary hover:shadow-md transition-all duration-300 overflow-hidden">
+                {/* County header bar */}
+                <div class="flex items-center justify-between px-5 py-3 bg-gradient-to-r from-primary/5 to-transparent border-b border-gray-100">
+                  <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-full bg-primary/10 group-hover/county:bg-primary text-primary group-hover/county:text-white flex items-center justify-center transition-colors">
+                      <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/></svg>
+                    </div>
+                    <h3 class="text-sm lg:text-base font-extrabold text-primary uppercase tracking-wider">{county}</h3>
+                  </div>
+                  <span class="text-[10px] lg:text-xs font-extrabold text-white bg-primary px-2.5 py-1 uppercase tracking-wider">
+                    {cities.length} {cities.length === 1 ? 'city' : 'cities'}
+                  </span>
                 </div>
-                <p class="text-sm text-gray-700 leading-relaxed">
-                  {cities.map((c, i) => (
-                    <>
-                      <span class="font-semibold">{c.name}</span>
-                      <span class="text-gray-400 font-mono text-xs"> {c.zip}</span>
-                      {i < cities.length - 1 && <span class="text-primary/40"> · </span>}
-                    </>
+
+                {/* Cities chips */}
+                <div class="px-5 py-4 flex flex-wrap gap-2">
+                  {cities.map((c) => (
+                    <span class="inline-flex items-baseline gap-1.5 bg-gray-50 hover:bg-highlight/30 border border-gray-200 hover:border-highlight px-3 py-1.5 transition-colors">
+                      <span class="text-sm font-bold text-gray-800">{c.name}</span>
+                      <span class="text-[10px] font-mono text-gray-500">{c.zip}</span>
+                    </span>
                   ))}
-                </p>
+                </div>
               </div>
             ))}
           </div>
