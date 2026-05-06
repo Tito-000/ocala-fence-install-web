@@ -171,25 +171,25 @@ const faqSchema = {
     <div class="absolute inset-0 opacity-[0.04] pointer-events-none" style="background-image: repeating-linear-gradient(135deg, transparent 0, transparent 18px, #136229 18px, #136229 19px, transparent 19px, transparent 38px);"></div>
 
     <div class="container-page relative py-12 lg:py-20">
-      <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+      <div class="grid lg:grid-cols-2 gap-6 lg:gap-12 items-center">
         {/* LEFT — content card */}
-        <div class="bg-white border border-gray-200 shadow-md p-8 lg:p-12">
+        <div class="bg-white border border-gray-200 shadow-md p-6 sm:p-8 lg:p-12">
           {/* Tags */}
           <div class="flex flex-wrap gap-2 mb-5">
             {service.popular && (
-              <span class="inline-block bg-primary text-white text-xs font-extrabold uppercase tracking-wider px-3 py-1.5">
+              <span class="inline-block bg-primary text-white text-[10px] sm:text-xs font-extrabold uppercase tracking-wider px-3 py-1.5">
                 Most Popular
               </span>
             )}
             {service.windRated && (
-              <span class="inline-block bg-accent text-white text-xs font-extrabold uppercase tracking-wider px-3 py-1.5">
+              <span class="inline-block bg-accent text-white text-[10px] sm:text-xs font-extrabold uppercase tracking-wider px-3 py-1.5">
                 {service.windRated} Wind-Rated
               </span>
             )}
           </div>
 
           {/* Title */}
-          <h1 class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold uppercase leading-[1.05] tracking-tight mb-5 text-balance text-gray-900">
+          <h1 class="text-2xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold leading-[1.1] lg:leading-[1.05] tracking-tight mb-5 text-balance text-gray-900">
             <span set:html={content.heroTitle}></span>
           </h1>
 
@@ -208,11 +208,11 @@ const faqSchema = {
           )}
 
           {/* CTAs */}
-          <div class="flex flex-wrap gap-3">
-            <a href="/free-estimate" class="inline-flex items-center gap-2 bg-primary hover:bg-primary-700 text-white font-extrabold uppercase tracking-wider text-sm px-8 py-4 rounded-none shadow-md transition-colors">
+          <div class="flex flex-col sm:flex-row gap-3">
+            <a href="/free-estimate" class="inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-700 text-white font-extrabold uppercase tracking-wider text-sm px-6 sm:px-8 py-4 rounded-none shadow-md transition-colors">
               Get Free Estimate
             </a>
-            <a href={`tel:${BUSINESS.phoneE164}`} class="inline-flex items-center gap-2 bg-white hover:bg-gray-50 text-primary border-2 border-primary font-extrabold uppercase tracking-wider text-sm px-8 py-4 rounded-none transition-colors" data-track="click_phone">
+            <a href={`tel:${BUSINESS.phoneE164}`} class="inline-flex items-center justify-center gap-2 bg-white hover:bg-gray-50 text-primary border-2 border-primary font-extrabold uppercase tracking-wider text-sm px-6 sm:px-8 py-4 rounded-none transition-colors" data-track="click_phone">
               Call Now
             </a>
           </div>
@@ -331,7 +331,51 @@ const faqSchema = {
         <p class="text-gray-600 text-lg">A side-by-side comparison of all 5 fence types we install.</p>
       </div>
 
-      <div class="overflow-x-auto">
+      {/* Mobile: stacked cards (visible <md) */}
+      <div class="md:hidden space-y-4">
+        {BUSINESS.services.map((s) => {
+          const isCurrent = s.slug === service.slug;
+          const privacy = s.slug === 'vinyl-privacy-fence' ? 'Full' :
+                          s.slug === 'composite-fence' ? 'Full' :
+                          s.slug === 'vinyl-picket-fence' ? 'Decorative' :
+                          'See-through';
+          const maintenance = s.slug.includes('aluminum') || s.slug.includes('pool') ? 'None' : 'Hose only';
+          const poolCompliant = s.slug === 'pool-fence' || s.slug === 'aluminum-fence';
+          return (
+            <div class={`bg-white border-2 ${isCurrent ? 'border-primary shadow-lg' : 'border-gray-200'} p-5`}>
+              <div class={`flex items-center justify-between mb-4 pb-3 border-b ${isCurrent ? 'border-primary/30' : 'border-gray-200'}`}>
+                <h3 class={`text-base font-extrabold uppercase tracking-wider ${isCurrent ? 'text-primary' : 'text-gray-900'}`}>{s.shortName}</h3>
+                {isCurrent && (
+                  <span class="text-[10px] uppercase tracking-wider font-extrabold bg-primary text-white px-2 py-1">You're viewing</span>
+                )}
+              </div>
+              <dl class="grid grid-cols-2 gap-x-3 gap-y-3 text-sm">
+                <dt class="text-gray-500 font-medium">Price (avg.)</dt>
+                <dd class={`text-right font-extrabold ${isCurrent ? 'text-primary' : 'text-gray-900'}`}>${(s.priceRange.min / 1000).toFixed(1)}k–${(s.priceRange.max / 1000).toFixed(0)}k</dd>
+                <dt class="text-gray-500 font-medium">Wind Rating</dt>
+                <dd class="text-right font-bold text-gray-800">{s.windRated || '—'}</dd>
+                <dt class="text-gray-500 font-medium">Lifespan</dt>
+                <dd class="text-right font-bold text-gray-800">{s.lifespan}</dd>
+                <dt class="text-gray-500 font-medium">Maintenance</dt>
+                <dd class="text-right font-bold text-gray-800">{maintenance}</dd>
+                <dt class="text-gray-500 font-medium">Privacy</dt>
+                <dd class="text-right font-bold text-gray-800">{privacy}</dd>
+                <dt class="text-gray-500 font-medium">Pool Code</dt>
+                <dd class="text-right">
+                  {poolCompliant ? (
+                    <svg class="w-5 h-5 text-primary inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                  ) : (
+                    <span class="text-gray-300">—</span>
+                  )}
+                </dd>
+              </dl>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Desktop: table (visible md+) */}
+      <div class="hidden md:block overflow-x-auto">
         <table class="w-full bg-white border border-gray-200 text-sm lg:text-base">
           <thead>
             <tr class="bg-gray-50 border-b-2 border-gray-200">
@@ -452,9 +496,9 @@ const faqSchema = {
               <span data-lf-tier-label class="text-highlight text-lg">Standard</span>
             </label>
             <div class="grid grid-cols-3 gap-2">
-              <button type="button" data-lf-tier="min" class="lf-tier-btn px-3 py-3 border-2 border-white/30 hover:border-highlight transition-colors text-sm font-extrabold uppercase tracking-wider">Basic</button>
-              <button type="button" data-lf-tier="mid" class="lf-tier-btn px-3 py-3 border-2 border-highlight bg-highlight/15 transition-colors text-sm font-extrabold uppercase tracking-wider" data-active="true">Standard</button>
-              <button type="button" data-lf-tier="max" class="lf-tier-btn px-3 py-3 border-2 border-white/30 hover:border-highlight transition-colors text-sm font-extrabold uppercase tracking-wider">Premium</button>
+              <button type="button" data-lf-tier="min" class="lf-tier-btn px-2 sm:px-3 py-3 border-2 border-white/30 hover:border-highlight transition-colors text-xs sm:text-sm font-extrabold uppercase tracking-wider">Basic</button>
+              <button type="button" data-lf-tier="mid" class="lf-tier-btn px-2 sm:px-3 py-3 border-2 border-highlight bg-highlight/15 transition-colors text-xs sm:text-sm font-extrabold uppercase tracking-wider" data-active="true">Standard</button>
+              <button type="button" data-lf-tier="max" class="lf-tier-btn px-2 sm:px-3 py-3 border-2 border-white/30 hover:border-highlight transition-colors text-xs sm:text-sm font-extrabold uppercase tracking-wider">Premium</button>
             </div>
           </div>
 
