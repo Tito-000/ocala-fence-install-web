@@ -743,37 +743,179 @@ const faqs = [
     </div>
   </section>
 
-  <!-- Service Areas -->
+  <!-- Service Areas — cities left + coverage map right -->
   <section class="section bg-gray-50">
     <div class="container-page">
-      <div class="text-center max-w-2xl mx-auto mb-10 lg:mb-14">
+      <div class="text-center max-w-3xl mx-auto mb-10 lg:mb-14">
         <span class="badge-highlight mb-4">Service Areas</span>
-        <h2 class="mb-3 text-balance">Where we work</h2>
-        <p class="text-gray-600 text-lg">Marion Oaks primary · Marion County · The Villages · 50 miles around Ocala</p>
-      </div>
-
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5">
-        {BUSINESS.serviceAreas.map((a) => (
-          <CityCard
-            slug={a.slug}
-            name={a.name}
-            state={a.state}
-            county={a.county}
-            primaryZip={a.primaryZip}
-            image={a.image}
-            imageAlt={a.imageAlt}
-          />
-        ))}
-      </div>
-
-      {/* Open invitation for areas not listed */}
-      <div class="mt-10 lg:mt-12 max-w-3xl mx-auto text-center">
-        <p class="text-base lg:text-lg text-gray-700 leading-relaxed">
-          <strong class="text-primary-900">Don't see your area?</strong> We also serve surrounding cities within 50 miles of Ocala. Call us to confirm coverage:
-          <a href={`tel:${BUSINESS.phoneE164}`} class="ml-1 text-primary hover:text-primary-700 font-extrabold transition-colors">
-            {BUSINESS.phone}
-          </a>
+        <h2 class="mb-3 text-balance">Where we work — and beyond</h2>
+        <p class="text-gray-600 text-lg">
+          Marion Oaks is home base. We install fences across <strong>{BUSINESS.extendedCoverage.counties.length} counties</strong> and <strong>{BUSINESS.serviceAreas.length + BUSINESS.extendedCoverage.additionalCities.length}+ cities</strong> within {BUSINESS.extendedCoverage.radiusMiles} miles of Ocala — including many that aren't on this list.
         </p>
+      </div>
+
+      <div class="grid lg:grid-cols-[1fr_1fr] gap-8 lg:gap-12 items-start max-w-7xl mx-auto">
+        {/* LEFT — primary cities grid */}
+        <div>
+          <p class="text-xs lg:text-sm uppercase tracking-[0.2em] font-extrabold text-primary mb-4">Primary Cities</p>
+          <div class="grid grid-cols-2 gap-3 lg:gap-4">
+            {BUSINESS.serviceAreas.map((a) => (
+              <CityCard
+                slug={a.slug}
+                name={a.name}
+                state={a.state}
+                county={a.county}
+                primaryZip={a.primaryZip}
+                image={a.image}
+                imageAlt={a.imageAlt}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* RIGHT — coverage map (SVG) */}
+        <div class="lg:sticky lg:top-24">
+          <p class="text-xs lg:text-sm uppercase tracking-[0.2em] font-extrabold text-primary mb-4">{BUSINESS.extendedCoverage.radiusMiles}-Mile Coverage Radius</p>
+
+          <div class="bg-white border-2 border-primary/15 shadow-sm overflow-hidden">
+            {/* Stylized map SVG */}
+            <div class="relative aspect-[4/3] bg-gradient-to-br from-gray-100 via-white to-gray-50 overflow-hidden">
+              <svg viewBox="0 0 400 300" class="w-full h-full" preserveAspectRatio="xMidYMid meet" aria-label="Coverage map showing Marion Oaks Florida and surrounding service areas">
+                {/* Subtle grid background */}
+                <defs>
+                  <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                    <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#e5e7eb" stroke-width="0.5"/>
+                  </pattern>
+                  <radialGradient id="circleGrad" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#136229" stop-opacity="0.35"/>
+                    <stop offset="70%" stop-color="#136229" stop-opacity="0.18"/>
+                    <stop offset="100%" stop-color="#136229" stop-opacity="0.05"/>
+                  </radialGradient>
+                </defs>
+                <rect width="400" height="300" fill="url(#grid)"/>
+
+                {/* Florida central outline (simplified) */}
+                <path
+                  d="M 60 40 Q 100 30 140 50 Q 180 60 220 50 Q 280 45 340 70 Q 360 90 350 130 Q 360 170 340 210 Q 310 250 270 260 Q 220 270 180 255 Q 130 250 90 230 Q 50 200 50 150 Q 45 90 60 40 Z"
+                  fill="#f3f4f6"
+                  stroke="#d1d5db"
+                  stroke-width="1.5"
+                />
+
+                {/* 50-mile coverage circle (centered on Marion Oaks) */}
+                <circle cx="200" cy="160" r="105" fill="url(#circleGrad)" stroke="#136229" stroke-width="2.5" stroke-dasharray="0" />
+
+                {/* Animated pulse ring */}
+                <circle cx="200" cy="160" r="105" fill="none" stroke="#136229" stroke-width="2" opacity="0.4">
+                  <animate attributeName="r" from="105" to="125" dur="2.5s" repeatCount="indefinite"/>
+                  <animate attributeName="opacity" from="0.4" to="0" dur="2.5s" repeatCount="indefinite"/>
+                </circle>
+
+                {/* Extended coverage cities (small cream pins around) */}
+                <g fill="#D1B487" stroke="#62522E" stroke-width="0.8">
+                  <circle cx="160" cy="100" r="3"/> {/* Gainesville (north) */}
+                  <circle cx="120" cy="170" r="3"/> {/* Crystal River (west) */}
+                  <circle cx="135" cy="200" r="3"/> {/* Homosassa */}
+                  <circle cx="150" cy="220" r="3"/> {/* Inverness */}
+                  <circle cx="270" cy="140" r="3"/> {/* Mount Dora */}
+                  <circle cx="280" cy="170" r="3"/> {/* Tavares */}
+                  <circle cx="265" cy="200" r="3"/> {/* Eustis */}
+                  <circle cx="250" cy="225" r="3"/> {/* Leesburg */}
+                  <circle cx="235" cy="200" r="3"/> {/* Wildwood */}
+                  <circle cx="230" cy="240" r="3"/> {/* Bushnell */}
+                  <circle cx="195" cy="115" r="3"/> {/* Reddick */}
+                  <circle cx="220" cy="105" r="3"/> {/* Anthony */}
+                  <circle cx="180" cy="105" r="3"/> {/* Williston */}
+                  <circle cx="240" cy="135" r="3"/> {/* Fort McCoy */}
+                  <circle cx="250" cy="150" r="3"/> {/* Ocklawaha */}
+                  <circle cx="270" cy="180" r="3"/> {/* Weirsdale */}
+                  <circle cx="170" cy="135" r="3"/> {/* Citra */}
+                  <circle cx="185" cy="125" r="3"/> {/* Sparr */}
+                </g>
+
+                {/* Primary cities (green pins inside circle) */}
+                <g fill="#136229" stroke="white" stroke-width="1.5">
+                  <circle cx="180" cy="155" r="4.5"/> {/* Ocala */}
+                  <circle cx="200" cy="190" r="4.5"/> {/* Belleview */}
+                  <circle cx="215" cy="200" r="4.5"/> {/* Summerfield */}
+                  <circle cx="215" cy="160" r="4.5"/> {/* Silver Springs */}
+                  <circle cx="155" cy="180" r="4.5"/> {/* Dunnellon */}
+                  <circle cx="245" cy="215" r="4.5"/> {/* The Villages */}
+                  <circle cx="235" cy="220" r="4.5"/> {/* Lady Lake */}
+                </g>
+
+                {/* Marion Oaks STAR (primary, biggest) */}
+                <g transform="translate(200, 175)">
+                  <circle r="11" fill="white" stroke="#136229" stroke-width="2.5"/>
+                  <path d="M 0 -7 L 1.6 -2.2 L 6.7 -2.2 L 2.5 0.9 L 4.1 5.7 L 0 2.7 L -4.1 5.7 L -2.5 0.9 L -6.7 -2.2 L -1.6 -2.2 Z"
+                        fill="#136229"/>
+                </g>
+
+                {/* Marion Oaks label */}
+                <g>
+                  <rect x="155" y="195" width="90" height="22" fill="#136229" rx="2"/>
+                  <text x="200" y="210" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="white" text-anchor="middle" letter-spacing="0.5">MARION OAKS</text>
+                </g>
+
+                {/* Compass marker */}
+                <g transform="translate(360, 30)" opacity="0.5">
+                  <circle r="14" fill="white" stroke="#9ca3af" stroke-width="1"/>
+                  <text x="0" y="-3" font-family="system-ui" font-size="8" font-weight="700" fill="#374151" text-anchor="middle">N</text>
+                  <path d="M 0 -8 L 2 -2 L 0 -1 L -2 -2 Z" fill="#136229"/>
+                </g>
+              </svg>
+
+              {/* Floating "+18 more cities" badge */}
+              <div class="absolute top-3 right-3 bg-highlight text-primary-900 text-[10px] lg:text-xs uppercase tracking-wider font-extrabold px-3 py-1.5 shadow-md">
+                + {BUSINESS.extendedCoverage.additionalCities.length} more cities
+              </div>
+            </div>
+
+            {/* Map legend */}
+            <div class="border-t border-gray-200 px-5 py-4 bg-white">
+              <div class="flex flex-wrap gap-x-5 gap-y-2 text-xs">
+                <div class="flex items-center gap-2">
+                  <span class="inline-block w-3 h-3 rounded-full bg-primary border-2 border-white shadow-sm"></span>
+                  <span class="text-gray-700 font-semibold">Primary cities</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="inline-block w-2.5 h-2.5 rounded-full bg-highlight border border-accent"></span>
+                  <span class="text-gray-700 font-semibold">Extended coverage</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="inline-block w-3 h-3 rounded-full border-2 border-primary bg-primary/20"></span>
+                  <span class="text-gray-700 font-semibold">{BUSINESS.extendedCoverage.radiusMiles}-mile radius</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Extended cities list */}
+            <div class="border-t border-gray-200 px-5 py-5 bg-gray-50">
+              <p class="text-[10px] uppercase tracking-[0.2em] font-bold text-gray-500 mb-3">Also serving</p>
+              <p class="text-sm text-gray-700 leading-relaxed">
+                {BUSINESS.extendedCoverage.additionalCities.map((c) => c.name).join(' · ')}
+              </p>
+              <a
+                href="/areas"
+                class="inline-flex items-center gap-1.5 mt-4 text-primary hover:text-primary-700 text-xs uppercase tracking-wider font-extrabold transition-colors"
+              >
+                View Full Coverage Map
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Open invitation — call CTA centered below */}
+      <div class="mt-10 lg:mt-14 max-w-2xl mx-auto text-center">
+        <p class="text-base lg:text-lg text-gray-700 leading-relaxed">
+          <strong class="text-primary-900">Don't see your specific area?</strong> Just call — chances are we cover it.
+        </p>
+        <a href={`tel:${BUSINESS.phoneE164}`} class="inline-flex items-center gap-2 mt-3 text-primary hover:text-primary-700 font-extrabold text-xl lg:text-2xl transition-colors">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 5a2 2 0 012-2h2.28a2 2 0 011.94 1.515L10.42 8.03a2 2 0 01-.45 1.95l-1.27 1.27a11 11 0 005.05 5.05l1.27-1.27a2 2 0 011.95-.45l3.515.879A2 2 0 0122 17.72V20a2 2 0 01-2 2h-1C9.611 22 2 14.389 2 5V5a2 2 0 011-2z"/></svg>
+          {BUSINESS.phone}
+        </a>
       </div>
     </div>
   </section>
