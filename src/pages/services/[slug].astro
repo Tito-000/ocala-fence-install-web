@@ -250,7 +250,7 @@ const faqSchema = {
         <div class="relative">
           <div class="aspect-[4/5] overflow-hidden shadow-2xl">
             <img
-              src={service.image}
+              src={(service as any).image2 || service.image}
               alt={`${service.name} installed in Ocala FL`}
               class="w-full h-full object-cover"
               loading="lazy"
