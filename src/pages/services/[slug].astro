@@ -39,6 +39,12 @@ const stylesBySlug: Record<string, { name: string; desc: string }[]> = {
     { name: 'Spear Top', desc: 'Decorative pointed picket tops' },
     { name: 'Flat Top', desc: 'Clean modern perimeter look' },
   ],
+  'durafence': [
+    { name: 'White', desc: 'Classic curb appeal — most popular' },
+    { name: 'Bronze', desc: 'Warm modern look for Mediterranean homes' },
+    { name: 'Black', desc: 'Sleek contemporary statement' },
+    { name: 'Custom Heights', desc: '5ft and 6ft standard, custom on request' },
+  ],
 };
 const styles = stylesBySlug[service.slug] || [];
 
@@ -60,6 +66,11 @@ const galleryBySlug: Record<string, { src: string; alt: string }[]> = {
     { src: '/images/gallery/aluminum-black-yard.webp', alt: 'Black aluminum ornamental fence backyard — Ocala FL' },
     { src: '/images/gallery/aluminum-driveway-gate.webp', alt: 'Black aluminum double driveway gate — The Villages FL' },
     { src: '/images/gallery/aluminum-3-rail.webp', alt: 'Black aluminum 3-rail estate fence — Ocala horse country' },
+  ],
+  'durafence': [
+    { src: '/images/gallery/composite-cedar-tone.webp', alt: 'Bronze Dura Fence install — Ocala FL' },
+    { src: '/images/gallery/composite-modern-gray.webp', alt: 'Black Dura Fence with horizontal panels — Marion County FL' },
+    { src: '/images/gallery/composite-stone-look.webp', alt: 'White Dura Fence install — Marion Oaks FL' },
   ],
 };
 const galleryImages = galleryBySlug[service.slug] || [];

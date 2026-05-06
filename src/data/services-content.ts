@@ -91,4 +91,33 @@ export const SERVICES_CONTENT: Record<string, {
       { q: 'How long does aluminum fence installation take?', a: 'Most projects finish in <strong>3-5 days</strong>. Pool perimeters can sometimes be done in 1-2 days if there are no permit delays.' },
     ],
   },
+  'durafence': {
+    metaTitle: 'Dura Fence Installation Ocala FL | Most Requested · Lifetime Warranty',
+    metaDescription: 'Dura Fence installation in Ocala and Marion County. The most requested fence in our lineup. Available in White, Bronze, and Black. 160 MPH wind-rated, lifetime warranty. $0 down financing. Call (863) 377-0928.',
+    heroTitle: 'Dura Fence Installation in <span class="text-highlight">Ocala, FL</span>',
+    heroSubtitle: 'Our most requested fence — premium look, hurricane-grade strength, lifetime warranty. Available in White, Bronze, and Black. 160 MPH wind-rated.',
+    intro: {
+      heading: 'Marion County\'s most requested fence',
+      paragraphs: [
+        'Dura Fence is the fence Ocala homeowners ask for the most. It combines the premium look of a high-end residential fence with the engineering toughness to outlast Florida hurricanes — all backed by a lifetime warranty.',
+        'Available in three colors: <strong>White</strong> for classic curb appeal, <strong>Bronze</strong> for a warm modern look, and <strong>Black</strong> for sleek contemporary homes. Heights of 5ft and 6ft, perfect for backyard privacy and front-yard statements.',
+        'Hurricane-rated to 160 MPH and engineered to never warp, rot, fade, or attract termites. Most installs finish in 5-7 days from signed contract.',
+      ],
+    },
+    whyCards: [
+      { title: 'Most Requested', body: 'Marion County\'s #1 fence — homeowners pick Dura Fence for its premium appearance and lifetime durability.' },
+      { title: '3 Premium Colors', body: 'White for classic curb appeal, Bronze for warm modern look, Black for sleek contemporary homes.' },
+      { title: '160 MPH Hurricane-Rated', body: 'Built for Florida storms. Concrete-set posts and engineered panels meet or exceed wind code.' },
+      { title: 'Lifetime Warranty', body: 'Manufacturer\'s lifetime warranty against cracking, fading, warping, and material failure. Transferable to next homeowner.' },
+    ],
+    faqs: [
+      { q: 'How much does Dura Fence cost in Ocala?', a: 'Most Dura Fence projects in Marion County run between <strong>$5,000 and $14,000</strong>, or $32-58 per linear foot installed. With $0 down financing, monthly payments typically fall between $99 and $250.' },
+      { q: 'What colors does Dura Fence come in?', a: 'Three premium colors: <strong>White, Bronze, and Black</strong>. White is the most popular for traditional homes, Bronze for warm/Mediterranean styles, Black for modern homes.' },
+      { q: 'Why is Dura Fence so popular?', a: 'It looks premium, lasts a lifetime, and never needs maintenance. No painting, no staining, no rotting. Plus the 160 MPH wind rating makes it one of the toughest residential fences for Florida storms.' },
+      { q: 'How does Dura Fence compare to vinyl?', a: 'Dura Fence has a more premium look and 30 MPH higher wind rating (160 vs 130). Vinyl is cheaper. If you want the highest-end residential fence, Dura Fence wins.' },
+      { q: 'Does Dura Fence require maintenance?', a: 'No painting, no staining, no sealing — ever. Hose it down once or twice a year if you want. The factory finish doesn\'t fade, chip, or yellow.' },
+      { q: 'How long does Dura Fence installation take?', a: 'Most Dura Fence projects finish in <strong>5-7 days</strong> from signed contract. Larger lots can take a few days more.' },
+      { q: 'Will Dura Fence handle Florida hurricanes?', a: 'Yes — better than wood or vinyl. Engineered panels and concrete-set posts are <strong>160 MPH wind-rated</strong>, exceeding Florida building code for the highest wind zones.' },
+    ],
+  },
 };

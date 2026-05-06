@@ -101,7 +101,7 @@ export const BUSINESS = {
     ],
   },
 
-  // Services (3 fence types)
+  // Services (4 fence types)
   services: [
     {
       slug: 'vinyl-privacy-fence',
@@ -116,7 +116,6 @@ export const BUSINESS = {
       heights: ['4ft', '5ft', '6ft'],
       windRated: '130 MPH',
       lifespan: '25+ years',
-      popular: true,
     },
     {
       slug: 'vinyl-picket-fence',
@@ -145,6 +144,21 @@ export const BUSINESS = {
       heights: ['4ft', '5ft', '6ft'],
       windRated: '160 MPH',
       lifespan: '50+ years',
+    },
+    {
+      slug: 'durafence',
+      name: 'Dura Fence',
+      shortName: 'Dura Fence',
+      tagline: 'Most requested · Premium look + lifetime warranty',
+      image: '/images/services/durafence.webp',
+      priceRange: { min: 5000, max: 14000 },
+      pricePerFoot: { min: 32, max: 58 },
+      priceFromMonthly: 99,
+      colors: ['White', 'Bronze', 'Black'],
+      heights: ['5ft', '6ft'],
+      windRated: '160 MPH',
+      lifespan: 'Lifetime warranty',
+      popular: true,
     },
   ] as const,
 
