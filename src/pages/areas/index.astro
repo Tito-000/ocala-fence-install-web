@@ -245,37 +245,6 @@ const totalAreas = BUSINESS.serviceAreas.length + BUSINESS.extendedCoverage.addi
     </div>
   </section>
 
-  {/* CTA — Don't see your area */}
-  <section class="bg-primary-900 text-white py-14 lg:py-16 relative overflow-hidden">
-    <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 1px 1px, white 1px, transparent 0); background-size: 24px 24px;"></div>
-    <div class="container-page relative">
-      <div class="max-w-3xl mx-auto text-center">
-        <p class="text-xs lg:text-sm uppercase tracking-[0.3em] font-bold text-highlight mb-3">Not on the list?</p>
-        <h2 class="text-3xl lg:text-4xl xl:text-5xl font-extrabold mb-5 leading-[1.05]">
-          Just call — we probably cover it.
-        </h2>
-        <p class="text-base lg:text-lg text-white/85 leading-relaxed mb-8 max-w-2xl mx-auto">
-          We expand our service radius based on demand. If you're a Florida homeowner near central Florida and we have install capacity, we'll come measure your yard.
-        </p>
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-3 lg:gap-4">
-          <a
-            href={`tel:${BUSINESS.phoneE164}`}
-            class="inline-flex items-center gap-2 bg-highlight hover:bg-highlight/90 text-primary-900 font-extrabold uppercase tracking-wider text-sm px-8 py-4 shadow-xl transition-colors"
-          >
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 5a2 2 0 012-2h2.28a2 2 0 011.94 1.515L10.42 8.03a2 2 0 01-.45 1.95l-1.27 1.27a11 11 0 005.05 5.05l1.27-1.27a2 2 0 011.95-.45l3.515.879A2 2 0 0122 17.72V20a2 2 0 01-2 2h-1C9.611 22 2 14.389 2 5V5a2 2 0 011-2z"/></svg>
-            Call {BUSINESS.phone}
-          </a>
-          <a
-            href="/free-estimate"
-            class="inline-flex items-center gap-2 bg-white hover:bg-gray-50 text-primary-900 font-extrabold uppercase tracking-wider text-sm px-8 py-4 shadow-xl transition-colors"
-          >
-            Request Free Estimate
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <FinalCTA
     title="Ready for your fence install?"
     subtitle="Same-day quote · $0 down financing · Less than 7 days install"
