@@ -72,31 +72,166 @@ const totalAreas = BUSINESS.serviceAreas.length + BUSINESS.extendedCoverage.addi
   {/* EXTENDED COVERAGE — additional cities by county */}
   <section class="bg-gray-50 py-14 lg:py-20 border-t border-gray-200">
     <div class="container-page">
-      <div class="text-center max-w-2xl mx-auto mb-10 lg:mb-12">
-        <span class="badge-highlight mb-4">Extended Coverage</span>
-        <h2 class="mb-3 text-balance">Plus all these cities within {BUSINESS.extendedCoverage.radiusMiles} miles</h2>
-        <p class="text-gray-600 text-lg">Same pricing, same crew, same install times. We just don't have a dedicated page yet.</p>
-      </div>
+      <div class="grid lg:grid-cols-[1fr_1fr] gap-10 lg:gap-16 items-start max-w-7xl mx-auto">
 
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto">
-        {Object.entries(citiesByCounty).map(([county, cities]) => (
-          <div class="bg-white border-l-4 border-primary p-6 lg:p-7 shadow-sm">
-            <h3 class="text-lg font-extrabold text-primary-900 mb-1 uppercase tracking-wider">
-              {county}
-            </h3>
-            <p class="text-xs uppercase tracking-wider text-gray-500 font-bold mb-4">
-              {cities.length} {cities.length === 1 ? 'city' : 'cities'}
-            </p>
-            <ul class="space-y-2">
-              {cities.map((c) => (
-                <li class="flex items-center justify-between text-sm">
-                  <span class="font-semibold text-gray-800">{c.name}, {c.state}</span>
-                  <span class="font-mono text-xs text-gray-500">{c.zip}</span>
-                </li>
-              ))}
-            </ul>
+        {/* LEFT — Coverage map (sticky on desktop) */}
+        <div class="lg:sticky lg:top-24">
+          <div class="bg-white border-2 border-primary/15 shadow-md overflow-hidden">
+            <div class="relative aspect-[4/3] bg-gradient-to-br from-gray-100 via-white to-gray-50 overflow-hidden">
+              <svg viewBox="0 0 400 300" class="w-full h-full" preserveAspectRatio="xMidYMid meet" aria-label="Coverage map showing Marion Oaks Florida and surrounding service areas">
+                <defs>
+                  <pattern id="ext-grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                    <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#e5e7eb" stroke-width="0.5"/>
+                  </pattern>
+                  <radialGradient id="ext-circleGrad" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#136229" stop-opacity="0.35"/>
+                    <stop offset="70%" stop-color="#136229" stop-opacity="0.18"/>
+                    <stop offset="100%" stop-color="#136229" stop-opacity="0.05"/>
+                  </radialGradient>
+                </defs>
+                <rect width="400" height="300" fill="url(#ext-grid)"/>
+
+                {/* Florida abstract outline */}
+                <path
+                  d="M 60 40 Q 100 30 140 50 Q 180 60 220 50 Q 280 45 340 70 Q 360 90 350 130 Q 360 170 340 210 Q 310 250 270 260 Q 220 270 180 255 Q 130 250 90 230 Q 50 200 50 150 Q 45 90 60 40 Z"
+                  fill="#f3f4f6"
+                  stroke="#d1d5db"
+                  stroke-width="1.5"
+                />
+
+                {/* 50-mile coverage circle */}
+                <circle cx="200" cy="160" r="105" fill="url(#ext-circleGrad)" stroke="#136229" stroke-width="2.5" />
+
+                {/* Animated pulse */}
+                <circle cx="200" cy="160" r="105" fill="none" stroke="#136229" stroke-width="2" opacity="0.4">
+                  <animate attributeName="r" from="105" to="125" dur="2.5s" repeatCount="indefinite"/>
+                  <animate attributeName="opacity" from="0.4" to="0" dur="2.5s" repeatCount="indefinite"/>
+                </circle>
+
+                {/* Extended cities pins (cream) */}
+                <g fill="#D1B487" stroke="#62522E" stroke-width="0.8">
+                  <circle cx="160" cy="100" r="3.5"/>
+                  <circle cx="120" cy="170" r="3.5"/>
+                  <circle cx="135" cy="200" r="3.5"/>
+                  <circle cx="150" cy="220" r="3.5"/>
+                  <circle cx="270" cy="140" r="3.5"/>
+                  <circle cx="280" cy="170" r="3.5"/>
+                  <circle cx="265" cy="200" r="3.5"/>
+                  <circle cx="250" cy="225" r="3.5"/>
+                  <circle cx="235" cy="200" r="3.5"/>
+                  <circle cx="230" cy="240" r="3.5"/>
+                  <circle cx="195" cy="115" r="3.5"/>
+                  <circle cx="220" cy="105" r="3.5"/>
+                  <circle cx="180" cy="105" r="3.5"/>
+                  <circle cx="240" cy="135" r="3.5"/>
+                  <circle cx="250" cy="150" r="3.5"/>
+                  <circle cx="270" cy="180" r="3.5"/>
+                  <circle cx="170" cy="135" r="3.5"/>
+                  <circle cx="185" cy="125" r="3.5"/>
+                </g>
+
+                {/* Primary cities pins (green) */}
+                <g fill="#136229" stroke="white" stroke-width="1.5">
+                  <circle cx="180" cy="155" r="4.5"/>
+                  <circle cx="200" cy="190" r="4.5"/>
+                  <circle cx="215" cy="200" r="4.5"/>
+                  <circle cx="215" cy="160" r="4.5"/>
+                  <circle cx="155" cy="180" r="4.5"/>
+                  <circle cx="245" cy="215" r="4.5"/>
+                  <circle cx="235" cy="220" r="4.5"/>
+                </g>
+
+                {/* Marion Oaks star */}
+                <g transform="translate(200, 175)">
+                  <circle r="11" fill="white" stroke="#136229" stroke-width="2.5"/>
+                  <path d="M 0 -7 L 1.6 -2.2 L 6.7 -2.2 L 2.5 0.9 L 4.1 5.7 L 0 2.7 L -4.1 5.7 L -2.5 0.9 L -6.7 -2.2 L -1.6 -2.2 Z"
+                        fill="#136229"/>
+                </g>
+
+                {/* Marion Oaks label */}
+                <g>
+                  <rect x="155" y="195" width="90" height="22" fill="#136229" rx="2"/>
+                  <text x="200" y="210" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="white" text-anchor="middle" letter-spacing="0.5">MARION OAKS</text>
+                </g>
+              </svg>
+
+              {/* Floating "+18 more" badge */}
+              <div class="absolute top-3 right-3 bg-highlight text-primary-900 text-[10px] lg:text-xs uppercase tracking-wider font-extrabold px-3 py-1.5 shadow-md">
+                + {BUSINESS.extendedCoverage.additionalCities.length} more cities
+              </div>
+            </div>
+
+            {/* Legend */}
+            <div class="border-t border-gray-200 px-5 py-4 bg-white">
+              <div class="flex flex-wrap gap-x-5 gap-y-2 text-xs">
+                <div class="flex items-center gap-2">
+                  <span class="inline-block w-3 h-3 rounded-full bg-primary border-2 border-white shadow-sm"></span>
+                  <span class="text-gray-700 font-semibold">Primary cities</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="inline-block w-2.5 h-2.5 rounded-full bg-highlight border border-accent"></span>
+                  <span class="text-gray-700 font-semibold">Extended coverage</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="inline-block w-3 h-3 rounded-full border-2 border-primary bg-primary/20"></span>
+                  <span class="text-gray-700 font-semibold">{BUSINESS.extendedCoverage.radiusMiles}-mile radius</span>
+                </div>
+              </div>
+            </div>
           </div>
-        ))}
+        </div>
+
+        {/* RIGHT — Persuasive copy + counties + cities list */}
+        <div>
+          <span class="badge-highlight mb-4">Extended Coverage</span>
+          <h2 class="text-3xl lg:text-4xl xl:text-5xl font-extrabold text-primary-900 leading-[1.05] mb-5">
+            Beyond Marion Oaks — we go where you need us
+          </h2>
+          <p class="text-base lg:text-lg text-gray-700 leading-relaxed mb-3">
+            Marion Oaks is our home base, but we travel up to <strong class="text-primary">{BUSINESS.extendedCoverage.radiusMiles} miles</strong> in any direction. <strong class="text-primary-900">Same pricing, same crew, same install times</strong> — we just don't have a dedicated page for every town yet.
+          </p>
+          <p class="text-base text-gray-600 leading-relaxed mb-8">
+            We regularly install fences across <strong>{BUSINESS.extendedCoverage.counties.length} counties</strong> in central Florida, including these {BUSINESS.extendedCoverage.additionalCities.length} additional cities and communities:
+          </p>
+
+          {/* Counties as pills */}
+          <div class="flex flex-wrap gap-2 mb-8">
+            {BUSINESS.extendedCoverage.counties.map((c) => (
+              <span class={`inline-block text-xs font-extrabold uppercase tracking-wider px-3 py-1.5 ${c.primary ? 'bg-primary text-white' : 'bg-gray-100 text-gray-800'}`}>
+                {c.name}
+              </span>
+            ))}
+          </div>
+
+          {/* Cities grouped by county — compact list */}
+          <div class="bg-white border border-gray-200 divide-y divide-gray-100">
+            {Object.entries(citiesByCounty).map(([county, cities]) => (
+              <div class="px-5 py-4">
+                <div class="flex items-baseline justify-between mb-2">
+                  <h3 class="text-sm font-extrabold text-primary uppercase tracking-wider">{county}</h3>
+                  <span class="text-[10px] font-bold text-gray-400 uppercase">{cities.length} {cities.length === 1 ? 'city' : 'cities'}</span>
+                </div>
+                <p class="text-sm text-gray-700 leading-relaxed">
+                  {cities.map((c, i) => (
+                    <>
+                      <span class="font-semibold">{c.name}</span>
+                      <span class="text-gray-400 font-mono text-xs"> {c.zip}</span>
+                      {i < cities.length - 1 && <span class="text-primary/40"> · </span>}
+                    </>
+                  ))}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          {/* Highlight box */}
+          <div class="mt-6 bg-highlight/20 border-l-4 border-highlight p-5">
+            <p class="text-sm lg:text-base text-gray-800 leading-relaxed">
+              <strong class="text-primary-900">Don't see your area?</strong> We expand based on demand. If you're a Florida homeowner near central Florida, give us a call — we'll come measure your yard.
+            </p>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
