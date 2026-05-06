@@ -20,7 +20,7 @@ export const SERVICES_CONTENT: Record<string, {
       paragraphs: [
         'Vinyl privacy fences are the #1 choice for Ocala homeowners — and for good reason. They give you full visual privacy from neighbors, block noise, keep pets and kids contained, and look new for 25+ years without painting, staining, or repairs.',
         'Our premium vinyl is engineered for Florida: UV-stabilized so it won\'t yellow under the sun, hurricane-rated to 130 MPH, and backed by a manufacturer\'s lifetime warranty that transfers to the next homeowner if you sell.',
-        'We install in 4ft, 5ft, and 6ft heights, in three colors (white, white with gray, cream). Most jobs are finished in less than 7 days from signed contract.',
+        'We install in 4ft, 5ft, and 6ft heights, in two colors (white and cream). Most jobs are finished in less than 7 days from signed contract.',
       ],
     },
     whyCards: [

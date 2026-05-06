@@ -113,7 +113,7 @@ export const BUSINESS = {
       priceRange: { min: 4500, max: 13000 },
       pricePerFoot: { min: 30, max: 55 },
       priceFromMonthly: 89,
-      colors: ['White', 'White + Gray', 'Cream'],
+      colors: ['White', 'Cream'],
       heights: ['4ft', '5ft', '6ft'],
       windRated: '130 MPH',
       lifespan: '25+ years',
