@@ -207,41 +207,74 @@ const { activeNav } = Astro.props;
       </div>
     </div>
 
-    {/* MEGA-MENU — Areas (square image cards, brand-coherent) */}
+    {/* MEGA-MENU — Areas (BJF style: state silhouette + city list) */}
     <div
-      class="mega-menu-panel absolute left-0 right-0 top-full z-50 bg-gradient-to-b from-primary-900 via-primary to-primary-700 text-white shadow-2xl border-t-2 border-highlight"
+      class="mega-menu-panel absolute left-0 right-0 top-full z-50 bg-white text-gray-900 shadow-2xl border-t-2 border-primary"
       data-mega-panel="Areas"
     >
       <div class="container-page py-8 lg:py-10">
-        <div class="grid grid-cols-4 lg:grid-cols-8 gap-4 lg:gap-5">
-          {BUSINESS.serviceAreas.map((c) => (
-            <a
-              href={`/areas/${c.slug}`}
-              class="group/card flex flex-col items-center text-center gap-3 hover:opacity-95 transition-opacity"
-            >
-              <div class="relative w-20 h-20 lg:w-24 lg:h-24 rounded-full overflow-hidden border-2 border-highlight/40 shadow-lg group-hover/card:border-highlight group-hover/card:scale-105 transition-all duration-300">
-                {c.image ? (
-                  <img src={c.image} alt={c.name} class="w-full h-full object-cover" loading="lazy" />
-                ) : (
-                  <div class="w-full h-full bg-primary-700 flex items-center justify-center text-white/40 text-2xl font-extrabold">
-                    {c.name.charAt(0)}
-                  </div>
-                )}
-                <div class="absolute inset-0 rounded-full ring-1 ring-inset ring-black/20"></div>
-              </div>
-              <span class="text-white text-xs lg:text-sm font-bold leading-tight">{c.name}</span>
-            </a>
-          ))}
+        <div class="grid lg:grid-cols-[auto_1fr] gap-8 lg:gap-12 max-w-6xl mx-auto">
+          {/* LEFT — Florida silhouette + state title */}
+          <div class="flex items-start gap-4 lg:flex-col lg:items-center lg:text-center lg:min-w-[180px]">
+            <svg viewBox="0 0 100 130" class="w-16 h-20 lg:w-28 lg:h-36 shrink-0 fill-primary" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M 5 10 L 95 10 L 95 25 Q 88 28 82 27 Q 75 26 70 28 Q 65 30 62 32 Q 60 35 60 42 L 60 55 Q 62 65 65 75 Q 68 88 72 100 Q 75 112 70 120 Q 65 124 58 122 Q 52 118 50 110 Q 48 100 45 90 Q 42 78 38 70 Q 33 60 28 52 Q 22 45 16 38 Q 10 30 8 22 Q 6 15 5 10 Z"/>
+            </svg>
+            <div>
+              <p class="text-[10px] lg:text-xs uppercase tracking-[0.3em] font-bold text-gray-500 mb-1">Service Areas</p>
+              <h3 class="text-2xl lg:text-3xl font-extrabold text-primary leading-tight">FLORIDA</h3>
+              <p class="text-xs text-gray-600 mt-1">Marion Oaks · 50-mile radius</p>
+            </div>
+          </div>
+
+          {/* RIGHT — primary cities + extended coverage */}
+          <div class="grid sm:grid-cols-2 gap-x-8 gap-y-6">
+            {/* Primary cities */}
+            <div>
+              <p class="text-[10px] uppercase tracking-[0.2em] font-extrabold text-primary mb-3 pb-2 border-b border-gray-200">
+                Primary Cities
+              </p>
+              <ul class="space-y-2">
+                {BUSINESS.serviceAreas.map((c) => (
+                  <li>
+                    <a
+                      href={`/areas/${c.slug}`}
+                      class="group/link flex items-center gap-2 text-sm font-bold text-gray-800 hover:text-primary transition-colors"
+                    >
+                      <span class="text-primary text-lg leading-none">•</span>
+                      <span class="uppercase tracking-wider">{c.name}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Extended coverage */}
+            <div>
+              <p class="text-[10px] uppercase tracking-[0.2em] font-extrabold text-accent mb-3 pb-2 border-b border-gray-200">
+                Extended Coverage <span class="text-gray-400 font-bold">· {BUSINESS.extendedCoverage.additionalCities.length} cities</span>
+              </p>
+              <ul class="grid grid-cols-2 gap-x-3 gap-y-1.5">
+                {BUSINESS.extendedCoverage.additionalCities.map((c) => (
+                  <li>
+                    <span class="flex items-center gap-1.5 text-xs font-semibold text-gray-600">
+                      <span class="text-highlight text-base leading-none">•</span>
+                      {c.name}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </div>
 
-        {/* View All Areas — link to /areas index with extended coverage list */}
-        <div class="mt-6 lg:mt-8 pt-5 lg:pt-6 border-t border-white/15 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
-          <p class="text-xs lg:text-sm text-white/80">
-            <strong class="text-highlight">+ {BUSINESS.extendedCoverage.additionalCities.length} more cities</strong> within {BUSINESS.extendedCoverage.radiusMiles} miles around Marion Oaks
+        {/* Footer — View All Areas */}
+        <div class="mt-8 lg:mt-10 pt-5 lg:pt-6 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-3 max-w-6xl mx-auto">
+          <p class="text-xs lg:text-sm text-gray-600">
+            We serve <strong class="text-primary">{BUSINESS.extendedCoverage.counties.length} counties</strong> within <strong class="text-primary">{BUSINESS.extendedCoverage.radiusMiles} miles</strong> of Marion Oaks
           </p>
           <a
             href="/areas"
-            class="inline-flex items-center gap-2 bg-highlight hover:bg-highlight/90 text-primary-900 text-xs lg:text-sm uppercase tracking-wider font-extrabold px-5 py-2.5 transition-colors"
+            class="inline-flex items-center gap-2 bg-primary hover:bg-primary-700 text-white text-xs lg:text-sm uppercase tracking-wider font-extrabold px-6 py-2.5 transition-colors"
           >
             View All Areas
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"/></svg>
