@@ -64,35 +64,6 @@ export const SERVICES_CONTENT: Record<string, {
       { q: 'How long does picket fence installation take?', a: 'Most picket projects finish in <strong>3-5 days</strong>. Smaller jobs can be done in 1-2 days.' },
     ],
   },
-  'composite-fence': {
-    metaTitle: 'Composite Fence Installation Ocala FL | Hurricane-Rated · Lifetime Warranty',
-    metaDescription: 'Composite fence installation in Ocala and Marion County. Wood-look beauty, zero rot, hurricane-rated 160 MPH, lifetime warranty. $0 down financing. Less than 7 days install. Call (863) 377-0928.',
-    heroTitle: 'Composite Fence Installation in <span class="text-highlight">Ocala, FL</span>',
-    heroSubtitle: 'Premium composite fence with the warm look of wood — and the strength of steel-core engineering. 160 MPH wind-rated, lifetime warranty, $0 down financing.',
-    intro: {
-      heading: 'The ultimate Florida fence',
-      paragraphs: [
-        'Composite fence is the smartest upgrade from wood: it gives you the warm wood-look you want, without the rotting, splinters, and re-staining every 2-3 years that real wood demands in Florida\'s humidity.',
-        'Engineered with a steel-reinforced core wrapped in weather-tough composite, our composite fence is hurricane-rated to 160 MPH. It won\'t crack, fade, warp, or attract termites — and it carries a lifetime warranty.',
-        'Available in multiple wood-tone colors and modern styles, in 5ft and 6ft heights. Perfect for high-end homes, front-of-property statement fences, sound barriers, and HOAs that want the look of wood with zero maintenance.',
-      ],
-    },
-    whyCards: [
-      { title: 'Wood Look, Zero Rot', body: 'The warm appearance of natural wood with none of the maintenance. No splinters, no rot, no termites, no re-staining every 2 years.' },
-      { title: '160 MPH Wind-Rated', body: 'Steel-reinforced core makes this our toughest fence. Hurricane-rated to 160 MPH — exceeds Florida building code for every wind zone.' },
-      { title: 'Lifetime Warranty', body: 'Manufacturer\'s lifetime warranty against cracking, fading, warping, and material failure. Transferable to next homeowner — adds value if you sell.' },
-      { title: 'Sound Barrier', body: 'Solid composite panels block road noise and neighbor noise far better than vinyl or wood. Great for homes near busy streets.' },
-    ],
-    faqs: [
-      { q: 'How much does composite fence cost in Ocala?', a: 'Most composite fence projects in Marion County run between <strong>$4,000 and $12,000</strong>, or $28-50 per linear foot installed. With $0 down financing, monthly payments typically fall between $79 and $200.' },
-      { q: 'Is composite fence better than wood?', a: 'For Florida\'s climate, yes. Composite gives you the warm wood look <strong>without the rot, splinters, termites, or staining</strong> that wood requires every 2-3 years. It also lasts 3-4x longer with zero maintenance.' },
-      { q: 'Composite fence vs vinyl — which is better?', a: 'Composite has a more upscale, real-wood appearance and is hurricane-rated 30 MPH higher than vinyl (160 vs 130). Vinyl is cheaper. If you want the look of wood and maximum durability, composite wins. If you want lowest cost, vinyl wins.' },
-      { q: 'Can composite fence be installed on a slope?', a: 'Yes. We rack the panels to follow ground contour. Most Marion County properties have some slope and composite handles it well — better than wood or chain link.' },
-      { q: 'Does composite fence require maintenance?', a: 'No painting, no staining, no sealing — ever. Hose it down once or twice a year if you want. The material doesn\'t fade like wood or yellow like cheap vinyl.' },
-      { q: 'How long does composite fence installation take?', a: 'Most projects finish in <strong>5-7 days</strong> from signed contract. The panels are heavier than vinyl so installation is slightly slower, but well within our standard 7-day promise.' },
-      { q: 'Will composite fence handle Florida hurricanes?', a: 'Yes — better than wood or vinyl. Steel-reinforced composite panels are <strong>160 MPH wind-rated</strong> when installed with our concrete-set posts. Exceeds Florida building code for the highest wind zones.' },
-    ],
-  },
   'aluminum-fence': {
     metaTitle: 'Aluminum Fence Installation Ocala FL | Pool-Code Ready · Hurricane-Rated',
     metaDescription: 'Modern black aluminum fence installation in Ocala and Marion County. Pool-code ready, 160 MPH wind-rated, 50+ year lifespan, $0 down financing. Call (863) 377-0928.',
@@ -116,35 +87,8 @@ export const SERVICES_CONTENT: Record<string, {
       { q: 'How much does aluminum fencing cost in Ocala?', a: 'Aluminum runs <strong>$4,500 to $12,000</strong> for most projects. Average pool perimeter (around an in-ground pool) runs $5,000-$7,000.' },
       { q: 'Does aluminum meet pool code?', a: 'Yes — our aluminum fences meet Florida <strong>§515 pool code</strong> when configured to 4ft minimum height with no horizontal climbable rails. We install self-closing magnetic gates rated for pool safety.' },
       { q: 'Will aluminum rust like wrought iron?', a: 'No. Aluminum is rust-proof by nature, and the powder-coat finish protects against scratches and color fading. Wrought iron rusts within 5-10 years in Florida humidity — aluminum lasts 50+.' },
-      { q: 'Can aluminum block my view?', a: 'No — aluminum keeps your view. If you want privacy, choose vinyl privacy or composite fence. Aluminum is for security, pool code, and decorative perimeters where you want to see through.' },
+      { q: 'Can aluminum block my view?', a: 'No — aluminum keeps your view. If you want full privacy, choose a vinyl privacy fence. Aluminum is for security, pool code, and decorative perimeters where you want to see through.' },
       { q: 'How long does aluminum fence installation take?', a: 'Most projects finish in <strong>3-5 days</strong>. Pool perimeters can sometimes be done in 1-2 days if there are no permit delays.' },
-    ],
-  },
-  'pool-fence': {
-    metaTitle: 'Pool Fence Installation Ocala FL | Florida §515 Code Compliant',
-    metaDescription: 'Pool fence installation in Ocala and Marion County. Florida §515 code compliant, self-closing magnetic gates, $0 down financing. Same-day estimates. Call (863) 377-0928.',
-    heroTitle: 'Pool Fence Installation in <span class="text-highlight">Ocala, FL</span>',
-    heroSubtitle: 'Florida §515 code-compliant pool fences. Self-closing magnetic gates, 4ft minimum, no climbable rails. Pass your inspection on the first try.',
-    intro: {
-      heading: 'Pass your pool inspection — guaranteed',
-      paragraphs: [
-        'Florida §515 requires every residential pool to have a code-compliant fence. We specialize in pool fences that pass inspection on the first try — no rework, no delays.',
-        'Our pool fences meet all four §515 requirements: minimum 4ft height, no climbable horizontal rails between pickets, self-closing and self-latching gates with magnets, and openings less than 4 inches wide.',
-        'Available in black aluminum or white vinyl, with same-day on-site estimates. Most pool fences install in 2-3 days.',
-      ],
-    },
-    whyCards: [
-      { title: 'FL §515 Compliant', body: 'Designed and installed to meet every Florida pool code requirement. We guarantee your fence passes inspection.' },
-      { title: 'Self-Closing Gates', body: 'Magnetic self-latching gates with adjustable closers. Tested in front of you at handover so you see it works.' },
-      { title: 'Permits Handled', body: 'We pull the Marion County pool fence permit and coordinate the inspection. You don\'t lift a finger.' },
-      { title: 'Same-Day Quotes', body: 'Pool inspection deadline coming up? Call us — we come measure within 24 hours and quote on the spot.' },
-    ],
-    faqs: [
-      { q: 'What does Florida §515 pool code require?', a: '<strong>Four things:</strong> (1) minimum 48-inch height, (2) no climbable horizontal rails between pickets, (3) self-closing self-latching gates with latches at least 54 inches above ground, (4) openings under 4 inches.' },
-      { q: 'How much does a pool fence cost in Ocala?', a: 'Pool fence projects typically run <strong>$3,500 to $9,000</strong> depending on perimeter length. Average in-ground pool fence runs $5,000-$6,500.' },
-      { q: 'How fast can you install a pool fence?', a: 'For urgent inspection deadlines, we can install in <strong>2-3 days</strong> from contract. Standard projects finish in 5-7 days.' },
-      { q: 'Aluminum vs vinyl for pool fences?', a: 'Most Ocala homeowners choose <strong>black aluminum</strong> — it disappears visually around the pool, never rusts, and meets §515 perfectly. White vinyl pool fences work too if you prefer that look.' },
-      { q: 'Do you handle the pool fence permit?', a: 'Yes. We pull the Marion County permit, schedule the inspection, and walk you through the gate self-close test at handover.' },
     ],
   },
 };

@@ -33,23 +33,11 @@ const stylesBySlug: Record<string, { name: string; desc: string }[]> = {
     { name: 'Gothic Cap', desc: 'Decorative cap on each picket' },
     { name: 'Flat Top', desc: 'Modern flat-top pickets' },
   ],
-  'composite-fence': [
-    { name: 'Stone Texture', desc: 'Realistic stacked stone look' },
-    { name: 'Smooth Finish', desc: 'Clean modern smooth surface' },
-    { name: 'Combination', desc: 'Stone bottom + smooth top accent' },
-    { name: 'Custom Heights', desc: '5ft, 6ft, custom on request' },
-  ],
   'aluminum-fence': [
-    { name: '3-Rail Standard', desc: 'Most common — pool & residential' },
+    { name: '3-Rail Standard', desc: 'Most common — residential & decorative' },
     { name: '4-Rail Premium', desc: 'Extra rail for security & strength' },
     { name: 'Spear Top', desc: 'Decorative pointed picket tops' },
-    { name: 'Flat Top', desc: 'Clean modern look — pool perimeter' },
-  ],
-  'pool-fence': [
-    { name: 'Black Aluminum', desc: 'Most popular — disappears visually' },
-    { name: 'White Vinyl Picket', desc: 'Classic white look pool perimeter' },
-    { name: 'Self-Closing Gate', desc: 'Magnetic latch · §515 compliant' },
-    { name: 'Double Gate', desc: 'Wide access for equipment' },
+    { name: 'Flat Top', desc: 'Clean modern perimeter look' },
   ],
 };
 const styles = stylesBySlug[service.slug] || [];
@@ -72,16 +60,6 @@ const galleryBySlug: Record<string, { src: string; alt: string }[]> = {
     { src: '/images/gallery/aluminum-black-yard.webp', alt: 'Black aluminum ornamental fence backyard — Ocala FL' },
     { src: '/images/gallery/aluminum-driveway-gate.webp', alt: 'Black aluminum double driveway gate — The Villages FL' },
     { src: '/images/gallery/aluminum-3-rail.webp', alt: 'Black aluminum 3-rail estate fence — Ocala horse country' },
-  ],
-  'pool-fence': [
-    { src: '/images/gallery/pool-fence-aluminum.webp', alt: 'Pool-code-compliant black aluminum fence — Summerfield FL' },
-    { src: '/images/gallery/pool-fence-screen-enclosure.webp', alt: 'Black aluminum pool fence with screen enclosure — Ocala FL' },
-    { src: '/images/gallery/pool-white-vinyl-picket.webp', alt: 'White vinyl picket pool-code fence with self-closing gate — Ocala FL' },
-  ],
-  'composite-fence': [
-    { src: '/images/gallery/composite-cedar-tone.webp', alt: 'Cedar-tone composite privacy fence with realistic wood grain — Ocala FL' },
-    { src: '/images/gallery/composite-modern-gray.webp', alt: 'Modern charcoal gray horizontal composite fence — Marion County FL' },
-    { src: '/images/gallery/composite-stone-look.webp', alt: 'Stone-look composite fence with stacked-stone texture — Ocala FL' },
   ],
 };
 const galleryImages = galleryBySlug[service.slug] || [];

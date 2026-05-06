@@ -18,12 +18,12 @@ const recentBlogPosts = [...BLOG_POSTS]
 
 const homeGalleryImages = [
   { src: '/images/gallery/vinyl-privacy-tan.webp', alt: 'Tan vinyl privacy fence install in Ocala FL', cat: 'Vinyl Privacy', city: 'Ocala' },
-  { src: '/images/gallery/composite-cedar-tone.webp', alt: 'Cedar-tone composite fence with wood grain — Belleview FL', cat: 'Composite Fence', city: 'Belleview' },
-  { src: '/images/gallery/pool-fence-aluminum.webp', alt: 'Black aluminum pool-code fence in Summerfield FL', cat: 'Pool Fence', city: 'Summerfield' },
+  { src: '/images/gallery/vinyl-privacy-white.webp', alt: 'White vinyl privacy fence with lattice top — Belleview FL', cat: 'Vinyl Privacy', city: 'Belleview' },
+  { src: '/images/gallery/vinyl-privacy-driveway-gate.webp', alt: 'White vinyl privacy fence with double driveway gate — Ocala FL', cat: 'Vinyl Privacy', city: 'Summerfield' },
   { src: '/images/gallery/aluminum-driveway-gate.webp', alt: 'Black aluminum double driveway gate — The Villages FL', cat: 'Aluminum', city: 'The Villages' },
   { src: '/images/gallery/vinyl-picket-white.webp', alt: 'White vinyl picket fence front yard — Silver Springs FL', cat: 'Vinyl Picket', city: 'Silver Springs' },
   { src: '/images/gallery/vinyl-privacy-shadowbox.webp', alt: 'Tan vinyl privacy shadowbox fence — Dunnellon FL', cat: 'Vinyl Privacy', city: 'Dunnellon' },
-  { src: '/images/gallery/composite-modern-gray.webp', alt: 'Modern gray horizontal composite fence — Lady Lake FL', cat: 'Composite Fence', city: 'Lady Lake' },
+  { src: '/images/gallery/aluminum-black-yard.webp', alt: 'Black aluminum ornamental fence — Lady Lake FL', cat: 'Aluminum', city: 'Lady Lake' },
   { src: '/images/gallery/aluminum-3-rail.webp', alt: 'Black aluminum 3-rail estate fence — Marion County FL', cat: 'Aluminum', city: 'Marion County' },
 ];
 
@@ -65,7 +65,7 @@ const localBusinessSchema = {
 const faqs = [
   { q: 'How long does fence installation take in Ocala?', a: 'Most installations are completed in <strong>less than 7 days</strong> from the signed contract. For urgent projects we can install in 2-3 days.' },
   { q: 'Do you offer financing?', a: 'Yes — <strong>$0 down financing</strong> with no credit impact pre-qualification. We partner with Aqua, Synchrony, Affirm, Klarna, Launch, and United Financial. Pre-qualify in 60 seconds.' },
-  { q: 'How long does the materials warranty last?', a: 'Vinyl and composite carry a <strong>lifetime materials warranty</strong> from the manufacturer. Aluminum carries 25+ years. Workmanship is warranted by us for 1 year. Warranty transfers to the next homeowner if you sell.' },
+  { q: 'How long does the materials warranty last?', a: 'Vinyl carries a <strong>lifetime materials warranty</strong> from the manufacturer. Aluminum carries 25+ years. Workmanship is warranted by us for 1 year. Warranty transfers to the next homeowner if you sell.' },
   { q: 'What ZIP codes do you serve?', a: 'We serve all of Marion County (34470-34491), plus The Villages (32162), Lady Lake (32159), and up to 100 miles south of Ocala.' },
   { q: 'Do I need a permit for my fence?', a: 'In unincorporated Marion County, no permit is needed for fences under 6ft. In City of Ocala limits, most fences require a permit. <strong>We handle the permit process for you</strong> either way.' },
   { q: 'What\'s the warranty on materials?', a: 'Lifetime warranty on vinyl and aluminum from the manufacturer. 1-year warranty on workmanship from us. Warranty transfers to the next homeowner if you sell.' },
@@ -74,14 +74,14 @@ const faqs = [
 
 <PageLayout
   title="Fence Installation Ocala FL | $0 Down · Done in Less Than 7 Days"
-  description="Marion County's family-owned fence installation team. Vinyl, composite, aluminum, and pool fences installed in less than 7 days. $0 down financing. Free same-day estimate. Call (863) 377-0928."
+  description="Marion County's family-owned fence installation team. Vinyl and aluminum fences installed in less than 7 days. $0 down financing. Free same-day estimate. Call (863) 377-0928."
   activeNav="Home"
   schemaJsonLd={localBusinessSchema}
 >
   <Hero
     tag="Marion County · Family-Owned · Licensed & Insured"
     title="Fence Installation in <span class='text-highlight'>Ocala, FL</span> — Done in Less Than 7 Days"
-    subtitle="Premium vinyl, composite, aluminum, and pool fence installation across Ocala and Marion County. $0 down financing, same-day estimates, lifetime materials warranty. Most fences installed in less than 7 days."
+    subtitle="Premium vinyl and aluminum fence installation across Ocala and Marion County. $0 down financing, same-day estimates, lifetime materials warranty. Most fences installed in less than 7 days."
     primaryCta={{ label: 'Get Your Quote', href: '/free-estimate' }}
     secondaryCta={{ label: `Call ${BUSINESS.phone}`, href: `tel:${BUSINESS.phoneE164}` }}
   />
@@ -129,7 +129,7 @@ const faqs = [
       <div class="text-center max-w-2xl mx-auto mb-10 lg:mb-14">
         <span class="badge-highlight mb-4">Our Services</span>
         <h2 class="mb-3 text-balance">Fences built for Florida homes</h2>
-        <p class="text-gray-600 text-lg">Five fence types, all installed by our own crew. No subcontractors. Lifetime materials warranty.</p>
+        <p class="text-gray-600 text-lg">Three fence types built for Florida homes. Lifetime materials warranty.</p>
       </div>
 
       <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-6">
@@ -191,14 +191,14 @@ const faqs = [
             Florida is wild. <strong>Bears, coyotes, gators</strong> — they don't stop at property lines. A real fence does.
           </p>
           <p class="text-gray-600 text-base leading-relaxed mb-8">
-            We install premium <strong>vinyl, composite, aluminum, and pool fences</strong> with our own crew — no subcontractors, no shortcuts. Family-owned, locally operated, and built to outlast Florida's weather and wildlife.
+            We install premium <strong>vinyl and aluminum fences</strong> built to outlast Florida's weather and wildlife. Family-owned and locally operated.
           </p>
 
           <!-- Bullet trust list -->
           <ul class="space-y-3 mb-10">
             <li class="flex items-start gap-3">
               <svg class="w-6 h-6 text-primary shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-              <span class="text-gray-700"><strong>Wind-rated</strong> up to 160 MPH (composite + aluminum)</span>
+              <span class="text-gray-700"><strong>Wind-rated</strong> up to 160 MPH (aluminum)</span>
             </li>
             <li class="flex items-start gap-3">
               <svg class="w-6 h-6 text-primary shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
@@ -207,10 +207,6 @@ const faqs = [
             <li class="flex items-start gap-3">
               <svg class="w-6 h-6 text-primary shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
               <span class="text-gray-700"><strong>$0 down financing</strong> — 6 lenders, pre-qualify in 60 seconds</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <svg class="w-6 h-6 text-primary shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-              <span class="text-gray-700"><strong>Same crew start to finish</strong> — no subcontractors, ever</span>
             </li>
           </ul>
 
@@ -455,7 +451,7 @@ const faqs = [
             avatarBg: 'bg-emerald-500',
             time: '2 months ago',
             rating: 5,
-            body: "We needed a pool fence to meet code before our inspection. Andry came out the same day, quoted, installed in a week, and walked us through the gate self-close test. Could not ask for more.",
+            body: "We needed a new aluminum fence around our backyard. Andry came out the same day, quoted on the spot, and installed in less than a week. Clean install, professional team, fair price. Could not ask for more.",
           },
           {
             name: 'Carlos R.',
@@ -817,8 +813,8 @@ const faqs = [
           },
           {
             n: 3,
-            title: 'All Florida Fence Types',
-            body: 'Vinyl, composite fence, hurricane-rated aluminum, and pool-code fences — one team, all materials.',
+            title: 'Florida Fence Specialists',
+            body: 'Vinyl privacy, vinyl picket, and hurricane-rated aluminum — one team, three premium materials, all built for Florida weather.',
           },
           {
             n: 4,
@@ -828,7 +824,7 @@ const faqs = [
           {
             n: 5,
             title: 'Premium Materials Only',
-            body: 'composite fence, premium vinyl, hurricane-rated aluminum. Lifetime materials warranty — no bargain shortcuts.',
+            body: 'Premium vinyl and hurricane-rated aluminum. Lifetime materials warranty — no bargain shortcuts.',
           },
           {
             n: 6,
