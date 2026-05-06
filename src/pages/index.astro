@@ -88,82 +88,34 @@ const faqs = [
 
   <TrustBar />
 
-  <!-- Service Areas — Marion Oaks primary + surrounding areas -->
+  <!-- Service Areas -->
   <section class="section bg-gray-50">
     <div class="container-page">
       <div class="text-center max-w-2xl mx-auto mb-10 lg:mb-14">
         <span class="badge-highlight mb-4">Service Areas</span>
-        <h2 class="mb-3 text-balance">Marion Oaks &amp; surrounding areas</h2>
-        <p class="text-gray-600 text-lg">We're locally based in Marion Oaks — and we serve homeowners across all of Marion County and beyond.</p>
+        <h2 class="mb-3 text-balance">Where we work</h2>
+        <p class="text-gray-600 text-lg">Marion Oaks primary · Marion County · The Villages · 50 miles around Ocala</p>
       </div>
 
-      {/* Marion Oaks — featured primary area card */}
-      {(() => {
-        const primary = BUSINESS.serviceAreas.find((a) => (a as { primary?: boolean }).primary);
-        const others = BUSINESS.serviceAreas.filter((a) => !(a as { primary?: boolean }).primary);
-        return (
-          <>
-            {primary && (
-              <a
-                href={`/areas/${primary.slug}`}
-                class="group relative block aspect-[21/9] sm:aspect-[3/1] lg:aspect-[4/1] overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 mb-6 lg:mb-8"
-              >
-                <img
-                  src={primary.image}
-                  alt={primary.imageAlt}
-                  class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                  loading="lazy"
-                  width="1600"
-                  height="500"
-                />
-                <div class="absolute inset-0 bg-gradient-to-r from-primary-900/95 via-primary-900/70 to-primary-900/40"></div>
-
-                <div class="absolute inset-0 flex items-center">
-                  <div class="container-page max-w-7xl">
-                    <div class="max-w-xl text-white p-6 lg:p-10">
-                      <div class="inline-flex items-center gap-2 bg-highlight text-primary-900 text-xs uppercase tracking-[0.2em] font-extrabold px-3 py-1.5 mb-4 lg:mb-5 shadow-md">
-                        <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                        Our Hometown
-                      </div>
-                      <h3 class="text-3xl lg:text-5xl xl:text-6xl font-extrabold mb-3 lg:mb-4 leading-[1.05] drop-shadow">
-                        {primary.name}, FL
-                      </h3>
-                      <p class="text-white/90 text-base lg:text-lg leading-relaxed mb-4 lg:mb-5 drop-shadow max-w-md">
-                        Same-day estimates · ZIPs {primary.allZips?.join(', ')} · We live and work right here.
-                      </p>
-                      <span class="inline-flex items-center gap-2 text-highlight group-hover:text-white text-xs lg:text-sm uppercase tracking-wider font-extrabold border-b-2 border-highlight group-hover:border-white pb-1 transition-colors">
-                        See Marion Oaks Fence Service
-                        <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"/></svg>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </a>
-            )}
-
-            {/* Surrounding areas grid */}
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 lg:gap-4">
-              {others.map((a) => (
-                <CityCard
-                  slug={a.slug}
-                  name={a.name}
-                  state={a.state}
-                  county={a.county}
-                  primaryZip={a.primaryZip}
-                  image={a.image}
-                  imageAlt={a.imageAlt}
-                />
-              ))}
-            </div>
-          </>
-        );
-      })()}
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5">
+        {BUSINESS.serviceAreas.map((a) => (
+          <CityCard
+            slug={a.slug}
+            name={a.name}
+            state={a.state}
+            county={a.county}
+            primaryZip={a.primaryZip}
+            image={a.image}
+            imageAlt={a.imageAlt}
+          />
+        ))}
+      </div>
 
       {/* Open invitation for areas not listed */}
-      <div class="mt-10 lg:mt-12 max-w-3xl mx-auto text-center bg-white border-2 border-primary/20 p-6 lg:p-8">
+      <div class="mt-10 lg:mt-12 max-w-3xl mx-auto text-center">
         <p class="text-base lg:text-lg text-gray-700 leading-relaxed">
-          <strong class="text-primary-900">Don't see your area?</strong> We serve all of Marion County plus parts of Sumter and Lake County within 50 miles of Ocala. Call us to confirm coverage:
-          <a href={`tel:${BUSINESS.phoneE164}`} class="block mt-3 text-primary hover:text-primary-700 font-extrabold text-xl lg:text-2xl transition-colors">
+          <strong class="text-primary-900">Don't see your area?</strong> We also serve surrounding cities within 50 miles of Ocala. Call us to confirm coverage:
+          <a href={`tel:${BUSINESS.phoneE164}`} class="ml-1 text-primary hover:text-primary-700 font-extrabold transition-colors">
             {BUSINESS.phone}
           </a>
         </p>
