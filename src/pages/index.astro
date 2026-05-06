@@ -88,41 +88,6 @@ const faqs = [
 
   <TrustBar />
 
-  <!-- Service Areas -->
-  <section class="section bg-gray-50">
-    <div class="container-page">
-      <div class="text-center max-w-2xl mx-auto mb-10 lg:mb-14">
-        <span class="badge-highlight mb-4">Service Areas</span>
-        <h2 class="mb-3 text-balance">Where we work</h2>
-        <p class="text-gray-600 text-lg">Marion Oaks primary · Marion County · The Villages · 50 miles around Ocala</p>
-      </div>
-
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5">
-        {BUSINESS.serviceAreas.map((a) => (
-          <CityCard
-            slug={a.slug}
-            name={a.name}
-            state={a.state}
-            county={a.county}
-            primaryZip={a.primaryZip}
-            image={a.image}
-            imageAlt={a.imageAlt}
-          />
-        ))}
-      </div>
-
-      {/* Open invitation for areas not listed */}
-      <div class="mt-10 lg:mt-12 max-w-3xl mx-auto text-center">
-        <p class="text-base lg:text-lg text-gray-700 leading-relaxed">
-          <strong class="text-primary-900">Don't see your area?</strong> We also serve surrounding cities within 50 miles of Ocala. Call us to confirm coverage:
-          <a href={`tel:${BUSINESS.phoneE164}`} class="ml-1 text-primary hover:text-primary-700 font-extrabold transition-colors">
-            {BUSINESS.phone}
-          </a>
-        </p>
-      </div>
-    </div>
-  </section>
-
   <!-- Services -->
   <section class="section">
     <div class="container-page">
@@ -778,6 +743,41 @@ const faqs = [
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/>
           </svg>
         </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service Areas -->
+  <section class="section bg-gray-50">
+    <div class="container-page">
+      <div class="text-center max-w-2xl mx-auto mb-10 lg:mb-14">
+        <span class="badge-highlight mb-4">Service Areas</span>
+        <h2 class="mb-3 text-balance">Where we work</h2>
+        <p class="text-gray-600 text-lg">Marion Oaks primary · Marion County · The Villages · 50 miles around Ocala</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5">
+        {BUSINESS.serviceAreas.map((a) => (
+          <CityCard
+            slug={a.slug}
+            name={a.name}
+            state={a.state}
+            county={a.county}
+            primaryZip={a.primaryZip}
+            image={a.image}
+            imageAlt={a.imageAlt}
+          />
+        ))}
+      </div>
+
+      {/* Open invitation for areas not listed */}
+      <div class="mt-10 lg:mt-12 max-w-3xl mx-auto text-center">
+        <p class="text-base lg:text-lg text-gray-700 leading-relaxed">
+          <strong class="text-primary-900">Don't see your area?</strong> We also serve surrounding cities within 50 miles of Ocala. Call us to confirm coverage:
+          <a href={`tel:${BUSINESS.phoneE164}`} class="ml-1 text-primary hover:text-primary-700 font-extrabold transition-colors">
+            {BUSINESS.phone}
+          </a>
+        </p>
       </div>
     </div>
   </section>
