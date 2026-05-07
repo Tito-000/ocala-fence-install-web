@@ -269,44 +269,52 @@ const faqSchema = {
         <h2 class="mb-3 text-balance">{service.shortName} at a glance</h2>
       </div>
 
-      <div class="bg-white border border-gray-200 shadow-sm max-w-4xl mx-auto">
-        <div class="grid sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-gray-200">
-          {/* Height + Gate Widths */}
-          <div class="p-6 lg:p-8 text-center">
-            <svg class="w-8 h-8 text-primary mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"/></svg>
-            <div class="text-xs uppercase tracking-[0.15em] text-gray-500 font-bold mb-2">Height · Gate Widths</div>
-            <div class="text-sm font-extrabold text-gray-900 leading-tight">{service.heights.join(' · ')} tall<br/><span class="text-xs font-bold text-gray-600">Gates: {(service as any).gateWidths?.join(' / ') || '5ft / 6ft'} wide</span></div>
-          </div>
+      {/* Mobile: swipe hint */}
+      <div class="md:hidden flex items-center justify-center gap-2 mb-3 text-xs text-gray-500 font-medium uppercase tracking-wider">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        <span>Swipe to view all specs</span>
+      </div>
 
-          {/* Colors */}
-          <div class="p-6 lg:p-8 text-center">
-            <div class="flex justify-center gap-1 mb-3">
-              {service.colors.slice(0, 3).map((color) => (
-                <span class={`w-5 h-5 border-2 border-gray-300 ${
-                  color.toLowerCase().includes('black') ? 'bg-gray-900' :
-                  color.toLowerCase().includes('bronze') ? 'bg-amber-800' :
-                  color.toLowerCase().includes('gray') ? 'bg-gray-300' :
-                  color.toLowerCase().includes('cream') ? 'bg-amber-50' :
-                  'bg-white'
-                }`}></span>
-              ))}
+      <div class="overflow-x-auto -mx-4 md:mx-0 px-4 md:px-0">
+        <div class="bg-white border border-gray-200 shadow-sm max-w-4xl mx-auto min-w-[560px]">
+          <div class="grid grid-cols-4 divide-x divide-gray-200">
+            {/* Height + Gate Widths */}
+            <div class="p-4 md:p-6 lg:p-8 text-center">
+              <svg class="w-7 h-7 md:w-8 md:h-8 text-primary mx-auto mb-2 md:mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"/></svg>
+              <div class="text-[10px] md:text-xs uppercase tracking-[0.15em] text-gray-500 font-bold mb-1 md:mb-2">Height · Gates</div>
+              <div class="text-xs md:text-sm font-extrabold text-gray-900 leading-tight">{service.heights.join(' · ')} tall<br/><span class="text-[10px] md:text-xs font-bold text-gray-600">Gates: {(service as any).gateWidths?.join(' / ') || '5ft / 6ft'}</span></div>
             </div>
-            <div class="text-xs uppercase tracking-[0.15em] text-gray-500 font-bold mb-2">Colors</div>
-            <div class="text-sm font-extrabold text-gray-900 leading-tight">{service.colors.join(' · ')}</div>
-          </div>
 
-          {/* Wind rated */}
-          <div class="p-6 lg:p-8 text-center">
-            <svg class="w-8 h-8 text-primary mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.59 4.59A2 2 0 1111 8H2m10.59 11.41A2 2 0 1014 16H2m15.73-8.27A2.5 2.5 0 1119.5 12H2"/></svg>
-            <div class="text-xs uppercase tracking-[0.15em] text-gray-500 font-bold mb-2">Wind Rated</div>
-            <div class="text-base font-extrabold text-gray-900">{service.windRated || 'N/A'}</div>
-          </div>
+            {/* Colors */}
+            <div class="p-4 md:p-6 lg:p-8 text-center">
+              <div class="flex justify-center gap-1 mb-2 md:mb-3">
+                {service.colors.slice(0, 3).map((color) => (
+                  <span class={`w-4 h-4 md:w-5 md:h-5 border-2 border-gray-300 ${
+                    color.toLowerCase().includes('black') ? 'bg-gray-900' :
+                    color.toLowerCase().includes('bronze') ? 'bg-amber-800' :
+                    color.toLowerCase().includes('gray') ? 'bg-gray-300' :
+                    color.toLowerCase().includes('cream') ? 'bg-amber-50' :
+                    'bg-white'
+                  }`}></span>
+                ))}
+              </div>
+              <div class="text-[10px] md:text-xs uppercase tracking-[0.15em] text-gray-500 font-bold mb-1 md:mb-2">Colors</div>
+              <div class="text-xs md:text-sm font-extrabold text-gray-900 leading-tight">{service.colors.join(' · ')}</div>
+            </div>
 
-          {/* Lifespan */}
-          <div class="p-6 lg:p-8 text-center">
-            <svg class="w-8 h-8 text-primary mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
-            <div class="text-xs uppercase tracking-[0.15em] text-gray-500 font-bold mb-2">Lifespan</div>
-            <div class="text-base font-extrabold text-gray-900">{service.lifespan}</div>
+            {/* Wind rated */}
+            <div class="p-4 md:p-6 lg:p-8 text-center">
+              <svg class="w-7 h-7 md:w-8 md:h-8 text-primary mx-auto mb-2 md:mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.59 4.59A2 2 0 1111 8H2m10.59 11.41A2 2 0 1014 16H2m15.73-8.27A2.5 2.5 0 1119.5 12H2"/></svg>
+              <div class="text-[10px] md:text-xs uppercase tracking-[0.15em] text-gray-500 font-bold mb-1 md:mb-2">Wind Rated</div>
+              <div class="text-sm md:text-base font-extrabold text-gray-900">{service.windRated || 'N/A'}</div>
+            </div>
+
+            {/* Lifespan */}
+            <div class="p-4 md:p-6 lg:p-8 text-center">
+              <svg class="w-7 h-7 md:w-8 md:h-8 text-primary mx-auto mb-2 md:mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+              <div class="text-[10px] md:text-xs uppercase tracking-[0.15em] text-gray-500 font-bold mb-1 md:mb-2">Lifespan</div>
+              <div class="text-xs md:text-base font-extrabold text-gray-900 leading-tight">{service.lifespan}</div>
+            </div>
           </div>
         </div>
       </div>
