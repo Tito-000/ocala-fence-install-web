@@ -244,7 +244,7 @@ const faqSchema = {
         <div>
           <h2 class="mb-5 text-balance">{content.intro.heading}</h2>
           {content.intro.paragraphs.map((p) => (
-            <p class="text-gray-700 text-lg leading-relaxed mb-4">{p}</p>
+            <p class="text-gray-700 text-lg leading-relaxed mb-4" set:html={p}></p>
           ))}
         </div>
         <div class="relative">
