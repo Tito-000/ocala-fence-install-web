@@ -319,60 +319,23 @@ const faqSchema = {
       <div class="text-center max-w-2xl mx-auto mb-10">
         <span class="badge-highlight mb-4">Compare</span>
         <h2 class="mb-3 text-balance">Which fence is right for you?</h2>
-        <p class="text-gray-600 text-lg">A side-by-side comparison of all 5 fence types we install.</p>
+        <p class="text-gray-600 text-lg">A side-by-side comparison of all 4 fence types we install.</p>
       </div>
 
-      {/* Mobile: stacked cards (visible <md) */}
-      <div class="md:hidden space-y-4">
-        {BUSINESS.services.map((s) => {
-          const isCurrent = s.slug === service.slug;
-          const privacy = s.slug === 'vinyl-privacy-fence' ? 'Full' :
-                          s.slug === 'composite-fence' ? 'Full' :
-                          s.slug === 'vinyl-picket-fence' ? 'Decorative' :
-                          'See-through';
-          const maintenance = s.slug.includes('aluminum') || s.slug.includes('pool') ? 'None' : 'Hose only';
-          const poolCompliant = s.slug === 'pool-fence' || s.slug === 'aluminum-fence';
-          return (
-            <div class={`bg-white border-2 ${isCurrent ? 'border-primary shadow-lg' : 'border-gray-200'} p-5`}>
-              <div class={`flex items-center justify-between mb-4 pb-3 border-b ${isCurrent ? 'border-primary/30' : 'border-gray-200'}`}>
-                <h3 class={`text-base font-extrabold uppercase tracking-wider ${isCurrent ? 'text-primary' : 'text-gray-900'}`}>{s.shortName}</h3>
-                {isCurrent && (
-                  <span class="text-[10px] uppercase tracking-wider font-extrabold bg-primary text-white px-2 py-1">You're viewing</span>
-                )}
-              </div>
-              <dl class="grid grid-cols-2 gap-x-3 gap-y-3 text-sm">
-                <dt class="text-gray-500 font-medium">Price (avg.)</dt>
-                <dd class={`text-right font-extrabold ${isCurrent ? 'text-primary' : 'text-gray-900'}`}>${(s.priceRange.min / 1000).toFixed(1)}k–${(s.priceRange.max / 1000).toFixed(0)}k</dd>
-                <dt class="text-gray-500 font-medium">Wind Rating</dt>
-                <dd class="text-right font-bold text-gray-800">{s.windRated || '—'}</dd>
-                <dt class="text-gray-500 font-medium">Lifespan</dt>
-                <dd class="text-right font-bold text-gray-800">{s.lifespan}</dd>
-                <dt class="text-gray-500 font-medium">Maintenance</dt>
-                <dd class="text-right font-bold text-gray-800">{maintenance}</dd>
-                <dt class="text-gray-500 font-medium">Privacy</dt>
-                <dd class="text-right font-bold text-gray-800">{privacy}</dd>
-                <dt class="text-gray-500 font-medium">Pool Code</dt>
-                <dd class="text-right">
-                  {poolCompliant ? (
-                    <svg class="w-5 h-5 text-primary inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                  ) : (
-                    <span class="text-gray-300">—</span>
-                  )}
-                </dd>
-              </dl>
-            </div>
-          );
-        })}
+      {/* Mobile: swipe hint */}
+      <div class="md:hidden flex items-center justify-center gap-2 mb-3 text-xs text-gray-500 font-medium uppercase tracking-wider">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        <span>Swipe to compare</span>
       </div>
 
-      {/* Desktop: table (visible md+) */}
-      <div class="hidden md:block overflow-x-auto">
-        <table class="w-full bg-white border border-gray-200 text-sm lg:text-base">
+      {/* Comparison table — same on mobile (with horizontal scroll) and desktop */}
+      <div class="overflow-x-auto -mx-4 md:mx-0 px-4 md:px-0">
+        <table class="w-full bg-white border border-gray-200 text-xs md:text-sm lg:text-base min-w-[560px]">
           <thead>
             <tr class="bg-gray-50 border-b-2 border-gray-200">
-              <th class="text-left p-4 font-extrabold text-gray-700 uppercase tracking-wider text-xs">Feature</th>
+              <th class="text-left p-2.5 md:p-4 font-extrabold text-gray-700 uppercase tracking-wider text-[10px] md:text-xs whitespace-nowrap">Feature</th>
               {BUSINESS.services.map((s) => (
-                <th class={`text-center p-4 font-extrabold uppercase tracking-wider text-xs ${s.slug === service.slug ? 'bg-primary text-white' : 'text-gray-700'}`}>
+                <th class={`text-center p-2.5 md:p-4 font-extrabold uppercase tracking-wider text-[10px] md:text-xs ${s.slug === service.slug ? "bg-primary text-white" : "text-gray-700"}`}>
                   {s.shortName}
                 </th>
               ))}
@@ -380,57 +343,57 @@ const faqSchema = {
           </thead>
           <tbody>
             <tr class="border-b border-gray-100">
-              <td class="p-4 font-semibold text-gray-700">Price (avg.)</td>
+              <td class="p-2.5 md:p-4 font-semibold text-gray-700 whitespace-nowrap">Price (avg.)</td>
               {BUSINESS.services.map((s) => (
-                <td class={`p-4 text-center ${s.slug === service.slug ? 'bg-primary-50 font-extrabold text-primary' : 'text-gray-700'}`}>
+                <td class={`p-2.5 md:p-4 text-center whitespace-nowrap ${s.slug === service.slug ? "bg-primary-50 font-extrabold text-primary" : "text-gray-700"}`}>
                   ${(s.priceRange.min / 1000).toFixed(1)}k–${(s.priceRange.max / 1000).toFixed(0)}k
                 </td>
               ))}
             </tr>
             <tr class="border-b border-gray-100">
-              <td class="p-4 font-semibold text-gray-700">Wind Rating</td>
+              <td class="p-2.5 md:p-4 font-semibold text-gray-700 whitespace-nowrap">Wind Rating</td>
               {BUSINESS.services.map((s) => (
-                <td class={`p-4 text-center ${s.slug === service.slug ? 'bg-primary-50 font-extrabold text-primary' : 'text-gray-700'}`}>
+                <td class={`p-2.5 md:p-4 text-center whitespace-nowrap ${s.slug === service.slug ? "bg-primary-50 font-extrabold text-primary" : "text-gray-700"}`}>
                   {s.windRated || '—'}
                 </td>
               ))}
             </tr>
             <tr class="border-b border-gray-100">
-              <td class="p-4 font-semibold text-gray-700">Lifespan</td>
+              <td class="p-2.5 md:p-4 font-semibold text-gray-700 whitespace-nowrap">Lifespan</td>
               {BUSINESS.services.map((s) => (
-                <td class={`p-4 text-center ${s.slug === service.slug ? 'bg-primary-50 font-extrabold text-primary' : 'text-gray-700'}`}>
+                <td class={`p-2.5 md:p-4 text-center whitespace-nowrap ${s.slug === service.slug ? "bg-primary-50 font-extrabold text-primary" : "text-gray-700"}`}>
                   {s.lifespan}
                 </td>
               ))}
             </tr>
             <tr class="border-b border-gray-100">
-              <td class="p-4 font-semibold text-gray-700">Maintenance</td>
+              <td class="p-2.5 md:p-4 font-semibold text-gray-700 whitespace-nowrap">Maintenance</td>
               {BUSINESS.services.map((s) => (
-                <td class={`p-4 text-center ${s.slug === service.slug ? 'bg-primary-50 font-extrabold text-primary' : 'text-gray-700'}`}>
+                <td class={`p-2.5 md:p-4 text-center whitespace-nowrap ${s.slug === service.slug ? "bg-primary-50 font-extrabold text-primary" : "text-gray-700"}`}>
                   {s.slug.includes('aluminum') || s.slug.includes('pool') ? 'None' : 'Hose only'}
                 </td>
               ))}
             </tr>
             <tr class="border-b border-gray-100">
-              <td class="p-4 font-semibold text-gray-700">Privacy</td>
+              <td class="p-2.5 md:p-4 font-semibold text-gray-700 whitespace-nowrap">Privacy</td>
               {BUSINESS.services.map((s) => {
                 const privacy = s.slug === 'vinyl-privacy-fence' ? 'Full' :
                                 s.slug === 'composite-fence' ? 'Full' :
                                 s.slug === 'vinyl-picket-fence' ? 'Decorative' :
                                 'See-through';
                 return (
-                  <td class={`p-4 text-center ${s.slug === service.slug ? 'bg-primary-50 font-extrabold text-primary' : 'text-gray-700'}`}>
+                  <td class={`p-2.5 md:p-4 text-center whitespace-nowrap ${s.slug === service.slug ? "bg-primary-50 font-extrabold text-primary" : "text-gray-700"}`}>
                     {privacy}
                   </td>
                 );
               })}
             </tr>
             <tr>
-              <td class="p-4 font-semibold text-gray-700">Pool Code</td>
+              <td class="p-2.5 md:p-4 font-semibold text-gray-700 whitespace-nowrap">Pool Code</td>
               {BUSINESS.services.map((s) => {
                 const compliant = s.slug === 'pool-fence' || s.slug === 'aluminum-fence';
                 return (
-                  <td class={`p-4 text-center ${s.slug === service.slug ? 'bg-primary-50' : ''}`}>
+                  <td class={`p-2.5 md:p-4 text-center ${s.slug === service.slug ? "bg-primary-50" : ""}`}>
                     {compliant ? (
                       <svg class="w-6 h-6 text-primary mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
                     ) : (
