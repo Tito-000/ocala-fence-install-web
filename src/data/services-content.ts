@@ -20,7 +20,7 @@ export const SERVICES_CONTENT: Record<string, {
       paragraphs: [
         'Vinyl privacy fences are the #1 choice for Ocala homeowners — and for good reason. They give you full visual privacy from neighbors, block noise, keep pets and kids contained, and look new for 25+ years without painting, staining, or repairs.',
         'Our premium vinyl is engineered for Florida: UV-stabilized so it won\'t yellow under the sun, hurricane-rated to 130 MPH, and backed by a manufacturer\'s lifetime warranty that transfers to the next homeowner if you sell.',
-        'We install in 4ft, 5ft, and 6ft heights, in two colors (white and cream). Most jobs are finished in less than 7 days from signed contract.',
+        'We install our standard 6ft tall privacy panels in two colors (white and cream), with gates available in 5ft or 6ft widths. Most jobs are finished in less than 7 days from signed contract.',
       ],
     },
     whyCards: [
@@ -41,12 +41,12 @@ export const SERVICES_CONTENT: Record<string, {
     metaTitle: 'Vinyl Picket Fence Installation Ocala FL | $0 Down · Lifetime Warranty',
     metaDescription: 'Classic vinyl picket fence installation in Ocala and Marion County. 25-year lifespan, lifetime materials warranty, $0 down financing. Less than 7 days install. Call (863) 377-0928.',
     heroTitle: 'Vinyl Picket Fence Installation in <span class="text-highlight">Ocala, FL</span>',
-    heroSubtitle: 'Classic curb appeal that lasts a lifetime. Decorative vinyl picket fences in 3ft, 4ft, and 5ft heights. $0 down financing, lifetime warranty.',
+    heroSubtitle: 'Classic curb appeal that lasts a lifetime. Decorative 6ft tall vinyl picket fences with 5ft or 6ft wide gates. $0 down financing, lifetime warranty.',
     intro: {
       heading: 'Curb appeal that lasts a lifetime',
       paragraphs: [
         'A vinyl picket fence adds instant character and curb appeal to any Ocala home — without the maintenance headaches of wood. Our premium vinyl pickets give you the classic look you want, with the durability you need in Florida.',
-        'Available in 3ft, 4ft, and 5ft heights, with white or cream finishes. Perfect for front yards, garden borders, pool decoration, and pet containment without blocking views.',
+        'Standard 6ft tall panels in white or cream finishes, with gates available in 5ft or 6ft widths. Perfect for front yards, garden borders, pool decoration, and pet containment without blocking views.',
         'Like all our vinyl, it carries a lifetime materials warranty and never needs painting. Most installations finish in less than 7 days.',
       ],
     },
@@ -57,8 +57,8 @@ export const SERVICES_CONTENT: Record<string, {
       { title: 'Pet & Garden Friendly', body: 'Spacing keeps small dogs in without blocking views. Great for front yards and decorative borders.' },
     ],
     faqs: [
-      { q: 'How tall do vinyl picket fences come?', a: 'We install <strong>3ft, 4ft, and 5ft</strong> heights. 3ft is most common for front yards. 4-5ft is better if you have small pets to contain.' },
-      { q: 'Will vinyl picket keep my dog in?', a: 'For small to medium dogs, yes — pickets are spaced narrow enough. For larger or jumpy dogs, we recommend 4-5ft height with closer picket spacing or a privacy fence.' },
+      { q: 'How tall do vinyl picket fences come?', a: 'We install <strong>6ft tall</strong> picket fences as standard, with gates in <strong>5ft or 6ft widths</strong>. The full height gives you reliable pet containment plus the classic decorative look.' },
+      { q: 'Will vinyl picket keep my dog in?', a: 'Yes. Our 6ft tall pickets are spaced narrow enough to keep small to medium dogs in. For larger dogs that jump, we recommend a vinyl privacy fence instead.' },
       { q: 'Can I install a picket fence in HOA neighborhoods?', a: 'Most Ocala HOAs allow white or cream vinyl picket. We handle the HOA approval paperwork as part of your project.' },
       { q: 'How does vinyl compare to wood picket?', a: 'Vinyl costs slightly more upfront but lasts <strong>3-4x longer</strong>, never needs paint or stain, and won\'t rot, warp, or attract termites. Total cost over 20 years is much lower.' },
       { q: 'How long does picket fence installation take?', a: 'Most picket projects finish in <strong>3-5 days</strong>. Smaller jobs can be done in 1-2 days.' },
@@ -73,7 +73,7 @@ export const SERVICES_CONTENT: Record<string, {
       heading: 'Modern, low-maintenance, hurricane-tough',
       paragraphs: [
         'Aluminum is the modern choice for Ocala homeowners who want sleek black fence lines without sacrificing strength. Pool-code compliant, hurricane-rated, and rust-proof for 50+ years.',
-        'Available in 4ft, 5ft, and 6ft heights. The matte black powder-coat finish never rusts, never peels, and never needs painting.',
+        'Standard 6ft tall panels with gates in 5ft or 6ft widths. The matte black powder-coat finish never rusts, never peels, and never needs painting.',
         'Perfect for pool perimeters (meets Florida §515 code), front-yard accents, side yards, and any property where you want the fence to disappear into the landscape.',
       ],
     },
@@ -100,7 +100,7 @@ export const SERVICES_CONTENT: Record<string, {
       heading: 'Marion County\'s most requested fence',
       paragraphs: [
         'Dura Fence is the fence Ocala homeowners ask for the most. It combines the premium look of a high-end residential fence with the engineering toughness to outlast Florida hurricanes — all backed by a lifetime warranty.',
-        'Available in three colors: <strong>White</strong> for classic curb appeal, <strong>Bronze</strong> for a warm modern look, and <strong>Black</strong> for sleek contemporary homes. Heights of 5ft and 6ft, perfect for backyard privacy and front-yard statements.',
+        'Available in three colors: <strong>White</strong> for classic curb appeal, <strong>Bronze</strong> for a warm modern look, and <strong>Black</strong> for sleek contemporary homes. Standard 6ft tall panels with gates in 5ft or 6ft widths, perfect for backyard privacy and front-yard statements.',
         'Hurricane-rated to 160 MPH and engineered to never warp, rot, fade, or attract termites. Most installs finish in 5-7 days from signed contract.',
       ],
     },
