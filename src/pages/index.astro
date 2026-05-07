@@ -331,29 +331,30 @@ const faqs = [
           </ul>
         </div>
 
-        {/* Real video — replaces placeholder */}
-        <div class="relative flex flex-col justify-center">
-          <div class="relative aspect-video w-full rounded-none overflow-hidden shadow-2xl bg-black group">
-            <video
-              id="why-choose-video"
-              class="w-full h-full object-contain bg-black"
-              controls
-              playsinline
-              preload="metadata"
-              poster="/videos/ocala-fence-explainer-poster.jpg"
-              aria-label="Ocala Fence Install — explainer video showing the 7-day install process"
-            >
-              <source src="/videos/ocala-fence-explainer-720p.mp4" type="video/mp4" />
-              <source src="/videos/ocala-fence-explainer.mp4" type="video/mp4" />
-            </video>
+        {/* Video card (poster only) — opens fullscreen modal on click */}
+        <div class="relative flex flex-col">
+          <button
+            type="button"
+            id="open-video-modal"
+            class="relative flex-1 min-h-[400px] rounded-none overflow-hidden shadow-2xl bg-black group cursor-pointer w-full text-left"
+            aria-label="Play explainer video"
+          >
+            {/* Poster image fills the card with cover */}
+            <img
+              src="/videos/ocala-fence-explainer-poster.jpg"
+              alt="Ocala Fence Install team"
+              class="absolute inset-0 w-full h-full object-cover"
+              loading="lazy"
+            />
 
-            {/* Play overlay (hidden once user clicks) */}
-            <button
-              type="button"
-              class="play-overlay absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-primary-900/60 via-primary-700/40 to-primary-900/70 group-hover:from-primary-900/40 group-hover:to-primary-900/55 transition-all cursor-pointer"
-              aria-label="Play video"
-              onclick="const v=document.getElementById('why-choose-video'); v.play(); this.style.display='none';"
-            >
+            {/* Gradient overlay */}
+            <div class="absolute inset-0 bg-gradient-to-br from-primary-900/55 via-primary-700/30 to-primary-900/65 group-hover:from-primary-900/35 group-hover:to-primary-900/50 transition-all"></div>
+
+            {/* Subtle pattern */}
+            <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 1px 1px, white 1px, transparent 0); background-size: 24px 24px;"></div>
+
+            {/* Play button + label */}
+            <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6">
               <div class="w-20 h-20 lg:w-24 lg:h-24 rounded-full bg-white/95 flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform mb-5">
                 <svg class="w-10 h-10 lg:w-12 lg:h-12 text-primary ml-2" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M8 5v14l11-7z"/>
@@ -362,11 +363,11 @@ const faqs = [
               <p class="text-white text-sm lg:text-base font-bold uppercase tracking-wider drop-shadow">
                 Watch how we work
               </p>
-              <p class="text-white/80 text-xs lg:text-sm mt-2 font-semibold">
+              <p class="text-white/85 text-xs lg:text-sm mt-2 font-semibold drop-shadow">
                 35 sec · Same crew · Done in &lt; 7 days
               </p>
-            </button>
-          </div>
+            </div>
+          </button>
 
           {/* Floating accent badge */}
           <div class="hidden md:block absolute -bottom-4 -right-4 bg-white rounded-none shadow-2xl px-5 py-3 border-l-4 border-highlight z-10">
@@ -1031,4 +1032,80 @@ const faqs = [
   </section>
 
   <FinalCTA />
+
+  {/* ─────────────────────────────────────────────────────
+       VIDEO MODAL — opens semi-fullscreen on play click
+       ───────────────────────────────────────────────────── */}
+  <div
+    id="video-modal"
+    class="fixed inset-0 z-[200] hidden items-center justify-center bg-black/90 backdrop-blur-sm p-4 lg:p-8"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Video player"
+  >
+    <button
+      type="button"
+      id="close-video-modal"
+      class="absolute top-4 right-4 lg:top-6 lg:right-6 w-12 h-12 lg:w-14 lg:h-14 rounded-full bg-white text-primary hover:bg-highlight hover:text-white flex items-center justify-center shadow-2xl transition-colors z-10"
+      aria-label="Close video"
+    >
+      <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+
+    <div class="relative w-full max-w-6xl aspect-video shadow-2xl rounded-lg overflow-hidden bg-black">
+      <video
+        id="modal-video"
+        class="w-full h-full object-contain"
+        controls
+        playsinline
+        preload="metadata"
+        poster="/videos/ocala-fence-explainer-poster.jpg"
+      >
+        <source src="/videos/ocala-fence-explainer-720p.mp4" type="video/mp4" />
+        <source src="/videos/ocala-fence-explainer.mp4" type="video/mp4" />
+      </video>
+    </div>
+  </div>
+
+  <script is:inline>
+    (() => {
+      const opener = document.getElementById('open-video-modal');
+      const modal  = document.getElementById('video-modal');
+      const closer = document.getElementById('close-video-modal');
+      const video  = document.getElementById('modal-video');
+
+      if (!opener || !modal || !closer || !video) return;
+
+      const open = () => {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+        // Auto-play once visible
+        video.currentTime = 0;
+        video.play().catch(() => { /* user-gesture required on some mobile */ });
+      };
+
+      const close = () => {
+        video.pause();
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.body.style.overflow = '';
+      };
+
+      opener.addEventListener('click', open);
+      closer.addEventListener('click', close);
+
+      // Click outside the video closes the modal
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) close();
+      });
+
+      // ESC closes
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !modal.classList.contains('hidden')) close();
+      });
+    })();
+  </script>
 </PageLayout>
