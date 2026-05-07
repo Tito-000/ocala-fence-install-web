@@ -331,14 +331,29 @@ const faqs = [
           </ul>
         </div>
 
-        {/* Video placeholder right — stretches to match left column height */}
+        {/* Real video — replaces placeholder */}
         <div class="relative flex flex-col">
-          <div class="relative flex-1 min-h-[400px] rounded-none overflow-hidden shadow-2xl bg-gradient-to-br from-primary-900 via-primary-700 to-primary-900 group cursor-pointer">
-            {/* Subtle pattern */}
-            <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 1px 1px, white 1px, transparent 0); background-size: 24px 24px;"></div>
+          <div class="relative flex-1 min-h-[400px] rounded-none overflow-hidden shadow-2xl bg-black group">
+            <video
+              id="why-choose-video"
+              class="w-full h-full object-cover"
+              controls
+              playsinline
+              preload="metadata"
+              poster="/videos/ocala-fence-explainer-poster.jpg"
+              aria-label="Ocala Fence Install — explainer video showing the 7-day install process"
+            >
+              <source src="/videos/ocala-fence-explainer-720p.mp4" type="video/mp4" />
+              <source src="/videos/ocala-fence-explainer.mp4" type="video/mp4" />
+            </video>
 
-            {/* Play button */}
-            <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6">
+            {/* Play overlay (hidden once user clicks) */}
+            <button
+              type="button"
+              class="play-overlay absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-primary-900/60 via-primary-700/40 to-primary-900/70 group-hover:from-primary-900/40 group-hover:to-primary-900/55 transition-all cursor-pointer"
+              aria-label="Play video"
+              onclick="const v=document.getElementById('why-choose-video'); v.play(); this.style.display='none';"
+            >
               <div class="w-20 h-20 lg:w-24 lg:h-24 rounded-full bg-white/95 flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform mb-5">
                 <svg class="w-10 h-10 lg:w-12 lg:h-12 text-primary ml-2" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M8 5v14l11-7z"/>
@@ -347,14 +362,14 @@ const faqs = [
               <p class="text-white text-sm lg:text-base font-bold uppercase tracking-wider drop-shadow">
                 Watch how we work
               </p>
-              <p class="text-white/70 text-xs lg:text-sm mt-2 italic">
-                (Video coming soon)
+              <p class="text-white/80 text-xs lg:text-sm mt-2 font-semibold">
+                35 sec · Same crew · Done in &lt; 7 days
               </p>
-            </div>
+            </button>
           </div>
 
           {/* Floating accent badge */}
-          <div class="hidden md:block absolute -bottom-4 -right-4 bg-white rounded-none shadow-2xl px-5 py-3 border-l-4 border-highlight">
+          <div class="hidden md:block absolute -bottom-4 -right-4 bg-white rounded-none shadow-2xl px-5 py-3 border-l-4 border-highlight z-10">
             <div class="text-2xl font-extrabold text-primary leading-none">5+ years</div>
             <div class="text-xs text-gray-600 mt-1 font-semibold uppercase tracking-wider">in Marion County</div>
           </div>
