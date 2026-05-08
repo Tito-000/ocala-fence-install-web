@@ -59,12 +59,12 @@ const { activeNav } = Astro.props;
 
         <!-- CTAs (right) — mobile: WS icon (44h) | Free Quote (44h primary) | Hamburger (44h subtle) -->
         <div class="flex items-center gap-1.5 lg:gap-2 shrink-0">
-          {/* Mobile: WhatsApp icon (secondary action) */}
+          {/* Mobile: WhatsApp icon (branded — primary green) */}
           <a
             href={`https://wa.me/${BUSINESS.whatsappE164}?text=${encodeURIComponent("Hi! I'm interested in a fence estimate for my property in Ocala.")}`}
             target="_blank"
             rel="noopener"
-            class="lg:hidden inline-flex items-center justify-center h-11 w-11 bg-[#25D366] hover:bg-[#1eb958] text-white shadow-sm transition-colors"
+            class="lg:hidden inline-flex items-center justify-center h-11 w-11 bg-primary hover:bg-primary-700 text-white border border-highlight/30 hover:border-highlight/60 transition-colors"
             aria-label="WhatsApp Andry"
             data-track="click_whatsapp"
           >
@@ -73,10 +73,10 @@ const { activeNav } = Astro.props;
             </svg>
           </a>
 
-          {/* Mobile: PRIMARY Free Quote CTA */}
+          {/* Mobile: PRIMARY Free Quote CTA — gold on dark = high contrast hero CTA */}
           <a
             href="/free-estimate"
-            class="lg:hidden inline-flex items-center gap-1.5 h-11 bg-primary hover:bg-primary-700 text-white font-extrabold uppercase tracking-wider text-[13px] px-3.5 rounded-none shadow-md transition-colors whitespace-nowrap"
+            class="lg:hidden inline-flex items-center gap-1.5 h-11 bg-highlight hover:bg-highlight-400 text-primary-900 font-extrabold uppercase tracking-wider text-[13px] px-3.5 rounded-none shadow-md transition-colors whitespace-nowrap"
           >
             <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
               <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
@@ -108,10 +108,10 @@ const { activeNav } = Astro.props;
             </button>
           </form>
 
-          <!-- Mobile menu toggle (subtle, doesn't compete with primary CTAs) -->
+          <!-- Mobile menu toggle (subtle, branded gold tint) -->
           <button
             type="button"
-            class="lg:hidden inline-flex items-center justify-center h-11 w-11 bg-white/10 hover:bg-highlight/30 text-highlight border border-white/15 hover:border-highlight/50 transition-colors"
+            class="lg:hidden inline-flex items-center justify-center h-11 w-11 bg-transparent hover:bg-highlight/15 text-highlight border border-highlight/30 hover:border-highlight transition-colors"
             aria-controls="mobile-menu"
             aria-expanded="false"
             id="mobile-menu-toggle"
