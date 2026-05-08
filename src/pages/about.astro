@@ -99,19 +99,34 @@ const breadcrumbSchema = {
         </div>
 
         <div class="relative">
-          <div class="relative aspect-video overflow-hidden shadow-2xl border-4 border-primary group cursor-pointer">
+          <button
+            type="button"
+            id="open-video-modal"
+            class="relative aspect-video w-full overflow-hidden shadow-2xl border-4 border-primary group cursor-pointer text-left"
+            aria-label="Play explainer video"
+          >
             <img
-              src="/images/about/founder-portrait.webp"
-              alt="Andry Ramírez, founder of Ocala Fence Install"
+              src="/videos/ocala-fence-explainer-poster.jpg"
+              alt="Ocala Fence Install — Andry and team"
               class="w-full h-full object-cover"
               loading="lazy"
             />
-            <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors flex items-center justify-center">
-              <div class="w-20 h-20 lg:w-24 lg:h-24 rounded-full bg-white/95 flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform">
-                <svg class="w-8 h-8 lg:w-10 lg:h-10 text-red-600 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            <div class="absolute inset-0 bg-gradient-to-br from-primary-900/45 via-primary-700/25 to-primary-900/55 group-hover:from-primary-900/30 group-hover:to-primary-900/45 transition-all flex flex-col items-center justify-center text-center p-6">
+              <div class="relative mb-4">
+                <span class="absolute inset-0 rounded-full bg-white/30 video-ring-pulse"></span>
+                <span class="absolute inset-0 rounded-full bg-white/20 video-ring-pulse" style="animation-delay: 0.5s;"></span>
+                <div class="relative w-20 h-20 lg:w-24 lg:h-24 rounded-full bg-white flex items-center justify-center shadow-[0_20px_60px_-10px_rgba(0,0,0,0.6)] group-hover:scale-110 transition-transform duration-300">
+                  <svg class="w-9 h-9 lg:w-11 lg:h-11 text-primary ml-1.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                </div>
               </div>
+              <p class="text-white text-sm lg:text-base font-extrabold uppercase tracking-[0.15em] drop-shadow-lg">
+                Watch how we work
+              </p>
+              <p class="text-white/90 text-xs lg:text-sm mt-1.5 font-semibold drop-shadow tracking-wide">
+                35 sec · Same crew · Done in &lt; 7 days
+              </p>
             </div>
-          </div>
+          </button>
         </div>
       </div>
     </div>
@@ -416,4 +431,69 @@ const breadcrumbSchema = {
     title="Ready for your fence estimate?"
     subtitle="Same-day quote · $0 down financing · Less than 7 days install"
   />
+
+  {/* ─── VIDEO MODAL — semi-fullscreen player ─── */}
+  <div
+    id="video-modal"
+    class="fixed inset-0 z-[200] hidden items-center justify-center bg-black/90 backdrop-blur-sm p-4 lg:p-8"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Video player"
+  >
+    <button
+      type="button"
+      id="close-video-modal"
+      class="absolute top-4 right-4 lg:top-6 lg:right-6 w-12 h-12 lg:w-14 lg:h-14 rounded-full bg-white text-primary hover:bg-highlight hover:text-white flex items-center justify-center shadow-2xl transition-colors z-10"
+      aria-label="Close video"
+    >
+      <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+
+    <div class="relative w-full max-w-6xl aspect-video shadow-2xl rounded-lg overflow-hidden bg-black">
+      <video
+        id="modal-video"
+        class="w-full h-full object-contain"
+        controls
+        playsinline
+        preload="metadata"
+        poster="/videos/ocala-fence-explainer-poster.jpg"
+      >
+        <source src="/videos/ocala-fence-explainer-720p.mp4" type="video/mp4" />
+        <source src="/videos/ocala-fence-explainer.mp4" type="video/mp4" />
+      </video>
+    </div>
+  </div>
+
+  <script is:inline>
+    (() => {
+      const opener = document.getElementById('open-video-modal');
+      const modal  = document.getElementById('video-modal');
+      const closer = document.getElementById('close-video-modal');
+      const video  = document.getElementById('modal-video');
+      if (!opener || !modal || !closer || !video) return;
+
+      const open = () => {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+        video.currentTime = 0;
+        video.play().catch(() => {});
+      };
+      const close = () => {
+        video.pause();
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.body.style.overflow = '';
+      };
+
+      opener.addEventListener('click', open);
+      closer.addEventListener('click', close);
+      modal.addEventListener('click', (e) => { if (e.target === modal) close(); });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !modal.classList.contains('hidden')) close();
+      });
+    })();
+  </script>
 </PageLayout>
