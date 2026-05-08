@@ -160,27 +160,46 @@
     }
   }
 
+  /* Trust strip — horizontal scroll on mobile, hide scrollbar */
+  .trust-strip {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    scroll-padding-left: 1rem;
+  }
+  .trust-strip::-webkit-scrollbar {
+    display: none;
+  }
+
   /* Trust badges (5 brand promises strip) */
   .trust-badge {
     @apply flex flex-col items-center text-center px-3 py-5 rounded-lg transition-all duration-300;
     color: var(--color-primary);
+    flex: 0 0 auto;
+    width: 140px;
+    scroll-snap-align: center;
+  }
+  @media (min-width: 1024px) {
+    .trust-badge {
+      width: auto;
+      flex: 1 1 0;
+    }
   }
   .trust-badge:hover {
     background-color: rgba(19, 98, 41, 0.04);
     transform: translateY(-2px);
   }
   .trust-badge-icon {
-    width: 56px;
-    height: 56px;
+    width: 48px;
+    height: 48px;
     color: var(--color-primary);
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     transition: transform 0.3s ease;
   }
   .trust-badge:hover .trust-badge-icon {
     transform: scale(1.08);
   }
   .trust-badge-title {
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 800;
     line-height: 1.2;
     color: #134529;
@@ -189,7 +208,7 @@
     margin-bottom: 6px;
   }
   .trust-badge-sub {
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 600;
     color: #6b7280;
     line-height: 1.3;
