@@ -111,7 +111,7 @@ export const CITIES_CONTENT: Record<string, {
     whyLocal: [
       { title: 'HOA Specialists', body: 'We work with Stonecrest, Del Webb, and Spruce Creek HOAs every week. We know exactly what they approve.' },
       { title: 'Pool-Code Pros', body: 'Most Summerfield homes have pools. Our aluminum fences meet Florida §515 code on the first inspection.' },
-      { title: 'Family-Owned Local', body: 'No call center, no out-of-state bosses. Andry direct.' },
+      { title: 'Family-Owned Local', body: 'No call center, no out-of-state bosses. Andri direct.' },
     ],
     faqs: [
       { q: 'Do you work with Stonecrest HOA?', a: 'Yes. We\'ve installed fences across Stonecrest for years. We know their approved colors, heights, and material specs. We handle the HOA submission paperwork.' },
@@ -188,7 +188,7 @@ export const CITIES_CONTENT: Record<string, {
     whyLocal: [
       { title: 'Villages HOA Pros', body: 'We know what each Villages HOA approves — colors, heights, materials. We submit the paperwork for you.' },
       { title: 'Pool-Code Specialists', body: 'Florida §515 compliant aluminum pool fences with self-closing magnetic gates. Pass inspection on the first try.' },
-      { title: 'No Out-of-State Bosses', body: 'Andry lives in Florida, knows Florida code, and runs every Villages job personally.' },
+      { title: 'No Out-of-State Bosses', body: 'Andri lives in Florida, knows Florida code, and runs every Villages job personally.' },
     ],
     faqs: [
       { q: 'Do you work with The Villages HOA approvals?', a: 'Yes. Every Villages district has its own HOA (ARC). We\'ve submitted approvals across <strong>Bonita, Buttonwood, Pine Ridge, Hadley</strong>, and most other villages. We handle the paperwork.' },

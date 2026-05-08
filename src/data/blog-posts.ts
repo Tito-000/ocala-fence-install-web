@@ -16,7 +16,7 @@ export type BlogPost = {
   body: string; // HTML
 };
 
-const ANDRY = { name: 'Andry Ramírez', role: 'Founder, Ocala Fence Install' };
+const ANDRY = { name: 'Andri Ramírez', role: 'Founder, Ocala Fence Install' };
 
 export const BLOG_POSTS: BlogPost[] = [
   {
