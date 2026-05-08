@@ -59,7 +59,20 @@ const { activeNav } = Astro.props;
 
         <!-- CTAs (right) -->
         <div class="flex items-center gap-2 shrink-0">
-          <a href="/free-estimate" class="hidden sm:inline-flex items-center bg-primary hover:bg-primary-700 text-white font-bold uppercase tracking-wider text-xs lg:text-sm px-4 lg:px-6 py-3 lg:py-3.5 rounded-none shadow transition-colors">
+          {/* Mobile: phone icon (quick call) */}
+          <a
+            href={`tel:${BUSINESS.phoneE164}`}
+            class="lg:hidden inline-flex items-center justify-center w-11 h-11 rounded-full bg-highlight/15 hover:bg-highlight/25 text-highlight border border-highlight/40 transition-colors"
+            aria-label={`Call ${BUSINESS.phone}`}
+            data-track="click_phone"
+          >
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+            </svg>
+          </a>
+
+          {/* Desktop: Free Estimate button */}
+          <a href="/free-estimate" class="hidden lg:inline-flex items-center bg-primary hover:bg-primary-700 text-white font-bold uppercase tracking-wider text-xs lg:text-sm px-4 lg:px-6 py-3 lg:py-3.5 rounded-none shadow transition-colors">
             Get Your Free Estimate
           </a>
 
@@ -85,7 +98,7 @@ const { activeNav } = Astro.props;
           <!-- Mobile menu toggle -->
           <button
             type="button"
-            class="lg:hidden inline-flex items-center justify-center p-2 rounded-none text-white hover:bg-white/10"
+            class="lg:hidden inline-flex items-center justify-center w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
             aria-controls="mobile-menu"
             aria-expanded="false"
             id="mobile-menu-toggle"
@@ -287,6 +300,22 @@ const { activeNav } = Astro.props;
 
   <!-- MOBILE MENU -->
   <div id="mobile-menu" class="lg:hidden hidden border-t border-gray-200 bg-white">
+    {/* Featured CTA at the top of the mobile menu */}
+    <div class="px-4 pt-4 pb-3 bg-gradient-to-b from-primary-900/5 to-transparent border-b border-gray-100">
+      <a
+        href="/free-estimate"
+        class="flex items-center justify-center gap-2 w-full bg-primary hover:bg-primary-700 text-white font-extrabold uppercase tracking-wider text-sm px-6 py-4 rounded-md shadow-lg transition-all"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+        </svg>
+        Get Your Free Estimate
+      </a>
+      <p class="text-center text-[11px] uppercase tracking-wider text-gray-500 font-bold mt-2">
+        Same-day quote · No obligation
+      </p>
+    </div>
+
     <nav class="container-page py-4 space-y-1" aria-label="Mobile primary">
       {PRIMARY_NAV.map((item) => (
         <details class="group">
@@ -305,12 +334,12 @@ const { activeNav } = Astro.props;
           )}
         </details>
       ))}
-      <div class="pt-4 mt-4 border-t border-gray-200 space-y-2">
-        <a href={`tel:${BUSINESS.phoneE164}`} class="btn-outline w-full" data-track="click_phone">
+      <div class="pt-4 mt-4 border-t border-gray-200">
+        <a href={`tel:${BUSINESS.phoneE164}`} class="flex items-center justify-center gap-2 w-full border-2 border-primary text-primary font-bold uppercase tracking-wider text-sm px-6 py-3 rounded-md hover:bg-primary hover:text-white transition-colors" data-track="click_phone">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+          </svg>
           Call {BUSINESS.phone}
-        </a>
-        <a href="/free-estimate" class="btn-primary w-full">
-          Free Estimate
         </a>
       </div>
     </nav>
