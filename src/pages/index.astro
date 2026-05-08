@@ -280,23 +280,76 @@ const faqs = [
     </div>
   </section>
 
-  <!-- Trust Strip — placeholder for certifications/brand logos (Andry to provide real ones) -->
+  <!-- Trust Strip — brand promises (5 verified badges) -->
   <section class="py-12 lg:py-16 bg-white border-y border-gray-200">
     <div class="container-page">
-      <p class="text-center text-xs uppercase tracking-[0.25em] text-gray-500 font-bold mb-8">Trusted &amp; Certified</p>
+      <p class="text-center text-xs uppercase tracking-[0.25em] text-gray-500 font-bold mb-10">Trusted &amp; Certified</p>
 
-      {/* Placeholder logos — to be replaced with real certifications when Andry provides them */}
-      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 lg:gap-10 items-center max-w-5xl mx-auto">
-        {[1, 2, 3, 4, 5].map(() => (
-          <div class="flex items-center justify-center h-20 px-4 border-2 border-dashed border-gray-200 rounded-none bg-gray-50/50">
-            <span class="text-xs uppercase tracking-wider text-gray-400 text-center">Logo<br/>placeholder</span>
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-5 lg:gap-8 items-stretch max-w-6xl mx-auto">
+
+        {/* 1. Florida State Licensed */}
+        <div class="trust-badge group">
+          <div class="trust-badge-icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M24 4L6 12V24C6 33 12 41 24 44C36 41 42 33 42 24V12L24 4Z" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" fill="currentColor" fill-opacity="0.08"/>
+              <path d="M16 24L21 29L32 18" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
           </div>
-        ))}
-      </div>
+          <div class="trust-badge-title">Florida<br/>Licensed</div>
+          <div class="trust-badge-sub">DBPR · State of FL</div>
+        </div>
 
-      <p class="text-center text-xs text-gray-400 mt-6 italic">
-        Logos to be added: FL Contractor License · Insurance Provider · Composite Fence Certified · BBB · Marion County Chamber
-      </p>
+        {/* 2. Fully Insured */}
+        <div class="trust-badge group">
+          <div class="trust-badge-icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M24 4C24 4 8 10 8 18V26C8 36 16 42 24 44C32 42 40 36 40 26V18C40 10 24 4 24 4Z" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" fill="currentColor" fill-opacity="0.08"/>
+              <path d="M24 16V28M18 22H30" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="trust-badge-title">Fully<br/>Insured</div>
+          <div class="trust-badge-sub">Liability + Workers Comp</div>
+        </div>
+
+        {/* 3. Lifetime Materials Warranty */}
+        <div class="trust-badge group">
+          <div class="trust-badge-icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="24" cy="20" r="14" stroke="currentColor" stroke-width="2.5" fill="currentColor" fill-opacity="0.08"/>
+              <path d="M14 32L10 44L18 40L24 44L30 40L38 44L34 32" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+              <path d="M24 14L26.5 19L32 19.5L28 23L29 28.5L24 26L19 28.5L20 23L16 19.5L21.5 19L24 14Z" fill="currentColor"/>
+            </svg>
+          </div>
+          <div class="trust-badge-title">Lifetime<br/>Warranty</div>
+          <div class="trust-badge-sub">On materials · Transferable</div>
+        </div>
+
+        {/* 4. Same-Day Estimate */}
+        <div class="trust-badge group">
+          <div class="trust-badge-icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="24" cy="24" r="18" stroke="currentColor" stroke-width="2.5" fill="currentColor" fill-opacity="0.08"/>
+              <path d="M24 14V24L31 28" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M40 8L44 12M8 8L4 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="trust-badge-title">Same-Day<br/>Estimate</div>
+          <div class="trust-badge-sub">Mon–Sun · Free on-site</div>
+        </div>
+
+        {/* 5. Bilingual / Hablamos Español */}
+        <div class="trust-badge group">
+          <div class="trust-badge-icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M24 6C13 6 4 13 4 22C4 27 7 31 11 34V42L19 38C20.6 38.3 22.3 38.5 24 38.5C35 38.5 44 31.5 44 22.5C44 13.5 35 6 24 6Z" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" fill="currentColor" fill-opacity="0.08"/>
+              <text x="24" y="27" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="800" fill="currentColor">EN/ES</text>
+            </svg>
+          </div>
+          <div class="trust-badge-title">Bilingual<br/>Team</div>
+          <div class="trust-badge-sub">Hablamos español</div>
+        </div>
+
+      </div>
     </div>
   </section>
 
