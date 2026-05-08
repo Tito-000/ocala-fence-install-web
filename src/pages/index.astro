@@ -355,15 +355,20 @@ const faqs = [
 
             {/* Play button + label */}
             <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6">
-              <div class="w-20 h-20 lg:w-24 lg:h-24 rounded-full bg-white/95 flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform mb-5">
-                <svg class="w-10 h-10 lg:w-12 lg:h-12 text-primary ml-2" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M8 5v14l11-7z"/>
-                </svg>
+              {/* Pulsing rings */}
+              <div class="relative mb-5">
+                <span class="absolute inset-0 rounded-full bg-white/30 video-ring-pulse"></span>
+                <span class="absolute inset-0 rounded-full bg-white/20 video-ring-pulse" style="animation-delay: 0.5s;"></span>
+                <div class="relative w-24 h-24 lg:w-28 lg:h-28 rounded-full bg-white flex items-center justify-center shadow-[0_20px_60px_-10px_rgba(0,0,0,0.6)] group-hover:scale-110 transition-transform duration-300">
+                  <svg class="w-11 h-11 lg:w-14 lg:h-14 text-primary ml-1.5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                </div>
               </div>
-              <p class="text-white text-sm lg:text-base font-bold uppercase tracking-wider drop-shadow">
+              <p class="text-white text-base lg:text-lg font-extrabold uppercase tracking-[0.15em] drop-shadow-lg">
                 Watch how we work
               </p>
-              <p class="text-white/85 text-xs lg:text-sm mt-2 font-semibold drop-shadow">
+              <p class="text-white/90 text-xs lg:text-sm mt-2 font-semibold drop-shadow tracking-wide">
                 35 sec · Same crew · Done in &lt; 7 days
               </p>
             </div>
