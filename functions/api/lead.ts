@@ -181,3 +181,4 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     { status: 200, headers: CORS_HEADERS },
   );
 };
+
