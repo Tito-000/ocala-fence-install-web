@@ -101,8 +101,25 @@ export const BUSINESS = {
     ],
   },
 
-  // Services (4 fence types)
+  // Services (4 fence types) — Dura Fence first as Most Popular
   services: [
+    {
+      slug: 'durafence',
+      name: 'Dura Fence',
+      shortName: 'Dura Fence',
+      tagline: 'Most requested · Premium look + lifetime warranty',
+      image: '/images/services/durafence.webp',
+      image2: '/images/services/durafence-intro.webp',
+      priceRange: { min: 5000, max: 14000 },
+      pricePerFoot: { min: 32, max: 58 },
+      priceFromMonthly: 99,
+      colors: ['White', 'Bronze', 'Black'],
+      heights: ['6ft'],
+      gateWidths: ['5ft', '6ft'],
+      windRated: '160 MPH',
+      lifespan: 'Lifetime warranty',
+      popular: true,
+    },
     {
       slug: 'vinyl-privacy-fence',
       name: 'Vinyl Privacy Fence',
@@ -148,23 +165,6 @@ export const BUSINESS = {
       gateWidths: ['5ft', '6ft'],
       windRated: '160 MPH',
       lifespan: '50+ years',
-    },
-    {
-      slug: 'durafence',
-      name: 'Dura Fence',
-      shortName: 'Dura Fence',
-      tagline: 'Most requested · Premium look + lifetime warranty',
-      image: '/images/services/durafence.webp',
-      image2: '/images/services/durafence-intro.webp',
-      priceRange: { min: 5000, max: 14000 },
-      pricePerFoot: { min: 32, max: 58 },
-      priceFromMonthly: 99,
-      colors: ['White', 'Bronze', 'Black'],
-      heights: ['6ft'],
-      gateWidths: ['5ft', '6ft'],
-      windRated: '160 MPH',
-      lifespan: 'Lifetime warranty',
-      popular: true,
     },
   ] as const,
 
