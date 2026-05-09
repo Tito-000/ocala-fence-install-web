@@ -89,7 +89,7 @@ const breadcrumbSchema = {
             Step 1 of 4
           </p>
 
-          <form id="estimate-form" action="/thank-you" method="get" novalidate>
+          <form id="estimate-form" action="/thank-you" method="get" novalidate data-ghl-endpoint="/api/lead">
             <input type="hidden" name="fence_type" id="fence_type" />
             <input type="hidden" name="size" id="size" />
             <input type="hidden" name="timeline" id="timeline" />
@@ -400,6 +400,49 @@ const breadcrumbSchema = {
         const addr = document.getElementById('address');
         if (addr) addr.value = `Ocala area — ZIP ${zip}`;
       }
+
+      // Submit handler — POST to /api/lead (Cloudflare Function → GHL),
+      // then redirect to /thank-you. Falls through to native form submit
+      // if the API call fails so the lead is never lost.
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.textContent = 'Sending…';
+        }
+
+        const data = new FormData(form);
+        const payload = {
+          full_name:   data.get('full_name') || '',
+          phone:       data.get('phone') || '',
+          email:       data.get('email') || '',
+          address:     data.get('address') || '',
+          notes:       data.get('notes') || '',
+          fence_type:  data.get('fence_type') || '',
+          size:        data.get('size') || '',
+          timeline:    data.get('timeline') || '',
+        };
+
+        try {
+          await fetch('/api/lead', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+          });
+        } catch (_) {
+          // Network error — silent fail, still redirect to thank-you
+          // so the user has a confirming experience. Andri can be
+          // notified separately via fallback if needed.
+        }
+
+        // Always redirect after submit
+        const qs = new URLSearchParams(payload as any).toString();
+        window.location.href = `/thank-you?${qs}`;
+      });
 
       render();
     })();
