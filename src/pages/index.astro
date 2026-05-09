@@ -129,18 +129,64 @@ const faqs = [
   <section class="section bg-gray-50">
     <div class="container-page">
       <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-        <!-- Image left -->
+        <!-- Image collage left: main photo + 3 wildlife thumbnails -->
         <div class="relative order-2 lg:order-1">
-          <div class="relative rounded-none overflow-hidden shadow-2xl aspect-[4/5] lg:aspect-[4/5] max-w-lg mx-auto">
+          <div class="grid grid-cols-3 gap-2 max-w-lg mx-auto mb-3">
+            <div class="relative aspect-square overflow-hidden shadow-lg group">
+              <img
+                src="/images/wildlife/florida-black-bear.webp"
+                alt="Florida black bear standing at the edge of an Ocala property — wildlife threat that fences keep out"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+                width="512"
+                height="512"
+              />
+              <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-2">
+                <span class="text-white text-[10px] uppercase tracking-wider font-extrabold">Black Bear</span>
+              </div>
+            </div>
+            <div class="relative aspect-square overflow-hidden shadow-lg group">
+              <img
+                src="/images/wildlife/florida-coyote.webp"
+                alt="Florida coyote prowling near a Marion County backyard — wildlife threat that fences keep out"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+                width="512"
+                height="512"
+              />
+              <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-2">
+                <span class="text-white text-[10px] uppercase tracking-wider font-extrabold">Coyote</span>
+              </div>
+            </div>
+            <div class="relative aspect-square overflow-hidden shadow-lg group">
+              <img
+                src="/images/wildlife/florida-alligator.webp"
+                alt="American alligator emerging from a Florida retention pond near homes — wildlife threat that fences keep out"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+                width="512"
+                height="512"
+              />
+              <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-2">
+                <span class="text-white text-[10px] uppercase tracking-wider font-extrabold">Gator</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="relative rounded-none overflow-hidden shadow-2xl aspect-[16/10] max-w-lg mx-auto">
             <img
               src="/images/lifestyle/kids-dog-protected-backyard.webp"
               alt="Two children and a golden retriever playing safely inside an Ocala backyard secured by a tall white vinyl privacy fence — Florida fence installation"
               class="w-full h-full object-cover"
               loading="lazy"
               width="800"
-              height="1000"
+              height="500"
             />
+            <div class="absolute top-3 left-3 bg-primary text-white text-[10px] uppercase tracking-wider font-extrabold px-2.5 py-1">
+              ✓ Safe inside the fence
+            </div>
           </div>
+
           <!-- Floating stat badge -->
           <div class="hidden md:block absolute -bottom-6 -right-2 lg:right-6 bg-white rounded-none shadow-2xl p-4 border-l-4 border-highlight max-w-[240px]">
             <div class="text-3xl font-extrabold text-primary leading-none">&lt; 7 days</div>
@@ -153,17 +199,17 @@ const faqs = [
           <span class="badge-highlight mb-5">Protection</span>
           <h2 class="mb-5 text-balance">Built to protect <span class="text-primary">what matters most</span></h2>
           <p class="text-gray-700 text-lg leading-relaxed mb-5">
-            Florida is wild. <strong>Bears, coyotes, gators</strong> — they don't stop at property lines. A real fence does.
+            Florida is wild. <strong>Bears, Coyotes, Gators</strong> — they don't stop at property lines. A real fence does.
           </p>
           <p class="text-gray-600 text-base leading-relaxed mb-8">
-            We install premium <strong>vinyl, aluminum, and Dura Fence</strong> built to outlast Florida's weather and wildlife. Family-owned and locally operated.
+            We install premium <strong>Vinyl, Aluminum, and Dura Fence</strong> built to outlast Florida's weather and wildlife. Family-owned and locally operated.
           </p>
 
           <!-- Bullet trust list -->
           <ul class="space-y-3 mb-10">
             <li class="flex items-start gap-3">
               <svg class="w-6 h-6 text-primary shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-              <span class="text-gray-700"><strong>Wind-rated</strong> up to 160 MPH (aluminum + Dura Fence)</span>
+              <span class="text-gray-700"><strong>Wind-rated</strong> up to 160 MPH (Aluminum + Dura Fence)</span>
             </li>
             <li class="flex items-start gap-3">
               <svg class="w-6 h-6 text-primary shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
