@@ -332,14 +332,16 @@ const breadcrumbSchema = {
 
   <script is:inline>
     (() => {
-      const form = document.querySelector('[data-estimate-form]');
+      const wrapper = document.querySelector('[data-estimate-form]');
+      if (!wrapper) return;
+      const form = document.getElementById('estimate-form');
       if (!form) return;
-      const steps = form.querySelectorAll('.form-step');
-      const stepBars = form.querySelectorAll('[data-step-bar]');
-      const stepLabel = form.querySelector('[data-step-label]');
-      const prevBtn = form.querySelector('[data-prev-btn]');
-      const nextBtn = form.querySelector('[data-next-btn]');
-      const submitBtn = form.querySelector('[data-submit-btn]');
+      const steps = wrapper.querySelectorAll('.form-step');
+      const stepBars = wrapper.querySelectorAll('[data-step-bar]');
+      const stepLabel = wrapper.querySelector('[data-step-label]');
+      const prevBtn = wrapper.querySelector('[data-prev-btn]');
+      const nextBtn = wrapper.querySelector('[data-next-btn]');
+      const submitBtn = wrapper.querySelector('[data-submit-btn]');
       const totalSteps = 4;
       let current = 1;
 
