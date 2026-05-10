@@ -131,7 +131,7 @@ export const BUSINESS = {
       shortName: 'Dura Fence',
       tagline: 'Most requested · Premium look + lifetime warranty',
       image: '/images/services/durafence.webp',
-      image2: '/images/gallery/durafence-bronze-gate.webp',
+      image2: '/images/services/durafence-intro.webp',
       priceRange: { min: 5000, max: 14000 },
       pricePerFoot: { min: 32, max: 58 },
       priceFromMonthly: 99,
