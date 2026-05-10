@@ -108,6 +108,61 @@ const META_PIXEL_ID = import.meta.env.PUBLIC_META_PIXEL_ID;
       fbq('track', 'PageView');
     </script>
   )}
+
+  <!-- Global event tracking — fires GA4 + Meta Pixel events -->
+  <script is:inline>
+    (() => {
+      // Helper: send event to GA4 + (optionally) Meta Pixel
+      function track(eventName, params) {
+        params = params || {};
+        if (window.gtag) gtag('event', eventName, params);
+        // Map a few key events to Meta Pixel standard events
+        if (window.fbq) {
+          if (eventName === 'lead_form_submit')   fbq('track', 'Lead', params);
+          else if (eventName === 'phone_click')    fbq('track', 'Contact');
+          else if (eventName === 'whatsapp_click') fbq('track', 'Contact');
+          else if (eventName === 'cta_estimate_click') fbq('trackCustom', 'CTAEstimateClick', params);
+        }
+      }
+      window.__track = track;
+
+      // 1. Delegated click listener for [data-track="..."] elements
+      document.addEventListener('click', (e) => {
+        const el = e.target && e.target.closest && e.target.closest('[data-track]');
+        if (!el) return;
+        const eventName = el.getAttribute('data-track');
+        if (!eventName) return;
+        track(eventName, { link_url: el.href || '', link_text: (el.textContent || '').trim().slice(0, 80) });
+      }, { capture: true });
+
+      // 2. CTA Estimate clicks (any link to /free-estimate)
+      document.addEventListener('click', (e) => {
+        const a = e.target && e.target.closest && e.target.closest('a[href*="/free-estimate"]');
+        if (!a) return;
+        // Skip if the element already has data-track (avoid double-firing)
+        if (a.hasAttribute('data-track')) return;
+        track('cta_estimate_click', { link_text: (a.textContent || '').trim().slice(0, 80) });
+      }, { capture: true });
+
+      // 3. Scroll 75% (fires once per page)
+      let scrolled75 = false;
+      window.addEventListener('scroll', () => {
+        if (scrolled75) return;
+        const h = document.documentElement;
+        const scrollTop = h.scrollTop || document.body.scrollTop;
+        const scrollHeight = h.scrollHeight || document.body.scrollHeight;
+        const clientHeight = h.clientHeight;
+        const pct = (scrollTop + clientHeight) / scrollHeight;
+        if (pct >= 0.75) {
+          scrolled75 = true;
+          track('engaged_scroll', { percent: 75 });
+        }
+      }, { passive: true });
+
+      // 4. Time on page > 60s (fires once per page)
+      setTimeout(() => track('engaged_time', { seconds: 60 }), 60000);
+    })();
+  </script>
 </head>
 <body class="min-h-screen flex flex-col bg-white text-gray-900">
   <slot />
