@@ -127,22 +127,34 @@ const META_PIXEL_ID = import.meta.env.PUBLIC_META_PIXEL_ID;
       window.__track = track;
 
       // 1. Delegated click listener for [data-track="..."] elements
+      // Bubble phase (no capture) so it doesn't interfere with form click
+      // handlers that may need to fire first. Also wrapped in try/catch so
+      // a tracking error never breaks the page interaction.
       document.addEventListener('click', (e) => {
-        const el = e.target && e.target.closest && e.target.closest('[data-track]');
-        if (!el) return;
-        const eventName = el.getAttribute('data-track');
-        if (!eventName) return;
-        track(eventName, { link_url: el.href || '', link_text: (el.textContent || '').trim().slice(0, 80) });
-      }, { capture: true });
+        try {
+          if (!e.target || !e.target.closest) return;
+          const el = e.target.closest('[data-track]');
+          if (!el) return;
+          const eventName = el.getAttribute('data-track');
+          if (!eventName) return;
+          track(eventName, {
+            link_url: (el.tagName === 'A' && el.href) ? el.href : '',
+            link_text: (el.textContent || '').trim().slice(0, 80),
+          });
+        } catch (_) { /* never break the page */ }
+      });
 
       // 2. CTA Estimate clicks (any link to /free-estimate)
       document.addEventListener('click', (e) => {
-        const a = e.target && e.target.closest && e.target.closest('a[href*="/free-estimate"]');
-        if (!a) return;
-        // Skip if the element already has data-track (avoid double-firing)
-        if (a.hasAttribute('data-track')) return;
-        track('cta_estimate_click', { link_text: (a.textContent || '').trim().slice(0, 80) });
-      }, { capture: true });
+        try {
+          if (!e.target || !e.target.closest) return;
+          const a = e.target.closest('a[href*="/free-estimate"]');
+          if (!a) return;
+          // Skip if the element already has data-track (avoid double-firing)
+          if (a.hasAttribute('data-track')) return;
+          track('cta_estimate_click', { link_text: (a.textContent || '').trim().slice(0, 80) });
+        } catch (_) { /* never break the page */ }
+      });
 
       // 3. Scroll 75% (fires once per page)
       let scrolled75 = false;
