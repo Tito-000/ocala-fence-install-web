@@ -99,12 +99,12 @@ const breadcrumbSchema = {
               <h3 class="text-xl lg:text-2xl font-extrabold mb-5">What kind of fence?</h3>
               <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
                 {[
-                  { value: 'vinyl-privacy', label: 'Vinyl Privacy', image: '/images/services/vinyl-privacy.webp' },
-                  { value: 'vinyl-picket', label: 'Vinyl Picket', image: '/images/services/vinyl-picket.webp' },
-                  { value: 'composite-fence', label: 'Composite Fence', image: '/images/services/composite-fence.webp' },
-                  { value: 'aluminum', label: 'Aluminum', image: '/images/services/aluminum.webp' },
-                  { value: 'pool-fence', label: 'Pool Fence', image: '/images/services/pool-fence.webp' },
-                  { value: 'not-sure', label: 'Not sure', icon: 'help' },
+                  { value: 'dura_fence',    label: 'Dura Fence',    image: '/images/services/durafence.webp', popular: true },
+                  { value: 'vinyl_privacy', label: 'Vinyl Privacy', image: '/images/services/vinyl-privacy.webp' },
+                  { value: 'vinyl_picket',  label: 'Vinyl Picket',  image: '/images/services/vinyl-picket.webp' },
+                  { value: 'aluminum',      label: 'Aluminum',      image: '/images/services/aluminum.webp' },
+                  { value: 'pool_fence',    label: 'Pool Fence',    image: '/images/services/pool-fence.webp' },
+                  { value: 'not_sure',      label: 'Not sure',      icon: 'help' },
                 ].map((opt) => (
                   <button
                     type="button"
@@ -120,6 +120,11 @@ const breadcrumbSchema = {
                       </div>
                     )}
                     <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent"></div>
+                    {opt.popular && (
+                      <span class="absolute top-2 left-2 bg-highlight text-primary-900 text-[9px] sm:text-[10px] font-extrabold uppercase tracking-wider px-2 py-1 rounded-sm shadow">
+                        Most Popular
+                      </span>
+                    )}
                     <span class="absolute inset-x-0 bottom-0 p-3 text-white text-xs sm:text-sm font-extrabold uppercase tracking-wider text-center leading-tight drop-shadow-lg">
                       {opt.label}
                     </span>

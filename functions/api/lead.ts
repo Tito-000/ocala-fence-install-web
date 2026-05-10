@@ -55,28 +55,41 @@ const OWNER_CONTACT_ID = '0LhuwxcUOlVgcAUqAqB7';
 
 // Approximate monetary value per fence size (used for opportunity.monetaryValue)
 function estimateValue(size?: string, fenceType?: string): number {
-  // Conservative midpoint estimates from business.ts price ranges
-  const base: Record<string, { small: number; medium: number; large: number }> = {
-    vinyl_privacy: { small: 4500, medium: 7500, large: 11000 },
-    vinyl_picket:  { small: 4000, medium: 6500, large: 9500 },
-    aluminum:      { small: 4500, medium: 7000, large: 10500 },
-    dura_fence:    { small: 5000, medium: 8500, large: 12000 },
-    pool_fence:    { small: 4500, medium: 7000, large: 10500 },
+  // Conservative midpoint estimates from business.ts price ranges.
+  // Form sends ranges; map them to small / medium / large / xl tiers.
+  const base: Record<string, { small: number; medium: number; large: number; xl: number }> = {
+    vinyl_privacy: { small: 4500, medium: 7500,  large: 11000, xl: 14500 },
+    vinyl_picket:  { small: 4000, medium: 6500,  large: 9500,  xl: 12500 },
+    aluminum:      { small: 4500, medium: 7000,  large: 10500, xl: 14000 },
+    dura_fence:    { small: 5000, medium: 8500,  large: 12000, xl: 16000 },
+    pool_fence:    { small: 4500, medium: 7000,  large: 10500, xl: 14000 },
   };
   const t = (fenceType || 'vinyl_privacy').toLowerCase().replace(/-/g, '_');
-  const s = (size || 'medium').toLowerCase();
-  const sizeKey = s.includes('small') ? 'small' : s.includes('large') ? 'large' : 'medium';
-  return base[t]?.[sizeKey] ?? 7500;
+  const s = (size || '').toLowerCase().replace(/\s/g, '');
+
+  let sizeKey: 'small' | 'medium' | 'large' | 'xl' = 'medium';
+  if (s.startsWith('<100') || s.includes('small')) sizeKey = 'small';
+  else if (s.startsWith('100-200') || s.includes('medium')) sizeKey = 'medium';
+  else if (s.startsWith('200-400') || s.includes('large')) sizeKey = 'large';
+  else if (s.startsWith('400+') || s.includes('xl')) sizeKey = 'xl';
+
+  return base[t]?.[sizeKey] ?? base.vinyl_privacy[sizeKey];
 }
 
-// Map size selection to approximate linear feet
+// Map size selection to approximate linear feet.
+// Form sends ranges like '<100ft', '100-200ft', '200-400ft', '400+ft'.
+// Also accepts 'small', 'medium', 'large' or a raw integer for backward compat.
 function sizeToLinearFeet(size?: string): number | undefined {
   if (!size) return undefined;
-  const s = size.toLowerCase();
+  const s = size.toLowerCase().replace(/\s/g, '');
   if (/^\d+$/.test(s)) return parseInt(s, 10);
+  if (s.startsWith('<100')) return 80;
+  if (s.startsWith('100-200')) return 150;
+  if (s.startsWith('200-400')) return 300;
+  if (s.startsWith('400+')) return 500;
   if (s.includes('small')) return 80;
   if (s.includes('medium')) return 150;
-  if (s.includes('large')) return 250;
+  if (s.includes('large')) return 300;
   return undefined;
 }
 
