@@ -49,6 +49,10 @@ const CF = {
 const PIPELINE_ID = 'DqLZHRBvcSW50Gov4OPE';
 const STAGE_NEW_LEAD = '5ff68988-dc04-4a47-a183-3272fd20fd74';
 
+// Owner contact ID — Andri Ramírez. Internal notifications (SMS + email)
+// are sent to this contact whenever a new web lead arrives.
+const OWNER_CONTACT_ID = '0LhuwxcUOlVgcAUqAqB7';
+
 // Approximate monetary value per fence size (used for opportunity.monetaryValue)
 function estimateValue(size?: string, fenceType?: string): number {
   // Conservative midpoint estimates from business.ts price ranges
@@ -228,6 +232,76 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
       opportunityId = (oppData as any)?.opportunity?.id;
     }
   }
+
+  // ── 3rd call: internal notification to Andri (SMS + Email) ──
+  // Send both in parallel; failures don't abort the response.
+  const leadName    = `${firstName || ''} ${lastName || ''}`.trim() || '(no name)';
+  const leadPhone   = phone || '(no phone)';
+  const leadEmail   = body.email || '(no email)';
+  const leadAddress = body.address || '(no address)';
+  const leadNotes   = body.notes || '(no notes)';
+  const valueUsd    = estimateValue(body.size, body.fence_type);
+
+  const smsBody = `🚨 NEW LEAD — ${leadName}
+${fenceLbl || 'Fence'} · ~$${valueUsd.toLocaleString()}
+📞 ${leadPhone}
+📍 ${leadAddress}
+${linearFt ? `📏 ~${linearFt} ft` : ''}
+Call within 2hrs for highest conversion.`;
+
+  const emailHtml = `<!DOCTYPE html>
+<html><body style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; background: #f8f5ed;">
+  <div style="background: white; padding: 28px; border-top: 6px solid #136229;">
+    <h1 style="color: #134529; margin: 0 0 8px; font-size: 24px;">🚨 New Website Lead</h1>
+    <p style="color: #62522E; margin: 0 0 24px; font-size: 14px; text-transform: uppercase; letter-spacing: 0.1em;"><strong>Estimated value: $${valueUsd.toLocaleString()}</strong></p>
+
+    <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+      <tr><td style="padding: 8px 0; color: #62522E; width: 130px;"><strong>Name:</strong></td><td style="padding: 8px 0; color: #134529;">${leadName}</td></tr>
+      <tr><td style="padding: 8px 0; color: #62522E;"><strong>Phone:</strong></td><td style="padding: 8px 0;"><a href="tel:${leadPhone}" style="color: #136229;">${leadPhone}</a></td></tr>
+      <tr><td style="padding: 8px 0; color: #62522E;"><strong>Email:</strong></td><td style="padding: 8px 0;"><a href="mailto:${leadEmail}" style="color: #136229;">${leadEmail}</a></td></tr>
+      <tr><td style="padding: 8px 0; color: #62522E;"><strong>Address:</strong></td><td style="padding: 8px 0; color: #134529;">${leadAddress}</td></tr>
+      <tr><td style="padding: 8px 0; color: #62522E;"><strong>Fence Type:</strong></td><td style="padding: 8px 0; color: #134529;"><strong>${fenceLbl || 'Not specified'}</strong></td></tr>
+      ${linearFt ? `<tr><td style="padding: 8px 0; color: #62522E;"><strong>Linear feet:</strong></td><td style="padding: 8px 0; color: #134529;">~${linearFt} ft</td></tr>` : ''}
+      ${body.timeline ? `<tr><td style="padding: 8px 0; color: #62522E;"><strong>Timeline:</strong></td><td style="padding: 8px 0; color: #134529;">${body.timeline}</td></tr>` : ''}
+    </table>
+
+    <div style="background: #faf6ed; padding: 16px; border-left: 4px solid #D1B487;">
+      <strong style="color: #62522E; display: block; margin-bottom: 6px;">Notes:</strong>
+      <span style="color: #134529; white-space: pre-wrap;">${leadNotes}</span>
+    </div>
+
+    <div style="margin-top: 28px; padding: 16px; background: #136229; text-align: center;">
+      <a href="https://app.gohighlevel.com/v2/location/${env.GHL_LOCATION_ID}/contacts/detail/${contactId || ''}" style="color: #D1B487; text-decoration: none; font-weight: bold; text-transform: uppercase; letter-spacing: 0.1em; font-size: 14px;">→ Open lead in CRM</a>
+    </div>
+
+    <p style="color: #62522E; font-size: 12px; margin-top: 24px; text-align: center;">⏱️ <strong>Call within 2 hours</strong> for highest conversion rate.</p>
+  </div>
+</body></html>`;
+
+  const sendInternal = async (type: 'SMS' | 'Email') => {
+    const payload: Record<string, unknown> = {
+      type,
+      contactId: OWNER_CONTACT_ID,
+    };
+    if (type === 'SMS') {
+      payload.message = smsBody;
+    } else {
+      payload.subject = `🚨 NEW LEAD: ${leadName} — ${fenceLbl || 'Fence'} ($${valueUsd.toLocaleString()})`;
+      payload.html = emailHtml;
+    }
+    return fetch('https://services.leadconnectorhq.com/conversations/messages', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${env.GHL_PIT}`,
+        Version: '2021-04-15',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    }).catch(() => null);
+  };
+
+  // Fire both in parallel — don't block the user response on these
+  await Promise.all([sendInternal('SMS'), sendInternal('Email')]);
 
   return new Response(
     JSON.stringify({ ok: true, contactId, opportunityId }),
