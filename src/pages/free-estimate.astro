@@ -113,19 +113,19 @@ const breadcrumbSchema = {
                     data-option-value={opt.value}
                   >
                     {opt.image ? (
-                      <img src={opt.image} alt={opt.label} class="absolute inset-0 w-full h-full object-cover group-hover/opt:scale-105 transition-transform" loading="lazy" />
+                      <img src={opt.image} alt={opt.label} class="absolute inset-0 w-full h-full object-cover group-hover/opt:scale-105 transition-transform pointer-events-none" loading="lazy" />
                     ) : (
-                      <div class="absolute inset-0 bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                      <div class="absolute inset-0 bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center pointer-events-none">
                         <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                       </div>
                     )}
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent"></div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent pointer-events-none"></div>
                     {opt.popular && (
-                      <span class="absolute top-2 left-2 bg-highlight text-primary-900 text-[9px] sm:text-[10px] font-extrabold uppercase tracking-wider px-2 py-1 rounded-sm shadow">
+                      <span class="absolute top-2 left-2 bg-highlight text-primary-900 text-[9px] sm:text-[10px] font-extrabold uppercase tracking-wider px-2 py-1 rounded-sm shadow pointer-events-none">
                         Most Popular
                       </span>
                     )}
-                    <span class="absolute inset-x-0 bottom-0 p-3 text-white text-xs sm:text-sm font-extrabold uppercase tracking-wider text-center leading-tight drop-shadow-lg">
+                    <span class="absolute inset-x-0 bottom-0 p-3 text-white text-xs sm:text-sm font-extrabold uppercase tracking-wider text-center leading-tight drop-shadow-lg pointer-events-none">
                       {opt.label}
                     </span>
                   </button>
@@ -359,30 +359,37 @@ const breadcrumbSchema = {
         submitBtn.classList.toggle('hidden', current !== totalSteps);
       }
 
-      // Option cards (steps 1, 2, 3) — click sets value + advances
-      form.querySelectorAll('[data-option-value]').forEach((card) => {
-        card.addEventListener('click', () => {
-          const step = card.getAttribute('data-option-step');
-          const value = card.getAttribute('data-option-value');
-          // Mark selected within step (highlight border + ring)
-          form.querySelectorAll(`[data-option-step="${step}"]`).forEach((c) => {
-            c.classList.remove('border-primary', 'ring-4', 'ring-primary/30');
-            c.classList.add('border-gray-300');
-          });
-          card.classList.remove('border-gray-300');
-          card.classList.add('border-primary', 'ring-4', 'ring-primary/30');
-          // Save to hidden input
-          if (step === '1') document.getElementById('fence_type').value = value;
-          if (step === '2') document.getElementById('size').value = value;
-          if (step === '3') document.getElementById('timeline').value = value;
-          // Auto-advance
-          setTimeout(() => {
-            if (current < totalSteps) {
-              current++;
-              render();
-            }
-          }, 250);
+      // Option cards (steps 1, 2, 3) — click sets value + advances.
+      // Delegated listener so clicks on inner elements (image, gradient,
+      // badge, label) still work. Also attribute selectors for size step
+      // use [data-option-step] (string), since values may contain '<' or '+'.
+      form.addEventListener('click', (e) => {
+        const card = e.target.closest('[data-option-value]');
+        if (!card || !form.contains(card)) return;
+        const step = card.getAttribute('data-option-step');
+        const value = card.getAttribute('data-option-value');
+        if (!step || !value) return;
+
+        // Mark selected within step (highlight border + ring)
+        form.querySelectorAll('[data-option-step="' + step + '"]').forEach((c) => {
+          c.classList.remove('border-primary', 'ring-4', 'ring-primary/30');
+          c.classList.add('border-gray-300');
         });
+        card.classList.remove('border-gray-300');
+        card.classList.add('border-primary', 'ring-4', 'ring-primary/30');
+
+        // Save to hidden input
+        if (step === '1') document.getElementById('fence_type').value = value;
+        if (step === '2') document.getElementById('size').value = value;
+        if (step === '3') document.getElementById('timeline').value = value;
+
+        // Auto-advance
+        setTimeout(() => {
+          if (current < totalSteps) {
+            current++;
+            render();
+          }
+        }, 250);
       });
 
       nextBtn.addEventListener('click', () => {
