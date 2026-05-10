@@ -45,6 +45,26 @@ const CF = {
   estimateNotes: 'mWKpv4wattfdSUPwLSEF', // LARGE_TEXT
 };
 
+// Pipeline + stage IDs for the Fence Sales pipeline
+const PIPELINE_ID = 'DqLZHRBvcSW50Gov4OPE';
+const STAGE_NEW_LEAD = '5ff68988-dc04-4a47-a183-3272fd20fd74';
+
+// Approximate monetary value per fence size (used for opportunity.monetaryValue)
+function estimateValue(size?: string, fenceType?: string): number {
+  // Conservative midpoint estimates from business.ts price ranges
+  const base: Record<string, { small: number; medium: number; large: number }> = {
+    vinyl_privacy: { small: 4500, medium: 7500, large: 11000 },
+    vinyl_picket:  { small: 4000, medium: 6500, large: 9500 },
+    aluminum:      { small: 4500, medium: 7000, large: 10500 },
+    dura_fence:    { small: 5000, medium: 8500, large: 12000 },
+    pool_fence:    { small: 4500, medium: 7000, large: 10500 },
+  };
+  const t = (fenceType || 'vinyl_privacy').toLowerCase().replace(/-/g, '_');
+  const s = (size || 'medium').toLowerCase();
+  const sizeKey = s.includes('small') ? 'small' : s.includes('large') ? 'large' : 'medium';
+  return base[t]?.[sizeKey] ?? 7500;
+}
+
 // Map size selection to approximate linear feet
 function sizeToLinearFeet(size?: string): number | undefined {
   if (!size) return undefined;
@@ -176,8 +196,41 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     );
   }
 
+  const contactId: string | undefined = (ghlData as any)?.contact?.id;
+
+  // ── 2nd call: create an opportunity in the Fence Sales pipeline ──
+  // Failure here doesn't abort the lead — the contact is already saved,
+  // and Andri can create the opportunity manually if needed.
+  let opportunityId: string | undefined;
+  if (contactId) {
+    const oppName = `${firstName || 'New Lead'} ${lastName || ''} — ${fenceLbl || 'Fence'}`.trim();
+    const oppPayload = {
+      pipelineId: PIPELINE_ID,
+      pipelineStageId: STAGE_NEW_LEAD,
+      locationId: env.GHL_LOCATION_ID,
+      name: oppName,
+      status: 'open',
+      contactId,
+      monetaryValue: estimateValue(body.size, body.fence_type),
+      source: 'Website Form',
+    };
+    const oppRes = await fetch('https://services.leadconnectorhq.com/opportunities/', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${env.GHL_PIT}`,
+        Version: '2021-07-28',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(oppPayload),
+    });
+    const oppData = await oppRes.json().catch(() => ({}));
+    if (oppRes.ok) {
+      opportunityId = (oppData as any)?.opportunity?.id;
+    }
+  }
+
   return new Response(
-    JSON.stringify({ ok: true, contactId: (ghlData as any)?.contact?.id }),
+    JSON.stringify({ ok: true, contactId, opportunityId }),
     { status: 200, headers: CORS_HEADERS },
   );
 };
