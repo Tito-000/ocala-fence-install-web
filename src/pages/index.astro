@@ -825,7 +825,7 @@ const faqs = [
 
         {/* RIGHT — coverage map (SVG) */}
         <div class="lg:sticky lg:top-24">
-          <p class="text-xs lg:text-sm uppercase tracking-[0.2em] font-extrabold text-primary mb-4">{BUSINESS.extendedCoverage.radiusMiles}-Mile Coverage Radius</p>
+          <p class="text-xs lg:text-sm uppercase tracking-[0.2em] font-extrabold text-primary mb-4">Ocala South to Orlando Metro</p>
 
           <div class="bg-white border-2 border-primary/15 shadow-sm overflow-hidden">
             {/* Stylized map SVG */}
@@ -852,50 +852,64 @@ const faqs = [
                   stroke-width="1.5"
                 />
 
-                {/* 50-mile coverage circle */}
-                <circle cx="200" cy="160" r="105" fill="url(#circleGrad)" stroke="#136229" stroke-width="2.5" stroke-dasharray="0" />
+                {/* Coverage area — oval extending Ocala (NW) → Orlando metro (SE) */}
+                <ellipse cx="210" cy="170" rx="115" ry="80" transform="rotate(-15 210 170)" fill="url(#circleGrad)" stroke="#136229" stroke-width="2.5"/>
 
-                {/* Animated pulse ring */}
-                <circle cx="200" cy="160" r="105" fill="none" stroke="#136229" stroke-width="2" opacity="0.4">
-                  <animate attributeName="r" from="105" to="125" dur="2.5s" repeatCount="indefinite"/>
+                {/* Animated pulse oval */}
+                <ellipse cx="210" cy="170" rx="115" ry="80" transform="rotate(-15 210 170)" fill="none" stroke="#136229" stroke-width="2" opacity="0.4">
+                  <animate attributeName="rx" from="115" to="135" dur="2.5s" repeatCount="indefinite"/>
+                  <animate attributeName="ry" from="80" to="100" dur="2.5s" repeatCount="indefinite"/>
                   <animate attributeName="opacity" from="0.4" to="0" dur="2.5s" repeatCount="indefinite"/>
-                </circle>
+                </ellipse>
 
-                {/* Extended coverage cities (small cream pins) */}
+                {/* Extended coverage cities (small cream pins) — spread along Ocala→Orlando corridor */}
                 <g fill="#D1B487" stroke="#62522E" stroke-width="0.8">
-                  <circle cx="160" cy="100" r="3"/>
-                  <circle cx="120" cy="170" r="3"/>
-                  <circle cx="135" cy="200" r="3"/>
-                  <circle cx="150" cy="220" r="3"/>
-                  <circle cx="270" cy="140" r="3"/>
-                  <circle cx="280" cy="170" r="3"/>
-                  <circle cx="265" cy="200" r="3"/>
-                  <circle cx="250" cy="225" r="3"/>
-                  <circle cx="235" cy="200" r="3"/>
-                  <circle cx="230" cy="240" r="3"/>
-                  <circle cx="195" cy="115" r="3"/>
-                  <circle cx="220" cy="105" r="3"/>
-                  <circle cx="180" cy="105" r="3"/>
-                  <circle cx="240" cy="135" r="3"/>
-                  <circle cx="250" cy="150" r="3"/>
-                  <circle cx="270" cy="180" r="3"/>
-                  <circle cx="170" cy="135" r="3"/>
-                  <circle cx="185" cy="125" r="3"/>
+                  {/* Ocala area + Marion County small towns */}
+                  <circle cx="155" cy="125" r="3"/>{/* Anthony */}
+                  <circle cx="160" cy="135" r="3"/>{/* Reddick */}
+                  <circle cx="170" cy="145" r="3"/>{/* Citra */}
+                  {/* Lake County (going SE) */}
+                  <circle cx="195" cy="170" r="3"/>{/* Leesburg */}
+                  <circle cx="210" cy="180" r="3"/>{/* Eustis */}
+                  <circle cx="215" cy="185" r="3"/>{/* Tavares */}
+                  <circle cx="225" cy="195" r="3"/>{/* Mount Dora */}
+                  <circle cx="235" cy="205" r="3"/>{/* Clermont */}
+                  {/* Sumter County */}
+                  <circle cx="180" cy="165" r="3"/>{/* Wildwood */}
+                  <circle cx="190" cy="180" r="3"/>{/* Bushnell */}
+                  {/* Volusia (East) */}
+                  <circle cx="265" cy="180" r="3"/>{/* DeLand */}
+                  <circle cx="270" cy="195" r="3"/>{/* Deltona */}
+                  {/* Seminole */}
+                  <circle cx="275" cy="205" r="3"/>{/* Sanford */}
+                  <circle cx="285" cy="215" r="3"/>{/* Oviedo */}
+                  {/* Orange (Orlando metro) */}
+                  <circle cx="270" cy="220" r="3"/>{/* Apopka */}
+                  <circle cx="285" cy="230" r="3"/>{/* Orlando */}
+                  {/* Osceola */}
+                  <circle cx="280" cy="245" r="3"/>{/* Kissimmee */}
+                  <circle cx="295" cy="248" r="3"/>{/* Saint Cloud */}
+                  {/* Polk */}
+                  <circle cx="255" cy="255" r="3"/>{/* Davenport */}
+                  <circle cx="245" cy="265" r="3"/>{/* Haines City */}
+                  <circle cx="225" cy="270" r="3"/>{/* Winter Haven */}
+                  <circle cx="200" cy="265" r="3"/>{/* Lakeland */}
+                  <circle cx="240" cy="275" r="3"/>{/* Lake Wales */}
                 </g>
 
-                {/* Primary cities (green pins) */}
+                {/* Primary cities (green pins, larger) */}
                 <g fill="#136229" stroke="white" stroke-width="1.5">
-                  <circle cx="180" cy="155" r="4.5"/>
-                  <circle cx="200" cy="190" r="4.5"/>
-                  <circle cx="215" cy="200" r="4.5"/>
-                  <circle cx="215" cy="160" r="4.5"/>
-                  <circle cx="155" cy="180" r="4.5"/>
-                  <circle cx="245" cy="215" r="4.5"/>
-                  <circle cx="235" cy="220" r="4.5"/>
+                  <circle cx="155" cy="115" r="4.5"/>{/* Ocala */}
+                  <circle cx="175" cy="155" r="4.5"/>{/* Belleview */}
+                  <circle cx="180" cy="165" r="4.5"/>{/* Summerfield */}
+                  <circle cx="170" cy="125" r="4.5"/>{/* Silver Springs */}
+                  <circle cx="125" cy="135" r="4.5"/>{/* Dunnellon */}
+                  <circle cx="195" cy="175" r="4.5"/>{/* The Villages */}
+                  <circle cx="200" cy="180" r="4.5"/>{/* Lady Lake */}
                 </g>
 
-                {/* MARION OAKS STAR */}
-                <g transform="translate(200, 175)">
+                {/* MARION OAKS (HQ) STAR */}
+                <g transform="translate(160, 145)">
                   <circle r="11" fill="white" stroke="#136229" stroke-width="2.5"/>
                   <path d="M 0 -7 L 1.6 -2.2 L 6.7 -2.2 L 2.5 0.9 L 4.1 5.7 L 0 2.7 L -4.1 5.7 L -2.5 0.9 L -6.7 -2.2 L -1.6 -2.2 Z"
                         fill="#136229"/>
@@ -903,8 +917,14 @@ const faqs = [
 
                 {/* Marion Oaks label */}
                 <g>
-                  <rect x="155" y="195" width="90" height="22" fill="#136229" rx="2"/>
-                  <text x="200" y="210" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="white" text-anchor="middle" letter-spacing="0.5">MARION OAKS</text>
+                  <rect x="115" y="160" width="90" height="22" fill="#136229" rx="2"/>
+                  <text x="160" y="175" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="white" text-anchor="middle" letter-spacing="0.5">MARION OAKS</text>
+                </g>
+
+                {/* Orlando label (destination side) */}
+                <g>
+                  <rect x="265" y="232" width="55" height="14" fill="#62522E" rx="2" opacity="0.85"/>
+                  <text x="293" y="242" font-family="system-ui, sans-serif" font-size="8" font-weight="700" fill="white" text-anchor="middle">ORLANDO</text>
                 </g>
 
                 {/* Compass marker */}
@@ -934,7 +954,7 @@ const faqs = [
                 </div>
                 <div class="flex items-center gap-2">
                   <span class="inline-block w-3 h-3 rounded-full border-2 border-primary bg-primary/20"></span>
-                  <span class="text-gray-700 font-semibold">{BUSINESS.extendedCoverage.radiusMiles}-mile radius</span>
+                  <span class="text-gray-700 font-semibold">Service zone</span>
                 </div>
               </div>
             </div>

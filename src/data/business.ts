@@ -67,30 +67,23 @@ export const BUSINESS = {
     { slug: 'marion-county-fl', name: 'Marion County', state: 'FL', county: 'Marion County', primaryZip: '34470', image: '/images/cities/marion-county.webp', imageAlt: 'Marion County FL horse country with white wooden horse fences — Ocala Fence Install service area' },
   ],
 
-  // Extended coverage — additional cities within 50 miles of Marion Oaks/Ocala
-  // (no dedicated page, but listed for SEO + transparency)
+  // Extended coverage — Ocala south through Central Florida toward Orlando metro
+  // Confirmed by Andri 2026-05-10 (real coverage map). Excludes north/west:
+  // NO Gainesville, Williston, Crystal River, Inverness, Homosassa, Tampa.
   extendedCoverage: {
-    radiusMiles: 50,
+    radiusMiles: 100,
     counties: [
       { name: 'Marion County', primary: true },
       { name: 'Sumter County' },
       { name: 'Lake County' },
-      { name: 'Citrus County' },
-      { name: 'Alachua County' },
-      { name: 'Levy County' },
+      { name: 'Volusia County' },
+      { name: 'Seminole County' },
+      { name: 'Orange County' },
+      { name: 'Osceola County' },
+      { name: 'Polk County' },
     ],
     additionalCities: [
-      { name: 'Crystal River', state: 'FL', county: 'Citrus County', zip: '34428' },
-      { name: 'Inverness', state: 'FL', county: 'Citrus County', zip: '34450' },
-      { name: 'Homosassa', state: 'FL', county: 'Citrus County', zip: '34446' },
-      { name: 'Gainesville', state: 'FL', county: 'Alachua County', zip: '32601' },
-      { name: 'Williston', state: 'FL', county: 'Levy County', zip: '32696' },
-      { name: 'Leesburg', state: 'FL', county: 'Lake County', zip: '34748' },
-      { name: 'Eustis', state: 'FL', county: 'Lake County', zip: '32726' },
-      { name: 'Tavares', state: 'FL', county: 'Lake County', zip: '32778' },
-      { name: 'Mount Dora', state: 'FL', county: 'Lake County', zip: '32757' },
-      { name: 'Wildwood', state: 'FL', county: 'Sumter County', zip: '34785' },
-      { name: 'Bushnell', state: 'FL', county: 'Sumter County', zip: '33513' },
+      // Marion County (local + small towns)
       { name: 'Anthony', state: 'FL', county: 'Marion County', zip: '32617' },
       { name: 'Reddick', state: 'FL', county: 'Marion County', zip: '32686' },
       { name: 'Citra', state: 'FL', county: 'Marion County', zip: '32113' },
@@ -98,6 +91,35 @@ export const BUSINESS = {
       { name: 'Fort McCoy', state: 'FL', county: 'Marion County', zip: '32134' },
       { name: 'Ocklawaha', state: 'FL', county: 'Marion County', zip: '32179' },
       { name: 'Weirsdale', state: 'FL', county: 'Marion County', zip: '32195' },
+      // Lake County (south of Ocala on the way to Orlando)
+      { name: 'Leesburg', state: 'FL', county: 'Lake County', zip: '34748' },
+      { name: 'Eustis', state: 'FL', county: 'Lake County', zip: '32726' },
+      { name: 'Tavares', state: 'FL', county: 'Lake County', zip: '32778' },
+      { name: 'Mount Dora', state: 'FL', county: 'Lake County', zip: '32757' },
+      { name: 'Clermont', state: 'FL', county: 'Lake County', zip: '34711' },
+      // Sumter County
+      { name: 'Wildwood', state: 'FL', county: 'Sumter County', zip: '34785' },
+      { name: 'Bushnell', state: 'FL', county: 'Sumter County', zip: '33513' },
+      // Volusia County (east)
+      { name: 'DeLand', state: 'FL', county: 'Volusia County', zip: '32720' },
+      { name: 'Deltona', state: 'FL', county: 'Volusia County', zip: '32725' },
+      // Seminole County
+      { name: 'Sanford', state: 'FL', county: 'Seminole County', zip: '32771' },
+      { name: 'Oviedo', state: 'FL', county: 'Seminole County', zip: '32765' },
+      // Orange County (Orlando metro)
+      { name: 'Apopka', state: 'FL', county: 'Orange County', zip: '32703' },
+      { name: 'Orlando', state: 'FL', county: 'Orange County', zip: '32801' },
+      // Osceola County
+      { name: 'Kissimmee', state: 'FL', county: 'Osceola County', zip: '34741' },
+      { name: 'Saint Cloud', state: 'FL', county: 'Osceola County', zip: '34769' },
+      { name: 'Celebration', state: 'FL', county: 'Osceola County', zip: '34747' },
+      // Polk County (south)
+      { name: 'Davenport', state: 'FL', county: 'Polk County', zip: '33837' },
+      { name: 'Haines City', state: 'FL', county: 'Polk County', zip: '33844' },
+      { name: 'Winter Haven', state: 'FL', county: 'Polk County', zip: '33880' },
+      { name: 'Lakeland', state: 'FL', county: 'Polk County', zip: '33801' },
+      { name: 'Lake Wales', state: 'FL', county: 'Polk County', zip: '33853' },
+      { name: 'Bartow', state: 'FL', county: 'Polk County', zip: '33830' },
     ],
   },
 
