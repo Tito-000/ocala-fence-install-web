@@ -463,7 +463,7 @@ const breadcrumbSchema = {
         } catch (_) {}
 
         // Always redirect after submit
-        const qs = new URLSearchParams(payload as any).toString();
+        const qs = new URLSearchParams(payload).toString();
         window.location.href = `/thank-you?${qs}`;
       });
 
