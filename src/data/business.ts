@@ -190,6 +190,22 @@ export const BUSINESS = {
       windRated: '160 MPH',
       lifespan: '50+ years',
     },
+    {
+      slug: 'horse-fence',
+      name: 'Horse Fence',
+      shortName: 'Horse Fence',
+      tagline: '3-rail vinyl ranch fencing for Marion County farms',
+      image: '/images/services/vinyl-picket.webp',
+      image2: '/images/services/vinyl-picket.webp',
+      priceRange: { min: 3500, max: 11000 },
+      pricePerFoot: { min: 12, max: 28 },
+      priceFromMonthly: 69,
+      colors: ['White', 'Black', 'Brown'],
+      heights: ['4ft', '5ft'],
+      gateWidths: ['10ft', '12ft', '16ft'],
+      windRated: '130 MPH',
+      lifespan: '25+ years',
+    },
   ] as const,
 
   // Financing partners (6)

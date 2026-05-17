@@ -91,6 +91,35 @@ export const SERVICES_CONTENT: Record<string, {
       { q: 'How long does aluminum fence installation take?', a: 'Most projects finish in <strong>3-5 days</strong>. Pool perimeters can sometimes be done in 1-2 days if there are no permit delays.' },
     ],
   },
+  'horse-fence': {
+    metaTitle: 'Horse Fence Installation Ocala FL | 3-Rail Vinyl Ranch Fencing · From $69/mo',
+    metaDescription: 'Premium 3-rail vinyl horse fence installation across Marion County. Ranch fencing for paddocks, pastures, and farms. From $69/mo with $0 down. Free same-day estimate. Call (863) 377-0928.',
+    heroTitle: 'Horse Fence Installation in <span class="text-highlight">Ocala\'s Horse Country</span>',
+    heroSubtitle: 'Premium 3-rail vinyl ranch fencing built to contain horses safely — flexes on impact, never splinters, never needs painting. Installed across Marion County paddocks and farms.',
+    intro: {
+      heading: 'Built for horses. Built for Ocala.',
+      paragraphs: [
+        'Marion County has more horses per capita than any other county in Florida — and you need a fence that respects that. Our 3-rail vinyl horse fence is the default for paddocks, pastures, and full farm perimeters across Ocala\'s horse country.',
+        'Vinyl ranch rail flexes on impact instead of snapping like wood or splitting like barbed wire. A horse that leans into it doesn\'t get hurt, and the fence doesn\'t break. Hollow 5x5 vinyl posts are reinforced with internal cores, set in concrete on 8-foot centers.',
+        'Available in <strong>White</strong> (the classic ranch look), <strong>Black</strong> (modern equestrian estates), and <strong>Brown</strong> (warm, natural feel). Heights of 4ft or 5ft, with 2-rail, 3-rail, or 4-rail configurations depending on what you\'re containing.',
+      ],
+    },
+    whyCards: [
+      { title: 'Horse-Safe by Design', body: 'Vinyl rails flex on impact instead of snapping. No splinters, no nails, no barbed-wire injuries. Hollow posts with reinforced cores.' },
+      { title: 'No Painting, Ever', body: 'UV-stabilized vinyl stays white (or black, or brown) for 25+ years. Wash with a hose. That\'s the maintenance.' },
+      { title: '130 MPH Wind-Rated', body: 'Hurricane-rated for Florida storms. Won\'t rot in humidity, won\'t warp in heat, doesn\'t attract termites like wood.' },
+      { title: 'Big Acreage, One Crew', body: 'From 1-acre back paddocks to 50+ acre full-farm perimeters. Our crew, same faces start to finish — no subcontractors.' },
+    ],
+    faqs: [
+      { q: 'How much does horse fencing cost in Ocala?', a: 'Most 3-rail vinyl horse fence projects in Marion County run between <strong>$3,500 and $11,000</strong> depending on linear footage, height, and number of rails. With $0 down financing, payments start around <strong>$69/month</strong>.' },
+      { q: 'What materials work best for horse fence in Florida?', a: 'Vinyl ranch rail is our most popular for Marion County — it doesn\'t rot, doesn\'t need painting, and won\'t splinter against a horse\'s flank. All our vinyl ranch fencing is hurricane-rated to 130 MPH.' },
+      { q: 'Will the fence hurt my horses if they lean on it?', a: 'No. Vinyl ranch rail flexes on impact instead of snapping like wood or barbed wire. We install <strong>5x5 hollow posts spaced every 8 feet</strong> with reinforced rails — strong enough to contain horses but with give so they don\'t injure themselves.' },
+      { q: 'How long does horse fence installation take?', a: 'For a typical 1-3 acre paddock, <strong>3 to 5 days</strong>. Larger ranches up to 10 acres usually finish in <strong>under 2 weeks</strong>. We can move faster if you have horses arriving on a specific date.' },
+      { q: 'Do I need a permit for horse fence in Marion County?', a: 'Unincorporated Marion County generally does <strong>not require</strong> a permit for agricultural / pasture fencing under 6ft. Inside City of Ocala limits or HOA-governed communities, paperwork may apply. We handle whichever applies.' },
+      { q: 'Can you fence large acreage?', a: 'Yes. We install on properties from 1 to 50+ acres across Marion County, Sumter County, and Lake County. We bring our own augers and stretch crews. No subcontractors.' },
+      { q: 'What about rail configurations — 2, 3, or 4 rails?', a: '<strong>3-rail</strong> is standard for adult horses (most popular). <strong>4-rail</strong> for foals, miniatures, or ponies (closer spacing prevents escape). <strong>2-rail</strong> for decorative perimeters or low-traffic pastures. Mesh add-on available for dogs or small livestock.' },
+    ],
+  },
   'durafence': {
     metaTitle: 'Dura Fence Installation Ocala FL | Most Requested · Lifetime Warranty',
     metaDescription: 'Dura Fence installation in Ocala and Marion County. The most requested fence in our lineup. Available in White, Bronze, and Black. 160 MPH wind-rated, lifetime warranty. $0 down financing. Call (863) 377-0928.',

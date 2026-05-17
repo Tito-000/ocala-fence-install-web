@@ -80,7 +80,7 @@ export const BLOG_POSTS: BlogPost[] = [
 <p class="text-lg text-gray-700 leading-relaxed mb-6">A failed pool fence inspection delays your final Certificate of Occupancy if you're building, or your pool inspection if you're remodeling. We've seen homeowners lose 2-4 weeks of pool season fixing fence issues that should have been done right the first time.</p>
 
 <div class="bg-highlight/30 border-l-4 border-primary p-6 my-10">
-  <p class="text-lg text-gray-800 leading-relaxed"><strong class="text-primary-900">Need a §515-compliant pool fence?</strong> Every pool fence we install passes Marion County inspection — guaranteed. <a href="/services/pool-fence" class="text-primary hover:text-primary-700 font-extrabold underline">See our pool fence options →</a></p>
+  <p class="text-lg text-gray-800 leading-relaxed"><strong class="text-primary-900">Need a §515-compliant pool fence?</strong> Every pool fence we install passes Marion County inspection — guaranteed. <a href="/services/aluminum-fence" class="text-primary hover:text-primary-700 font-extrabold underline">See our aluminum pool fence options →</a></p>
 </div>
     `,
   },
