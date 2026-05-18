@@ -466,7 +466,7 @@ const faqSchema = {
 
           <div>
             <p class="text-xs text-white/70 leading-relaxed">
-              <strong class="text-white">What's included:</strong> Materials, concrete-set posts, pickets/panels, gate hardware, removal of old fence, debris haul-off, permits, Sunshine 811 utility marking, and labor.
+              <strong class="text-white">What's included:</strong> Materials, concrete-set posts, pickets/panels, gate hardware, and labor.
             </p>
           </div>
         </div>
@@ -477,7 +477,6 @@ const faqSchema = {
           <div class="border-b border-white/20 pb-5 mb-5">
             <div class="text-xl lg:text-2xl font-extrabold mb-2">Project Total</div>
             <div class="text-4xl lg:text-5xl font-extrabold text-highlight" data-lf-total>$5,250</div>
-            <div class="text-sm text-white/70 mt-2"><span data-lf-rate>$35</span>/lf installed</div>
           </div>
           <div class="space-y-3 text-sm lg:text-base">
             <div class="flex justify-between text-white/85">
@@ -665,7 +664,7 @@ const faqSchema = {
       const monthly = (total * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
       feetEl.textContent = feet + ' ft';
       totalEl.textContent = fmt(total);
-      rateEl.textContent = '$' + rate;
+      if (rateEl) rateEl.textContent = '$' + rate;
       monthlyEl.textContent = fmt(monthly);
       tierLabel.textContent = tierLabels[currentTier];
     }
