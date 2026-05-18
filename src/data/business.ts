@@ -153,7 +153,7 @@ export const BUSINESS = {
       pricePerFoot: { min: 30, max: 55 },
       priceFromMonthly: 89,
       colors: ['White', 'Cream'],
-      heights: ['6ft'],
+      heights: ['6ft', '8ft'],
       gateWidths: ['5ft', '6ft'],
       windRated: '130 MPH',
       lifespan: '25+ years',
