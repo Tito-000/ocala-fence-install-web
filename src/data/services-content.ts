@@ -149,4 +149,60 @@ export const SERVICES_CONTENT: Record<string, {
       { q: 'Will Dura Fence handle Florida hurricanes?', a: 'Yes — better than wood or vinyl. Engineered panels and concrete-set posts are <strong>160 MPH wind-rated</strong>, exceeding Florida building code for the highest wind zones.' },
     ],
   },
+  'chain-link-fence': {
+    metaTitle: 'Chain Link Fence Installation Ocala FL | Affordable · Galvanized · Pet-Safe',
+    metaDescription: 'Affordable chain link fence installation in Ocala and Marion County. Galvanized and black vinyl-coated options. Heights 4ft, 5ft, 6ft. $0 down financing. Call (863) 377-0928.',
+    heroTitle: 'Chain Link Fence Installation in <span class="text-highlight">Ocala, FL</span>',
+    heroSubtitle: 'The most affordable way to secure your yard. Galvanized or black vinyl-coated chain link in 4ft, 5ft, and 6ft heights. $0 down financing, hablamos español.',
+    intro: {
+      heading: 'The most affordable fence we install',
+      paragraphs: [
+        'Chain link is the workhorse of Marion County backyards. It\'s the cheapest way to fully enclose a yard, keep dogs in, kids safe, and define property lines — without spending vinyl or DuraFence money.',
+        'We install <strong>galvanized silver</strong> (the classic look — most affordable) and <strong>black vinyl-coated</strong> (modern, blends into landscaping). Standard heights are 4ft (most popular for residential), 5ft, and 6ft. Tension wire, top rail, and posts all included.',
+        'Backyard projects typically run 3-5 days from signed contract to finished install. Concrete-set terminal and gate posts, line posts driven for stability.',
+      ],
+    },
+    whyCards: [
+      { title: 'Most Affordable', body: 'Lowest cost per linear foot we install. Get a full yard fenced for less than $5,000 in most cases.' },
+      { title: 'Pet-Safe Containment', body: 'Galvanized mesh keeps dogs in without blocking views. Smaller mesh sizes available for small breeds.' },
+      { title: '15-20 Year Lifespan', body: 'Galvanized steel resists rust. Black vinyl-coated lasts even longer. Lower upfront cost than vinyl or DuraFence.' },
+      { title: 'Fast Install', body: 'Most backyards finish in 3-5 days. No special permits needed in unincorporated Marion County.' },
+    ],
+    faqs: [
+      { q: 'How much does chain link cost in Ocala?', a: 'Most residential chain link projects run between <strong>$1,500 and $5,000</strong> ($8-$18 per linear foot installed). With $0 down financing, monthly payments typically start at $39.' },
+      { q: 'Galvanized vs black vinyl-coated — what\'s the difference?', a: '<strong>Galvanized</strong> is the classic silver chain link — cheaper, traditional look. <strong>Black vinyl-coated</strong> has a PVC coating that blends into landscaping, looks more modern, and lasts longer. Black runs about 30% more.' },
+      { q: 'Will chain link keep my dog in?', a: 'Yes — for most breeds. 4ft works for small/medium dogs that don\'t jump. 5-6ft for larger dogs or jumpers. We can add a "dig guard" along the bottom if your dog digs.' },
+      { q: 'Does chain link rust in Florida?', a: 'Galvanized chain link is rust-resistant — typically 15-20 years before any visible rust. Black vinyl-coated lasts even longer because the PVC seals the steel completely.' },
+      { q: 'How tall does chain link come?', a: 'We install <strong>4ft, 5ft, and 6ft</strong> heights. 4ft is the most common residential. 6ft for security or larger dogs.' },
+      { q: 'Do I need a permit for chain link in Marion County?', a: 'Unincorporated Marion County generally does not require a permit for chain link under 6ft. Inside City of Ocala limits, permits may apply. We handle whichever applies.' },
+    ],
+  },
+  'wood-fence': {
+    metaTitle: 'Wood Fence Installation Ocala FL | Classic Privacy · Natural Warmth',
+    metaDescription: 'Wood fence installation in Ocala and Marion County. Classic 6ft privacy in natural pine, cedar, and pre-stained options. $0 down financing. Less than 7 days install. Call (863) 377-0928.',
+    heroTitle: 'Wood Fence Installation in <span class="text-highlight">Ocala, FL</span>',
+    heroSubtitle: 'Classic 6ft tall wood privacy fences with the natural warmth and curb appeal only real wood delivers. Pine, cedar, or pre-stained brown. $0 down financing.',
+    intro: {
+      heading: 'The classic privacy fence — real wood, real warmth',
+      paragraphs: [
+        'Some Ocala homeowners want the natural warmth and traditional look that only real wood delivers. Our 6ft wood privacy fences are built with pressure-treated pine or cedar pickets, installed on concrete-set posts.',
+        'Available in <strong>natural pine</strong> (classic, weathers to silver-gray over time), <strong>cedar with stain</strong> (warm reddish tones, naturally rot-resistant), and <strong>pre-stained brown</strong> (consistent finish from day one). Standard 6ft height with gates in 3ft, 4ft, or 5ft widths.',
+        'Wood needs more maintenance than vinyl or aluminum — plan to seal or stain every 2-3 years to preserve the color and extend lifespan. Properly maintained, expect 10-15 years before replacement.',
+      ],
+    },
+    whyCards: [
+      { title: 'Classic Natural Look', body: 'The traditional fence material — warm, organic, blends with any home style. Nothing matches the look of real wood.' },
+      { title: 'Full Privacy', body: 'Solid 6ft pickets with no gaps. Complete visual privacy from neighbors. Blocks noise.' },
+      { title: 'Real Wood Warmth', body: 'Pine, cedar, or pre-stained brown. Each board is unique. Ages gracefully to silver-gray if left natural.' },
+      { title: 'Affordable Privacy', body: 'Real wood at half the price of premium vinyl. Great for budget-conscious homeowners who want privacy.' },
+    ],
+    faqs: [
+      { q: 'How much does a wood fence cost in Ocala?', a: 'Most wood fence projects run between <strong>$3,000 and $8,000</strong> ($20-$35 per linear foot installed). With $0 down financing, monthly payments typically start at $59.' },
+      { q: 'How long does a wood fence last in Florida?', a: 'With regular maintenance (sealing/staining every 2-3 years), <strong>10-15 years</strong> is typical. Without maintenance, 7-10 years before pickets need replacement.' },
+      { q: 'What wood do you use?', a: 'Pressure-treated pine (most affordable, weathers to silver-gray) or cedar (naturally rot-resistant, warm reddish color). Both are kiln-dried and rated for Florida humidity.' },
+      { q: 'Do I need to stain or seal my wood fence?', a: 'Strongly recommended every <strong>2-3 years</strong> to prevent graying, cracking, and rot. We can refer you to a local sealing service or you can DIY for ~$200-400.' },
+      { q: 'How does wood compare to vinyl privacy?', a: 'Wood is <strong>30-40% cheaper</strong> upfront but lasts half as long and needs maintenance. Vinyl costs more but never needs painting and lasts 25+ years. Choose wood for the natural look, vinyl for low maintenance.' },
+      { q: 'Will my wood fence warp or rot in Florida?', a: 'Properly installed pressure-treated wood resists rot, but Florida humidity can cause some warping over time. Cedar resists warping better than pine. Regular sealing helps a lot.' },
+    ],
+  },
 };
