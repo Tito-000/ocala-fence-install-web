@@ -288,15 +288,22 @@ const faqSchema = {
             {/* Colors */}
             <div class="p-4 md:p-6 lg:p-8 text-center">
               <div class="flex justify-center gap-1 mb-2 md:mb-3">
-                {service.colors.slice(0, 3).map((color) => (
-                  <span class={`w-4 h-4 md:w-5 md:h-5 border-2 border-gray-300 ${
-                    color.toLowerCase().includes('black') ? 'bg-gray-900' :
-                    color.toLowerCase().includes('bronze') ? 'bg-amber-800' :
-                    color.toLowerCase().includes('gray') ? 'bg-gray-300' :
-                    color.toLowerCase().includes('cream') ? 'bg-amber-50' :
-                    'bg-white'
-                  }`}></span>
-                ))}
+                {service.colors.slice(0, 3).map((color) => {
+                  const c = color.toLowerCase();
+                  const bg =
+                    c.includes('black') ? 'bg-gray-900' :
+                    c.includes('bronze') ? 'bg-amber-800' :
+                    c.includes('cedar') ? 'bg-orange-800' :
+                    c.includes('brown') ? 'bg-amber-900' :
+                    c.includes('pine') ? 'bg-amber-200' :
+                    c.includes('galvanized') || c.includes('silver') ? 'bg-gray-400' :
+                    c.includes('gray') ? 'bg-gray-300' :
+                    c.includes('cream') ? 'bg-amber-50' :
+                    'bg-white';
+                  return (
+                    <span class={`w-4 h-4 md:w-5 md:h-5 border-2 border-gray-300 ${bg}`}></span>
+                  );
+                })}
               </div>
               <div class="text-[10px] md:text-xs uppercase tracking-[0.15em] text-gray-500 font-bold mb-1 md:mb-2">Colors</div>
               <div class="text-xs md:text-sm font-extrabold text-gray-900 leading-tight">{service.colors.join(' · ')}</div>
