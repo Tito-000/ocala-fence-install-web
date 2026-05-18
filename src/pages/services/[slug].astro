@@ -376,16 +376,20 @@ const faqSchema = {
             </tr>
             <tr class="border-b border-gray-100">
               <td class="p-2.5 md:p-4 font-semibold text-gray-700 whitespace-nowrap">Maintenance</td>
-              {BUSINESS.services.map((s) => (
-                <td class={`p-2.5 md:p-4 text-center whitespace-nowrap ${s.slug === service.slug ? "bg-primary-50 font-extrabold text-primary" : "text-gray-700"}`}>
-                  {s.slug.includes('aluminum') || s.slug.includes('pool') ? 'None' : 'Hose only'}
-                </td>
-              ))}
+              {BUSINESS.services.map((s) => {
+                const maintenance = s.slug === 'durafence' ? 'Hose and Paint' : 'Hose only';
+                return (
+                  <td class={`p-2.5 md:p-4 text-center whitespace-nowrap ${s.slug === service.slug ? "bg-primary-50 font-extrabold text-primary" : "text-gray-700"}`}>
+                    {maintenance}
+                  </td>
+                );
+              })}
             </tr>
             <tr class="border-b border-gray-100">
               <td class="p-2.5 md:p-4 font-semibold text-gray-700 whitespace-nowrap">Privacy</td>
               {BUSINESS.services.map((s) => {
                 const privacy = s.slug === 'vinyl-privacy-fence' ? 'Full' :
+                                s.slug === 'durafence' ? 'Full' :
                                 s.slug === 'composite-fence' ? 'Full' :
                                 s.slug === 'vinyl-picket-fence' ? 'Decorative' :
                                 'See-through';
