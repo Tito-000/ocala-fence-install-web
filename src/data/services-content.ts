@@ -11,26 +11,26 @@ export const SERVICES_CONTENT: Record<string, {
   faqs: { q: string; a: string }[];
 }> = {
   'vinyl-privacy-fence': {
-    metaTitle: 'Vinyl Privacy Fence Installation Ocala FL | $0 Down · 25-Year Lifespan',
-    metaDescription: 'Premium vinyl privacy fence installation in Ocala and Marion County. 130 MPH wind-rated, 25-year lifespan, lifetime materials warranty. $0 down financing. Less than 7 days install. Call (863) 377-0928.',
+    metaTitle: 'Vinyl Privacy Fence Installation Ocala FL | $0 Down · Lifetime Warranty',
+    metaDescription: 'Premium vinyl privacy fence installation in Ocala and Marion County. 130 MPH wind-rated, lifetime materials warranty. $0 down financing. Less than 7 days install. Call (863) 377-0928.',
     heroTitle: 'Vinyl Privacy Fence Installation in <span class="text-highlight">Ocala, FL</span>',
-    heroSubtitle: 'Premium 6ft vinyl privacy fences built to outlast Florida weather. 130 MPH wind-rated, 25-year manufacturer warranty, $0 down financing.',
+    heroSubtitle: 'Premium vinyl privacy fences built to outlast Florida weather. Available in 6ft and 8ft heights. 130 MPH wind-rated, lifetime manufacturer warranty, $0 down financing.',
     intro: {
       heading: 'The most popular fence in Marion County',
       paragraphs: [
-        'Vinyl privacy fences are the #1 choice for Ocala homeowners — and for good reason. They give you full visual privacy from neighbors, block noise, keep pets and kids contained, and look new for 25+ years without painting, staining, or repairs.',
+        'Vinyl privacy fences are the #1 choice for Ocala homeowners — and for good reason. They give you full visual privacy from neighbors, block noise, keep pets and kids contained, and look new for decades without painting, staining, or repairs.',
         'Our premium vinyl is engineered for Florida: UV-stabilized so it won\'t yellow under the sun, hurricane-rated to 130 MPH, and backed by a manufacturer\'s lifetime warranty that transfers to the next homeowner if you sell.',
-        'We install our standard 6ft tall privacy panels in two colors (white and cream), with gates available in 5ft or 6ft widths. Most jobs are finished in less than 7 days from signed contract.',
+        'We install privacy panels in 6ft and 8ft heights in two colors (white and cream), with gates available in 5ft or 6ft widths. Most jobs are finished in less than 7 days from signed contract.',
       ],
     },
     whyCards: [
       { title: 'Lifetime Warranty', body: 'Manufacturer\'s lifetime materials warranty covers cracking, splitting, fading, and discoloration. Transferable to the next homeowner.' },
-      { title: 'Zero Maintenance', body: 'Never paint, stain, or seal again. A garden hose is the only tool you need to keep it looking new for 25+ years.' },
+      { title: 'Zero Maintenance', body: 'Never paint, stain, or seal again. A garden hose is the only tool you need to keep it looking new for life.' },
       { title: 'Florida-Tough', body: 'UV-stabilized polymer formula stops yellowing under Ocala\'s harsh sun. Wind-rated to 130 MPH for hurricane resistance.' },
-      { title: 'True Privacy', body: 'Solid 6ft panels with no gaps between boards. Full visual privacy from neighbors. Blocks noise. Keeps kids and pets in.' },
+      { title: 'True Privacy', body: 'Solid panels (6ft or 8ft tall) with no gaps between boards. Full visual privacy from neighbors. Blocks noise. Keeps kids and pets in.' },
     ],
     faqs: [
-      { q: 'How much does a vinyl privacy fence cost in Ocala?', a: 'Most projects run between <strong>$4,500 and $13,000</strong> depending on length, height, and gates. Average yard runs $7,500. With $0 down financing, monthly payments typically fall between $89 and $200.' },
+      { q: 'How much does a vinyl privacy fence cost in Ocala?', a: 'Most projects run between <strong>$3,900 and $14,000</strong> depending on length, height (6ft or 8ft), and gates. With $0 down financing, monthly payments typically fall between $89 and $200.' },
       { q: 'Will vinyl yellow or fade in Florida sun?', a: 'No. Premium UV-stabilized vinyl is engineered specifically to resist yellowing and fading. The lifetime warranty covers fading and discoloration — if it ever yellows, the manufacturer replaces it.' },
       { q: 'Can vinyl handle hurricanes?', a: 'Yes. Our vinyl privacy panels are <strong>130 MPH wind-rated</strong> when installed properly with our concrete-set posts. We meet or exceed Florida building code for fence wind resistance.' },
       { q: 'How long does vinyl privacy fence installation take?', a: 'Most jobs finish in <strong>less than 7 days</strong> from signed contract. Urgent timelines (2-3 days) are possible for smaller projects. We handle Marion County permits.' },
@@ -39,7 +39,7 @@ export const SERVICES_CONTENT: Record<string, {
   },
   'vinyl-picket-fence': {
     metaTitle: 'Vinyl Picket Fence Installation Ocala FL | $0 Down · Lifetime Warranty',
-    metaDescription: 'Classic vinyl picket fence installation in Ocala and Marion County. 25-year lifespan, lifetime materials warranty, $0 down financing. Less than 7 days install. Call (863) 377-0928.',
+    metaDescription: 'Classic vinyl picket fence installation in Ocala and Marion County. Lifetime materials warranty, $0 down financing. Less than 7 days install. Call (863) 377-0928.',
     heroTitle: 'Vinyl Picket Fence Installation in <span class="text-highlight">Ocala, FL</span>',
     heroSubtitle: 'Classic curb appeal that lasts a lifetime. Decorative 6ft tall vinyl picket fences with 5ft or 6ft wide gates. $0 down financing, lifetime warranty.',
     intro: {
@@ -84,7 +84,7 @@ export const SERVICES_CONTENT: Record<string, {
       { title: 'See-Through Security', body: 'Maintains your view of the landscape, lake, or property — unlike vinyl privacy. Adds security without blocking sight lines.' },
     ],
     faqs: [
-      { q: 'How much does aluminum fencing cost in Ocala?', a: 'Aluminum runs <strong>$4,500 to $12,000</strong> for most projects. Average pool perimeter (around an in-ground pool) runs $5,000-$7,000.' },
+      { q: 'How much does aluminum fencing cost in Ocala?', a: 'Aluminum runs <strong>$4,500 to $15,000</strong> for most projects. Average pool perimeter (around an in-ground pool) runs $5,000-$7,500.' },
       { q: 'Does aluminum meet pool code?', a: 'Yes — our aluminum fences meet Florida <strong>§515 pool code</strong> when configured to 4ft minimum height with no horizontal climbable rails. We install self-closing magnetic gates rated for pool safety.' },
       { q: 'Will aluminum rust like wrought iron?', a: 'No. Aluminum is rust-proof by nature, and the powder-coat finish protects against scratches and color fading. Wrought iron rusts within 5-10 years in Florida humidity — aluminum lasts 50+.' },
       { q: 'Can aluminum block my view?', a: 'No — aluminum keeps your view. If you want full privacy, choose a vinyl privacy fence. Aluminum is for security, pool code, and decorative perimeters where you want to see through.' },
@@ -111,7 +111,7 @@ export const SERVICES_CONTENT: Record<string, {
       { title: 'Big Acreage, One Crew', body: 'From 1-acre back paddocks to 50+ acre full-farm perimeters. Our crew, same faces start to finish — no subcontractors.' },
     ],
     faqs: [
-      { q: 'How much does horse fencing cost in Ocala?', a: 'Most 3-rail vinyl horse fence projects in Marion County run between <strong>$3,500 and $11,000</strong> depending on linear footage, height, and number of rails. With $0 down financing, payments start around <strong>$69/month</strong>.' },
+      { q: 'How much does horse fencing cost in Ocala?', a: 'Most 3-rail vinyl horse fence projects in Marion County run between <strong>$2,900 and $10,000</strong> depending on linear footage, height, and number of rails. With $0 down financing, payments start around <strong>$69/month</strong>.' },
       { q: 'What materials work best for horse fence in Florida?', a: 'Vinyl ranch rail is our most popular for Marion County — it doesn\'t rot, doesn\'t need painting, and won\'t splinter against a horse\'s flank. All our vinyl ranch fencing is hurricane-rated to 130 MPH.' },
       { q: 'Will the fence hurt my horses if they lean on it?', a: 'No. Vinyl ranch rail flexes on impact instead of snapping like wood or barbed wire. We install <strong>5x5 hollow posts spaced every 8 feet</strong> with reinforced rails — strong enough to contain horses but with give so they don\'t injure themselves.' },
       { q: 'How long does horse fence installation take?', a: 'For a typical 1-3 acre paddock, <strong>3 to 5 days</strong>. Larger ranches up to 10 acres usually finish in <strong>under 2 weeks</strong>. We can move faster if you have horses arriving on a specific date.' },
@@ -121,30 +121,30 @@ export const SERVICES_CONTENT: Record<string, {
     ],
   },
   'durafence': {
-    metaTitle: 'Dura Fence Installation Ocala FL | Most Requested · Lifetime Warranty',
-    metaDescription: 'Dura Fence installation in Ocala and Marion County. The most requested fence in our lineup. Available in White, Bronze, and Black. 160 MPH wind-rated, lifetime warranty. $0 down financing. Call (863) 377-0928.',
+    metaTitle: 'Dura Fence Installation Ocala FL | Most Requested · 20-Year Lifespan',
+    metaDescription: 'Dura Fence installation in Ocala and Marion County. The most requested fence in our lineup. Available in White, Bronze, and Black. 160 MPH wind-rated, 20+ year lifespan. $0 down financing. Call (863) 377-0928.',
     heroTitle: 'Dura Fence Installation in <span class="text-highlight">Ocala, FL</span>',
-    heroSubtitle: 'Our most requested fence — premium look, hurricane-grade strength, lifetime warranty. Available in White, Bronze, and Black. 160 MPH wind-rated.',
+    heroSubtitle: 'Our most requested fence — premium steel-core look, hurricane-grade strength, full privacy. Available in White, Bronze, and Black. 160 MPH wind-rated.',
     intro: {
       heading: 'Marion County\'s most requested fence',
       paragraphs: [
-        'Dura Fence is the fence Ocala homeowners ask for the most. It combines the premium look of a high-end residential fence with the engineering toughness to outlast Florida hurricanes — all backed by a lifetime warranty.',
+        'Dura Fence is the fence Ocala homeowners ask for the most. It combines the premium look of a high-end residential fence with the engineering toughness to outlast Florida hurricanes — built to last 20+ years.',
         'Available in three colors: <strong>White</strong> for classic curb appeal, <strong>Bronze</strong> for a warm modern look, and <strong>Black</strong> for sleek contemporary homes. Standard 6ft tall panels with gates in 5ft or 6ft widths, perfect for backyard privacy and front-yard statements.',
-        'Hurricane-rated to 160 MPH and engineered to never warp, rot, fade, or attract termites. Most installs finish in 5-7 days from signed contract.',
+        'Hurricane-rated to 160 MPH and engineered to resist warping, rot, and termites. Hose it down regularly and re-paint every few years to keep the finish like new. Most installs finish in 5-7 days from signed contract.',
       ],
     },
     whyCards: [
-      { title: 'Most Requested', body: 'Marion County\'s #1 fence — homeowners pick Dura Fence for its premium appearance and lifetime durability.' },
+      { title: 'Most Requested', body: 'Marion County\'s #1 fence — homeowners pick Dura Fence for its premium appearance and steel-core durability.' },
       { title: '3 Premium Colors', body: 'White for classic curb appeal, Bronze for warm modern look, Black for sleek contemporary homes.' },
       { title: '160 MPH Hurricane-Rated', body: 'Built for Florida storms. Concrete-set posts and engineered panels meet or exceed wind code.' },
-      { title: 'Lifetime Warranty', body: 'Manufacturer\'s lifetime warranty against cracking, fading, warping, and material failure. Transferable to next homeowner.' },
+      { title: '20+ Year Lifespan', body: 'Built to outlast 20+ years of Florida weather. Wash with a hose; refresh the paint every few years to keep it looking new.' },
     ],
     faqs: [
-      { q: 'How much does Dura Fence cost in Ocala?', a: 'Most Dura Fence projects in Marion County run between <strong>$5,000 and $14,000</strong>, or $32-58 per linear foot installed. With $0 down financing, monthly payments typically fall between $99 and $250.' },
+      { q: 'How much does Dura Fence cost in Ocala?', a: 'Most Dura Fence projects in Marion County run between <strong>$3,300 and $13,000</strong>, or $32-58 per linear foot installed. With $0 down financing, monthly payments typically fall between $99 and $250.' },
       { q: 'What colors does Dura Fence come in?', a: 'Three premium colors: <strong>White, Bronze, and Black</strong>. White is the most popular for traditional homes, Bronze for warm/Mediterranean styles, Black for modern homes.' },
-      { q: 'Why is Dura Fence so popular?', a: 'It looks premium, lasts a lifetime, and never needs maintenance. No painting, no staining, no rotting. Plus the 160 MPH wind rating makes it one of the toughest residential fences for Florida storms.' },
-      { q: 'How does Dura Fence compare to vinyl?', a: 'Dura Fence has a more premium look and 30 MPH higher wind rating (160 vs 130). Vinyl is cheaper. If you want the highest-end residential fence, Dura Fence wins.' },
-      { q: 'Does Dura Fence require maintenance?', a: 'No painting, no staining, no sealing — ever. Hose it down once or twice a year if you want. The factory finish doesn\'t fade, chip, or yellow.' },
+      { q: 'Why is Dura Fence so popular?', a: 'It looks premium, lasts 20+ years, and the 160 MPH wind rating makes it one of the toughest residential fences for Florida storms.' },
+      { q: 'How does Dura Fence compare to vinyl?', a: 'Dura Fence has a more premium look and 30 MPH higher wind rating (160 vs 130). Vinyl has a longer warranty and needs less upkeep. Dura Fence wins on hurricane resistance and curb appeal.' },
+      { q: 'Does Dura Fence require maintenance?', a: 'Yes — light maintenance. Hose it down regularly and plan to repaint every few years to keep the finish like new. It won\'t rot, warp, or attract termites.' },
       { q: 'How long does Dura Fence installation take?', a: 'Most Dura Fence projects finish in <strong>5-7 days</strong> from signed contract. Larger lots can take a few days more.' },
       { q: 'Will Dura Fence handle Florida hurricanes?', a: 'Yes — better than wood or vinyl. Engineered panels and concrete-set posts are <strong>160 MPH wind-rated</strong>, exceeding Florida building code for the highest wind zones.' },
     ],
