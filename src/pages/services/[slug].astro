@@ -51,10 +51,21 @@ const styles = stylesBySlug[service.slug] || [];
 // Gallery images per service slug — unique image set per service, no repeats
 const galleryBySlug: Record<string, { src: string; alt: string }[]> = {
   'vinyl-privacy-fence': [
-    // Hero image is vinyl-privacy-white-gate.webp (installer working) — excluded here so gallery shows different photos
+    // White
+    { src: '/images/gallery/vinyl-privacy-white-corner-blue-sky.webp', alt: 'White vinyl privacy fence corner install with bright blue sky — Marion County FL' },
+    { src: '/images/gallery/vinyl-privacy-white-backyard-pool-cage.webp', alt: 'White vinyl privacy fence wrapping backyard with pool cage view — Ocala FL' },
+    { src: '/images/gallery/vinyl-privacy-white-driveway-front.webp', alt: 'White vinyl privacy fence along front driveway with shed — Marion County FL' },
+    { src: '/images/gallery/vinyl-privacy-white-driveway-gate.webp', alt: 'White vinyl privacy fence with driveway gate next to garage — Ocala FL' },
+    { src: '/images/gallery/vinyl-privacy-white-trees.webp', alt: 'White vinyl privacy fence along property line with mature oak trees — Marion County FL' },
+    { src: '/images/gallery/vinyl-privacy-white-construction.webp', alt: 'White vinyl privacy fence long run during install — Marion County FL' },
     { src: '/images/gallery/vinyl-privacy-white-double-gate.webp', alt: 'White vinyl privacy fence panels with double-swing gate — Ocala FL' },
-    { src: '/images/gallery/vinyl-privacy-white-long-run.webp', alt: 'White vinyl privacy fence long run along backyard with American flag — Ocala FL' },
+    { src: '/images/gallery/vinyl-privacy-white-long-run.webp', alt: 'White vinyl privacy fence long run along backyard — Ocala FL' },
     { src: '/images/gallery/vinyl-privacy-white-backyard.webp', alt: 'White vinyl privacy fence wrapping backyard property line — Marion County FL' },
+    // Tan / Cream
+    { src: '/images/gallery/vinyl-privacy-tan-modern-home.webp', alt: 'Tan cream vinyl privacy fence framing modern Florida home — Ocala FL' },
+    { src: '/images/gallery/vinyl-privacy-tan-shed-yard.webp', alt: 'Tan cream vinyl privacy fence with shed and large yard — Marion County FL' },
+    { src: '/images/gallery/vinyl-privacy-tan-side.webp', alt: 'Tan cream vinyl privacy fence side panels with home stucco — Ocala FL' },
+    { src: '/images/gallery/vinyl-privacy-tan-condo-side.webp', alt: 'Tan cream vinyl privacy fence side yard between homes — Marion County FL' },
   ],
   // No gallery for vinyl-picket-fence and aluminum-fence yet — Andri has not sent real photos
   // Section is hidden via {galleryImages.length > 0 &&} condition
