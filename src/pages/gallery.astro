@@ -4,28 +4,44 @@ import FinalCTA from '@components/FinalCTA.astro';
 import { BUSINESS } from '@data/business';
 
 const projects = [
-  // Vinyl Privacy (real installs by Ocala Fence Install)
+  // Vinyl Privacy — White (real installs by Andri)
   { id: '01', src: '/images/gallery/vinyl-privacy-white-gate.webp', alt: 'White vinyl privacy fence with double gate by Ocala Fence Install — Marion County FL', cat: 'Vinyl Privacy', city: 'Marion Oaks' },
   { id: '02', src: '/images/gallery/vinyl-privacy-white-double-gate.webp', alt: 'White vinyl privacy fence panels with double-swing gate — Ocala FL', cat: 'Vinyl Privacy', city: 'Ocala' },
-  { id: '03', src: '/images/gallery/vinyl-privacy-white-long-run.webp', alt: 'White vinyl privacy fence long run with American flag — Ocala FL', cat: 'Vinyl Privacy', city: 'Belleview' },
+  { id: '03', src: '/images/gallery/vinyl-privacy-white-long-run.webp', alt: 'White vinyl privacy fence long run along backyard — Ocala FL', cat: 'Vinyl Privacy', city: 'Belleview' },
   { id: '04', src: '/images/gallery/vinyl-privacy-white-backyard.webp', alt: 'White vinyl privacy fence wrapping backyard — Marion County FL', cat: 'Vinyl Privacy', city: 'Summerfield' },
+  { id: '05', src: '/images/gallery/vinyl-privacy-white-corner-blue-sky.webp', alt: 'White vinyl privacy fence corner install with bright blue sky — Marion County FL', cat: 'Vinyl Privacy', city: 'Marion County' },
+  { id: '06', src: '/images/gallery/vinyl-privacy-white-backyard-pool-cage.webp', alt: 'White vinyl privacy fence wrapping backyard with pool cage view — Ocala FL', cat: 'Vinyl Privacy', city: 'Ocala' },
+  { id: '07', src: '/images/gallery/vinyl-privacy-white-driveway-front.webp', alt: 'White vinyl privacy fence along front driveway with shed — Marion County FL', cat: 'Vinyl Privacy', city: 'Belleview' },
+  { id: '08', src: '/images/gallery/vinyl-privacy-white-driveway-gate.webp', alt: 'White vinyl privacy fence with driveway gate next to garage — Ocala FL', cat: 'Vinyl Privacy', city: 'Ocala' },
+  { id: '09', src: '/images/gallery/vinyl-privacy-white-trees.webp', alt: 'White vinyl privacy fence along property line with mature oak trees — Marion County FL', cat: 'Vinyl Privacy', city: 'Marion County' },
+  { id: '10', src: '/images/gallery/vinyl-privacy-white-construction.webp', alt: 'White vinyl privacy fence long run during install — Marion County FL', cat: 'Vinyl Privacy', city: 'Summerfield' },
+  // Vinyl Privacy — Tan / Cream
+  { id: '11', src: '/images/gallery/vinyl-privacy-tan-modern-home.webp', alt: 'Tan cream vinyl privacy fence framing modern Florida home — Ocala FL', cat: 'Vinyl Privacy', city: 'Ocala' },
+  { id: '12', src: '/images/gallery/vinyl-privacy-tan-shed-yard.webp', alt: 'Tan cream vinyl privacy fence with shed and large yard — Marion County FL', cat: 'Vinyl Privacy', city: 'Marion County' },
+  { id: '13', src: '/images/gallery/vinyl-privacy-tan-side.webp', alt: 'Tan cream vinyl privacy fence side panels with home stucco — Ocala FL', cat: 'Vinyl Privacy', city: 'Belleview' },
+  { id: '14', src: '/images/gallery/vinyl-privacy-tan-condo-side.webp', alt: 'Tan cream vinyl privacy fence side yard between homes — Marion County FL', cat: 'Vinyl Privacy', city: 'Summerfield' },
   // Dura Fence — White (real installs)
-  { id: '05', src: '/images/gallery/durafence-white-side.webp', alt: 'White Dura Fence along side of home in Marion Oaks FL', cat: 'Dura Fence', city: 'Marion Oaks' },
-  { id: '06', src: '/images/gallery/durafence-white-gate.webp', alt: 'White Dura Fence with double gate between homes — Ocala FL', cat: 'Dura Fence', city: 'Ocala' },
-  { id: '07', src: '/images/gallery/durafence-white-driveway.webp', alt: 'White Dura Fence next to driveway and garage — Ocala FL', cat: 'Dura Fence', city: 'Ocala' },
-  { id: '08', src: '/images/gallery/durafence-white-yard.webp', alt: 'White Dura Fence backyard privacy install — Ocala FL', cat: 'Dura Fence', city: 'Belleview' },
+  { id: '15', src: '/images/gallery/durafence-white-side.webp', alt: 'White Dura Fence along side of home in Marion Oaks FL', cat: 'Dura Fence', city: 'Marion Oaks' },
+  { id: '16', src: '/images/gallery/durafence-white-gate.webp', alt: 'White Dura Fence with double gate between homes — Ocala FL', cat: 'Dura Fence', city: 'Ocala' },
+  { id: '17', src: '/images/gallery/durafence-white-driveway.webp', alt: 'White Dura Fence next to driveway and garage — Ocala FL', cat: 'Dura Fence', city: 'Ocala' },
+  { id: '18', src: '/images/gallery/durafence-white-yard.webp', alt: 'White Dura Fence backyard privacy install — Ocala FL', cat: 'Dura Fence', city: 'Belleview' },
   // Dura Fence — Bronze
-  { id: '09', src: '/images/gallery/durafence-bronze-long-run.webp', alt: 'Bronze Dura Fence long run with scalloped top — Ocala FL', cat: 'Dura Fence', city: 'Ocala' },
-  { id: '10', src: '/images/gallery/durafence-bronze-side-yard.webp', alt: 'Bronze Dura Fence side yard install — Marion County FL', cat: 'Dura Fence', city: 'Marion County' },
-  { id: '11', src: '/images/gallery/durafence-bronze-gate.webp', alt: 'Bronze Dura Fence with gate next to garage — Marion County FL', cat: 'Dura Fence', city: 'Summerfield' },
-  { id: '12', src: '/images/gallery/durafence-bronze-corner.webp', alt: 'Bronze Dura Fence corner install — Ocala FL', cat: 'Dura Fence', city: 'Marion Oaks' },
+  { id: '19', src: '/images/gallery/durafence-bronze-long-run.webp', alt: 'Bronze Dura Fence long run with scalloped top — Ocala FL', cat: 'Dura Fence', city: 'Ocala' },
+  { id: '20', src: '/images/gallery/durafence-bronze-side-yard.webp', alt: 'Bronze Dura Fence side yard install — Marion County FL', cat: 'Dura Fence', city: 'Marion County' },
+  { id: '21', src: '/images/gallery/durafence-bronze-gate.webp', alt: 'Bronze Dura Fence with gate next to garage — Marion County FL', cat: 'Dura Fence', city: 'Summerfield' },
+  { id: '22', src: '/images/gallery/durafence-bronze-corner.webp', alt: 'Bronze Dura Fence corner install — Ocala FL', cat: 'Dura Fence', city: 'Marion Oaks' },
   // Dura Fence — Black
-  { id: '13', src: '/images/gallery/durafence-black-long-run.webp', alt: 'Black Dura Fence long run with scalloped top — Ocala FL', cat: 'Dura Fence', city: 'Ocala' },
-  { id: '14', src: '/images/gallery/durafence-black-side.webp', alt: 'Black Dura Fence side yard install — Marion County FL', cat: 'Dura Fence', city: 'Lady Lake' },
-  { id: '15', src: '/images/gallery/durafence-black-gate.webp', alt: 'Black Dura Fence with double gate — Ocala FL', cat: 'Dura Fence', city: 'The Villages' },
+  { id: '23', src: '/images/gallery/durafence-black-long-run.webp', alt: 'Black Dura Fence long run with scalloped top — Ocala FL', cat: 'Dura Fence', city: 'Ocala' },
+  { id: '24', src: '/images/gallery/durafence-black-side.webp', alt: 'Black Dura Fence side yard install — Marion County FL', cat: 'Dura Fence', city: 'Lady Lake' },
+  { id: '25', src: '/images/gallery/durafence-black-gate.webp', alt: 'Black Dura Fence with double gate — Ocala FL', cat: 'Dura Fence', city: 'The Villages' },
+  // Horse Fence — 3-rail white vinyl ranch (real installs)
+  { id: '26', src: '/images/gallery/horse-fence-white-long-run.webp', alt: 'White 3-rail vinyl horse fence long run across pasture — Marion County FL', cat: 'Horse Fence', city: 'Marion County' },
+  { id: '27', src: '/images/gallery/horse-fence-white-gate.webp', alt: 'White 3-rail vinyl horse fence with X-brace driveway gate — Marion County FL', cat: 'Horse Fence', city: 'Marion County' },
+  { id: '28', src: '/images/gallery/horse-fence-white-driveway.webp', alt: 'White 3-rail vinyl horse fence along driveway entry — Marion County FL', cat: 'Horse Fence', city: 'Ocala' },
+  { id: '29', src: '/images/gallery/horse-fence-white-residential.webp', alt: 'White 3-rail vinyl horse fence framing residential home — Ocala FL', cat: 'Horse Fence', city: 'Ocala' },
 ];
 
-const categories = ['All', 'Vinyl Privacy', 'Dura Fence'];
+const categories = ['All', 'Vinyl Privacy', 'Dura Fence', 'Horse Fence'];
 
 const breadcrumbSchema = {
   '@context': 'https://schema.org',
