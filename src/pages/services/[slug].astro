@@ -100,10 +100,6 @@ const galleryBySlug: Record<string, { src: string; alt: string }[]> = {
 };
 const galleryImages = galleryBySlug[service.slug] || [];
 
-// Linear-foot pricing helper
-const pricePerFoot = (service as { pricePerFoot?: { min: number; max: number } }).pricePerFoot || { min: 30, max: 50 };
-const pricePerFootMid = Math.round((pricePerFoot.min + pricePerFoot.max) / 2);
-
 // Schema.org Product
 const productSchema = {
   '@context': 'https://schema.org',
@@ -451,80 +447,43 @@ const faqSchema = {
     </div>
   </section>
 
-  {/* Linear-Foot Cost Calculator — brand dark panel, BJF style */}
+  {/* Free Estimate CTA — replaced linear-foot calculator per Andri's request */}
   <section class="section bg-white">
-    <div class="container-page">
-      <div class="text-center max-w-3xl mx-auto mb-10 lg:mb-12">
-        <span class="badge-highlight mb-4">Quick Estimate</span>
-        <h2 class="mb-3 text-balance">{service.shortName} cost in Marion County, FL</h2>
-        <p class="text-gray-600 text-lg lg:text-xl leading-relaxed">
-          Move the slider for your project size. Every project gets a <strong class="text-primary">free on-site estimate</strong> with the final price tailored to your property.
+    <div class="container-page max-w-4xl">
+      <div class="bg-primary-900 text-white p-10 lg:p-16 shadow-2xl text-center">
+        <span class="inline-block bg-highlight/20 border border-highlight/40 text-highlight text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded mb-6">
+          Get Your Custom Quote
+        </span>
+        <h2 class="text-3xl lg:text-5xl font-extrabold mb-5 text-balance leading-tight">
+          Every {service.shortName.toLowerCase()} project is custom-priced
+        </h2>
+        <p class="text-lg lg:text-xl text-white/85 mb-10 max-w-2xl mx-auto leading-relaxed">
+          Final price depends on linear footage, gates, height, terrain, and any custom features. Get a <strong class="text-highlight">free on-site estimate</strong> tailored to your property — usually within 24-48 hours.
         </p>
-      </div>
 
-      <div class="grid md:grid-cols-[1.4fr_1fr] gap-6 lg:gap-8 max-w-5xl mx-auto" data-lf-calc data-min={pricePerFoot.min} data-max={pricePerFoot.max} data-mid={pricePerFootMid}>
-        {/* Inputs */}
-        <div class="bg-primary-900 text-white p-7 lg:p-9 shadow-xl">
-          <div class="mb-7">
-            <label class="flex items-center justify-between text-base font-extrabold mb-3">
-              <span>Linear Footage</span>
-              <span data-lf-feet class="text-highlight text-lg">150 ft</span>
-            </label>
-            <input
-              type="range"
-              min="20"
-              max="500"
-              step="5"
-              value="150"
-              data-lf-input
-              class="w-full accent-highlight"
-              aria-label="Linear footage"
-            />
-            <div class="flex justify-between text-xs text-white/60 mt-1">
-              <span>20 ft</span>
-              <span>500 ft</span>
-            </div>
-          </div>
-
-          <div class="mb-7">
-            <label class="flex items-center justify-between text-base font-extrabold mb-3">
-              <span>Quality Tier</span>
-              <span data-lf-tier-label class="text-highlight text-lg">Standard</span>
-            </label>
-            <div class="grid grid-cols-3 gap-2">
-              <button type="button" data-lf-tier="min" class="lf-tier-btn px-2 sm:px-3 py-3 border-2 border-white/30 hover:border-highlight transition-colors text-xs sm:text-sm font-extrabold uppercase tracking-wider">Basic</button>
-              <button type="button" data-lf-tier="mid" class="lf-tier-btn px-2 sm:px-3 py-3 border-2 border-highlight bg-highlight/15 transition-colors text-xs sm:text-sm font-extrabold uppercase tracking-wider" data-active="true">Standard</button>
-              <button type="button" data-lf-tier="max" class="lf-tier-btn px-2 sm:px-3 py-3 border-2 border-white/30 hover:border-highlight transition-colors text-xs sm:text-sm font-extrabold uppercase tracking-wider">Premium</button>
-            </div>
-          </div>
-
-          <div>
-            <p class="text-xs text-white/70 leading-relaxed">
-              <strong class="text-white">What's included:</strong> Materials, concrete-set posts, pickets/panels, gate hardware, and labor.
-            </p>
-          </div>
+        <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center">
+          <a
+            href="/free-estimate"
+            class="inline-flex items-center gap-2 bg-highlight hover:bg-highlight/90 text-primary-900 font-extrabold uppercase tracking-wider text-sm lg:text-base px-10 py-5 shadow-lg transition-colors w-full sm:w-auto justify-center"
+            data-track="cta_estimate_click"
+          >
+            Get Your Free Estimate
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"/></svg>
+          </a>
+          <a
+            href={`tel:${BUSINESS.phoneE164}`}
+            class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 border-2 border-white/30 text-white font-extrabold uppercase tracking-wider text-sm lg:text-base px-10 py-5 transition-colors w-full sm:w-auto justify-center"
+            data-track="click_phone"
+          >
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
+            Call {BUSINESS.phone}
+          </a>
         </div>
 
-        {/* Summary */}
-        <div class="bg-primary-900 text-white p-7 lg:p-9 shadow-xl flex flex-col justify-center">
-          <div class="text-xs uppercase tracking-[0.2em] font-bold text-highlight mb-2">Estimate</div>
-          <div class="border-b border-white/20 pb-5 mb-5">
-            <div class="text-xl lg:text-2xl font-extrabold mb-2">Project Total</div>
-            <div class="text-4xl lg:text-5xl font-extrabold text-highlight" data-lf-total>$5,250</div>
-          </div>
-          <div class="space-y-3 text-sm lg:text-base">
-            <div class="flex justify-between text-white/85">
-              <span>Or finance from</span>
-              <span class="font-bold"><span data-lf-monthly>$104</span>/mo</span>
-            </div>
-            <div class="flex justify-between text-white/85">
-              <span>Lead time</span>
-              <span class="font-bold">&lt; 7 days</span>
-            </div>
-          </div>
-          <p class="text-[11px] text-white/55 mt-7 leading-relaxed">
-            * Estimate based on Marion County averages. Final price depends on terrain, gates, height, and any custom features.
-          </p>
+        <div class="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-white/70">
+          <span class="flex items-center gap-2"><svg class="w-4 h-4 text-highlight" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>Same-day quotes</span>
+          <span class="flex items-center gap-2"><svg class="w-4 h-4 text-highlight" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>$0 down financing</span>
+          <span class="flex items-center gap-2"><svg class="w-4 h-4 text-highlight" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>Hablamos español</span>
         </div>
       </div>
     </div>
@@ -667,56 +626,3 @@ const faqSchema = {
   />
 </PageLayout>
 
-<script is:inline>
-  document.querySelectorAll('[data-lf-calc]').forEach((calc) => {
-    const min = parseFloat(calc.dataset.min);
-    const max = parseFloat(calc.dataset.max);
-    const mid = parseFloat(calc.dataset.mid);
-    const tiers = { min, mid, max };
-    let currentTier = 'mid';
-
-    const input = calc.querySelector('[data-lf-input]');
-    const feetEl = calc.querySelector('[data-lf-feet]');
-    const totalEl = calc.querySelector('[data-lf-total]');
-    const rateEl = calc.querySelector('[data-lf-rate]');
-    const monthlyEl = calc.querySelector('[data-lf-monthly]');
-    const tierLabel = calc.querySelector('[data-lf-tier-label]');
-    const tierBtns = calc.querySelectorAll('[data-lf-tier]');
-    const tierLabels = { min: 'Basic', mid: 'Standard', max: 'Premium' };
-
-    function fmt(n) {
-      return '$' + Math.round(n).toLocaleString('en-US');
-    }
-
-    function update() {
-      const feet = parseInt(input.value, 10);
-      const rate = tiers[currentTier];
-      const total = feet * rate;
-      // Estimate monthly via 60-month financing at 6.99% APR
-      const r = 0.0699 / 12;
-      const n = 60;
-      const monthly = (total * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
-      feetEl.textContent = feet + ' ft';
-      totalEl.textContent = fmt(total);
-      if (rateEl) rateEl.textContent = '$' + rate;
-      monthlyEl.textContent = fmt(monthly);
-      tierLabel.textContent = tierLabels[currentTier];
-    }
-
-    input.addEventListener('input', update);
-    tierBtns.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        currentTier = btn.dataset.lfTier;
-        tierBtns.forEach((b) => {
-          const active = b === btn;
-          b.dataset.active = active ? 'true' : 'false';
-          b.classList.toggle('border-highlight', active);
-          b.classList.toggle('bg-highlight/15', active);
-          b.classList.toggle('border-white/30', !active);
-        });
-        update();
-      });
-    });
-    update();
-  });
-</script>
