@@ -29,6 +29,15 @@ const ogImage = image.startsWith('http') ? image : new URL(image, Astro.site).hr
 // Analytics IDs (from env)
 const GA4_ID = import.meta.env.PUBLIC_GA4_ID;
 const META_PIXEL_ID = import.meta.env.PUBLIC_META_PIXEL_ID;
+
+// Google Ads conversion tracking (AW-XXXXXXXXX + per-action labels).
+// Safe to ship empty — every conversion call is a no-op until these env
+// vars are set in Cloudflare. Labels come from the conversion actions
+// created inside the Google Ads account.
+const GOOGLE_ADS_ID = import.meta.env.PUBLIC_GOOGLE_ADS_ID;
+const GADS_LABEL_LEAD = import.meta.env.PUBLIC_GADS_LABEL_LEAD;
+const GADS_LABEL_CALL = import.meta.env.PUBLIC_GADS_LABEL_CALL;
+const GADS_LABEL_WHATSAPP = import.meta.env.PUBLIC_GADS_LABEL_WHATSAPP;
 ---
 
 <!DOCTYPE html>
@@ -93,6 +102,22 @@ const META_PIXEL_ID = import.meta.env.PUBLIC_META_PIXEL_ID;
     </>
   )}
 
+  <!-- Google Ads — reuses the gtag.js already loaded by GA4; loads it
+       standalone if GA4 is absent. Conversions fire from the track() helper. -->
+  {GOOGLE_ADS_ID && (
+    <>
+      {!GA4_ID && (
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ADS_ID}`}></script>
+      )}
+      <script is:inline define:vars={{ GOOGLE_ADS_ID }}>
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function(){dataLayer.push(arguments);};
+        gtag('js', new Date());
+        gtag('config', GOOGLE_ADS_ID);
+      </script>
+    </>
+  )}
+
   <!-- Meta Pixel -->
   {META_PIXEL_ID && (
     <script is:inline define:vars={{ META_PIXEL_ID }}>
@@ -109,13 +134,30 @@ const META_PIXEL_ID = import.meta.env.PUBLIC_META_PIXEL_ID;
     </script>
   )}
 
-  <!-- Global event tracking — fires GA4 + Meta Pixel events -->
-  <script is:inline>
+  <!-- Global event tracking — fires GA4 + Google Ads conversions + Meta Pixel -->
+  <script is:inline define:vars={{ GOOGLE_ADS_ID, GADS_LABEL_LEAD, GADS_LABEL_CALL, GADS_LABEL_WHATSAPP }}>
     (() => {
-      // Helper: send event to GA4 + (optionally) Meta Pixel
+      // Map key events to their Google Ads conversion label (empty until
+      // the conversion actions exist + env vars are set — then it just works).
+      var GADS_LABELS = {
+        lead_form_submit: GADS_LABEL_LEAD,
+        phone_click:      GADS_LABEL_CALL,
+        whatsapp_click:   GADS_LABEL_WHATSAPP,
+      };
+
+      // Helper: send event to GA4 + Google Ads + (optionally) Meta Pixel
       function track(eventName, params) {
         params = params || {};
         if (window.gtag) gtag('event', eventName, params);
+
+        // Google Ads conversion (only for mapped key events, only if configured)
+        if (window.gtag && GOOGLE_ADS_ID) {
+          var label = GADS_LABELS[eventName];
+          if (label) {
+            gtag('event', 'conversion', { send_to: GOOGLE_ADS_ID + '/' + label });
+          }
+        }
+
         // Map a few key events to Meta Pixel standard events
         if (window.fbq) {
           if (eventName === 'lead_form_submit')   fbq('track', 'Lead', params);
