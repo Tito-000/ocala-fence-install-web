@@ -30,14 +30,16 @@ const ogImage = image.startsWith('http') ? image : new URL(image, Astro.site).hr
 const GA4_ID = import.meta.env.PUBLIC_GA4_ID;
 const META_PIXEL_ID = import.meta.env.PUBLIC_META_PIXEL_ID;
 
-// Google Ads conversion tracking (AW-XXXXXXXXX + per-action labels).
-// Safe to ship empty — every conversion call is a no-op until these env
-// vars are set in Cloudflare. Labels come from the conversion actions
-// created inside the Google Ads account.
-const GOOGLE_ADS_ID = import.meta.env.PUBLIC_GOOGLE_ADS_ID;
-const GADS_LABEL_LEAD = import.meta.env.PUBLIC_GADS_LABEL_LEAD;
-const GADS_LABEL_CALL = import.meta.env.PUBLIC_GADS_LABEL_CALL;
-const GADS_LABEL_WHATSAPP = import.meta.env.PUBLIC_GADS_LABEL_WHATSAPP;
+// Google Ads conversion tracking (AW id + per-action labels).
+// These are PUBLIC conversion IDs (visible in page source — not secrets),
+// so they ship as defaults and work on deploy; an env var still overrides
+// them if ever needed. Conversion actions live in Google Ads account
+// 310-158-7931 ("Ocala Fence Install"): OFI - Lead Form Submit / WhatsApp
+// Click / Phone Call Click.
+const GOOGLE_ADS_ID = import.meta.env.PUBLIC_GOOGLE_ADS_ID || 'AW-18276061492';
+const GADS_LABEL_LEAD = import.meta.env.PUBLIC_GADS_LABEL_LEAD || 'l3J4CMuf3MYcELSi2opE';
+const GADS_LABEL_CALL = import.meta.env.PUBLIC_GADS_LABEL_CALL || '99lWCNGf3MYcELSi2opE';
+const GADS_LABEL_WHATSAPP = import.meta.env.PUBLIC_GADS_LABEL_WHATSAPP || 'nLy1CM6f3MYcELSi2opE';
 ---
 
 <!DOCTYPE html>
