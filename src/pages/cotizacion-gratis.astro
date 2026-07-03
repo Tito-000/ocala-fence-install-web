@@ -424,6 +424,11 @@ const breadcrumbSchema = {
         }
 
         const data = new FormData(form);
+        function gcl(k) {
+          try {
+            return new URLSearchParams(window.location.search).get(k) || localStorage.getItem('ofi_' + k) || '';
+          } catch (_) { return ''; }
+        }
         const payload = {
           full_name:   data.get('full_name') || '',
           phone:       data.get('phone') || '',
@@ -433,6 +438,9 @@ const breadcrumbSchema = {
           fence_type:  data.get('fence_type') || '',
           size:        data.get('size') || '',
           timeline:    data.get('timeline') || '',
+          gclid:       gcl('gclid'),
+          wbraid:      gcl('wbraid'),
+          gbraid:      gcl('gbraid'),
         };
 
         try {
@@ -443,18 +451,14 @@ const breadcrumbSchema = {
           });
         } catch (_) {}
 
-        // GA4 + Google Ads + Meta — lead conversion event (same as English form)
-        try {
-          if (window.__track) {
-            window.__track('lead_form_submit', {
-              fence_type: payload.fence_type,
-              size: payload.size,
-              timeline: payload.timeline,
-            });
-          }
-        } catch (_) {}
-
-        const qs = new URLSearchParams(payload).toString();
+        // La conversión de lead se dispara al CARGAR /gracias (confiable, sin
+        // carrera con el redirect). Solo pasamos params no-PII + un id único.
+        const qs = new URLSearchParams({
+          lead: String(Date.now()),
+          fence_type: payload.fence_type,
+          size: payload.size,
+          timeline: payload.timeline,
+        }).toString();
         window.location.href = `/gracias?${qs}`;
       });
 

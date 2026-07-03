@@ -24,6 +24,9 @@ interface LeadPayload {
   fence_type?: string;   // 'vinyl_privacy' | 'vinyl_picket' | 'aluminum' | 'dura_fence' | 'pool_fence' | 'not_sure'
   size?: string;         // 'small' | 'medium' | 'large' | string with linear feet
   timeline?: string;     // 'asap' | '1-3_months' | '3-6_months' | 'just_browsing'
+  gclid?: string;        // Google click ID (for offline conversion import)
+  wbraid?: string;       // Google click ID (app/web, iOS)
+  gbraid?: string;       // Google click ID (app/web)
 }
 
 const FENCE_LABELS: Record<string, string> = {
@@ -168,6 +171,10 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   const notesParts: string[] = [];
   if (body.timeline) notesParts.push(`Timeline: ${body.timeline}`);
   if (body.notes)    notesParts.push(body.notes.trim());
+  // Persist Google click IDs so a sold lead can be matched back to the ad
+  // click for offline conversion import.
+  const clickId = body.gclid || body.wbraid || body.gbraid;
+  if (clickId) notesParts.push(`Google Click ID: ${clickId}`);
   const fullNotes = notesParts.join('\n\n');
 
   // Build customFields array (only fields we have a value for)

@@ -169,6 +169,32 @@ const breadcrumbSchema = {
       </div>
     </div>
   </section>
+
+  {/* Lead conversion fires here, on the confirmation page LOAD — the
+      reliable place (no race with the form's redirect). Deduped per lead id. */}
+  <script is:inline>
+    (function () {
+      try {
+        var p = new URLSearchParams(window.location.search);
+        var id = p.get('lead');
+        if (!id) return;
+        var key = 'ofi_leadfired_' + id;
+        try { if (sessionStorage.getItem(key)) return; sessionStorage.setItem(key, '1'); } catch (_) {}
+        var tries = 0;
+        (function fire() {
+          if (window.__track) {
+            window.__track('lead_form_submit', {
+              fence_type: p.get('fence_type') || '',
+              size: p.get('size') || '',
+              timeline: p.get('timeline') || '',
+            });
+          } else if (tries++ < 30) {
+            setTimeout(fire, 150);
+          }
+        })();
+      } catch (_) {}
+    })();
+  </script>
 </PageLayout>
 
 <style>

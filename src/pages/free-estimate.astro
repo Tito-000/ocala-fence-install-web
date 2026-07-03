@@ -432,6 +432,11 @@ const breadcrumbSchema = {
         }
 
         const data = new FormData(form);
+        function gcl(k) {
+          try {
+            return new URLSearchParams(window.location.search).get(k) || localStorage.getItem('ofi_' + k) || '';
+          } catch (_) { return ''; }
+        }
         const payload = {
           full_name:   data.get('full_name') || '',
           phone:       data.get('phone') || '',
@@ -441,6 +446,9 @@ const breadcrumbSchema = {
           fence_type:  data.get('fence_type') || '',
           size:        data.get('size') || '',
           timeline:    data.get('timeline') || '',
+          gclid:       gcl('gclid'),
+          wbraid:      gcl('wbraid'),
+          gbraid:      gcl('gbraid'),
         };
 
         try {
@@ -455,19 +463,15 @@ const breadcrumbSchema = {
           // notified separately via fallback if needed.
         }
 
-        // GA4 + Meta Pixel — lead conversion event
-        try {
-          if (window.__track) {
-            window.__track('lead_form_submit', {
-              fence_type: payload.fence_type,
-              size: payload.size,
-              timeline: payload.timeline,
-            });
-          }
-        } catch (_) {}
-
-        // Always redirect after submit
-        const qs = new URLSearchParams(payload).toString();
+        // The lead conversion fires on the /thank-you page LOAD (reliable —
+        // no race with this redirect, no lost conversions). We pass only
+        // non-PII params + a one-time lead id for dedupe.
+        const qs = new URLSearchParams({
+          lead: String(Date.now()),
+          fence_type: payload.fence_type,
+          size: payload.size,
+          timeline: payload.timeline,
+        }).toString();
         window.location.href = `/thank-you?${qs}`;
       });
 
