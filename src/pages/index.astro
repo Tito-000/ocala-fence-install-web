@@ -20,8 +20,6 @@ const recentBlogPosts = [...BLOG_POSTS]
 const homeGalleryImages = [
   { src: '/images/services/durafence.webp', alt: 'White Dura Fence install — Marion Oaks FL', cat: 'Dura Fence', city: 'Marion Oaks' },
   { src: '/images/gallery/vinyl-privacy-white-driveway-gate.webp', alt: 'White vinyl privacy fence with driveway gate — Ocala FL', cat: 'Vinyl Privacy', city: 'Ocala' },
-  { src: '/images/services/vinyl-picket.webp', alt: 'White vinyl picket fence front yard — Silver Springs FL', cat: 'Vinyl Picket', city: 'Silver Springs' },
-  { src: '/images/services/aluminum.webp', alt: 'Black aluminum ornamental fence — Lady Lake FL', cat: 'Aluminum', city: 'Lady Lake' },
   { src: '/images/gallery/horse-fence-white-residential.webp', alt: 'White 3-rail vinyl horse fence framing residential home — Marion County FL', cat: 'Horse Fence', city: 'Marion County' },
   { src: '/images/services/chain-link.webp', alt: 'Galvanized chain link fence residential — Ocala FL', cat: 'Chain Link', city: 'Ocala' },
   { src: '/images/services/wood-fence.webp', alt: 'Natural pine wood privacy fence — Marion County FL', cat: 'Wood', city: 'Marion County' },
@@ -600,7 +598,7 @@ const faqs = [
         <p class="text-gray-600 text-lg">A look at our most recent installations across Ocala and surrounding areas.</p>
       </div>
 
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 lg:gap-4">
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-3 lg:gap-4">
         {homeGalleryImages.map((p) => (
           <a
             href="/gallery"
