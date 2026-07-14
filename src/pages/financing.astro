@@ -208,10 +208,14 @@ const serviceSchema = {
         </p>
       </div>
 
+      {/* JS submits this via POST to /api/lead. No action/method="get" — that
+          leaked every field (name, email, phone, address) into the URL, which
+          then got sent to Google Ads/GA4 as page_location, and the lead never
+          reached the CRM. */}
       <form
         id="financing-form-el"
-        action="/thank-you"
-        method="get"
+        novalidate
+        data-ghl-endpoint="/api/lead"
         class="max-w-3xl mx-auto space-y-4"
       >
         <input type="hidden" name="source" value="financing-page"/>
@@ -350,9 +354,24 @@ const serviceSchema = {
           ></textarea>
         </div>
 
+        {/* Shown only if the lead fails to reach the CRM — never silently lose
+            an application (and never fire a conversion for a lost lead). */}
+        <div
+          id="financing-error"
+          role="alert"
+          class="hidden border-2 border-red-500 bg-red-50 text-red-800 px-5 py-4 text-sm font-semibold"
+        >
+          We couldn't submit your application. Please try again, or reach us
+          directly at
+          <a href={`tel:${BUSINESS.phoneE164}`} class="underline font-extrabold" data-track="phone_click">{BUSINESS.phone}</a>
+          or on
+          <a href={`https://wa.me/${BUSINESS.whatsappE164}`} target="_blank" rel="noopener" class="underline font-extrabold" data-track="whatsapp_click">WhatsApp</a>.
+        </div>
+
         <button
+          id="financing-submit"
           type="submit"
-          class="w-full bg-primary hover:bg-primary-700 text-white font-extrabold uppercase tracking-wider text-base lg:text-lg px-10 py-5 shadow-lg transition-colors"
+          class="w-full bg-primary hover:bg-primary-700 text-white font-extrabold uppercase tracking-wider text-base lg:text-lg px-10 py-5 shadow-lg transition-colors disabled:opacity-60"
         >
           Send My Application
         </button>
@@ -451,4 +470,88 @@ const serviceSchema = {
     el?.addEventListener('input', calc);
   });
   calc();
+</script>
+
+<script is:inline>
+  /* Financing application → POST /api/lead (GHL). Replaces the old
+     action="/thank-you" method="get", which leaked all PII into the URL,
+     never reached the CRM, and still fired the lead conversion. */
+  (() => {
+    const form = document.getElementById('financing-form-el');
+    if (!form) return;
+    const btn = document.getElementById('financing-submit');
+    const errBox = document.getElementById('financing-error');
+
+    const FENCE_MAP = {
+      'vinyl-privacy': 'vinyl_privacy',
+      'vinyl-picket': 'vinyl_picket',
+      'aluminum': 'aluminum',
+      'pool': 'pool_fence',
+      'wood': 'wood_fence',
+      'chain-link': 'chain_link',
+      'not-sure': 'not_sure',
+    };
+
+    function gcl(k) {
+      try {
+        return new URLSearchParams(window.location.search).get(k) || localStorage.getItem('ofi_' + k) || '';
+      } catch (_) { return ''; }
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+
+      if (errBox) errBox.classList.add('hidden');
+      if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+
+      const d = new FormData(form);
+      const addr = [d.get('street'), d.get('city'), d.get('state'), d.get('zip')]
+        .filter(Boolean).join(', ');
+      const notes = ['FINANCING APPLICATION (pre-qualify)', d.get('details') || '']
+        .filter(Boolean).join('\n\n');
+
+      const payload = {
+        full_name:  [d.get('firstName'), d.get('lastName')].filter(Boolean).join(' '),
+        phone:      d.get('phone') || '',
+        email:      d.get('email') || '',
+        address:    addr,
+        notes:      notes,
+        fence_type: FENCE_MAP[d.get('fenceType')] || '',
+        timeline:   'financing',
+        gclid:      gcl('gclid'),
+        wbraid:     gcl('wbraid'),
+        gbraid:     gcl('gbraid'),
+      };
+
+      // Only redirect (and therefore only count the conversion) if the lead
+      // actually reached the CRM. A failed lead must never look like a win.
+      let ok = false;
+      try {
+        const res = await fetch('/api/lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        ok = res.ok;
+      } catch (_) { ok = false; }
+
+      if (!ok) {
+        if (btn) { btn.disabled = false; btn.textContent = 'Send My Application'; }
+        if (errBox) {
+          errBox.classList.remove('hidden');
+          errBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        return;
+      }
+
+      // Non-PII querystring only — the conversion fires on /thank-you load.
+      const qs = new URLSearchParams({
+        lead: String(Date.now()),
+        fence_type: payload.fence_type,
+        timeline: 'financing',
+      }).toString();
+      window.location.href = `/thank-you?${qs}`;
+    });
+  })();
 </script>

@@ -244,6 +244,19 @@ const breadcrumbSchema = {
               </div>
             </div>
 
+            <!-- Shown only if the lead fails to reach the CRM — never silently
+                 lose a lead (and never fire a conversion for a lost one). -->
+            <div
+              id="estimate-error"
+              role="alert"
+              class="hidden mt-6 border-2 border-red-500 bg-red-50 text-red-800 px-4 py-3 text-sm font-semibold"
+            >
+              We couldn't send your request. Please try again, or reach us at
+              <a href={`tel:${BUSINESS.phoneE164}`} class="underline font-extrabold" data-track="phone_click">{BUSINESS.phone}</a>
+              or on
+              <a href={`https://wa.me/${BUSINESS.whatsappE164}`} target="_blank" rel="noopener" class="underline font-extrabold" data-track="whatsapp_click">WhatsApp</a>.
+            </div>
+
             <!-- Form nav -->
             <div class="flex gap-3 mt-6">
               <button type="button" data-prev-btn
@@ -451,16 +464,30 @@ const breadcrumbSchema = {
           gbraid:      gcl('gbraid'),
         };
 
+        // Only advance if the lead actually reached the CRM. Redirecting on a
+        // failed POST would show "thanks", fire the lead conversion, and lose
+        // the lead — a silent failure that looks like a win in the reports.
+        let ok = false;
         try {
-          await fetch('/api/lead', {
+          const res = await fetch('/api/lead', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload),
           });
-        } catch (_) {
-          // Network error — silent fail, still redirect to thank-you
-          // so the user has a confirming experience. Andri can be
-          // notified separately via fallback if needed.
+          ok = res.ok;
+        } catch (_) { ok = false; }
+
+        if (!ok) {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Get My Estimate →';
+          }
+          const errBox = document.getElementById('estimate-error');
+          if (errBox) {
+            errBox.classList.remove('hidden');
+            errBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+          return;
         }
 
         // The lead conversion fires on the /thank-you page LOAD (reliable —

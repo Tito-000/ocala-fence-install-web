@@ -245,6 +245,19 @@ const breadcrumbSchema = {
               </div>
             </div>
 
+            <!-- Solo aparece si el lead NO llegó al CRM — nunca perder un lead
+                 en silencio (ni contar una conversión falsa). -->
+            <div
+              id="estimate-error"
+              role="alert"
+              class="hidden mt-6 border-2 border-red-500 bg-red-50 text-red-800 px-4 py-3 text-sm font-semibold"
+            >
+              No pudimos enviar tu solicitud. Intenta de nuevo, o escríbenos al
+              <a href={`tel:${BUSINESS.phoneE164}`} class="underline font-extrabold" data-track="phone_click">{BUSINESS.phone}</a>
+              o por
+              <a href={`https://wa.me/${BUSINESS.whatsappE164}`} target="_blank" rel="noopener" class="underline font-extrabold" data-track="whatsapp_click">WhatsApp</a>.
+            </div>
+
             <!-- Form nav -->
             <div class="flex gap-3 mt-6">
               <button type="button" data-prev-btn
@@ -443,13 +456,31 @@ const breadcrumbSchema = {
           gbraid:      gcl('gbraid'),
         };
 
+        // Solo avanzamos si el lead LLEGÓ al CRM. Redirigir tras un POST fallido
+        // mostraría "gracias", dispararía la conversión y perdería el lead — un
+        // fallo silencioso que en los reportes parece una victoria.
+        let ok = false;
         try {
-          await fetch('/api/lead', {
+          const res = await fetch('/api/lead', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload),
           });
-        } catch (_) {}
+          ok = res.ok;
+        } catch (_) { ok = false; }
+
+        if (!ok) {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Recibir mi cotización →';
+          }
+          const errBox = document.getElementById('estimate-error');
+          if (errBox) {
+            errBox.classList.remove('hidden');
+            errBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+          return;
+        }
 
         // La conversión de lead se dispara al CARGAR /gracias (confiable, sin
         // carrera con el redirect). Solo pasamos params no-PII + un id único.
