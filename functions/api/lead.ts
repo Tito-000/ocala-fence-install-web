@@ -201,7 +201,11 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     if (ghlPayload[k] === undefined || ghlPayload[k] === '') delete ghlPayload[k];
   }
 
-  const ghlRes = await fetch('https://services.leadconnectorhq.com/contacts/', {
+  // UPSERT, not create. GHL rejects a plain POST /contacts/ with 400 when the
+  // email or phone already exists ("duplicated contact"), which meant any
+  // returning customer — or anyone who submitted the form twice — lost their
+  // lead. /contacts/upsert creates the contact or updates the existing one.
+  const ghlRes = await fetch('https://services.leadconnectorhq.com/contacts/upsert', {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${env.GHL_PIT}`,
