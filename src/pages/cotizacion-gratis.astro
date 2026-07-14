@@ -90,7 +90,8 @@ const breadcrumbSchema = {
             Paso 1 de 4
           </p>
 
-          <form id="estimate-form" action="/gracias" method="get" novalidate data-ghl-endpoint="/api/lead">
+          <form id="estimate-form" action="/api/lead" method="post" novalidate data-ghl-endpoint="/api/lead">
+            <input type="hidden" name="redirect" value="/gracias" />
             <input type="hidden" name="fence_type" id="fence_type" />
             <input type="hidden" name="size" id="size" />
             <input type="hidden" name="timeline" id="timeline" />

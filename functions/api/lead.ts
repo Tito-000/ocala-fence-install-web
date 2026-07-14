@@ -139,12 +139,27 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     );
   }
 
+  // Accept a JSON body (the form's fetch) AND a native form POST. The native
+  // POST is the fallback for when the page's JS never runs: the lead still
+  // reaches the CRM, and — more importantly — the visitor's name, email and
+  // phone stay OUT of the URL. A GET submit would put all of it in
+  // page_location, which we then hand to GA4 and Google Ads.
+  const contentType = request.headers.get('content-type') || '';
+  const isFormPost = /x-www-form-urlencoded|multipart\/form-data/.test(contentType);
+
   let body: LeadPayload;
   try {
-    body = await request.json();
+    if (isFormPost) {
+      const fd = await request.formData();
+      body = Object.fromEntries(
+        [...fd.entries()].map(([k, v]) => [k, String(v)]),
+      ) as unknown as LeadPayload;
+    } else {
+      body = await request.json();
+    }
   } catch {
     return new Response(
-      JSON.stringify({ ok: false, error: 'Invalid JSON body' }),
+      JSON.stringify({ ok: false, error: 'Invalid body' }),
       { status: 400, headers: CORS_HEADERS },
     );
   }
@@ -218,6 +233,21 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   const ghlData = await ghlRes.json().catch(() => ({}));
 
   if (!ghlRes.ok) {
+    // A native form POST would render raw JSON at the visitor. Give them a
+    // way to reach us instead of a dead end.
+    if (isFormPost) {
+      return new Response(
+        `<!doctype html><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1">
+<title>We couldn't send your request</title>
+<div style="font-family:system-ui;max-width:32rem;margin:4rem auto;padding:0 1.5rem;text-align:center">
+<h1 style="font-size:1.5rem">We couldn't send your request</h1>
+<p style="color:#555">Call or text us and we'll get your estimate started right away.</p>
+<p><a href="tel:+18633770928" style="display:inline-block;background:#1d4ed8;color:#fff;padding:.9rem 1.6rem;font-weight:700;text-decoration:none">Call (863) 377-0928</a></p>
+<p><a href="https://wa.me/18633770928">Or message us on WhatsApp</a></p>
+</div>`,
+        { status: 502, headers: { 'Content-Type': 'text/html; charset=utf-8' } },
+      );
+    }
     return new Response(
       JSON.stringify({ ok: false, error: 'GHL upstream error', upstream: ghlData }),
       { status: 502, headers: CORS_HEADERS },
@@ -230,6 +260,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   // Failure here doesn't abort the lead — the contact is already saved,
   // and Andri can create the opportunity manually if needed.
   let opportunityId: string | undefined;
+  let oppError: string | undefined;
   if (contactId) {
     const oppName = `${firstName || 'New Lead'} ${lastName || ''} — ${fenceLbl || 'Fence'}`.trim();
     const oppPayload = {
@@ -253,7 +284,9 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     });
     const oppData = await oppRes.json().catch(() => ({}));
     if (oppRes.ok) {
-      opportunityId = (oppData as any)?.opportunity?.id;
+      opportunityId = (oppData as any)?.opportunity?.id ?? (oppData as any)?.id;
+    } else {
+      oppError = (oppData as any)?.message || `HTTP ${oppRes.status}`;
     }
   }
 
@@ -327,8 +360,23 @@ Call within 2hrs for highest conversion.`;
   // Fire both in parallel — don't block the user response on these
   await Promise.all([sendInternal('SMS'), sendInternal('Email')]);
 
+  // A native form POST expects a navigation back, not JSON. Send it to the
+  // thank-you page the form asked for (same-site paths only) carrying the
+  // same non-PII params the JS path uses, so the lead conversion still fires.
+  if (isFormPost) {
+    const asked = typeof (body as any).redirect === 'string' ? (body as any).redirect : '';
+    const dest = /^\/[a-z0-9\-/]*$/i.test(asked) && !asked.startsWith('//') ? asked : '/thank-you';
+    const qs = new URLSearchParams({
+      lead: contactId || 'ok',
+      fence_type: body.fence_type || '',
+      size: body.size || '',
+      timeline: body.timeline || '',
+    }).toString();
+    return new Response(null, { status: 303, headers: { Location: `${dest}?${qs}` } });
+  }
+
   return new Response(
-    JSON.stringify({ ok: true, contactId, opportunityId }),
+    JSON.stringify({ ok: true, contactId, opportunityId, oppError }),
     { status: 200, headers: CORS_HEADERS },
   );
 };
