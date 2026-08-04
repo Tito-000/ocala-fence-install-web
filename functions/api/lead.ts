@@ -52,9 +52,24 @@ const CF = {
 const PIPELINE_ID = 'DqLZHRBvcSW50Gov4OPE';
 const STAGE_NEW_LEAD = '5ff68988-dc04-4a47-a183-3272fd20fd74';
 
-// Owner contact ID — Andri Ramírez. Internal notifications (SMS + email)
-// are sent to this contact whenever a new web lead arrives.
-const OWNER_CONTACT_ID = '0LhuwxcUOlVgcAUqAqB7';
+// Andri, as a USER of the sub-account. Assigning the lead to him is what makes
+// the LeadConnector app push a notification to his phone. The owner alert EMAIL
+// is sent by the GHL workflow, not from here (see the note near the response) —
+// hanging it off an owner-contact ID was fragile because GHL kept merging that
+// contact away, and there's no LC phone number provisioned for SMS anyway
+// (the business line +1 863-377-0928 IS Andri's cell). Enabling real SMS would
+// need an LC Phone number + A2P 10DLC registration (business EIN, a few days).
+const ANDRI_USER_ID = 'a68jBTuZPJMbEXzuCimz';
+
+// Extra inboxes that get a copy of every new lead, addressed by EMAIL rather
+// than by contact id. The previous version hardcoded an owner contact id and
+// broke silently the moment GHL merged that contact away; upserting by email
+// re-resolves the current id on every send, so a merge can't kill the alert.
+//
+// ocalafenceinstall@gmail.com is deliberately NOT here — the GHL workflow
+// "01 · New Lead — Instant Response" already emails it, and listing it twice
+// would double up. This array covers the addresses the workflow misses.
+const EXTRA_ALERT_EMAILS = ['crystallinedynamicsinc@gmail.com'];
 
 // Approximate monetary value per fence size (used for opportunity.monetaryValue)
 function estimateValue(size?: string, fenceType?: string): number {
@@ -256,6 +271,22 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
 
   const contactId: string | undefined = (ghlData as any)?.contact?.id;
 
+  // ── Assign the lead to Andri so his LeadConnector app pushes a phone alert.
+  // /contacts/upsert silently ignores `assignedTo` (verified 2026-07-17 — the
+  // field is accepted but never applied), so it needs its own PUT. Best-effort:
+  // a failed assignment never costs the lead, so it doesn't touch the response.
+  if (contactId) {
+    await fetch(`https://services.leadconnectorhq.com/contacts/${contactId}`, {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${env.GHL_PIT}`,
+        Version: '2021-07-28',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ assignedTo: ANDRI_USER_ID }),
+    }).catch(() => null);
+  }
+
   // ── 2nd call: create an opportunity in the Fence Sales pipeline ──
   // Failure here doesn't abort the lead — the contact is already saved,
   // and Andri can create the opportunity manually if needed.
@@ -290,8 +321,13 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     }
   }
 
-  // ── 3rd call: internal notification to Andri (SMS + Email) ──
-  // Send both in parallel; failures don't abort the response.
+  // ── Owner alert to Andri is intentionally NOT sent from here anymore. ──
+  // The GHL workflow "01 · New Lead — Instant Response" fires on this new
+  // opportunity and both emails Andri and auto-replies the customer. Doing it
+  // in code too meant a duplicate alert, and — worse — it hung off a hardcoded
+  // owner-contact ID that GHL kept merging away. The GHL workflow still owns
+  // the alert to ocalafenceinstall@gmail.com; the block below only covers the
+  // EXTRA addresses the workflow doesn't reach, resolved by email each time.
   const leadName    = `${firstName || ''} ${lastName || ''}`.trim() || '(no name)';
   const leadPhone   = phone || '(no phone)';
   const leadEmail   = body.email || '(no email)';
@@ -299,19 +335,11 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   const leadNotes   = body.notes || '(no notes)';
   const valueUsd    = estimateValue(body.size, body.fence_type);
 
-  const smsBody = `🚨 NEW LEAD — ${leadName}
-${fenceLbl || 'Fence'} · ~$${valueUsd.toLocaleString()}
-📞 ${leadPhone}
-📍 ${leadAddress}
-${linearFt ? `📏 ~${linearFt} ft` : ''}
-Call within 2hrs for highest conversion.`;
-
-  const emailHtml = `<!DOCTYPE html>
+  const alertHtml = `<!DOCTYPE html>
 <html><body style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; background: #f8f5ed;">
   <div style="background: white; padding: 28px; border-top: 6px solid #136229;">
     <h1 style="color: #134529; margin: 0 0 8px; font-size: 24px;">🚨 New Website Lead</h1>
     <p style="color: #62522E; margin: 0 0 24px; font-size: 14px; text-transform: uppercase; letter-spacing: 0.1em;"><strong>Estimated value: $${valueUsd.toLocaleString()}</strong></p>
-
     <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
       <tr><td style="padding: 8px 0; color: #62522E; width: 130px;"><strong>Name:</strong></td><td style="padding: 8px 0; color: #134529;">${leadName}</td></tr>
       <tr><td style="padding: 8px 0; color: #62522E;"><strong>Phone:</strong></td><td style="padding: 8px 0;"><a href="tel:${leadPhone}" style="color: #136229;">${leadPhone}</a></td></tr>
@@ -321,44 +349,71 @@ Call within 2hrs for highest conversion.`;
       ${linearFt ? `<tr><td style="padding: 8px 0; color: #62522E;"><strong>Linear feet:</strong></td><td style="padding: 8px 0; color: #134529;">~${linearFt} ft</td></tr>` : ''}
       ${body.timeline ? `<tr><td style="padding: 8px 0; color: #62522E;"><strong>Timeline:</strong></td><td style="padding: 8px 0; color: #134529;">${body.timeline}</td></tr>` : ''}
     </table>
-
     <div style="background: #faf6ed; padding: 16px; border-left: 4px solid #D1B487;">
       <strong style="color: #62522E; display: block; margin-bottom: 6px;">Notes:</strong>
       <span style="color: #134529; white-space: pre-wrap;">${leadNotes}</span>
     </div>
-
     <div style="margin-top: 28px; padding: 16px; background: #136229; text-align: center;">
       <a href="https://app.gohighlevel.com/v2/location/${env.GHL_LOCATION_ID}/contacts/detail/${contactId || ''}" style="color: #D1B487; text-decoration: none; font-weight: bold; text-transform: uppercase; letter-spacing: 0.1em; font-size: 14px;">→ Open lead in CRM</a>
     </div>
-
     <p style="color: #62522E; font-size: 12px; margin-top: 24px; text-align: center;">⏱️ <strong>Call within 2 hours</strong> for highest conversion rate.</p>
   </div>
 </body></html>`;
 
-  const sendInternal = async (type: 'SMS' | 'Email') => {
-    const payload: Record<string, unknown> = {
-      type,
-      contactId: OWNER_CONTACT_ID,
-    };
-    if (type === 'SMS') {
-      payload.message = smsBody;
-    } else {
-      payload.subject = `🚨 NEW LEAD: ${leadName} — ${fenceLbl || 'Fence'} ($${valueUsd.toLocaleString()})`;
-      payload.html = emailHtml;
+  // Subject line is the whole notification on a phone's lock screen, so the
+  // money detail goes first and the pleasantries die.
+  const alertSubject =
+    `🚨 NEW LEAD: ${leadName} · ${fenceLbl || 'Fence'}` +
+    `${linearFt ? ` ${linearFt}ft` : ''} · ~$${valueUsd.toLocaleString()} · ${leadPhone}`;
+
+  const ghlHeaders = (version: string) => ({
+    Authorization: `Bearer ${env.GHL_PIT}`,
+    Version: version,
+    'Content-Type': 'application/json',
+  });
+
+  // Upsert resolves (and creates on first run) the alert contact, returning the
+  // id that is valid RIGHT NOW even if GHL merged the previous one away.
+  const alertOne = async (address: string): Promise<string | undefined> => {
+    try {
+      const up = await fetch('https://services.leadconnectorhq.com/contacts/upsert', {
+        method: 'POST',
+        headers: ghlHeaders('2021-07-28'),
+        body: JSON.stringify({
+          locationId: env.GHL_LOCATION_ID,
+          email: address,
+          firstName: 'Ocala Fence Install',
+          lastName: '(lead alerts)',
+          tags: ['internal: lead alerts'],
+        }),
+      });
+      const upData = await up.json().catch(() => null);
+      const alertContactId = (upData as any)?.contact?.id;
+      if (!alertContactId) return `upsert failed: ${(upData as any)?.message || up.status}`;
+
+      const res = await fetch('https://services.leadconnectorhq.com/conversations/messages', {
+        method: 'POST',
+        headers: ghlHeaders('2021-04-15'),
+        body: JSON.stringify({
+          type: 'Email',
+          contactId: alertContactId,
+          subject: alertSubject,
+          html: alertHtml,
+        }),
+      });
+      if (res.ok) return undefined;
+      const data = await res.json().catch(() => null);
+      return (data as any)?.message || `HTTP ${res.status}`;
+    } catch (e) {
+      return e instanceof Error ? e.message : 'network error';
     }
-    return fetch('https://services.leadconnectorhq.com/conversations/messages', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${env.GHL_PIT}`,
-        Version: '2021-04-15',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(payload),
-    }).catch(() => null);
   };
 
-  // Fire both in parallel — don't block the user response on these
-  await Promise.all([sendInternal('SMS'), sendInternal('Email')]);
+  // Never swallow these — a dead alert path is exactly how this broke before.
+  const alertErrors = (await Promise.all(EXTRA_ALERT_EMAILS.map(alertOne)))
+    .map((err, i) => (err ? `${EXTRA_ALERT_EMAILS[i]}: ${err}` : null))
+    .filter(Boolean) as string[];
+  if (alertErrors.length) console.error('EXTRA ALERT FAILED', alertErrors);
 
   // A native form POST expects a navigation back, not JSON. Send it to the
   // thank-you page the form asked for (same-site paths only) carrying the
@@ -376,7 +431,8 @@ Call within 2hrs for highest conversion.`;
   }
 
   return new Response(
-    JSON.stringify({ ok: true, contactId, opportunityId, oppError }),
+    JSON.stringify({ ok: true, contactId, opportunityId, oppError,
+      alertErrors: alertErrors.length ? alertErrors : undefined }),
     { status: 200, headers: CORS_HEADERS },
   );
 };

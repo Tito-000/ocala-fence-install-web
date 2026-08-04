@@ -1,0 +1,123 @@
+---
+import PageLayout from '@layouts/PageLayout.astro';
+import { BUSINESS } from '@data/business';
+
+const LAST_UPDATED = 'July 2026';
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://ocalafenceinstall.com' },
+    { '@type': 'ListItem', position: 2, name: 'Privacy Policy', item: 'https://ocalafenceinstall.com/privacy-policy' },
+  ],
+};
+---
+
+<PageLayout
+  title={`Privacy Policy | ${BUSINESS.name}`}
+  description="How Ocala Fence Install collects, uses, and protects the information you share when you request a fence estimate."
+  activeNav=""
+  schemaJsonLd={[breadcrumbSchema]}
+>
+  <section class="bg-black py-16 lg:py-20">
+    <div class="container-page">
+      <p class="text-highlight text-sm uppercase tracking-[0.3em] font-bold mb-4">Legal</p>
+      <h1 class="text-4xl lg:text-5xl font-extrabold text-white leading-tight tracking-tight">Privacy Policy</h1>
+      <p class="text-white/60 mt-4 text-sm">Last updated: {LAST_UPDATED}</p>
+    </div>
+  </section>
+
+  <section class="bg-white py-14 lg:py-20">
+    <div class="container-page max-w-3xl legal-prose">
+      <p>
+        {BUSINESS.name} ("we," "us," or "our"), operated by {BUSINESS.legalName}, respects your privacy.
+        This policy explains what information we collect through <a href="https://ocalafenceinstall.com">ocalafenceinstall.com</a>,
+        how we use it, and the choices you have. By using this site or submitting a request, you agree to this policy.
+      </p>
+
+      <h2>Information we collect</h2>
+      <p>We only collect information you choose to give us, plus basic technical data your browser sends automatically.</p>
+      <ul>
+        <li><strong>Information you provide:</strong> when you request a free estimate or contact us, we collect your name, phone number, email address, property address or ZIP code, and any project details you share (fence type, size, timeline, notes).</li>
+        <li><strong>Automatic information:</strong> like most websites, we receive standard log and device data such as your IP address, browser type, pages viewed, and the site or ad that referred you.</li>
+      </ul>
+
+      <h2>How we use your information</h2>
+      <ul>
+        <li>To prepare and send your fence estimate and to contact you about your project.</li>
+        <li>To respond to your questions by phone, text, email, or WhatsApp.</li>
+        <li>To improve our website, marketing, and customer service.</li>
+        <li>To measure the performance of our advertising so we spend our budget where it helps homeowners find us.</li>
+      </ul>
+
+      <h2>Analytics and advertising</h2>
+      <p>
+        We use third-party tools to understand how visitors use our site and to measure our ads. These may set cookies
+        or similar technologies in your browser:
+      </p>
+      <ul>
+        <li><strong>Google Analytics &amp; Google Ads</strong> — website traffic and ad conversion measurement.</li>
+        <li><strong>Meta (Facebook) Pixel</strong> — measurement for social advertising.</li>
+        <li><strong>Hotjar</strong> — anonymized, aggregated insight into how pages are used.</li>
+      </ul>
+      <p>
+        You can limit tracking through your browser settings, by using the Google Ads Settings and Google Analytics
+        opt-out, and through your device's ad-tracking controls.
+      </p>
+
+      <h2>How we share information</h2>
+      <p>
+        We do not sell your personal information. We share it only with service providers who help us run our business,
+        under agreements that require them to protect it — for example, our customer-relationship platform (GoHighLevel),
+        our website host (Cloudflare), and the analytics and advertising providers named above. We may also disclose
+        information if required by law.
+      </p>
+
+      <h2>Text messages and calls</h2>
+      <p>
+        When you give us your phone number, you agree that we may call or text you about your fence project. Message and
+        data rates may apply. You can opt out of texts at any time by replying STOP, and you can ask us to stop calling.
+      </p>
+
+      <h2>Data retention &amp; security</h2>
+      <p>
+        We keep your information only as long as needed to serve you and to meet legal or business requirements, then
+        delete or anonymize it. We use reasonable safeguards to protect it, though no method of transmission over the
+        internet is completely secure.
+      </p>
+
+      <h2>Your choices</h2>
+      <p>
+        You may ask us to access, correct, or delete the personal information we hold about you. Contact us using the
+        details below and we'll respond within a reasonable time.
+      </p>
+
+      <h2>Children's privacy</h2>
+      <p>This site is intended for adults. We do not knowingly collect information from anyone under 18.</p>
+
+      <h2>Changes to this policy</h2>
+      <p>
+        We may update this policy from time to time. The "last updated" date above shows when it last changed. Continued
+        use of the site means you accept the current version.
+      </p>
+
+      <h2>Contact us</h2>
+      <p>
+        {BUSINESS.legalName} (d/b/a {BUSINESS.name})<br />
+        {BUSINESS.address.addressLocality}, {BUSINESS.address.addressRegion}<br />
+        Phone: <a href={`tel:${BUSINESS.phoneE164}`}>{BUSINESS.phone}</a><br />
+        Email: <a href={`mailto:${BUSINESS.email}`}>{BUSINESS.email}</a>
+      </p>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .legal-prose { color: #374151; line-height: 1.75; }
+  .legal-prose > p { margin-bottom: 1.25rem; }
+  .legal-prose h2 { color: #134529; font-weight: 800; font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 0.9rem; }
+  .legal-prose ul { list-style: disc; padding-left: 1.4rem; margin-bottom: 1.25rem; }
+  .legal-prose li { margin-bottom: 0.55rem; }
+  .legal-prose a { color: #136229; text-decoration: underline; font-weight: 600; }
+</style>

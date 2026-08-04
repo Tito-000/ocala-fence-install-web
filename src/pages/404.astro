@@ -1,0 +1,50 @@
+---
+import PageLayout from '@layouts/PageLayout.astro';
+import { BUSINESS } from '@data/business';
+---
+
+<PageLayout
+  title={`Page Not Found | ${BUSINESS.name}`}
+  description="The page you're looking for doesn't exist. Head back home or get a free fence estimate in Ocala, FL."
+  noindex={true}
+>
+  <section class="bg-black py-24 lg:py-32">
+    <div class="container-page text-center">
+      <p class="text-highlight text-sm uppercase tracking-[0.3em] font-bold mb-5">Error 404</p>
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-[0.95] tracking-tight mb-6 text-balance drop-shadow-2xl">
+        This page took a detour
+      </h1>
+      <p class="text-base lg:text-xl text-white/75 max-w-2xl mx-auto leading-relaxed font-medium mb-10">
+        The page you're looking for isn't here. It may have moved, or the link was mistyped. Let's get you back on track.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/" class="inline-flex items-center justify-center bg-highlight hover:bg-highlight-400 text-primary-900 font-extrabold uppercase tracking-wider text-sm px-8 py-4 transition-colors">
+          Back to Home
+        </a>
+        <a href="/free-estimate" class="inline-flex items-center justify-center border-2 border-white text-white hover:bg-white hover:text-primary-900 font-extrabold uppercase tracking-wider text-sm px-8 py-4 transition-colors">
+          Get a Free Estimate
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white py-16 lg:py-20">
+    <div class="container-page max-w-4xl">
+      <h2 class="text-2xl lg:text-3xl font-extrabold text-primary-900 mb-8 text-center">Popular pages</h2>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {[
+          { label: 'Fence Types', href: '/services' },
+          { label: 'Service Areas', href: '/areas' },
+          { label: 'Gallery', href: '/gallery' },
+          { label: 'Financing', href: '/financing' },
+          { label: 'Blog', href: '/blog' },
+          { label: 'Contact Us', href: '/contact' },
+        ].map((l) => (
+          <a href={l.href} class="border-2 border-gray-200 hover:border-primary hover:bg-primary-50 px-6 py-4 font-bold text-primary-900 transition-colors text-center">
+            {l.label}
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</PageLayout>

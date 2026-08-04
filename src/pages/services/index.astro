@@ -1,0 +1,78 @@
+---
+import PageLayout from '@layouts/PageLayout.astro';
+import FinalCTA from '@components/FinalCTA.astro';
+import { BUSINESS } from '@data/business';
+
+const services = BUSINESS.services;
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://ocalafenceinstall.com' },
+    { '@type': 'ListItem', position: 2, name: 'Fence Types', item: 'https://ocalafenceinstall.com/services' },
+  ],
+};
+
+const itemListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  itemListElement: services.map((s, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: s.name,
+    url: `https://ocalafenceinstall.com/services/${s.slug}`,
+  })),
+};
+---
+
+<PageLayout
+  title={`Fence Types We Install in Ocala, FL | ${BUSINESS.name}`}
+  description="Vinyl, aluminum, wood, chain link, Dura Fence, and horse fence installation across Marion County, FL. Compare fence types, wind ratings, and financing — free estimates."
+  activeNav="Fence Types"
+  schemaJsonLd={[breadcrumbSchema, itemListSchema]}
+>
+  {/* HERO */}
+  <section class="bg-black py-20 lg:py-28">
+    <div class="container-page text-center">
+      <p class="text-highlight text-sm uppercase tracking-[0.3em] font-bold mb-5">Fence Types</p>
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-[0.98] tracking-tight mb-6 text-balance drop-shadow-2xl">
+        Every fence we install in Marion County
+      </h1>
+      <p class="text-base lg:text-xl text-white/75 max-w-3xl mx-auto leading-relaxed font-medium">
+        Vinyl, aluminum, wood, chain link, Dura Fence, and horse fencing — built for Florida heat, rain, and wind. Pick a style below to see pricing, wind ratings, and financing.
+      </p>
+    </div>
+  </section>
+
+  {/* GRID */}
+  <section class="bg-white py-16 lg:py-24">
+    <div class="container-page">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-7xl mx-auto">
+        {services.map((s) => (
+          <a href={`/services/${s.slug}`} class="group border-2 border-gray-200 hover:border-primary hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col">
+            <div class="relative aspect-[4/3] overflow-hidden">
+              <img src={s.image} alt={`${s.name} installation in Ocala FL`} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" width="600" height="450" />
+              {s.popular && (
+                <span class="absolute top-3 left-3 bg-highlight text-primary-900 text-[10px] font-extrabold uppercase tracking-wider px-3 py-1">Most Requested</span>
+              )}
+            </div>
+            <div class="p-6 flex flex-col flex-1">
+              <h2 class="text-xl font-extrabold text-primary-900 mb-2 group-hover:text-primary transition-colors">{s.name}</h2>
+              <p class="text-sm text-gray-600 leading-relaxed mb-4 flex-1">{s.tagline}</p>
+              <div class="flex flex-wrap gap-x-4 gap-y-1 text-xs text-gray-500 mb-4">
+                {s.windRated && <span><strong class="text-primary-900">{s.windRated}</strong> wind-rated</span>}
+                {s.lifespan && <span><strong class="text-primary-900">{s.lifespan}</strong></span>}
+              </div>
+              <span class="inline-flex items-center gap-2 text-sm font-extrabold uppercase tracking-wider text-primary group-hover:gap-3 transition-all">
+                View Details →
+              </span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <FinalCTA />
+</PageLayout>

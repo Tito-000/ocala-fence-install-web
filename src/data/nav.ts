@@ -45,7 +45,7 @@ export const FOOTER_NAV = {
   company: [
     { label: 'About', href: '/about' },
     { label: 'Contact', href: '/contact' },
-    { label: 'Reviews', href: '/reviews' },
+    { label: 'Reviews', href: '/about/reviews' },
     { label: 'Free Estimate', href: '/free-estimate' },
   ],
   legal: [
