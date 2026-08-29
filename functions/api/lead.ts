@@ -213,6 +213,13 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   if (linearFt)  customFields.push({ id: CF.linearFeet, value: linearFt });
   if (fullNotes) customFields.push({ id: CF.estimateNotes, value: fullNotes });
 
+  // Native GHL attribution field — lets a workflow read the click id directly
+  // off the contact (contact.attributionSource.gclid) instead of parsing it
+  // out of the free-text notes. Only gclid maps to a plain click conversion;
+  // wbraid/gbraid still go to notes only, since GHL's attributionSource has
+  // no dedicated field for them.
+  const attributionSource = body.gclid ? { gclid: body.gclid } : undefined;
+
   const ghlPayload: Record<string, unknown> = {
     locationId: env.GHL_LOCATION_ID,
     firstName,
@@ -224,6 +231,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     source: 'Website Form',
     tags,
     customFields,
+    attributionSource,
   };
 
   // Strip undefined values
