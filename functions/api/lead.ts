@@ -61,15 +61,20 @@ const STAGE_NEW_LEAD = '5ff68988-dc04-4a47-a183-3272fd20fd74';
 // need an LC Phone number + A2P 10DLC registration (business EIN, a few days).
 const ANDRI_USER_ID = 'a68jBTuZPJMbEXzuCimz';
 
-// Extra inboxes that get a copy of every new lead, addressed by EMAIL rather
-// than by contact id. The previous version hardcoded an owner contact id and
-// broke silently the moment GHL merged that contact away; upserting by email
+// Inboxes that get a copy of every new lead, addressed by EMAIL rather than by
+// contact id. The previous version hardcoded an owner contact id and broke
+// silently the moment GHL merged that contact away; upserting by email
 // re-resolves the current id on every send, so a merge can't kill the alert.
 //
-// ocalafenceinstall@gmail.com is deliberately NOT here — the GHL workflow
-// "01 · New Lead — Instant Response" already emails it, and listing it twice
-// would double up. This array covers the addresses the workflow misses.
-const EXTRA_ALERT_EMAILS = ['crystallinedynamicsinc@gmail.com'];
+// ocalafenceinstall@gmail.com was left out on the assumption that the GHL
+// workflow "01 · New Lead — Instant Response" already emailed it. Verified
+// 2026-09-03: no contact with that address existed in the sub-account, so that
+// email never went out — Andri never saw a single alert there. Sending from
+// here is the path that provably works; a duplicate is cheaper than a missed lead.
+const EXTRA_ALERT_EMAILS = [
+  'ocalafenceinstall@gmail.com',
+  'crystallinedynamicsinc@gmail.com',
+];
 
 // Approximate monetary value per fence size (used for opportunity.monetaryValue)
 function estimateValue(size?: string, fenceType?: string): number {
