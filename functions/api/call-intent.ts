@@ -15,6 +15,11 @@
  * yet — they are about to call US). It carries the click id and a tag so Andri
  * can tell these apart from real form leads in the CRM.
  *
+ * It also opens an opportunity in the same Fence Sales pipeline. A loose
+ * contact would force Andri to hunt for it and merge by hand when the call
+ * comes in; a card in the pipeline is the thing he already works with — he
+ * renames it when he picks up, or deletes it if the call never came.
+ *
  * Environment variables (set in Cloudflare Pages dashboard):
  *   - GHL_PIT          — Private Integration Token (pit-...)
  *   - GHL_LOCATION_ID  — Sub-account location ID
@@ -24,6 +29,13 @@ interface Env {
   GHL_PIT: string;
   GHL_LOCATION_ID: string;
 }
+
+// Same pipeline the form leads land in — Andri works one board, not two.
+const PIPELINE_ID = 'DqLZHRBvcSW50Gov4OPE';
+const STAGE_NEW_LEAD = '5ff68988-dc04-4a47-a183-3272fd20fd74';
+
+// Assigning to Andri is what makes the LeadConnector app push a phone alert.
+const ANDRI_USER_ID = 'a68jBTuZPJMbEXzuCimz';
 
 interface CallIntentPayload {
   gclid?: string;
@@ -70,7 +82,6 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
 
   const isWhatsApp = body.source === 'whatsapp_click';
   const channel = isWhatsApp ? 'WhatsApp' : 'Phone';
-  const stamp = new Date().toISOString();
 
   // The click id doubles as the contact key: the same visitor tapping call on
   // two pages upserts onto one contact instead of creating duplicates. The
@@ -78,10 +89,18 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   // mistaken for a real inbox or receive mail.
   const syntheticEmail = `gclid-${body.gclid.slice(0, 40).toLowerCase()}@call-intent.invalid`;
 
+  const localTime = new Date().toLocaleString('en-US', {
+    timeZone: 'America/New_York',
+    month: 'short',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: '2-digit',
+  });
+
   const ghlPayload = {
     locationId: env.GHL_LOCATION_ID,
-    firstName: `${channel} click`,
-    lastName: '(no form)',
+    firstName: `📞 Incoming ${channel}`,
+    lastName: `— ${localTime}`,
     email: syntheticEmail,
     source: `Website ${channel} Click`,
     tags: ['source: website', `intent: ${isWhatsApp ? 'whatsapp' : 'call'}`, 'no form submitted'],
@@ -90,24 +109,27 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
       {
         id: 'mWKpv4wattfdSUPwLSEF', // Estimate Notes
         value:
-          `Tapped ${channel} from the website without filling the form.\n` +
+          `Tapped ${channel} on the website without filling the form.\n` +
           `Page: ${body.page || '(unknown)'}\n` +
-          `When: ${stamp}\n\n` +
-          `No name or number yet — they were about to call. Match this to the ` +
-          `incoming call and merge, or delete if the call never came.\n\n` +
+          `When: ${localTime} (Ocala time)\n\n` +
+          `Came from a Google ad. Rename this card with their real name and ` +
+          `number when you pick up — then work it like any other lead. If the ` +
+          `call never came, delete it.\n\n` +
           `Google Click ID: ${body.gclid}`,
       },
     ],
   };
 
+  const ghlHeaders = {
+    Authorization: `Bearer ${env.GHL_PIT}`,
+    Version: '2021-07-28',
+    'Content-Type': 'application/json',
+  };
+
   try {
     const res = await fetch('https://services.leadconnectorhq.com/contacts/upsert', {
       method: 'POST',
-      headers: {
-        Authorization: `Bearer ${env.GHL_PIT}`,
-        Version: '2021-07-28',
-        'Content-Type': 'application/json',
-      },
+      headers: ghlHeaders,
       body: JSON.stringify(ghlPayload),
     });
     const data = await res.json().catch(() => ({}));
@@ -120,8 +142,48 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
       });
     }
 
+    const contactId: string | undefined = (data as any)?.contact?.id;
+
+    // Assign to Andri so his phone lights up. /contacts/upsert accepts
+    // `assignedTo` but never applies it, so it needs its own PUT.
+    // Best-effort: a failed assignment must not cost the card.
+    if (contactId) {
+      await fetch(`https://services.leadconnectorhq.com/contacts/${contactId}`, {
+        method: 'PUT',
+        headers: ghlHeaders,
+        body: JSON.stringify({ assignedTo: ANDRI_USER_ID }),
+      }).catch(() => null);
+    }
+
+    // The card is the whole point — a loose contact would just sit there
+    // unnoticed. monetaryValue stays 0: we have no idea what they want yet,
+    // and a made-up number would poison the pipeline totals.
+    let opportunityId: string | undefined;
+    if (contactId) {
+      const oppRes = await fetch('https://services.leadconnectorhq.com/opportunities/', {
+        method: 'POST',
+        headers: ghlHeaders,
+        body: JSON.stringify({
+          pipelineId: PIPELINE_ID,
+          pipelineStageId: STAGE_NEW_LEAD,
+          locationId: env.GHL_LOCATION_ID,
+          name: `📞 Incoming ${channel} — ${localTime}`,
+          status: 'open',
+          contactId,
+          monetaryValue: 0,
+          source: `Website ${channel} Click`,
+        }),
+      });
+      const oppData = await oppRes.json().catch(() => ({}));
+      if (oppRes.ok) {
+        opportunityId = (oppData as any)?.opportunity?.id ?? (oppData as any)?.id;
+      } else {
+        console.error('CALL INTENT OPP FAILED', JSON.stringify(oppData));
+      }
+    }
+
     return new Response(
-      JSON.stringify({ ok: true, contactId: (data as any)?.contact?.id }),
+      JSON.stringify({ ok: true, contactId, opportunityId }),
       { status: 200, headers: CORS_HEADERS },
     );
   } catch (e) {
