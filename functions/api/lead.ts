@@ -74,6 +74,7 @@ const ANDRI_USER_ID = 'a68jBTuZPJMbEXzuCimz';
 const EXTRA_ALERT_EMAILS = [
   'ocalafenceinstall@gmail.com',
   'crystallinedynamicsinc@gmail.com',
+  'martinmercedes100@gmail.com', // agencia — para ver los leads sin entrar al CRM
 ];
 
 // Approximate monetary value per fence size (used for opportunity.monetaryValue)
