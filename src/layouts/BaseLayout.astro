@@ -211,6 +211,38 @@ const GADS_LABEL_EMAIL = import.meta.env.PUBLIC_GADS_LABEL_EMAIL || 'zqQpCMXDpso
         return '';
       }
 
+      // Someone who taps "call" never submits the form, so their Google click
+      // id dies in the browser and the sale they close on that call can never
+      // be sent back to Google. This records the click id in the CRM at the
+      // moment of the tap, so a won deal from that call can be attributed.
+      //
+      // Fires at most once per visitor (sessionStorage) — a person who taps
+      // call three times is one lead, not three. keepalive lets the request
+      // survive the browser leaving the page to open the dialer.
+      function recordCallIntent(source) {
+        try {
+          if (sessionStorage.getItem('ofi_call_recorded')) return;
+          var gclid = '';
+          try {
+            gclid = new URLSearchParams(window.location.search).get('gclid')
+                 || localStorage.getItem('ofi_gclid') || '';
+          } catch (_) {}
+          // No click id means nothing to attribute — don't clutter the CRM.
+          if (!gclid) return;
+          sessionStorage.setItem('ofi_call_recorded', '1');
+          fetch('/api/call-intent', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            keepalive: true,
+            body: JSON.stringify({
+              gclid: gclid,
+              source: source,
+              page: window.location.pathname,
+            }),
+          }).catch(function () {});
+        } catch (_) {}
+      }
+
       // 1. Unified click listener — fires the right conversion for any
       // [data-track] element AND auto-detects contact links by href.
       // Bubble phase + try/catch so tracking never breaks the interaction.
@@ -230,6 +262,9 @@ const GADS_LABEL_EMAIL = import.meta.env.PUBLIC_GADS_LABEL_EMAIL || 'zqQpCMXDpso
             link_url: (a && a.href) ? a.href : '',
             link_text: ((node && node.textContent) || '').trim().slice(0, 80),
           });
+          if (eventName === 'phone_click' || eventName === 'whatsapp_click') {
+            recordCallIntent(eventName);
+          }
         } catch (_) { /* never break the page */ }
       });
 
