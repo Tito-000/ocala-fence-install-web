@@ -1,8 +1,8 @@
 /**
  * Cloudflare Pages Function: POST /api/call-intent
  *
- * Records that a visitor who arrived from Google Ads tapped "call" or
- * "WhatsApp" without ever submitting the form.
+ * Records that a visitor who arrived from Google Ads tapped "call", "WhatsApp"
+ * or the email link without ever submitting the form.
  *
  * Why this exists: the Google click id only survives in the browser. Someone
  * who taps the phone number and closes a $14,500 job on that call is invisible
@@ -12,13 +12,13 @@
  * ("Google Ads · Venta Ganada") can attribute the sale like any other lead.
  *
  * The contact is deliberately minimal: no name, no phone (we don't have them
- * yet — they are about to call US). It carries the click id and a tag so Andri
- * can tell these apart from real form leads in the CRM.
+ * yet — they are about to reach out to US). It carries the click id and a tag
+ * so Andri can tell these apart from real form leads in the CRM.
  *
  * It also opens an opportunity in the same Fence Sales pipeline. A loose
- * contact would force Andri to hunt for it and merge by hand when the call
- * comes in; a card in the pipeline is the thing he already works with — he
- * renames it when he picks up, or deletes it if the call never came.
+ * contact would force Andri to hunt for it and merge by hand when they reach
+ * out; a card in the pipeline is the thing he already works with — he renames
+ * it when they do, or deletes it if they never did.
  *
  * Environment variables (set in Cloudflare Pages dashboard):
  *   - GHL_PIT          — Private Integration Token (pit-...)
@@ -48,7 +48,7 @@ const ALERT_EMAILS = [
 
 interface CallIntentPayload {
   gclid?: string;
-  source?: string; // 'phone_click' | 'whatsapp_click'
+  source?: string; // 'phone_click' | 'whatsapp_click' | 'click_email'
   page?: string;
 }
 
@@ -89,8 +89,18 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     });
   }
 
-  const isWhatsApp = body.source === 'whatsapp_click';
-  const channel = isWhatsApp ? 'WhatsApp' : 'Phone';
+  // Three ways someone reaches out without filling the form. Email is the
+  // weakest signal of the three — opening a mail client is not the same as
+  // sending — but it still carries the click id, so a sale that starts there
+  // can be attributed like any other.
+  const CHANNELS = {
+    whatsapp_click: { label: 'WhatsApp', tag: 'whatsapp', icon: '💬', verb: 'messaging' },
+    click_email:    { label: 'Email',    tag: 'email',    icon: '✉️', verb: 'emailing' },
+    phone_click:    { label: 'Phone',    tag: 'call',     icon: '📞', verb: 'calling' },
+  } as const;
+
+  const ch = CHANNELS[(body.source || '') as keyof typeof CHANNELS] ?? CHANNELS.phone_click;
+  const channel = ch.label;
 
   // The click id doubles as the contact key: the same visitor tapping call on
   // two pages upserts onto one contact instead of creating duplicates. The
@@ -108,11 +118,11 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
 
   const ghlPayload = {
     locationId: env.GHL_LOCATION_ID,
-    firstName: `📞 Incoming ${channel}`,
+    firstName: `${ch.icon} Incoming ${channel}`,
     lastName: `— ${localTime}`,
     email: syntheticEmail,
     source: `Website ${channel} Click`,
-    tags: ['source: website', `intent: ${isWhatsApp ? 'whatsapp' : 'call'}`, 'no form submitted'],
+    tags: ['source: website', `intent: ${ch.tag}`, 'no form submitted'],
     attributionSource: { gclid: body.gclid },
     customFields: [
       {
@@ -122,8 +132,8 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
           `Page: ${body.page || '(unknown)'}\n` +
           `When: ${localTime} (Ocala time)\n\n` +
           `Came from a Google ad. Rename this card with their real name and ` +
-          `number when you pick up — then work it like any other lead. If the ` +
-          `call never came, delete it.\n\n` +
+          `contact info when they reach out — then work it like any other lead. ` +
+          `If they never did, delete it.\n\n` +
           `Google Click ID: ${body.gclid}`,
       },
     ],
@@ -176,7 +186,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
           pipelineId: PIPELINE_ID,
           pipelineStageId: STAGE_NEW_LEAD,
           locationId: env.GHL_LOCATION_ID,
-          name: `📞 Incoming ${channel} — ${localTime}`,
+          name: `${ch.icon} Incoming ${channel} — ${localTime}`,
           status: 'open',
           contactId,
           monetaryValue: 0,
@@ -193,14 +203,14 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
 
     // Email the same inboxes that get the form-lead alert. Without this the
     // only warning is the LeadConnector app notification, which is silent if
-    // the app isn't installed — and this lead is about to call RIGHT NOW.
+    // the app isn't installed — and this lead is reaching out RIGHT NOW.
     const alertSubject =
-      `📞 INCOMING ${channel.toUpperCase()} — they're calling now · from a Google ad · ${localTime}`;
+      `${ch.icon} INCOMING ${channel.toUpperCase()} — from a Google ad · ${localTime}`;
 
     const alertHtml = `<!DOCTYPE html>
 <html><body style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; background: #f8f5ed;">
   <div style="background: white; padding: 28px; border-top: 6px solid #C4703C;">
-    <h1 style="color: #134529; margin: 0 0 8px; font-size: 24px;">📞 Someone is calling you</h1>
+    <h1 style="color: #134529; margin: 0 0 8px; font-size: 24px;">${ch.icon} Someone is ${ch.verb} you</h1>
     <p style="color: #62522E; margin: 0 0 24px; font-size: 14px; text-transform: uppercase; letter-spacing: 0.1em;"><strong>They came from a Google ad</strong></p>
     <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
       <tr><td style="padding: 8px 0; color: #62522E; width: 130px;"><strong>When:</strong></td><td style="padding: 8px 0; color: #134529;">${localTime} (Ocala time)</td></tr>
@@ -208,7 +218,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
       <tr><td style="padding: 8px 0; color: #62522E;"><strong>How:</strong></td><td style="padding: 8px 0; color: #134529;">Tapped ${channel} on the website</td></tr>
     </table>
     <div style="background: #faf6ed; padding: 16px; border-left: 4px solid #D1B487;">
-      <span style="color: #134529;">This person clicked your ad, went to the website and tapped ${channel} — <strong>without filling the form</strong>. We don't have their name or number yet: they were about to call you.</span>
+      <span style="color: #134529;">This person clicked your ad, went to the website and tapped ${channel} — <strong>without filling the form</strong>. We don't have their name or number yet: they were about to reach out.</span>
     </div>
     <div style="background: #fff8e6; padding: 16px; border-left: 4px solid #C4703C; margin-top: 14px;">
       <strong style="color: #62522E; display: block; margin-bottom: 6px;">When you pick up:</strong>

@@ -262,7 +262,7 @@ const GADS_LABEL_EMAIL = import.meta.env.PUBLIC_GADS_LABEL_EMAIL || 'zqQpCMXDpso
             link_url: (a && a.href) ? a.href : '',
             link_text: ((node && node.textContent) || '').trim().slice(0, 80),
           });
-          if (eventName === 'phone_click' || eventName === 'whatsapp_click') {
+          if (eventName === 'phone_click' || eventName === 'whatsapp_click' || eventName === 'click_email') {
             recordCallIntent(eventName);
           }
         } catch (_) { /* never break the page */ }
