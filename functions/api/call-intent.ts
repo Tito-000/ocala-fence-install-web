@@ -37,6 +37,15 @@ const STAGE_NEW_LEAD = '5ff68988-dc04-4a47-a183-3272fd20fd74';
 // Assigning to Andri is what makes the LeadConnector app push a phone alert.
 const ANDRI_USER_ID = 'a68jBTuZPJMbEXzuCimz';
 
+// Same inboxes that get the form-lead alert. The app notification only fires
+// if Andri has LeadConnector installed with notifications on — email is the
+// path that always works. Kept in sync with lead.ts on purpose.
+const ALERT_EMAILS = [
+  'ocalafenceinstall@gmail.com',
+  'crystallinedynamicsinc@gmail.com',
+  'martinmercedes100@gmail.com',
+];
+
 interface CallIntentPayload {
   gclid?: string;
   source?: string; // 'phone_click' | 'whatsapp_click'
@@ -182,8 +191,83 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
       }
     }
 
+    // Email the same inboxes that get the form-lead alert. Without this the
+    // only warning is the LeadConnector app notification, which is silent if
+    // the app isn't installed — and this lead is about to call RIGHT NOW.
+    const alertSubject =
+      `📞 INCOMING ${channel.toUpperCase()} — they're calling now · from a Google ad · ${localTime}`;
+
+    const alertHtml = `<!DOCTYPE html>
+<html><body style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; background: #f8f5ed;">
+  <div style="background: white; padding: 28px; border-top: 6px solid #C4703C;">
+    <h1 style="color: #134529; margin: 0 0 8px; font-size: 24px;">📞 Someone is calling you</h1>
+    <p style="color: #62522E; margin: 0 0 24px; font-size: 14px; text-transform: uppercase; letter-spacing: 0.1em;"><strong>They came from a Google ad</strong></p>
+    <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+      <tr><td style="padding: 8px 0; color: #62522E; width: 130px;"><strong>When:</strong></td><td style="padding: 8px 0; color: #134529;">${localTime} (Ocala time)</td></tr>
+      <tr><td style="padding: 8px 0; color: #62522E;"><strong>Page:</strong></td><td style="padding: 8px 0; color: #134529;">${body.page || '(unknown)'}</td></tr>
+      <tr><td style="padding: 8px 0; color: #62522E;"><strong>How:</strong></td><td style="padding: 8px 0; color: #134529;">Tapped ${channel} on the website</td></tr>
+    </table>
+    <div style="background: #faf6ed; padding: 16px; border-left: 4px solid #D1B487;">
+      <span style="color: #134529;">This person clicked your ad, went to the website and tapped ${channel} — <strong>without filling the form</strong>. We don't have their name or number yet: they were about to call you.</span>
+    </div>
+    <div style="background: #fff8e6; padding: 16px; border-left: 4px solid #C4703C; margin-top: 14px;">
+      <strong style="color: #62522E; display: block; margin-bottom: 6px;">When you pick up:</strong>
+      <span style="color: #134529;">Open the card in the CRM, rename it with their real name and number, and work it like any other lead. If nobody called, delete it.</span>
+    </div>
+    <div style="margin-top: 28px; padding: 16px; background: #136229; text-align: center;">
+      <a href="https://app.gohighlevel.com/v2/location/${env.GHL_LOCATION_ID}/contacts/detail/${contactId || ''}" style="color: #D1B487; text-decoration: none; font-weight: bold; text-transform: uppercase; letter-spacing: 0.1em; font-size: 14px;">→ Open the card in CRM</a>
+    </div>
+  </div>
+</body></html>`;
+
+    // Best-effort: a failed alert must never cost the lead that is already saved.
+    const alertOne = async (address: string) => {
+      try {
+        const up = await fetch('https://services.leadconnectorhq.com/contacts/upsert', {
+          method: 'POST',
+          headers: ghlHeaders,
+          body: JSON.stringify({
+            locationId: env.GHL_LOCATION_ID,
+            email: address,
+            firstName: 'Ocala Fence Install',
+            lastName: '(lead alerts)',
+            tags: ['internal: lead alerts'],
+          }),
+        });
+        const upData = await up.json().catch(() => null);
+        const alertContactId = (upData as any)?.contact?.id;
+        if (!alertContactId) return `upsert failed: ${(upData as any)?.message || up.status}`;
+
+        const res = await fetch('https://services.leadconnectorhq.com/conversations/messages', {
+          method: 'POST',
+          headers: { ...ghlHeaders, Version: '2021-04-15' },
+          body: JSON.stringify({
+            type: 'Email',
+            contactId: alertContactId,
+            subject: alertSubject,
+            html: alertHtml,
+          }),
+        });
+        if (res.ok) return undefined;
+        const d = await res.json().catch(() => null);
+        return (d as any)?.message || `HTTP ${res.status}`;
+      } catch (e) {
+        return e instanceof Error ? e.message : 'network error';
+      }
+    };
+
+    const alertErrors = (await Promise.all(ALERT_EMAILS.map(alertOne)))
+      .map((err, i) => (err ? `${ALERT_EMAILS[i]}: ${err}` : null))
+      .filter(Boolean) as string[];
+    if (alertErrors.length) console.error('CALL INTENT ALERT FAILED', alertErrors);
+
     return new Response(
-      JSON.stringify({ ok: true, contactId, opportunityId }),
+      JSON.stringify({
+        ok: true,
+        contactId,
+        opportunityId,
+        alertErrors: alertErrors.length ? alertErrors : undefined,
+      }),
       { status: 200, headers: CORS_HEADERS },
     );
   } catch (e) {
