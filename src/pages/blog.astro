@@ -14,8 +14,8 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://ocalafenceinstall.com' },
-    { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://ocalafenceinstall.com/blog' },
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://fenceexpertsofocala.com' },
+    { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://fenceexpertsofocala.com/blog' },
   ],
 };
 
@@ -24,16 +24,16 @@ const blogSchema = {
   '@type': 'Blog',
   name: `${BUSINESS.name} Fence Blog`,
   description: 'Honest fence advice from a Marion County fence installer — material comparisons, pricing, code, HOA, and install tips.',
-  url: 'https://ocalafenceinstall.com/blog',
+  url: 'https://fenceexpertsofocala.com/blog',
   publisher: { '@type': 'LocalBusiness', name: BUSINESS.name },
   blogPost: sortedPosts.map((p) => ({
     '@type': 'BlogPosting',
     headline: p.title,
-    image: `https://ocalafenceinstall.com${p.image}`,
+    image: `https://fenceexpertsofocala.com${p.image}`,
     datePublished: p.date,
     description: p.excerpt,
     author: { '@type': 'Person', name: p.author.name },
-    url: `https://ocalafenceinstall.com/blog/${p.slug}`,
+    url: `https://fenceexpertsofocala.com/blog/${p.slug}`,
   })),
 };
 ---

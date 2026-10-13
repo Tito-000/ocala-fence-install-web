@@ -22,9 +22,9 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://ocalafenceinstall.com' },
-    { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://ocalafenceinstall.com/blog' },
-    { '@type': 'ListItem', position: 3, name: post.title, item: `https://ocalafenceinstall.com/blog/${post.slug}` },
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://fenceexpertsofocala.com' },
+    { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://fenceexpertsofocala.com/blog' },
+    { '@type': 'ListItem', position: 3, name: post.title, item: `https://fenceexpertsofocala.com/blog/${post.slug}` },
   ],
 };
 
@@ -33,7 +33,7 @@ const blogPostingSchema = {
   '@type': 'BlogPosting',
   headline: post.title,
   description: post.metaDescription,
-  image: `https://ocalafenceinstall.com${post.image}`,
+  image: `https://fenceexpertsofocala.com${post.image}`,
   datePublished: post.date,
   author: {
     '@type': 'Person',
@@ -44,12 +44,12 @@ const blogPostingSchema = {
     name: BUSINESS.name,
     logo: {
       '@type': 'ImageObject',
-      url: 'https://ocalafenceinstall.com/images/logo.png',
+      url: 'https://fenceexpertsofocala.com/images/logo.png',
     },
   },
   mainEntityOfPage: {
     '@type': 'WebPage',
-    '@id': `https://ocalafenceinstall.com/blog/${post.slug}`,
+    '@id': `https://fenceexpertsofocala.com/blog/${post.slug}`,
   },
 };
 ---

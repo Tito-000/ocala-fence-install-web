@@ -3,7 +3,7 @@ import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://ocalafenceinstall.com',
+  site: 'https://fenceexpertsofocala.com',
   trailingSlash: 'never',
   integrations: [
     tailwind({ applyBaseStyles: false }),
