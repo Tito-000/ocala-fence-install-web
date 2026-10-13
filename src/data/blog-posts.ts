@@ -16,7 +16,7 @@ export type BlogPost = {
   body: string; // HTML
 };
 
-const ANDRY = { name: 'Andri Ramírez', role: 'Founder, Ocala Fence Install' };
+const ANDRY = { name: 'Andri Ramírez', role: 'Founder, Fence Experts of Ocala' };
 
 export const BLOG_POSTS: BlogPost[] = [
   {
@@ -257,7 +257,7 @@ export const BLOG_POSTS: BlogPost[] = [
 
 <p class="text-lg text-gray-700 leading-relaxed mb-6">Market ranges get you to a budget. They can't see your yard. An accurate fence quote requires measuring your actual footage, walking your terrain, counting gates, checking access, and confirming what Marion County and your HOA will require for your specific property.</p>
 
-<p class="text-lg text-gray-700 leading-relaxed mb-6">That's why <strong>Ocala Fence Install quotes every project with a free on-site estimate</strong>. We measure, we look at the ground we'll actually be digging, and you walk away with an exact number for your yard instead of a guess against a range. We've been installing fences across Ocala, The Villages, Belleview, Dunnellon, Summerfield, Silver Springs, Lady Lake, and Marion Oaks since 2021, and <strong>most fences are installed in under 7 days</strong>.</p>
+<p class="text-lg text-gray-700 leading-relaxed mb-6">That's why <strong>Fence Experts of Ocala quotes every project with a free on-site estimate</strong>. We measure, we look at the ground we'll actually be digging, and you walk away with an exact number for your yard instead of a guess against a range. We've been installing fences across Ocala, The Villages, Belleview, Dunnellon, Summerfield, Silver Springs, Lady Lake, and Marion Oaks since 2021, and <strong>most fences are installed in under 7 days</strong>.</p>
 
 <p class="text-lg text-gray-700 leading-relaxed mb-6">If the upfront hit is what's holding you back, <a href="/financing" class="text-primary hover:text-primary-700 font-extrabold underline">financing with $0 down</a> is available, so the fence can go up now and the cost can spread out.</p>
 
@@ -279,7 +279,7 @@ export const BLOG_POSTS: BlogPost[] = [
     imageAlt: 'White vinyl privacy fence in a sunny Ocala, Florida backyard with green grass, palm trees and dark summer storm clouds building in the distance',
     author: ANDRY,
     body: `
-<p class="text-lg text-gray-700 leading-relaxed mb-6">Ask five fence companies what the <strong>best fence for Florida</strong> is and you'll get five sales pitches. Here's the field version instead. Ocala Fence Install has been in business since 2021, serving Ocala and Marion County, and Central Florida weather grades every material without mercy: relentless UV, daily summer downpours, humidity that never lets up, year-round termite pressure, and the occasional tropical system leaning on every panel. Some materials shrug all of that off. Some demand constant attention. One is purely a budget play.</p>
+<p class="text-lg text-gray-700 leading-relaxed mb-6">Ask five fence companies what the <strong>best fence for Florida</strong> is and you'll get five sales pitches. Here's the field version instead. Fence Experts of Ocala has been in business since 2021, serving Ocala and Marion County, and Central Florida weather grades every material without mercy: relentless UV, daily summer downpours, humidity that never lets up, year-round termite pressure, and the occasional tropical system leaning on every panel. Some materials shrug all of that off. Some demand constant attention. One is purely a budget play.</p>
 
 <p class="text-lg text-gray-700 leading-relaxed mb-6">Below is our honest ranking, plus exactly what fails in each material and why, so you can choose based on physics rather than a pitch.</p>
 

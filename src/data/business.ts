@@ -4,7 +4,7 @@
  */
 
 export const BUSINESS = {
-  name: 'Ocala Fence Install',
+  name: 'Fence Experts of Ocala',
   legalName: 'Crystalline Dynamics',
   tagline: 'Marion County\'s family-owned fence installation team',
   founded: 2021,
@@ -56,7 +56,7 @@ export const BUSINESS = {
 
   // Service areas (8 cities)
   serviceAreas: [
-    { slug: 'marion-oaks-fl', name: 'Marion Oaks', state: 'FL', county: 'Marion County', primaryZip: '34473', image: '/images/cities/marion-oaks.webp', imageAlt: 'Marion Oaks FL residential community with palm trees and family homes — Ocala Fence Install primary service area', allZips: ['34473', '34476'], primary: true },
+    { slug: 'marion-oaks-fl', name: 'Marion Oaks', state: 'FL', county: 'Marion County', primaryZip: '34473', image: '/images/cities/marion-oaks.webp', imageAlt: 'Marion Oaks FL residential community with palm trees and family homes — Fence Experts of Ocala primary service area', allZips: ['34473', '34476'], primary: true },
     { slug: 'ocala-fl', name: 'Ocala', state: 'FL', county: 'Marion County', primaryZip: '34471', image: '/images/cities/ocala.webp', imageAlt: 'Aerial view of Ocala FL horse country — fence installation service area in Marion County', allZips: ['34471', '34472', '34474', '34480'] },
     { slug: 'belleview-fl', name: 'Belleview', state: 'FL', county: 'Marion County', primaryZip: '34420', image: '/images/cities/belleview.webp', imageAlt: 'Belleview FL small town with church steeple — fence installation in Marion County 34420' },
     { slug: 'summerfield-fl', name: 'Summerfield', state: 'FL', county: 'Marion County', primaryZip: '34491', image: '/images/cities/summerfield.webp', imageAlt: 'Aerial of Summerfield FL residential community with lake — fence installation Marion County 34491' },
@@ -64,7 +64,7 @@ export const BUSINESS = {
     { slug: 'dunnellon-fl', name: 'Dunnellon', state: 'FL', county: 'Marion County', primaryZip: '34431', image: '/images/cities/dunnellon.webp', imageAlt: 'Dunnellon FL Rainbow River with kayaks — fence installation service area Marion County 34431' },
     { slug: 'the-villages-fl', name: 'The Villages', state: 'FL', county: 'Sumter County', primaryZip: '32162', image: '/images/cities/the-villages.webp', imageAlt: 'Aerial of The Villages FL 55+ golf community — fence installation Sumter County 32162' },
     { slug: 'lady-lake-fl', name: 'Lady Lake', state: 'FL', county: 'Lake County', primaryZip: '32159', image: '/images/cities/lady-lake.webp', imageAlt: 'Lady Lake FL residential community surrounding circular lake — fence installation Lake County 32159' },
-    { slug: 'marion-county-fl', name: 'Marion County', state: 'FL', county: 'Marion County', primaryZip: '34470', image: '/images/cities/marion-county.webp', imageAlt: 'Marion County FL horse country with white wooden horse fences — Ocala Fence Install service area' },
+    { slug: 'marion-county-fl', name: 'Marion County', state: 'FL', county: 'Marion County', primaryZip: '34470', image: '/images/cities/marion-county.webp', imageAlt: 'Marion County FL horse country with white wooden horse fences — Fence Experts of Ocala service area' },
   ],
 
   // Extended coverage — Ocala south through Central Florida toward Orlando metro

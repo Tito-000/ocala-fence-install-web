@@ -239,7 +239,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
           body: JSON.stringify({
             locationId: env.GHL_LOCATION_ID,
             email: address,
-            firstName: 'Ocala Fence Install',
+            firstName: 'Fence Experts of Ocala',
             lastName: '(lead alerts)',
             tags: ['internal: lead alerts'],
           }),

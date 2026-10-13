@@ -21,7 +21,7 @@ export const CITIES_CONTENT: Record<string, {
     intro: {
       heading: 'Marion Oaks homeowners — your local fence team',
       paragraphs: [
-        'Marion Oaks is home base for Ocala Fence Install. We live here, we work here, and we know every street, every HOA rule, and every Marion County permit requirement that affects your fence install. When you call us, you\'re not getting a corporate sales rep — you\'re getting a neighbor.',
+        'Marion Oaks is home base for Fence Experts of Ocala. We live here, we work here, and we know every street, every HOA rule, and every Marion County permit requirement that affects your fence install. When you call us, you\'re not getting a corporate sales rep — you\'re getting a neighbor.',
         'We\'ve installed hundreds of fences across Marion Oaks ZIPs <strong>34473</strong> and <strong>34476</strong>, from privacy fences in Marion Oaks Manor to pool-code aluminum in Marion Oaks Trails. Same-day estimates, $0 down financing, and most jobs finished in under 7 days.',
         'And because we\'re local, we get to your property fast. Most Marion Oaks visits happen within 24 hours of your call.',
       ],
