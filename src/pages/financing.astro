@@ -522,6 +522,8 @@ const serviceSchema = {
         gclid:      gcl('gclid'),
         wbraid:     gcl('wbraid'),
         gbraid:     gcl('gbraid'),
+        fe_hp: d.get('fe_hp') || '',
+        fe_ms: d.get('fe_ms') || '',
       };
 
       // Only redirect (and therefore only count the conversion) if the lead

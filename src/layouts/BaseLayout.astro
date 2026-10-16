@@ -302,5 +302,37 @@ const GADS_LABEL_EMAIL = import.meta.env.PUBLIC_GADS_LABEL_EMAIL || 'zqQpCMXDpso
 </head>
 <body class="min-h-screen flex flex-col bg-white text-gray-900">
   <slot />
+  {/* Bot guard for every lead form (see functions/api/lead.ts, 16 oct 2026).
+      Adds a honeypot a person never sees and the time spent on the page,
+      measured here with performance.now() so a wrong phone clock can't block
+      a real customer. Capture phase, so it runs before each form's own
+      submit handler reads the FormData. */}
+  <script is:inline>
+    (function () {
+      var sel = 'form[action*="/api/lead"], form[data-ghl-endpoint]';
+      document.querySelectorAll(sel).forEach(function (f) {
+        if (!f.querySelector('input[name="fe_hp"]')) {
+          var hp = document.createElement('input');
+          hp.type = 'text'; hp.name = 'fe_hp'; hp.tabIndex = -1; hp.autocomplete = 'off';
+          hp.setAttribute('aria-hidden', 'true');
+          hp.style.cssText = 'position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none';
+          f.appendChild(hp);
+        }
+        if (!f.querySelector('input[name="fe_ms"]')) {
+          var ms = document.createElement('input');
+          ms.type = 'hidden'; ms.name = 'fe_ms';
+          f.appendChild(ms);
+        }
+      });
+      function stamp(e) {
+        var f = e.target && e.target.closest ? e.target.closest(sel) : null;
+        var i = f && f.querySelector('input[name="fe_ms"]');
+        if (i) i.value = String(Math.round(performance.now()));
+      }
+      ['input', 'change', 'click', 'submit'].forEach(function (t) {
+        document.addEventListener(t, stamp, true);
+      });
+    })();
+  </script>
 </body>
 </html>

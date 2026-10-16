@@ -149,6 +149,64 @@ const CORS_HEADERS = {
   'Content-Type': 'application/json',
 };
 
+// ===== BOT FILTER (16 oct 2026) =====
+// 12-16 oct: 32 bot submissions hit the twin Crystalline form (same CRM): a
+// 10-letter random name, every service checked, made-up phones and real emails
+// lifted from leaked lists. Each one became two CRM cards and the CRM emailed
+// and texted a stranger. This form had no filter at all, so it gets the same
+// guard before a bot finds it.
+// One strong signal rejects; two weak signals reject. The page adds the
+// honeypot (fe_hp) and the time on page (fe_ms); a script posting straight to
+// this endpoint sends neither.
+const ALLOWED_HOSTS = ['fenceexpertsofocala.com', 'ocalafenceinstall.com', 'ocala-fence-install-web.pages.dev'];
+
+function hostOf(u: string): string {
+  try { return new URL(u).hostname.replace(/^www\./, ''); } catch { return ''; }
+}
+
+function looksRandom(name: string): boolean {
+  // Real people type a capital or a space; the bot sends one lowercase blob.
+  if (!name || /\s/.test(name) || name.length < 8) return false;
+  if (name !== name.toLowerCase() || !/^[a-z]+$/.test(name)) return false;
+  const vowels = (name.match(/[aeiouy]/g) || []).length;
+  return /[^aeiouy]{5,}/.test(name) || vowels / name.length < 0.25;
+}
+
+function botReasons(body: Record<string, unknown>, request: Request): string[] {
+  const strong: string[] = [];
+  const weak: string[] = [];
+
+  if (String(body.fe_hp ?? '').trim()) strong.push('honeypot');
+
+  // fe_ms = milliseconds the visitor spent on the page, measured in the browser
+  // (performance.now), so a wrong phone clock can't block a real customer.
+  const ms = Number(body.fe_ms);
+  if (Number.isFinite(ms) && ms > 0) {
+    if (ms < 2500) strong.push('too-fast');
+  } else {
+    weak.push('no-ts');
+  }
+
+  const src = request.headers.get('origin') || request.headers.get('referer') || '';
+  if (!src) weak.push('no-origin');
+  else {
+    const h = hostOf(src);
+    if (!ALLOWED_HOSTS.some((a) => h === a || h.endsWith('.' + a))) strong.push('foreign-origin');
+  }
+
+  if (looksRandom(String(body.full_name ?? body.name ?? '').trim())) weak.push('random-name');
+
+  const d = String(body.phone ?? '').replace(/\D/g, '').replace(/^1(?=\d{10}$)/, '');
+  // NANP: area code and exchange never start with 0 or 1; 555-01XX is fiction.
+  if (d.length === 10 && (/^[01]/.test(d) || /^\d{3}[01]/.test(d) || /^\d{3}55501/.test(d))) weak.push('impossible-phone');
+
+  const email = String(body.email ?? '').toLowerCase();
+  if (/@(formtests\.info|mailinator|guerrillamail|10minutemail|tempmail|trashmail|throwaway|yandex\.|mail\.ru)/.test(email)) weak.push('test-email');
+
+  if (strong.length) return strong.concat(weak);
+  return weak.length >= 2 ? weak : [];
+}
+
 export const onRequestOptions: PagesFunction = async () =>
   new Response(null, { status: 204, headers: CORS_HEADERS });
 
@@ -191,6 +249,16 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
       JSON.stringify({ ok: false, error: 'phone or email is required' }),
       { status: 400, headers: CORS_HEADERS },
     );
+  }
+
+  // Bot filter. Answer as if it worked so the bot doesn't change tactics, but
+  // create nothing in the CRM and email/text nobody. The redirect carries no
+  // `lead` param, so the thank-you page fires no Google Ads conversion.
+  const botWhy = botReasons(body as unknown as Record<string, unknown>, request);
+  if (botWhy.length) {
+    console.log('[bot] lead rejected', { reasons: botWhy, email: body.email, phone: body.phone });
+    if (isFormPost) return new Response(null, { status: 303, headers: { Location: '/thank-you/' } });
+    return new Response(JSON.stringify({ ok: true }), { status: 200, headers: CORS_HEADERS });
   }
 
   const { firstName, lastName } = splitName(body.full_name);

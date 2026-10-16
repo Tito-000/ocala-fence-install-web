@@ -463,6 +463,8 @@ const breadcrumbSchema = {
           gclid:       gcl('gclid'),
           wbraid:      gcl('wbraid'),
           gbraid:      gcl('gbraid'),
+          fe_hp: data.get('fe_hp') || '',
+          fe_ms: data.get('fe_ms') || '',
         };
 
         // Only advance if the lead actually reached the CRM. Redirecting on a
